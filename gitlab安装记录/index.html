@@ -1,0 +1,1344 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Gitlab安装记录 - MyBlog</title><meta name="Description" content="我的博客"><meta property="og:title" content="Gitlab安装记录" />
+<meta property="og:description" content="使用 k8s 安装 gitlab https://docs.gitlab.com/charts/ gitlab 官方的 helm chart 地址：https://gitlab.com/gitlab-org/charts/gitlab 下载 master 分支的 chart 1 2 3 mkdir" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://msdemt.github.io/gitlab%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95/" />
+<meta property="og:image" content="https://msdemt.github.io/logo.png"/>
+<meta property="article:published_time" content="2019-11-01T19:11:25+08:00" />
+<meta property="article:modified_time" content="2019-11-01T19:11:25+08:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://msdemt.github.io/logo.png"/>
+
+<meta name="twitter:title" content="Gitlab安装记录"/>
+<meta name="twitter:description" content="使用 k8s 安装 gitlab https://docs.gitlab.com/charts/ gitlab 官方的 helm chart 地址：https://gitlab.com/gitlab-org/charts/gitlab 下载 master 分支的 chart 1 2 3 mkdir"/>
+<meta name="application-name" content="MyBlog">
+<meta name="apple-mobile-web-app-title" content="MyBlog"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://msdemt.github.io/gitlab%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95/" /><link rel="prev" href="https://msdemt.github.io/jenkins%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95/" /><link rel="next" href="https://msdemt.github.io/git%E5%91%BD%E4%BB%A4/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Gitlab安装记录",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/msdemt.github.io\/gitlab%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95\/"
+        },"image": ["https:\/\/msdemt.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","wordcount":  6804 ,
+        "url": "https:\/\/msdemt.github.io\/gitlab%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95\/","datePublished": "2019-11-01T19:11:25+08:00","dateModified": "2019-11-01T19:11:25+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": "https:\/\/msdemt.github.io\/images\/avatar.png"},"author": {
+                "@type": "Person",
+                "name": "hekai"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="MyBlog"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>MyBlog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/categories/documentation/"> 文档 </a><a class="menu-item" href="/about/"> 关于 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="MyBlog"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>MyBlog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/categories/documentation/" title="">文档</a><a class="menu-item" href="/about/" title="">关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Gitlab安装记录</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>hekai</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2019-11-01">2019-11-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 6804 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 14 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
+            </div><div class="content" id="content"><p>使用 k8s 安装 gitlab <a href="https://docs.gitlab.com/charts/">https://docs.gitlab.com/charts/</a></p>
+<p>gitlab 官方的 helm chart 地址：https://gitlab.com/gitlab-org/charts/gitlab</p>
+<p>下载 master 分支的 chart</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">mkdir /home/k8s/gitlab &amp;&amp; cd /home/k8s/gitlab
+wget https://gitlab.com/gitlab-org/charts/gitlab/-/archive/master/gitlab-master.tar.gz
+tar -zxf gitlab-master.tar.gz
+</code></pre></td></tr></table>
+</div>
+</div><p>查看 chart 里的一些说明，如：<strong><code>gitlab-master/doc/advanced/external-nginx/index.md</code></strong> 中指出了自定义 gitlab 的 ingress 选项， 如果 k8s 集群中有多个 nginx ingress 控制器，则 Ingress 使用 annotation 来标志哪一个控制器实现它，如果你不想使用 git lab chart 自带的 nginx ingress 控制器， 而是想使用其他的 nginx ingress 控制器，可以通过 <code>global.ingress.class</code> 进行指定。</p>
+<p>多个 nginx ingress controller 参考：<a href="https://github.com/kubernetes/ingress-nginx/blob/c3ce6b892e5f1cc1066f81c19482dded2901ad45/docs/user-guide/multiple-ingress.md">https://github.com/kubernetes/ingress-nginx/blob/c3ce6b892e5f1cc1066f81c19482dded2901ad45/docs/user-guide/multiple-ingress.md</a></p>
+<p>如果你的 k8s 集群中已有一个 nginx ingress 控制器了，你不想 gitlab chart 再安装一个 nginx ingress 控制器，可以通过 <code>nginx-ingress.enabled=false</code> 来让 gitlab chart 不安装 nginx ingress 控制器。</p>
+<p>该文件里还指出了自定义证书管理器的说明：如果你的 k8s 集群里已经有一个额外的 ingress 控制器了，那么你可能也已有一个额外的 cert-manager 实例或其他管理证书的工具。如果你的 k8s 集群中已经有 cert-manager 了，不想 gitlab chart 安装，可以通过 <code>certmanager.install=false</code> 来让 gitlab chart 不安装 cert-manager。并且通过设置 <code>global.ingress.configureCertmanager=false</code> 来让 gitlab chart 不去创建证书。详细的文档可以参考：<code>https://gitlab.com/gitlab-org/charts/gitlab/blob/master/doc/installation/tls.md</code>。</p>
+<p>查看 <strong><code>gitlab-master/doc/installation/tls.md</code></strong>，里面说如果你已经安装了 cert-manager ，可以通过使用 <code>global.ingress.annotations</code> 来为你的cert-manager 部署配置适合的 annotations。本文已经安装 nginx ingress 控制器、 cert-manager 了，并在 cert-manager 配置了 Issuer ，所以需要看 <code>External cert-manager and Issuer (external)</code>，内容如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-markdown" data-lang="markdown">To make use of an external <span class="sb">`cert-manager`</span> and <span class="sb">`Issuer`</span> resource you must provide several items, so that self-signed certificates
+are not activated.
+
+<span class="k">1.</span> Annotations to activate the external <span class="sb">`cert-manager`</span> (see [documentation][cm-annotations] for further details)
+<span class="k">1.</span> Names of TLS secrets for each service (this deactivates [<span class="nt">self-signed behaviors</span>](<span class="na">#option-4-use-auto-generated-self-signed-wildcard-certificate</span>))
+
+
+helm install ...
+  --set cert-manager.install=false \
+  --set global.ingress.configureCertmanager=false \
+  --set global.ingress.annotations.&#34;kubernetes\.io/tls-acme&#34;=true \
+  --set gitlab.unicorn.ingress.tls.secretName=RELEASE-gitlab-tls \
+  --set registry.ingress.tls.secretName=RELEASE-registry-tls \
+  --set minio.ingress.tls.secretName=RELEASE-minio-tls
+
+</code></pre></td></tr></table>
+</div>
+</div><p>查看 <strong><code>gitlab-master/doc/charts/globals.md</code></strong>，里面说明了怎么指定 annotations 和 configureCertmanager的作用。</p>
+<p>本文使用的 cert-manager 自动生成证书的 annotation 为 <code>cert-manager.io/cluster-issuer: cluster-issuer</code>，需要替换下，然后下面的三个 secretName 是 cluster-issuer 生成的 Ingress 使用的 secret （用于 https）。</p>
+<p>综上，我们使用如下命令生成 gitlab chart 的清单文件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">[root@k8s-m1 gitlab]# helm template ./gitlab-master --name mygitlab --set global.edition=ce --set global.time_zone=CST+8 --set global.hosts.domain=k8s.abc --set nginx-ingress.enabled=false --set global.ingress.class=nginx --set prometheus.install=false --set certmanager.install=false --set global.ingress.configureCertmanager=false --set global.ingress.annotations.&#34;cert-manager\.io\/cluster-issuer&#34;=cluster-issuer --set gitlab.unicorn.ingress.tls.secretName=RELEASE-gitlab-tls --set registry.ingress.tls.secretName=RELEASE-registry-tls --set minio.ingress.tls.secretName=RELEASE-minio-tls --namespace gitlab &gt; gitlab.yaml
+</code></pre></td></tr></table>
+</div>
+</div><p>报错了</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Error: found in requirements.yaml, but missing in charts/ directory: cert-manager, prometheus, postgresql, gitlab-runner, grafana
+</code></pre></td></tr></table>
+</div>
+</div><p>因为 gitlab chart 依赖这些chart，使用如下命令下载依赖</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">helm dep up ./gitlab-master
+</code></pre></td></tr></table>
+</div>
+</div><p>因为这些子 chart 的地址是 <code>kubernetes-charts.storage.googleapis.com</code>，国内无法访问，所以可能下载失败。</p>
+<p>可以通过配置代理的方式，实现下载这些子 chart，在 /etc/profile 里添加 <code>export http_proxy=&quot;http://192.168.14.58:8580&quot;</code>，然后再执行 source /etc/profile，这台 linux 通过代理下载子chart 了。</p>
+<p>如果想要去除这个代理，在 /etc/profile 里将 http_proxy 修改为 <code>export http_proxy=</code>，然后执行 source /etc/profile 就可以了。</p>
+<p>注意：不要配置 https_proxy，如果配置了可能会报错 <code>proxyconnect tcp: tls: first record does not look like a TLS handshake</code>。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">[root@k8s-m1 gitlab]# helm dep up ./gitlab-master
+Hang tight while we grab the latest from your chart repositories...
+...Unable to get an update from the &#34;local&#34; chart repository (http://127.0.0.1:8879/charts):
+  Get http://127.0.0.1:8879/charts/index.yaml: dial tcp 127.0.0.1:8879: connect: connection refused
+...Unable to get an update from the &#34;harbor&#34; chart repository (https://helm.goharbor.io):
+  Get https://helm.goharbor.io/index.yaml: EOF
+...Unable to get an update from the &#34;stable&#34; chart repository (https://kubernetes-charts.storage.googleapis.com):
+  Get https://kubernetes-charts.storage.googleapis.com/index.yaml: EOF
+...Unable to get an update from the &#34;pingcap&#34; chart repository (https://charts.pingcap.org/):
+  Get https://charts.pingcap.org/index.yaml: unexpected EOF
+...Unable to get an update from the &#34;istio.io&#34; chart repository (https://storage.googleapis.com/istio-release/releases/1.3.1/charts/):
+  Get https://storage.googleapis.com/istio-release/releases/1.3.1/charts/index.yaml: EOF
+...Unable to get an update from the &#34;rancher-stable&#34; chart repository (https://releases.rancher.com/server-charts/stable):
+  Get https://releases.rancher.com/server-charts/stable/index.yaml: EOF
+...Unable to get an update from the &#34;elastic&#34; chart repository (https://helm.elastic.co):
+  Get https://helm.elastic.co/index.yaml: EOF
+...Unable to get an update from the &#34;gitlab&#34; chart repository (https://charts.gitlab.io/):
+  Get https://charts.gitlab.io/index.yaml: EOF
+Update Complete.
+Saving 5 charts
+Downloading cert-manager from repo https://kubernetes-charts.storage.googleapis.com/
+Downloading prometheus from repo https://kubernetes-charts.storage.googleapis.com/
+Downloading postgresql from repo https://kubernetes-charts.storage.googleapis.com/
+Downloading gitlab-runner from repo https://charts.gitlab.io/
+Downloading grafana from repo https://kubernetes-charts.storage.googleapis.com/
+Deleting outdated charts
+[root@k8s-m1 gitlab]# cd gitlab-master/charts/
+[root@k8s-m1 charts]# ls
+certmanager-issuer       gitlab-runner-0.10.0.tgz  nginx                  redis     shared-secrets
+cert-manager-v0.4.0.tgz  grafana-3.8.15.tgz        postgresql-0.12.0.tgz  redis-ha
+gitlab                   minio                     prometheus-5.5.3.tgz   registry
+</code></pre></td></tr></table>
+</div>
+</div><p>已经成功下载 <code>cert-manager-v0.4.0.tgz</code>、<code>gitlab-runner-0.10.0.tgz</code>、<code>grafana-3.8.15.tgz</code>、<code>postgresql-0.12.0.tgz</code>、<code>prometheus-5.5.3.tgz</code> 到 <code>gitlab-master/charts/</code> 目录下。</p>
+<p>再次生成清单文件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">[root@k8s-m1 gitlab]# helm template ./gitlab-master --name mygitlab --set global.edition=ce --set global.time_zone=CST+8 --set global.hosts.domain=k8s.abc --set nginx-ingress.enabled=false --set global.ingress.class=nginx --set prometheus.install=false --set certmanager.install=false --set global.ingress.configureCertmanager=false  --set gitlab.unicorn.ingress.tls.secretName=RELEASE-gitlab-tls --set registry.ingress.tls.secretName=RELEASE-registry-tls --set minio.ingress.tls.secretName=RELEASE-minio-tls --set global.ingress.annotations.&#34;cert-manager\.io\/cluster-issuer&#34;=cluster-issuer --namespace gitlab &gt; gitlab.yaml
+</code></pre></td></tr></table>
+</div>
+</div><p>解释下: 安装社区版gitlab；将时区设置为 CST+8，表示中国标准时间；域名设置为 k8s.abc，生成的 ingress 里的域名会自动加上前缀，如 gitlab.k8s.abc；不安装 nginx ingress controller ; 在 Ingress 上配置使用名为 nginx 的 nginx ingress controller，这个是默认的 nginx ingress controller 的名字，也是本文的 nginx ingress controller 的名字；不安装 prometheus；不安装cert-manager；configureCertmanager置为false，就不需要输入cert-manager 验证用的邮箱了，而且也不会自动生成对应的 secret ，如果向要生成 secret 的话需要指定名字，其后的三条就是指定了 secret 的名字；annotations 这条是通知 cert-manager 的 shim 组件去根据 secret 的名字生成对应的 ingress 使用的 https 的 secret ；最后一条是执行安装在 gitlab 命名空间内。</p>
+<p>新建 gitlab 命名空间</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">kubectl create ns gitlab
+</code></pre></td></tr></table>
+</div>
+</div><p>执行清单文件，安装 gitlab</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">kubectl apply -f gitlab.yaml
+</code></pre></td></tr></table>
+</div>
+</div><p>部署后发现，postgresql 和 gitlab-runner 仍然运行在 default 命名空间内，删除部署</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">kubectl delete -f gitlab.yaml
+</code></pre></td></tr></table>
+</div>
+</div><p>修改下 gitlab.yaml，为没有配置 namespace 的 配置上 namespace。
+在配置上 imagePullPolicy: IfNotPresent，chart里推荐 <code>'Always' if imageTag is 'latest', else set to 'IfNotPresent'</code></p>
+<p>时区修改为Beijing，如果是CST+8，会报错<code>ArgumentError: Invalid Timezone: CST+8</code>
+<a href="https://stackoverflow.com/questions/31565999/invalid-timezone">https://stackoverflow.com/questions/31565999/invalid-timezone</a></p>
+<p>再次部署，发现 cert-manager 没有生成 ingress 里的 secret ，查看 cert-manager 的日志，发现</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">I1031 12:59:32.896141       1 controller.go:129] cert-manager/controller/ingress-shim &#34;level&#34;=0 &#34;msg&#34;=&#34;syncing item&#34; &#34;key&#34;=&#34;gitlab/mygitlab-minio&#34; 
+E1031 12:59:32.903598       1 controller.go:131] cert-manager/controller/ingress-shim &#34;msg&#34;=&#34;re-queuing item  due to error processing&#34; &#34;error&#34;=&#34;Certificate.cert-manager.io \&#34;RELEASE-minio-tls\&#34; is invalid: metadata.name: Invalid value: \&#34;RELEASE-minio-tls\&#34;: a DNS-1123 subdomain must consist of lower case alphanumeric characters, &#39;-&#39; or &#39;.&#39;, and must start and end with an alphanumeric character (e.g. &#39;example.com&#39;, regex used for validation is &#39;[a-z0-9]([-a-z0-9]*[a-z0-9])?(\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*&#39;)&#34; &#34;key&#34;=&#34;gitlab/mygitlab-minio&#34; 
+I1031 12:59:33.217104       1 controller.go:129] cert-manager/controller/ingress-shim &#34;level&#34;=0 &#34;msg&#34;=&#34;syncing item&#34; &#34;key&#34;=&#34;gitlab/mygitlab-registry&#34;
+</code></pre></td></tr></table>
+</div>
+</div><p>原来 secret 名不符合要求，再修改下，将 secret 中的大写字母改为小写</p>
+<p>再次部署，发现 pod mygitlab-migrations.0-55445 报错</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">2019-10-31T13:00:21.000Z 8 TID-gmpl6bw2c WARN: PG::ConnectionBad: could not connect to server: No route to host
+  Is the server running on host &#34;mygitlab-postgresql&#34; (10.105.112.88) and accepting
+  TCP/IP connections on port 5432?
+</code></pre></td></tr></table>
+</div>
+</div><p>因为这个 pod 在 c48-1 主机上，这台主机开启了 firewalld 防火墙，将 tcp 5432 端口开放就不报错了。
+不理解为什么要开启这个端口， pod 访问 postgresql 应该是走的 k8s 的内网，而且 c48-1 上的 tcp 5432 端口未被监听。</p>
+<p>再次查看 gitlab 的 pod 的状态</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">[root@k8s-m1 gitlab]# kubectl get pods -n gitlab -o wide
+NAME                                           READY   STATUS             RESTARTS   AGE   IP              NODE     NOMINATED NODE   READINESS GATES
+mygitlab-gitaly-0                              1/1     Running            0          31m   172.30.81.181   k8s-m2   &lt;none&gt;           &lt;none&gt;
+mygitlab-gitlab-exporter-787d755bd7-zg6wx      1/1     Running            0          31m   172.30.77.33    c48-2    &lt;none&gt;           &lt;none&gt;
+mygitlab-gitlab-runner-79df86778c-f4shq        0/1     CrashLoopBackOff   7          31m   172.30.182.35   c48-1    &lt;none&gt;           &lt;none&gt;
+mygitlab-gitlab-shell-845977ff9c-9g7jh         1/1     Running            0          31m   172.30.42.135   k8s-m1   &lt;none&gt;           &lt;none&gt;
+mygitlab-gitlab-shell-845977ff9c-z6zzn         1/1     Running            0          31m   172.30.77.37    c48-2    &lt;none&gt;           &lt;none&gt;
+mygitlab-gitlab-upgrade-check-g2hps            0/1     Completed          0          31m   172.30.182.31   c48-1    &lt;none&gt;           &lt;none&gt;
+mygitlab-migrations.0-55445                    0/1     Completed          0          31m   172.30.77.35    c48-2    &lt;none&gt;           &lt;none&gt;
+mygitlab-minio-cdf46ff8-7ss5d                  1/1     Running            0          31m   172.30.182.29   c48-1    &lt;none&gt;           &lt;none&gt;
+mygitlab-postgresql-5d49d8c57d-8jbqs           2/2     Running            0          31m   172.30.77.36    c48-2    &lt;none&gt;           &lt;none&gt;
+mygitlab-redis-6b9477b6d8-4cqtc                2/2     Running            0          31m   172.30.42.136   k8s-m1   &lt;none&gt;           &lt;none&gt;
+mygitlab-registry-85c79f7866-6v4ww             1/1     Running            0          31m   172.30.77.34    c48-2    &lt;none&gt;           &lt;none&gt;
+mygitlab-registry-85c79f7866-9zn2n             1/1     Running            0          31m   172.30.81.180   k8s-m2   &lt;none&gt;           &lt;none&gt;
+mygitlab-shared-secrets.0-8qk-selfsign-9xxj9   0/1     Completed          0          31m   172.30.42.137   k8s-m1   &lt;none&gt;           &lt;none&gt;
+mygitlab-shared-secrets.0-ii7-6dphn            0/1     Completed          0          31m   172.30.42.132   k8s-m1   &lt;none&gt;           &lt;none&gt;
+mygitlab-sidekiq-all-in-1-786cd5454f-7n7zm     1/1     Running            0          31m   172.30.182.36   c48-1    &lt;none&gt;           &lt;none&gt;
+mygitlab-task-runner-66fd7cdfc9-2gddp          1/1     Running            0          31m   172.30.182.38   c48-1    &lt;none&gt;           &lt;none&gt;
+mygitlab-unicorn-76c764b677-8sdwz              2/2     Running            0          31m   172.30.182.44   c48-1    &lt;none&gt;           &lt;none&gt;
+mygitlab-unicorn-76c764b677-xqfk7              2/2     Running            0          31m   172.30.77.38    c48-2    &lt;none&gt;           &lt;none&gt;
+mygitlab-unicorn-test-runner-nzz88             0/1     Error              0          31m   172.30.182.30   c48-1    &lt;none&gt;           &lt;none&gt;
+</code></pre></td></tr></table>
+</div>
+</div><p>pod gitlab-runner 在不停重启，查看下日志</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">ERROR: Registering runner... failed                 runner=egNEppfW status=couldn&#39;t execute POST against https://gitlab.k8s.abc/api/v4/runners: Post https://gitlab.k8s.abc/api/v4/runners: dial tcp: lookup gitlab.k8s.abc on 10.96.0.10:53: no such host
+PANIC: Failed to register this runner. Perhaps you are having network problems
+Registration attempt 13 of 30
+Runtime platform                                    arch=amd64 os=linux pid=246 revision=1564076b version=12.4.0
+WARNING: Running in user-mode.
+WARNING: The user-mode requires you to manually start builds processing:
+WARNING: $ gitlab-runner run
+WARNING: Use sudo for system-mode:
+WARNING: $ sudo gitlab-runner...
+</code></pre></td></tr></table>
+</div>
+</div><p>在 gitlab-runner 容器中访问 gitlab.k8s.abc 不通，通过 coredns （10.96.0.10） 查不到 gitlab.k8s.abc 对应的 ip。</p>
+<p>解决办法为 配置 coredns 的查询规则，先查 /etc/hosts 中的域名，如果查不到，再使用其他方式查询。
+需要使用 coredns 的 hosts 插件，见: <a href="https://coredns.io/plugins/hosts/">https://coredns.io/plugins/hosts/</a></p>
+<p>首先将 宿主机的 /etc/hosts 文件 挂载到 coredns 容器 的 /etc/hosts 上，然后配置 coredns 的查询规则，再 Corefile 中 kubernetes 的前面添加 <code>hosts { fallthrouth }</code> ，表示解析域名时，先查 /etc/hosts 中的信息，如果查不到，就跳到下一个查询，使用 kubernetes 查询。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml">...<span class="w"> </span>...<span class="w">
+</span><span class="w"></span>---<span class="w">
+</span><span class="w"></span><span class="k">apiVersion</span><span class="p">:</span><span class="w"> </span>v1<span class="w">
+</span><span class="w"></span><span class="k">kind</span><span class="p">:</span><span class="w"> </span>ConfigMap<span class="w">
+</span><span class="w"></span><span class="k">metadata</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="k">name</span><span class="p">:</span><span class="w"> </span>coredns<span class="w">
+</span><span class="w">  </span><span class="k">namespace</span><span class="p">:</span><span class="w"> </span>kube-system<span class="w">
+</span><span class="w">  </span><span class="k">labels</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="k">addonmanager.kubernetes.io/mode</span><span class="p">:</span><span class="w"> </span>EnsureExists<span class="w">
+</span><span class="w"></span><span class="k">data</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="k">Corefile</span><span class="p">:</span><span class="w"> </span><span class="sd">|
+</span><span class="sd">    .:53 {</span><span class="w">
+</span><span class="w">        </span>errors<span class="w">
+</span><span class="w">        </span>health<span class="w">
+</span><span class="w">        </span>hosts<span class="w"> </span>{<span class="w">
+</span><span class="w">            </span>fallthrough<span class="w">
+</span><span class="w">        </span>}<span class="w">
+</span><span class="w">        </span>kubernetes<span class="w"> </span>cluster.local<span class="w"> </span>in-addr.arpa<span class="w"> </span>ip6.arpa<span class="w"> </span>{<span class="w">
+</span><span class="w">            </span>pods<span class="w"> </span>insecure<span class="w">
+</span><span class="w">            </span>upstream<span class="w">
+</span><span class="w">            </span>fallthrough<span class="w"> </span>in-addr.arpa<span class="w"> </span>ip6.arpa<span class="w">
+</span><span class="w">            </span>ttl<span class="w"> </span><span class="m">30</span><span class="w">
+</span><span class="w">        </span>}<span class="w">
+</span><span class="w">        </span>prometheus<span class="w"> </span><span class="p">:</span><span class="m">9153</span><span class="w">
+</span><span class="w">        </span>forward<span class="w"> </span>.<span class="w"> </span>/etc/resolv.conf<span class="w">
+</span><span class="w">        </span>cache<span class="w"> </span><span class="m">30</span><span class="w">
+</span><span class="w">        </span>loop<span class="w">
+</span><span class="w">        </span>reload<span class="w">
+</span><span class="w">        </span>loadbalance<span class="w">
+</span><span class="w">    </span>}<span class="w">
+</span><span class="w"></span>---<span class="w">
+</span><span class="w"></span><span class="k">apiVersion</span><span class="p">:</span><span class="w"> </span>apps/v1<span class="w">
+</span><span class="w"></span><span class="k">kind</span><span class="p">:</span><span class="w"> </span>Deployment<span class="w">
+</span><span class="w"></span><span class="k">metadata</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="k">name</span><span class="p">:</span><span class="w"> </span>coredns<span class="w">
+</span><span class="w">  </span><span class="k">namespace</span><span class="p">:</span><span class="w"> </span>kube-system<span class="w">
+</span><span class="w">  </span><span class="k">labels</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="k">k8s-app</span><span class="p">:</span><span class="w"> </span>kube-dns<span class="w">
+</span><span class="w">    </span><span class="k">kubernetes.io/cluster-service</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;true&#34;</span><span class="w">
+</span><span class="w">    </span><span class="k">addonmanager.kubernetes.io/mode</span><span class="p">:</span><span class="w"> </span>Reconcile<span class="w">
+</span><span class="w">    </span><span class="k">kubernetes.io/name</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;CoreDNS&#34;</span><span class="w">
+</span><span class="w"></span><span class="k">spec</span><span class="p">:</span><span class="w">
+</span><span class="w"></span>...<span class="w"> </span>...<span class="w">
+</span><span class="w">      </span><span class="k">containers</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>coredns<span class="w">
+</span><span class="w">        </span><span class="k">image</span><span class="p">:</span><span class="w"> </span>coredns/coredns<span class="p">:</span><span class="m">1.4.0</span><span class="w">
+</span><span class="w"></span>...<span class="w"> </span>...<span class="w">
+</span><span class="w">        </span><span class="k">volumeMounts</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>config-volume<span class="w">
+</span><span class="w">          </span><span class="k">mountPath</span><span class="p">:</span><span class="w"> </span>/etc/coredns<span class="w">
+</span><span class="w">          </span><span class="k">readOnly</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="w">        </span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>host-time<span class="w">
+</span><span class="w">          </span><span class="k">mountPath</span><span class="p">:</span><span class="w"> </span>/etc/localtime<span class="w">
+</span><span class="w">          </span><span class="k">readOnly</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="w">        </span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>hosts<span class="w">
+</span><span class="w">          </span><span class="k">mountPath</span><span class="p">:</span><span class="w"> </span>/etc/hosts<span class="w">
+</span><span class="w">          </span><span class="k">readOnly</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="w"></span>...<span class="w"> </span>...<span class="w">
+</span><span class="w">      </span><span class="k">volumes</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>config-volume<span class="w">
+</span><span class="w">          </span><span class="k">configMap</span><span class="p">:</span><span class="w">
+</span><span class="w">            </span><span class="k">name</span><span class="p">:</span><span class="w"> </span>coredns<span class="w">
+</span><span class="w">            </span><span class="k">items</span><span class="p">:</span><span class="w">
+</span><span class="w">            </span>- <span class="k">key</span><span class="p">:</span><span class="w"> </span>Corefile<span class="w">
+</span><span class="w">              </span><span class="k">path</span><span class="p">:</span><span class="w"> </span>Corefile<span class="w">
+</span><span class="w">        </span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>host-time<span class="w">
+</span><span class="w">          </span><span class="k">hostPath</span><span class="p">:</span><span class="w">
+</span><span class="w">            </span><span class="k">path</span><span class="p">:</span><span class="w"> </span>/etc/localtime<span class="w">
+</span><span class="w">        </span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>hosts<span class="w">
+</span><span class="w">          </span><span class="k">hostPath</span><span class="p">:</span><span class="w">
+</span><span class="w">            </span><span class="k">path</span><span class="p">:</span><span class="w"> </span>/etc/hosts<span class="w">
+</span><span class="w"></span>---<span class="w">
+</span><span class="w"></span>...<span class="w"> </span>...<span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>更新好后，重新部署下 coredns</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">kubectl apply -f coredns.yaml
+</code></pre></td></tr></table>
+</div>
+</div><p>然后运行一个测试的yaml文件，测试下能否解析域名，如果测试的容器的基础镜像为 centos ，就安装下 dns-utils，如果是 debian ，就安装 dnsutils 。安装后，就可以使用 nslookup 查询域名了。</p>
+<p>如 nslookup gitlab.k8s.abc 10.96.0.10，这条查询会查 /etc/hosts
+如果查service，比如查 kube-system 命名空间下的 metrics-server ，则使用命令 nslookup metrics-server.kube-system 10.96.0.10</p>
+<p>继续，gitlab-runner 报了另一个错误</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">ERROR: Registering runner... failed                 runner=egNEppfW status=couldn&#39;t execute POST against https://gitlab.k8s.abc/api/v4/runners: Post https://gitlab.k8s.abc/api/v4/runners: x509: certificate signed by unknown authority
+PANIC: Failed to register this runner. Perhaps you are having network problems
+Registration attempt 7 of 30
+Runtime platform                                    arch=amd64 os=linux pid=176 revision=1564076b version=12.4.0
+WARNING: Running in user-mode.
+WARNING: The user-mode requires you to manually start builds processing:
+WARNING: $ gitlab-runner run
+WARNING: Use sudo for system-mode:
+WARNING: $ sudo gitlab-runner...
+</code></pre></td></tr></table>
+</div>
+</div><p>这个错误表示 runner 向 域名 <a href="https://gitlab.k8s.abc">https://gitlab.k8s.abc</a> 发送 post 请求，证书错误。<a href="https://gitlab.k8s.abc">https://gitlab.k8s.abc</a> 这个域名使用的证书是上文使用 cert-manager 自动生成的，使用的是我们自己的 CA ，runner 这个pod 使用的是什么证书呢？</p>
+<p>查看 gitlab chart 的 values.yaml中关于 runner 的部分
+<code>doc/installation/secrets.md</code> 介绍了 gitlab chart 的 secret ，里面好像没有指定 runner 使用的 证书。
+<code>doc/charts/gitlab/gitlab-runner/index.md</code> 介绍了 gitlab-runner ，但是里面也没有提到 runner 使用的证书，只有提到 runner 向 gitlab 注册token 和 gitlab 的 url 。</p>
+<p>看看 gitlab-runner chart 里的信息，里面的 values.yaml 提到了一个地址， <a href="https://docs.gitlab.com/runner/configuration/tls-self-signed.html#supported-options-for-self-signed-certificates">https://docs.gitlab.com/runner/configuration/tls-self-signed.html#supported-options-for-self-signed-certificates</a> 支持自签名证书，这个应该就是我们要找的。里面的内容是：
+从 gitlab runner 0.7.0 版本开始，允许用户配置用来验证和 gitlab server tls 连接的证书，这可以解决当注册 runner 时的 <code>x509: certificate signed by unknown authority</code> 问题。
+gitlab runner 提供如下选项：</p>
+<ol>
+<li>
+<p>默认： gitlab runner 读取系统证书库并使用系统中的 CA 验证 gitlab server</p>
+</li>
+<li>
+<p>gitlab runner 从以下文件中读取 pem 证书（der 格式的证书不支持）
+- 当 gitlab runner 在 *nix 系统以 root 用户执行时对应的文件为 <code>/etc/gitlab-runner/certs/hostname.crt</code>
+- 当 gitlab runner 在 *nix 系统以非 root 用户执行时对应的文件为 <code>~/.gitlab-runner/certs/hostname.crt</code>
+- 其他系统上对应的文件为 <code>./certs/hostname.crt</code></p>
+<p>如果 gitlab server 的地址是 <a href="https://my.gitlab.server.com:8443/">https://my.gitlab.server.com:8443/</a> ，则需要创建如下形式的证书：<code>/etc/gitlab-runner/certs/my.gitlab.server.com.crt</code> 。</p>
+</li>
+<li>
+<p>gitlab runner 在向 gitlab server <a href="https://docs.gitlab.com/runner/commands/README.html#gitlab-runner-register" target="_blank" rel="noopener noreffer">注册</a>时，提供了 tls-ca-file 参数（gitlab-runner register &ndash;tls-ca-file=/path），并且在 <a href="https://docs.gitlab.com/runner/configuration/advanced-configuration.html" target="_blank" rel="noopener noreffer">config.toml</a> 中的<code>[[runners]]</code> 部分，这两种方式允许你指定一个自定义的证书文件，这个文件需要在访问 gitlab server 的时候时刻都准备好。</p>
+</li>
+</ol>
+<p>我们使用第二种方式，通过进入 gitlab runner 的 pod 查看，可以查到 gitlab runner 使用的是 debian 系统，是类unix 系统，并且用户为 gitlab-runner。所以，需要在<code>/home/gitlab-runner/.gitlab-runner/certs/</code>目录下新建一个 gitlab.k8s.abc.crt，这个 crt 需要对应 上文 ingress-nginx 一节的 ca.crt。我们使用 secret 的方式进行挂载。</p>
+<p>在 gitlab 命名空间新建 gitlab.k8s.abc.crt 对应的 secret</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">kubectl create secret generic gitlab.k8s.abc.crt --from-file=gitlab.k8s.abc.crt=ca.crt -n gitlab
+</code></pre></td></tr></table>
+</div>
+</div><p>修改 gitlab runner 的 Deployment 文件，将该 secret 挂载到 <code>/home/gitlab-runner/.gitlab-runner/certs/</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="c"># Source: gitlab/charts/gitlab-runner/templates/deployment.yaml</span><span class="w">
+</span><span class="w"></span><span class="k">apiVersion</span><span class="p">:</span><span class="w"> </span>apps/v1<span class="w">
+</span><span class="w"></span><span class="k">kind</span><span class="p">:</span><span class="w"> </span>Deployment<span class="w">
+</span><span class="w"></span><span class="k">metadata</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="k">name</span><span class="p">:</span><span class="w"> </span>mygitlab-gitlab-runner<span class="w">
+</span><span class="w">  </span><span class="k">namespace</span><span class="p">:</span><span class="w"> </span>gitlab<span class="w">
+</span><span class="w"></span>...<span class="w"> </span>...<span class="w">
+</span><span class="w"></span><span class="k">spec</span><span class="p">:</span><span class="w">
+</span><span class="w"></span>...<span class="w"> </span>...<span class="w">
+</span><span class="w">      </span><span class="k">initContainers</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>configure<span class="w">
+</span><span class="w">        </span><span class="k">command</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;sh&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;/config/configure&#39;</span><span class="p">]</span><span class="w">
+</span><span class="w">        </span><span class="k">image</span><span class="p">:</span><span class="w"> </span>gitlab/gitlab-runner<span class="p">:</span>alpine-v12<span class="m">.4.0</span><span class="w">
+</span><span class="w"></span>...<span class="w"> </span>...<span class="w">
+</span><span class="w">        </span><span class="k">volumeMounts</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>runner-secrets<span class="w">
+</span><span class="w">          </span><span class="k">mountPath</span><span class="p">:</span><span class="w"> </span>/secrets<span class="w">
+</span><span class="w">          </span><span class="k">readOnly</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span><span class="w">        </span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>scripts<span class="w">
+</span><span class="w">          </span><span class="k">mountPath</span><span class="p">:</span><span class="w"> </span>/config<span class="w">
+</span><span class="w">          </span><span class="k">readOnly</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="w">        </span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>init-runner-secrets<span class="w">
+</span><span class="w">          </span><span class="k">mountPath</span><span class="p">:</span><span class="w"> </span>/init-secrets<span class="w">
+</span><span class="w">          </span><span class="k">readOnly</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="w"></span>...<span class="w"> </span>...<span class="w">
+</span><span class="w">      </span><span class="k">containers</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>mygitlab-gitlab-runner<span class="w">
+</span><span class="w">        </span><span class="k">image</span><span class="p">:</span><span class="w"> </span>gitlab/gitlab-runner<span class="p">:</span>alpine-v12<span class="m">.4.0</span><span class="w">
+</span><span class="w">        </span><span class="k">imagePullPolicy</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;IfNotPresent&#34;</span><span class="w">
+</span><span class="w">        </span><span class="k">command</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;/bin/bash&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;/scripts/entrypoint&#34;</span><span class="p">]</span><span class="w">
+</span><span class="w"></span>...<span class="w"> </span>...<span class="w">
+</span><span class="w">        </span><span class="k">volumeMounts</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>runner-secrets<span class="w">
+</span><span class="w">          </span><span class="k">mountPath</span><span class="p">:</span><span class="w"> </span>/secrets<span class="w">
+</span><span class="w">        </span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>etc-gitlab-runner<span class="w">
+</span><span class="w">          </span><span class="k">mountPath</span><span class="p">:</span><span class="w"> </span>/home/gitlab-runner/.gitlab-runner<span class="w">
+</span><span class="w">        </span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>gitlab-runner-crt<span class="w">
+</span><span class="w">          </span><span class="k">mountPath</span><span class="p">:</span><span class="w"> </span>/home/gitlab-runner/.gitlab-runner/certs/<span class="w">
+</span><span class="w">        </span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>scripts<span class="w">
+</span><span class="w">          </span><span class="k">mountPath</span><span class="p">:</span><span class="w"> </span>/scripts<span class="w">
+</span><span class="w">        </span><span class="k">resources</span><span class="p">:</span><span class="w">
+</span><span class="w">          </span>{}<span class="w">
+</span><span class="w">      </span><span class="k">volumes</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>runner-secrets<span class="w">
+</span><span class="w">        </span><span class="k">emptyDir</span><span class="p">:</span><span class="w">
+</span><span class="w">          </span><span class="k">medium</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;Memory&#34;</span><span class="w">
+</span><span class="w">      </span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>etc-gitlab-runner<span class="w">
+</span><span class="w">        </span><span class="k">emptyDir</span><span class="p">:</span><span class="w">
+</span><span class="w">          </span><span class="k">medium</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;Memory&#34;</span><span class="w">
+</span><span class="w">      </span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>gitlab-runner-crt<span class="w">
+</span><span class="w">        </span><span class="k">secret</span><span class="p">:</span><span class="w">
+</span><span class="w">          </span><span class="k">secretName</span><span class="p">:</span><span class="w"> </span>gitlab.k8s.abc.crt<span class="w">
+</span><span class="w">      </span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>init-runner-secrets<span class="w">
+</span><span class="w">        </span><span class="k">projected</span><span class="p">:</span><span class="w">
+</span><span class="w">          </span><span class="k">sources</span><span class="p">:</span><span class="w">
+</span><span class="w">            </span>- <span class="k">secret</span><span class="p">:</span><span class="w">
+</span><span class="w">                </span><span class="k">name</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;mygitlab-minio-secret&#34;</span><span class="w">
+</span><span class="w">            </span>- <span class="k">secret</span><span class="p">:</span><span class="w">
+</span><span class="w">                </span><span class="k">name</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;mygitlab-gitlab-runner-secret&#34;</span><span class="w">
+</span><span class="w">                </span><span class="k">items</span><span class="p">:</span><span class="w">
+</span><span class="w">                  </span>- <span class="k">key</span><span class="p">:</span><span class="w"> </span>runner-registration-token<span class="w">
+</span><span class="w">                    </span><span class="k">path</span><span class="p">:</span><span class="w"> </span>runner-registration-token<span class="w">
+</span><span class="w">                  </span>- <span class="k">key</span><span class="p">:</span><span class="w"> </span>runner-token<span class="w">
+</span><span class="w">                    </span><span class="k">path</span><span class="p">:</span><span class="w"> </span>runner-token<span class="w">
+</span><span class="w">      </span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>scripts<span class="w">
+</span><span class="w">        </span><span class="k">configMap</span><span class="p">:</span><span class="w">
+</span><span class="w">          </span><span class="k">name</span><span class="p">:</span><span class="w"> </span>mygitlab-gitlab-runner<span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>再次执行，就解决 gitlab runner 证书授权的问题了。</p>
+<p>通过 <code>doc/installation/secrets.md</code> 中的 <code>Registry authentication certificates</code> 可以知道 gitlab registry 使用的是自签名证书，这个有影响吗？</p>
+<p>gitlab 和 registry 之间的交流是在 ingress 后面进行的，所以使用自签名证书能满足大部分的场景。如果流量通过一个网络，那你需要生成公共校验证书。</p>
+<p>生成一个证书密钥对</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">mkdir -p certs
+openssl req -new -newkey rsa:4096 -subj &#34;/CN=gitlab-issuer&#34; -nodes -x509 -keyout certs/registry-example-com.key -out certs/registry-example-com.crt
+</code></pre></td></tr></table>
+</div>
+</div><p>生成一个 secret 包含这些证书，我们会新建一个名为 <code>&lt;name&gt;-registry-secret</code> 的secret，包含 <code>registry-auth.key</code> 和 <code>registry-auth.crt</code>，将 <code>&lt;name&gt;</code> 替换为对应的 release 名。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">kubectl create secret generic &lt;name&gt;-registry-secret --from-file=registry-auth.key=certs/registry-example-com.key --from-file=registry-auth.crt=certs/registry-example-com.crt
+</code></pre></td></tr></table>
+</div>
+</div><p>这个 secret 可以通过设置 <code>global.registry.certificate.secret</code> 引用。</p>
+<p>还有一个 <code>wildcard-tls-ca</code>，见 <code>doc/installation/tls.md</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">The `shared-secrets` chart will then produce a CA certificate and wildcard certificate for use by all externally
+accessible services. The secrets containing these will be `RELEASE-wildcard-tls` and `RELEASE-wildcard-tls-ca`.
+The `RELEASE-wildcard-tls-ca` contains the public CA certificate that can be distributed to users and systems that
+will access the deployed GitLab instance.
+</code></pre></td></tr></table>
+</div>
+</div><p><code>shared-secrets</code> 子 chart 生成的，它会生成一个 ca 证书 和 通配符证书 供外部的服务使用。如果这个 CA 使用 自己的 ca 会不会好一点。</p>
+<p>查看 <code>shared-secrets</code> chart 的说明 <code>doc/charts/shared-secrets/index.md</code>，<code>shared-secrets</code> 子 chart 负责提供安装过程中的各种 secret ，除了其他手动指定的。包括</p>
+<ul>
+<li>
+<p>初始 root 密码</p>
+</li>
+<li>
+<p>所有公共服务的自签名 tls 证书，包括 gitlab, minio 和 registry</p>
+</li>
+<li>
+<p>registry 认证证书</p>
+</li>
+<li>
+<p>minio, registry, gitlab shell 和 gitaly 的 secret</p>
+</li>
+<li>
+<p>ssh host keys</p>
+</li>
+</ul>
+<p>其中 gitlab, minio 和 registry公共服务的自签名证书应该在上文生成 gitlab.yaml 时指定了，由 cert-manager 生成。registry 认证证书可以通过 <code>global.registry.certificate.secret</code> 指定。</p>
+<p>它提供的参数里，没有指定 ca 的参数，如果可以指定 ca 的话，就统一使用我们自己的 ca 签发证书，不用自签名了，就可以彻底避免 证书认证的问题。</p>
+<p>在 doc/charts/shared-secret 和 charts/shared-secret 查看 <code>shared-secrets</code> chart 的信息，没有找到关于指定 ca 的参数</p>
+<p>观察下 gitlab.yaml , 其中通过名为 shared-secrets 的 Job 可以了解下<code>shared-secrets</code> chart的作用，它使用 <code>cfssl-self-sign:1.2</code> 镜像中的 cfssl 工具，利用 环境变量里的信息生成自签名证书，然后把生成的证书放在 emptyDir 中，然后 kubectl 镜像将 emptyDir 中的证书生成 secret 。 可知，使用 <code>shared-secrets</code> chart 无法自定义我们自己的 CA，如果想使用 自己的 CA，应该是只能不安装这个 chart ，然后手动生成各种 secret ，手动生成 secret 参考 <code>doc/installation/secret.md</code></p>
+<p><code>shared-secrets</code> chart 在 Job 中生成了 通用证书 secret （mygitlab-wildcard-tls）和 ca 证书 secret （mygitlab-wildcard-tls-ca），其中，mygitlab-wildcard-tls 可以在 gitlab.yaml 中看到它的使用，它对应的名字为 custom-ca-certificates， 都是挂载到了 alpine-certificates 容器中，这个是一个初始化的容器，没找到这个镜像的 dockerfile，不知道做了什么。</p>
+<p>上面是手动修改的 gitlan runner 和 postgresql 的命名空间，能否生成 yaml 文件的时候指定呢？
+查看 postgresql 里的文件和它的 chart ，没有发现指定命名空间的地方。</p>
+<p>查看 doc/charts/gitlab/gitlab-runner/index.md ，其中 <code>gitlab-runner.runners.namespace</code> 可以指定 runner 的命名空间，经过测试，这个参数无效</p>
+<p>使用 helm v3 安装 gitlab</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">helm template . \
+  --name-template ${release} \
+  --set global.edition=ce \
+  --set global.time_zone=Beijing \
+  --set global.hosts.domain=k8s.abc \
+  --set global.grafana.enabled=false \
+  --set global.ingress.class=nginx \
+  --set global.ingress.configureCertmanager=false \
+  --set gitlab.unicorn.ingress.tls.secretName=release-gitlab-tls \
+  --set registry.ingress.tls.secretName=release-registry-tls \
+  --set minio.ingress.tls.secretName=release-minio-tls \
+  --set global.ingress.annotations.&#34;cert-manager\.io\/cluster-issuer&#34;=cluster-issuer \
+  --set global.registry.certificate.secret=${release}-registry-secret \
+  --set global.email.display_name=hekai \
+  --set global.email.from=hekai@abc.com \
+  --set global.email.reply_to=hekai@abc.com \
+  --set global.email.subject_suffix=@abc.com \
+  --set global.smtp.enabled=true \
+  --set global.smtp.address=smtp.abc.com \
+  --set global.smtp.port=465 \
+  --set global.smtp.authentication=login \
+  --set global.smtp.openssl_verify_mode=none \
+  --set global.smtp.starttls_auto=true \
+  --set global.smtp.tls=true \
+  --set global.smtp.password.key=gitlab-outgoing-smtp-pwd-key \
+  --set global.smtp.password.secret=gitlab-outgoing-smtp-pwd-secret \
+  --set global.smtp.user_name=hekai@abc.com \
+  --set certmanager.install=false \
+  --set nginx-ingress.enabled=false \
+  --set prometheus.install=false \
+  --namespace gitlab \
+  &gt; gitlab.yaml
+</code></pre></td></tr></table>
+</div>
+</div><p>根据 doc/installation/storage.md 中描述，建议 storageclass 的 reclaimPolicy 使用 retain 模式</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">The default storage class should:
+
+- Use fast SSD storage when available
+- Set `reclaimPolicy` to `Retain`
+
+&gt; Uninstalling GitLab without the `reclaimPolicy` set to `Retain` allows automated jobs to completely delete the volume, disk and data.
+&gt; Some platforms set the default `reclaimPolicy` to `Delete`. The `gitaly` persistent volume claims do not follow this rule because
+&gt; they belong to a [StatefulSet][].
+</code></pre></td></tr></table>
+</div>
+</div><p>由于 上文创建的 managed-nfs-storage 的默认 reclaimPolicy 使用的是 Delete 模式，并且已经有 一些 容器使用 这个 storageclass 了，所以可以新建一个 nfs storage class 来支持 retain 模式，并把该 storage class 置为默认。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">[root@k8s-m1 deploy]# cat class.yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: managed-nfs-storage
+provisioner: nfs-storage # or choose another name, must match deployment&#39;s env PROVISIONER_NAME&#39;
+parameters:
+  archiveOnDelete: &#34;false&#34;
+[root@k8s-m1 deploy]# cat class-retain.yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: nfs-storage-retain
+  annotations:
+    storageclass.kubernetes.io/is-default-class: &#34;true&#34; # 将该sc配置为默认的sc
+provisioner: nfs-storage # or choose another name, must match deployment&#39;s env PROVISIONER_NAME&#39;
+parameters:
+  archiveOnDelete: &#34;false&#34;
+# Supported policies: Delete, Retain
+reclaimPolicy: Retain
+[root@k8s-m1 deploy]# kubectl apply -f class.yaml -f class-retain.yaml
+</code></pre></td></tr></table>
+</div>
+</div><hr>
+<ol>
+<li>
+<p>配置 coredns 使用 hosts 插件 挂载 宿主机的 /etc/hosts</p>
+<p>目前的问题是 coredns 使用 hosts插件，如果宿主机的 /etc/hosts 中内容变化，coredns里的解析不会重新加载</p>
+</li>
+<li>
+<p>配置 ingress-controller 暴漏 22 端口</p>
+</li>
+<li>
+<p>新建命名空间</p>
+</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">kubectl create ns gitlab
+</code></pre></td></tr></table>
+</div>
+</div><ol start="4">
+<li>
+<p>使用 CA 证书生成 gitlab-runner 连接 gitlab server 认证用的 secret
+kubectl create secret generic gitlab.k8s.abc.crt &ndash;from-file=gitlab.k8s.abc.crt=ca.crt -n gitlab</p>
+</li>
+<li>
+<p>生成 gitlab server 与 registry 交互使用的证书
+生成私钥和证书签名请求
+openssl req -new -newkey rsa:4096 -subj &ldquo;/CN=gitlab-issuer&rdquo; -nodes -keyout registry-k8s-abc.key -out registry-k8s-abc.csr
+使用CA证书根据证书签名请求签发证书
+openssl x509 -req -sha256 -days 365 -in registry-k8s-abc.csr -CA ca.crt -CAkey ca.key -set_serial 01 -out registry-k8s-abc.crt</p>
+</li>
+</ol>
+<blockquote>
+<p>原文是自签名生成一个证书和私钥
+openssl req -new -newkey rsa:4096 -subj &ldquo;/CN=gitlab-issuer&rdquo; -nodes -x509 -keyout certs/registry-example-com.key -out certs/registry-example-com.crt</p>
+</blockquote>
+<p>根据生成的证书和私钥建一个secret
+kubectl create secret generic ${release}-registry-secret &ndash;from-file=registry-auth.key=registry-k8s-abc.key &ndash;from-file=registry-auth.crt=registry-k8s-abc.crt -n gitlab</p>
+<p>然后生成yaml时可以通过 global.registry.certificate.secret 引用该 secret</p>
+<ol>
+<li>生成 imap和smtp 所需的密码</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">kubectl create secret generic gitlab-incoming-imap-pwd-secret --from-file=./gitlab-incoming-imap-pwd-key -n gitlab
+
+kubectl create secret generic gitlab-outgoing-smtp-pwd-secret --from-file=gitlab-outgoing-smtp-pwd-key=gitlab-incoming-imap-pwd-key -n gitlab
+</code></pre></td></tr></table>
+</div>
+</div><ol start="6">
+<li>生成gitlab.yaml</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">helm template . \
+  --name-template ${release} \
+  --set global.edition=ce \
+  --set global.time_zone=Beijing \
+  --set global.hosts.domain=k8s.abc \
+  --set global.grafana.enabled=false \
+  --set global.ingress.class=nginx \
+  --set global.ingress.configureCertmanager=false \
+  --set gitlab.unicorn.ingress.tls.secretName=release-gitlab-tls \
+  --set registry.ingress.tls.secretName=release-registry-tls \
+  --set minio.ingress.tls.secretName=release-minio-tls \
+  --set global.ingress.annotations.&#34;cert-manager\.io\/cluster-issuer&#34;=cluster-issuer \
+  --set global.registry.certificate.secret=${release}-registry-secret \
+  --set global.email.display_name=hekai \
+  --set global.email.from=276516848@qq.com \
+  --set global.email.reply_to=276516848@qq.com \
+  --set global.email.subject_suffix=@qq.com \
+  --set global.smtp.enabled=true \
+  --set global.smtp.address=smtp.qq.com \
+  --set global.smtp.port=465 \
+  --set global.smtp.authentication=login \
+  --set global.smtp.openssl_verify_mode=none \
+  --set global.smtp.starttls_auto=true \
+  --set global.smtp.tls=true \
+  --set global.smtp.password.key=gitlab-outgoing-smtp-pwd-key \
+  --set global.smtp.password.secret=gitlab-outgoing-smtp-pwd-secret \
+  --set global.smtp.user_name=276516848@qq.com \
+  --set certmanager.install=false \
+  --set nginx-ingress.enabled=false \
+  --set prometheus.install=false \
+  --namespace gitlab \
+  &gt; gitlab.yaml
+</code></pre></td></tr></table>
+</div>
+</div><ol start="7">
+<li>
+<p>挂载 gitlab.k8s.abc.crt</p>
+</li>
+<li>
+<p>修改 gitlab-runner 和 postgresql 相关资源的命名空间</p>
+</li>
+</ol>
+<p>注释掉 configmap mygitlab-nginx-ingress-tcp，因为这个是配置ingress nginx的，我们自己的已经配置好了</p>
+<p>注释掉 PersistentVolumeClaim ，将对应的 Deployment 改为 StatefulSet ，并添加 pvc</p>
+<p>为所有容器挂载宿主机 /etc/localtime</p>
+<p>然后执行 kubectl apply -f gitlab.yaml</p>
+<p>升级 到 v2.5.1，同时将smtp修改为使用qq提供
+export release=mygitlab</p>
+<ol>
+<li>修改 smtp 密码</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="o">[</span>root@k8s-m1 gitlab-v2.5.1<span class="o">]</span><span class="c1"># kubectl delete secret -n gitlab gitlab-outgoing-smtp-pwd-secret</span> 
+secret <span class="s2">&#34;gitlab-outgoing-smtp-pwd-secret&#34;</span> deleted
+<span class="o">[</span>root@k8s-m1 gitlab-v2.5.1<span class="o">]</span><span class="c1"># kubectl delete secret -n gitlab gitlab-incoming-imap-pwd-secret</span> 
+secret <span class="s2">&#34;gitlab-incoming-imap-pwd-secret&#34;</span> deleted
+<span class="o">[</span>root@k8s-m1 gitlab-v2.5.1<span class="o">]</span><span class="c1"># cat gitlab-outgoing-smtp-pwd-key</span>
+xxxxxxxxxxxx
+<span class="o">[</span>root@k8s-m1 gitlab-v2.5.1<span class="o">]</span><span class="c1"># kubectl create secret generic gitlab-outgoing-smtp-pwd-secret --from-file=gitlab-outgoing-smtp-pwd-key=gitlab-outgoing-smtp-pwd-key -n gitlab</span>
+secret/gitlab-outgoing-smtp-pwd-secret created
+
+</code></pre></td></tr></table>
+</div>
+</div><p>[root@k8s-m1 gitlab-v2.5.1]# helm dependency update</p>
+<p>生成gitlab.yaml</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">helm template . \
+  --name-template ${release} \
+  --set global.edition=ce \
+  --set global.time_zone=Aisa/Shanghai \
+  --set global.hosts.domain=k8s.abc \
+  --set global.grafana.enabled=false \
+  --set global.ingress.class=nginx \
+  --set global.ingress.configureCertmanager=false \
+  --set gitlab.unicorn.ingress.tls.secretName=release-gitlab-tls \
+  --set registry.ingress.tls.secretName=release-registry-tls \
+  --set minio.ingress.tls.secretName=release-minio-tls \
+  --set global.ingress.annotations.&#34;cert-manager\.io\/cluster-issuer&#34;=cluster-issuer \
+  --set global.registry.certificate.secret=${release}-registry-secret \
+  --set global.email.display_name=hekai \
+  --set global.email.from=276516848@qq.com \
+  --set global.email.reply_to=276516848@qq.com \
+  --set global.email.subject_suffix=@qq.com \
+  --set global.smtp.enabled=true \
+  --set global.smtp.address=smtp.qq.com \
+  --set global.smtp.port=465 \
+  --set global.smtp.authentication=login \
+  --set global.smtp.openssl_verify_mode=none \
+  --set global.smtp.starttls_auto=true \
+  --set global.smtp.tls=true \
+  --set global.smtp.password.key=gitlab-outgoing-smtp-pwd-key \
+  --set global.smtp.password.secret=gitlab-outgoing-smtp-pwd-secret \
+  --set global.smtp.user_name=276516848@qq.com \
+  --set certmanager.install=false \
+  --set nginx-ingress.enabled=false \
+  --set prometheus.install=false \
+  --namespace gitlab \
+  &gt; gitlab.yaml
+</code></pre></td></tr></table>
+</div>
+</div><ol start="7">
+<li>
+<p>挂载 gitlab.k8s.abc.crt</p>
+</li>
+<li>
+<p>修改 gitlab-runner 和 postgresql 相关资源的命名空间</p>
+</li>
+</ol>
+<p>这个也可以通过 kubectl apply -n gitlab 来指定</p>
+<p>注释掉 configmap mygitlab-nginx-ingress-tcp，因为这个是配置ingress nginx的，我们自己的已经配置好了</p>
+<p>注释掉 PersistentVolumeClaim ，将对应的 Deployment 改为 StatefulSet ，并添加 pvc</p>
+<p>为所有容器挂载宿主机 /etc/localtime</p>
+<p>不能直接执行 kubectl apply -f 进行更新，会报错，因为我们已经使用了 Stateful 进行了持久化，所以，可以先删除原来的部署，再重新部署</p>
+<p>kubectl delete -f ../gitlab-v2.4.6/gitlab.yaml
+kubectl create -f gitlab.yaml</p>
+<p>发现 postgresql 没有启动，查看日志</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="o">[</span>root@k8s-m1 gitlab-v2.5.1<span class="o">]</span><span class="c1"># kubectl get statefulset -n gitlab</span>
+NAME                  READY   AGE
+mygitlab-gitaly       1/1     3m28s
+mygitlab-minio        0/1     3m29s
+mygitlab-postgresql   0/1     3m29s
+mygitlab-redis        0/1     3m28s
+<span class="o">[</span>root@k8s-m1 gitlab-v2.5.1<span class="o">]</span><span class="c1"># kubectl describe statefulset -n gitlab mygitlab-postgresql</span>
+... ...
+Events:
+  Type     Reason        Age                   From                    Message
+  ----     ------        ----                  ----                    -------
+  Warning  FailedCreate  62s <span class="o">(</span>x16 over 3m46s<span class="o">)</span>  statefulset-controller  create Pod mygitlab-postgresql-0 in StatefulSet mygitlab-postgresql failed error: Pod <span class="s2">&#34;mygitlab-postgresql-0&#34;</span> is invalid: spec.containers<span class="o">[</span>0<span class="o">]</span>.volumeMounts<span class="o">[</span>0<span class="o">]</span>.name: Not found: <span class="s2">&#34;data&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>原因是 statefulset 中的 pvc 和 pod中挂载的名字不一致（原因是v2.4.6版本我改成统一格式的名字了）。</p>
+<p>修改后执行安装</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">kubectl apply -f gitlab.yaml -n gitlab
+</code></pre></td></tr></table>
+</div>
+</div><p>20191204 重新安装 gitlab-v2.5.4，已删除 gitlab 命名空间</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="o">[</span>root@k8s-m1 gitlab<span class="o">]</span><span class="c1"># kubectl create ns gitlab</span>
+namespace/gitlab created
+</code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2019-11-01</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/gitlab%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://msdemt.github.io/gitlab%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95/" data-title="Gitlab安装记录"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://msdemt.github.io/gitlab%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95/"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="https://msdemt.github.io/gitlab%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95/" data-title="Gitlab安装记录"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://msdemt.github.io/gitlab%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95/" data-title="Gitlab安装记录"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@2.14.0/icons/line.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://msdemt.github.io/gitlab%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95/" data-title="Gitlab安装记录" data-ralateuid="xxxx"><i class="fab fa-weibo fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/jenkins%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95/" class="prev" rel="prev" title="Jenkins安装记录"><i class="fas fa-angle-left fa-fw"></i>Jenkins安装记录</a>
+            <a href="/git%E5%91%BD%E4%BB%A4/" class="next" rel="next" title="Git命令">Git命令<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.72.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">hekai</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/smooth-scroll@16.1.3/dist/smooth-scroll.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.37.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.8/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.2.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.0/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

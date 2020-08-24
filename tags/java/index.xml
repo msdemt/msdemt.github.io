@@ -1,0 +1,22 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>java - 标签 - MyBlog</title>
+        <link>https://msdemt.github.io/tags/java/</link>
+        <description>java - 标签 - MyBlog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>276516848@qq.com (hekai)</managingEditor>
+            <webMaster>276516848@qq.com (hekai)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 04 Jun 2020 14:24:49 &#43;0800</lastBuildDate><atom:link href="https://msdemt.github.io/tags/java/" rel="self" type="application/rss+xml" /><item>
+    <title>Ultraiso制作centos7启动盘安装系统时找不到磁盘</title>
+    <link>https://msdemt.github.io/ultraiso%E5%88%B6%E4%BD%9Ccentos7%E5%90%AF%E5%8A%A8%E7%9B%98%E5%AE%89%E8%A3%85%E7%B3%BB%E7%BB%9F%E6%97%B6%E6%89%BE%E4%B8%8D%E5%88%B0%E7%A3%81%E7%9B%98/</link>
+    <pubDate>Thu, 04 Jun 2020 14:24:49 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://msdemt.github.io/ultraiso%E5%88%B6%E4%BD%9Ccentos7%E5%90%AF%E5%8A%A8%E7%9B%98%E5%AE%89%E8%A3%85%E7%B3%BB%E7%BB%9F%E6%97%B6%E6%89%BE%E4%B8%8D%E5%88%B0%E7%A3%81%E7%9B%98/</guid>
+    <description><![CDATA[参考： https://blog.csdn.net/ouyangxs/article/details/84193077 https://blog.csdn.net/weixin_30897233/article/details/96292006 https://jingyan.baidu.com/article/ab0b563061fa84c15afa7d8c.html 使用 ultraiso 制作 centos7 u 盘启动盘后，使用 u 盘启动盘安装 centos7 系统，出现如下的错误： 原因： 使用 ultraiso 制作的 centos7 u 盘启动盘的卷标是 CentOS 7 x8，然而 centos7 系统镜]]></description>
+</item><item>
+    <title>File类与IO流</title>
+    <link>https://msdemt.github.io/file%E7%B1%BB%E4%B8%8Eio%E6%B5%81/</link>
+    <pubDate>Tue, 02 Jun 2020 22:04:47 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://msdemt.github.io/file%E7%B1%BB%E4%B8%8Eio%E6%B5%81/</guid>
+    <description><![CDATA[第一章 File类 1.1 概述 java.io.File 类是文件和目录路径名的抽象表示，主要用于文件和目录的创建、查找和删除等操作。 1.2 构造方法 public File(String pathname) ：通过将给定的路径名字符]]></description>
+</item></channel>
+</rss>

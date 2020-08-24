@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Tidb V3 - MyBlog</title><meta name="Description" content="我的博客"><meta property="og:title" content="Tidb V3" />
+<meta property="og:description" content="官方文档地址：https://pingcap.com/docs-cn/v3.0/ TiDB in Kubernetes 安装本地持久卷提供者 参考：https://github" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://msdemt.github.io/tidb-v3.0-%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" />
+<meta property="og:image" content="https://msdemt.github.io/logo.png"/>
+<meta property="article:published_time" content="2019-10-24T10:37:24+08:00" />
+<meta property="article:modified_time" content="2019-10-24T10:37:24+08:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://msdemt.github.io/logo.png"/>
+
+<meta name="twitter:title" content="Tidb V3"/>
+<meta name="twitter:description" content="官方文档地址：https://pingcap.com/docs-cn/v3.0/ TiDB in Kubernetes 安装本地持久卷提供者 参考：https://github"/>
+<meta name="application-name" content="MyBlog">
+<meta name="apple-mobile-web-app-title" content="MyBlog"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://msdemt.github.io/tidb-v3.0-%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" /><link rel="prev" href="https://msdemt.github.io/vscode%E7%9A%84%E4%BD%BF%E7%94%A8/" /><link rel="next" href="https://msdemt.github.io/jenkins%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Tidb V3",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/msdemt.github.io\/tidb-v3.0-%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0\/"
+        },"image": ["https:\/\/msdemt.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","wordcount":  4674 ,
+        "url": "https:\/\/msdemt.github.io\/tidb-v3.0-%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0\/","datePublished": "2019-10-24T10:37:24+08:00","dateModified": "2019-10-24T10:37:24+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": "https:\/\/msdemt.github.io\/images\/avatar.png"},"author": {
+                "@type": "Person",
+                "name": "hekai"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="MyBlog"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>MyBlog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/categories/documentation/"> 文档 </a><a class="menu-item" href="/about/"> 关于 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="MyBlog"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>MyBlog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/categories/documentation/" title="">文档</a><a class="menu-item" href="/about/" title="">关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Tidb V3</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>hekai</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2019-10-24">2019-10-24</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 4674 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 10 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#tidb-in-kubernetes">TiDB in Kubernetes</a>
+      <ul>
+        <li><a href="#安装本地持久卷提供者">安装本地持久卷提供者</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>官方文档地址：<a href="https://pingcap.com/docs-cn/v3.0/">https://pingcap.com/docs-cn/v3.0/</a></p>
+<h2 id="tidb-in-kubernetes">TiDB in Kubernetes</h2>
+<h3 id="安装本地持久卷提供者">安装本地持久卷提供者</h3>
+<p>参考：<a href="https://github.com/kubernetes-sigs/sig-storage-local-static-provisioner#version-compatibility">https://github.com/kubernetes-sigs/sig-storage-local-static-provisioner#version-compatibility</a></p>
+<p>在<a href="https://github.com/kubernetes-sigs/sig-storage-local-static-provisioner/releases" target="_blank" rel="noopener noreffer">下载页面</a>下载 发布包</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">wget https://github.com/kubernetes-sigs/sig-storage-local-static-provisioner/archive/v2.3.3.tar.gz
+</code></pre></td></tr></table>
+</div>
+</div><p>解压</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">tar -zxvf v2.3.3.tar.gz
+</code></pre></td></tr></table>
+</div>
+</div><p>新建一个 StorageClass
+To delay volume binding until pod scheduling and to handle multiple local PVs in a single pod, a StorageClass must to be created with <code>volumeBindingMode</code> set to <code>WaitForFirstConsumer</code>.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">cd sig-storage-local-static-provisioner-2.3.3
+cp deployment/kubernetes/example/default_example_storageclass.yaml deployment/kubernetes/example/default_example_storageclass.yaml.orig
+</code></pre></td></tr></table>
+</div>
+</div><p>修改 StorageClass 的 yaml ，将 sc 的名字由 <code>fast-disks</code> 改为 <code>local-disk-storage</code> 。（此步可以跳过，我只是觉得 <code>local-disk-storage</code> 这个名字更好辨认）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">vi deployment/kubernetes/example/default_example_storageclass.yaml
+</code></pre></td></tr></table>
+</div>
+</div><p>部署 StorageClass</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">kubectl create -f deployment/kubernetes/example/default_example_storageclass.yaml
+</code></pre></td></tr></table>
+</div>
+</div><p>查看新建的 StorageClass</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ kubectl get sc
+NAME                            PROVISIONER                    AGE
+local-disk-storage              kubernetes.io/no-provisioner   6s
+managed-nfs-storage (default)   nfs-storage                    12h
+</code></pre></td></tr></table>
+</div>
+</div><p>使用 helm 创建本地持久卷提供者</p>
+<p>修改 helm 的 values.yaml</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">cp helm/provisioner/values.yaml helm/provisioner/values.yaml.orig
+</code></pre></td></tr></table>
+</div>
+</div><p>修改后和原文对比如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># diff helm/provisioner/values.yaml helm/provisioner/values.yaml.orig
+12c12
+&lt;   namespace: local-static-provisioner
+---
+&gt;   namespace: default
+16c16
+&lt;   createNamespace: true
+---
+&gt;   createNamespace: false
+53c53
+&lt; - name: local-disk-storage # Defines name of storage classe.
+---
+&gt; - name: fast-disks # Defines name of storage classe.
+56c56
+&lt;   hostDir: /home/data/local-disk-storage
+---
+&gt;   hostDir: /mnt/fast-disks
+</code></pre></td></tr></table>
+</div>
+</div><p>修改了命名空间名，改为了将改 helm 的资源安装到 local-static-provisioner 命名空间，并且自动新建该命名空间，修改了hostDir，改为了 <code>/home/data/local-disk-storage</code>， 注意，因为在上面修改了 StorageClass 的名字，所以需要在 values.yaml 里也修改下。</p>
+<p>使用 helm template 命令将该 chart 生成为一个清单文件。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">helm template ./helm/provisioner &gt; deployment/kubernetes/provisioner_generated.yaml
+</code></pre></td></tr></table>
+</div>
+</div><p>部署提供者</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">kubectl create -f deployment/kubernetes/provisioner_generated.yaml
+</code></pre></td></tr></table>
+</div>
+</div><p>测试</p>
+<p>本地卷提供者启动成功后，它会检查并创建 本地卷 pv。比如，如果 /home/data/local-disk-storage 目录中包含一个子目录 /home/data/local-disk-storage/vol1 ，<strong>且该子目录已经被挂载了</strong>，那么静态本地卷提供者会自动创建对应的 pv 。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">mkdir /home/data/local-disk-storage/vol1
+mount -t tmpfs /home/data/local-disk-storage/vol1/ /home/data/local-disk-storage/vol1/
+</code></pre></td></tr></table>
+</div>
+</div><p>上文中，使用的是该文件夹自己挂载自己，来模拟文件夹被其他磁盘卷挂载。</p>
+<p>可以看到，本地卷提供者自动新建了 pv</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ kubectl get pv
+NAME                                       CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM                                                STORAGECLASS          REASON   AGE
+local-pv-5b8d1757                          7997Mi     RWO            Delete           Available                                                        local-disk-storage             4m41s
+$ kubectl describe pv local-pv-5b8d1757 
+Name:              local-pv-5b8d1757
+Labels:            &lt;none&gt;
+Annotations:       pv.kubernetes.io/provisioned-by: local-volume-provisioner-k8s-m1-7725028a-d16c-455f-93d5-400dccf19d8a
+Finalizers:        [kubernetes.io/pv-protection]
+StorageClass:      local-disk-storage
+Status:            Available
+Claim:
+Reclaim Policy:    Delete
+Access Modes:      RWO
+VolumeMode:        Filesystem
+Capacity:          7997Mi
+Node Affinity:
+  Required Terms:  
+    Term 0:        kubernetes.io/hostname in [k8s-m1]
+Message:
+Source:
+    Type:  LocalVolume (a persistent volume backed by local storage on a node)
+    Path:  /home/data/local-disk-storage/vol1
+Events:    &lt;none&gt;
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p><a href="https://www.codercto.com/a/53701.html">https://www.codercto.com/a/53701.html</a>
+<a href="https://github.com/kubernetes-sigs/sig-storage-local-static-provisioner/blob/master/docs/faqs.md#why-i-need-to-bind-mount-normal-directories-to-create-pvs-for-them">https://github.com/kubernetes-sigs/sig-storage-local-static-provisioner/blob/master/docs/faqs.md#why-i-need-to-bind-mount-normal-directories-to-create-pvs-for-them</a>
+Why I need to bind mount normal directories to create PVs for them
+This is because there is a race between mounting another filesystem volume on a normal directory and creating a PV for it. If you want to create PVs for normal directories which do not have a mount point, you need to bind mount them onto another directory under discovery directory, or themselves if they are already in. Mount point on directory explicitly express it is ready to have a PV created for it.
+本地卷提供者自动创建 pv 需要两个条件：该目录是被绑定的，该目录是发现目录的第一级子目录。
+Provisioner only creates local PVs for mounted directories in the first level of discovery directory. This is because there is no way to detect whether the sub-directory is created by system admin for discovering as local PVs or by user applications.</p>
+</blockquote>
+<p>创建持久卷声明（pvc），使用上面的持久卷（pv）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ cat test-pvc.yaml
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: example-local-claim
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: local-disk-storage
+</code></pre></td></tr></table>
+</div>
+</div><p>注意，storageClassName 需要和持久卷（pv）的保持一致
+可以看到 pvc 处于 pending 状态，</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ kubectl get pvc
+NAME                  STATUS    VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS         AGE
+example-local-claim   Pending                                      local-disk-storage   114s
+$ kubectl describe pvc example-local-claim
+...
+  Type    Reason                Age                  From                         Message
+  ----    ------                ----                 ----                         -------
+  Normal  WaitForFirstConsumer  6s (x10 over 2m15s)  persistentvolume-controller  waiting for first consumer to be created before binding
+</code></pre></td></tr></table>
+</div>
+</div><p>因为 StorageClass local-disk-storage 配置了 WaitForFirstConsumer ，需要有消费者消费后才会绑定。</p>
+<p>删除 pvc</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">kubectl delete pvc example-local-claim
+</code></pre></td></tr></table>
+</div>
+</div><p>pvc成功删除</p>
+<p>删除 pv</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">kubectl delete pv local-pv-5b8d1757
+</code></pre></td></tr></table>
+</div>
+</div><p>发现 本地持久卷又新建了</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ kubectl get pv
+NAME                                       CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM                                                STORAGECLASS          REASON   AGE
+local-pv-5b8d1757                          7997Mi     RWO            Delete           Available                                                        local-disk-storage             13s
+</code></pre></td></tr></table>
+</div>
+</div><p>删除的话，需要先删除对应的vol1文件夹，因为vol1文件夹被绑定了，所以首先得解绑</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">umount /home/data/local-disk-storage/vol1
+rm -rf /home/data/local-disk-storage/vol1
+kubectl delete pv local-pv-5b8d1757
+</code></pre></td></tr></table>
+</div>
+</div><p>再次查看，pv 没有了。</p>
+<p>自动建立的 pv 的容量是怎么分配的呢？pv 的容量是挂载的磁盘的空间？</p>
+<p>感觉这个 本地卷提供者 不是很好用。它让集群管理员不用手动建立 pv 了，免除了手动建立 local pv 的麻烦</p>
+<p>手动新建本地持久卷（local persistent volume）</p>
+<p><a href="https://kubernetes.io/docs/concepts/storage/volumes/#local">https://kubernetes.io/docs/concepts/storage/volumes/#local</a></p>
+<p>A local volume represents a mounted local storage device such as a disk, partition or directory.<br>
+本地卷 表示 一个 已挂载的本地存储设备 如 磁盘， 分区 或 目录。</p>
+<p>Local volumes can only be used as a statically created PersistentVolume. Dynamic provisioning is not supported yet.<br>
+本地卷只能作为静态创建的持久卷。尚不支持动态提供。</p>
+<p>Compared to hostPath volumes, local volumes can be used in a durable and portable manner without manually scheduling Pods to nodes, as the system is aware of the volume’s node constraints by looking at the node affinity on the PersistentVolume.<br>
+与 hostPath 卷 相比，本地卷可以以持久和可移植的方式使用，无需手动将 pod 调度到节点，因为系统通过查看 在 持久卷 上的节点亲和性来了解卷的节点约束。</p>
+<p>However, local volumes are still subject to the availability of the underlying node and are not suitable for all applications. If a node becomes unhealthy, then the local volume will also become inaccessible, and a Pod using it will not be able to run. Applications using local volumes must be able to tolerate this reduced availability, as well as potential data loss, depending on the durability characteristics of the underlying disk.<br>
+同时，本地卷仍取决于基础节点的可用性，并且不适合所有的应用。如果一个节点变得不健康，那么在其上的本地卷同时也会变得不可访问，并且 使用该本地卷的 pod 将无法运行。使用本地卷的应用程序必须能够容忍这种可用性降低，潜在数据丢失，取决于基础磁盘持久性的缺点。</p>
+<p>The following is an example of PersistentVolume spec using a local volume and nodeAffinity:<br>
+下面是一个使用本地卷和节点亲和性的例子</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="k">apiVersion</span><span class="p">:</span><span class="w"> </span>v1<span class="w">
+</span><span class="w"></span><span class="k">kind</span><span class="p">:</span><span class="w"> </span>PersistentVolume<span class="w">
+</span><span class="w"></span><span class="k">metadata</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="k">name</span><span class="p">:</span><span class="w"> </span>example-pv<span class="w">
+</span><span class="w"></span><span class="k">spec</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="k">capacity</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="k">storage</span><span class="p">:</span><span class="w"> </span>100Gi<span class="w">
+</span><span class="w">  </span><span class="c"># volumeMode field requires BlockVolume Alpha feature gate to be enabled.</span><span class="w">
+</span><span class="w">  </span><span class="k">volumeMode</span><span class="p">:</span><span class="w"> </span>Filesystem<span class="w">
+</span><span class="w">  </span><span class="k">accessModes</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span>- ReadWriteOnce<span class="w">
+</span><span class="w">  </span><span class="k">persistentVolumeReclaimPolicy</span><span class="p">:</span><span class="w"> </span>Delete<span class="w">
+</span><span class="w">  </span><span class="k">storageClassName</span><span class="p">:</span><span class="w"> </span>local-storage<span class="w">
+</span><span class="w">  </span><span class="k">local</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="k">path</span><span class="p">:</span><span class="w"> </span>/mnt/disks/ssd1<span class="w">
+</span><span class="w">  </span><span class="k">nodeAffinity</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="k">required</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="k">nodeSelectorTerms</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="k">matchExpressions</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span>- <span class="k">key</span><span class="p">:</span><span class="w"> </span>kubernetes.io/hostname<span class="w">
+</span><span class="w">          </span><span class="k">operator</span><span class="p">:</span><span class="w"> </span>In<span class="w">
+</span><span class="w">          </span><span class="k">values</span><span class="p">:</span><span class="w">
+</span><span class="w">          </span>- example-node<span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>PersistentVolume <code>nodeAffinity</code> is required when using local volumes. It enables the Kubernetes scheduler to correctly schedule Pods using local volumes to the correct node.<br>
+当使用本地卷的时候需要配置持久卷节点亲和性。它能够让 kubernetes scheduler 将使用本地卷的 pod 分配到正确的节点上。</p>
+<p>PersistentVolume <code>volumeMode</code> can now be set to “Block” (instead of the default value “Filesystem”) to expose the local volume as a raw block device. The <code>volumeMode</code> field requires <code>BlockVolume</code> Alpha feature gate to be enabled.<br>
+持久卷模式现在可以设置为 “Block”（默认的模式为“Filesystem”）来将本地卷作为 原生的块设备进行暴露。volumeMode 字段需要开启 BlockVolume Alpha 特征功能。</p>
+<p>When using local volumes, it is recommended to create a StorageClass with <code>volumeBindingMode</code> set to <code>WaitForFirstConsumer</code>. See the <a href="https://kubernetes.io/docs/concepts/storage/storage-classes/#local" target="_blank" rel="noopener noreffer">example</a>. Delaying volume binding ensures that the PersistentVolumeClaim binding decision will also be evaluated with any other node constraints the Pod may have, such as node resource requirements, node selectors, Pod affinity, and Pod anti-affinity.<br>
+当使用本地卷时，建议创建一个带有 volumeBindingMode 设置为 WaitForFirstConsumer 的 StorageClass 。 见例子。 延迟卷绑定以确保持久卷声明（PersistentVolumeClaim）绑定决策同时也能够与其他节点上的 pod 可能有的约束一起评估，如节点资源要求，节点选择，pod 亲和性和 pod 反亲和性。</p>
+<p>An external static provisioner can be run separately for improved management of the local volume lifecycle. Note that this provisioner does not support dynamic provisioning yet. For an example on how to run an external local provisioner, see the <a href="https://github.com/kubernetes-sigs/sig-storage-local-static-provisioner" target="_blank" rel="noopener noreffer">local volume provisioner user guide</a>.<br>
+一个额外的静态提供者可以单独运行来改善本地卷生命周期的管理。注意，此提供者目前不支持动态提供。有关如何运行一个额外的本地卷提供者的示例，见本地卷提供者用户指南。</p>
+<p>Note: The local PersistentVolume requires manual cleanup and deletion by the user if the external static provisioner is not used to manage the volume lifecycle.<br>
+注意：如果额外的静态提供者没有配置管理本地卷的声明周期，那么本地持久卷需要用户手动清理和删除</p>
+<p>由于 测试环境没有磁盘可供挂载，而且如果使用本地卷提供者，不能自定义pv 的容量，所以，本文使用手动创建本地卷的方式为 tidb 提供持久卷。</p>
+<p>删除本地卷提供者</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">kubectl delete -f deployment/kubernetes/provisioner_generated.yaml
+kubectl delete -f deployment/kubernetes/example/default_example_storageclass.yaml
+</code></pre></td></tr></table>
+</div>
+</div><p>安装 tidb operator</p>
+<blockquote>
+<p>参考：https://github.com/pingcap/tidb-operator<br>
+<a href="https://pingcap.com/docs-cn/v3.0/tidb-in-kubernetes/deploy/tidb-operator">https://pingcap.com/docs-cn/v3.0/tidb-in-kubernetes/deploy/tidb-operator</a></p>
+</blockquote>
+<p>TiDB Operator 使用 CRD (Custom Resource Definition) 扩展 Kubernetes，所以要使用 TiDB Operator，必须先创建 TidbCluster 自定义资源类型。只需要在你的 Kubernetes 集群上创建一次即可：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">kubectl apply -f https://raw.githubusercontent.com/pingcap/tidb-operator/master/manifests/crd.yaml &amp;&amp; \
+kubectl get crd tidbclusters.pingcap.com
+</code></pre></td></tr></table>
+</div>
+</div><p>创建 TidbCluster 自定义资源类型后，接下来在 Kubernetes 集群上安装 TiDB Operator。</p>
+<p>查看当前的支持的版本</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">[root@k8s-m1 tidb]# helm search -l tidb-operator
+NAME                 	CHART VERSION 	APP VERSION	DESCRIPTION                            
+pingcap/tidb-operator	v1.1.0-alpha.3	           	tidb-operator Helm chart for Kubernetes
+pingcap/tidb-operator	v1.1.0-alpha.2	           	tidb-operator Helm chart for Kubernetes
+pingcap/tidb-operator	v1.1.0-alpha.1	           	tidb-operator Helm chart for Kubernetes
+pingcap/tidb-operator	v1.1.0-alpha.0	           	tidb-operator Helm chart for Kubernetes
+pingcap/tidb-operator	v1.0.1        	           	tidb-operator Helm chart for Kubernetes
+pingcap/tidb-operator	v1.0.0        	           	tidb-operator Helm chart for Kubernetes
+pingcap/tidb-operator	v1.0.0-rc.1   	           	tidb-operator Helm chart for Kubernetes
+pingcap/tidb-operator	v1.0.0-beta.3 	           	tidb-operator Helm chart for Kubernetes
+pingcap/tidb-operator	v1.0.0-beta.2 	           	tidb-operator Helm chart for Kubernetes
+</code></pre></td></tr></table>
+</div>
+</div><p>获取你要安装的 tidb-operator chart 中的 values.yaml 文件：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">mkdir -p /home/k8s/tidb/tidb-operator &amp;&amp; \
+helm inspect values pingcap/tidb-operator --version=v1.0.1 &gt; /home/k8s/tidb/tidb-operator/values-tidb-operator.yaml
+</code></pre></td></tr></table>
+</div>
+</div><p>配置 TiDB Operator</p>
+<p>TiDB Operator 里面会用到 k8s.gcr.io/kube-scheduler 镜像，如果下载不了该镜像，可以修改 /home/k8s/tidb/tidb-operator/values-tidb-operator.yaml 文件中的 scheduler.kubeSchedulerImage 为 registry.cn-hangzhou.aliyuncs.com/google_containers/kube-scheduler。</p>
+<p>修改 values.yaml 中的 <code>defaultStorageClassName</code> 为 <code>tidb-local-storage</code></p>
+<p>安装 TiDB Operator</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">helm install pingcap/tidb-operator --name=tidb-operator --namespace=tidb-admin --version=v1.0.1 -f /home/k8s/tidb/tidb-operator/values-tidb-operator.yaml &amp;&amp; \
+kubectl get po -n tidb-admin -l app.kubernetes.io/name=tidb-operator
+</code></pre></td></tr></table>
+</div>
+</div><p>通过下面命令获取待安装的 tidb-cluster chart 的 values.yaml 配置文件：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">mkdir -p /home/k8s/tidb/tidb-cluster &amp;&amp; \
+helm inspect values pingcap/tidb-cluster --version=v1.0.1 &gt; /home/k8s/tidb/tidb-cluster/values-tidb-cluster.yaml
+</code></pre></td></tr></table>
+</div>
+</div><p>release-name 将会作为 Kubernetes 相关资源（例如 Pod，Service 等）的前缀名，可以起一个方便记忆的名字，要求全局唯一，通过 helm ls -q 可以查看集群中已经有的 release-name。
+chart-version 是 tidb-cluster chart 发布的版本，可以通过 helm search -l tidb-cluster 查看当前支持的版本。</p>
+<p>通过查看 tidb-cluster 的 values.yaml 文件，发现需要很多 StorageClass，手动创建很麻烦。
+对不同类型的存储使用了不同的支持本地卷的 StorageClass</p>
+<p>具体如下：</p>
+<ul>
+<li>pd 使用的 StorageClass 为  tidb-pd-local-storage ，3个pod，对应 pv 的容量为 1Gi</li>
+<li>tikv 使用的 StorageClass 为  tidb-kv-local-storage ，3个pod，对应 pv 的容量为 10Gi</li>
+<li>monitor 使用的 StorageClass 为  tidb-monitor-local-storage ，对应 pv 的容量为 10Gi</li>
+<li>binlog.pump 使用的 StorageClass 为  tidb-pump-local-storage ，对应 pv 的容量为 20Gi</li>
+<li>binlog.drainer 使用的 StorageClass 为  tidb-drainer-local-storage ，对应 pv 的容量为 10Gi</li>
+<li>scheduledBackup 使用的 StorageClass 为  tidb-scheduledbackup-local-storage ，对应 pv 的容量为 100Gi</li>
+</ul>
+<p><strong>修改了storageclass和镜像的tag，pd3.0.1的镜像有个bug,所以统一使用了当前最新的3.0.4版本。bug: <a href="https://github.com/pingcap/tidb-operator/issues/568">https://github.com/pingcap/tidb-operator/issues/568</a></strong></p>
+<p>新建对应的StorageClass，新建对应pv 时，容量建议比对应标准的容量大些</p>
+<p>配置完后，部署 TiDB 集群：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">helm install pingcap/tidb-cluster --name=tidb-cluster --namespace=tidb-cluster --version=v1.0.1 -f /home/k8s/tidb/tidb-cluster/values-tidb-cluster.yaml
+</code></pre></td></tr></table>
+</div>
+</div><p>查看 tidb-cluster 暴露的服务</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">[root@k8s-m1 tidb-cluster]# kubectl get svc -n tidb-cluster 
+NAME                            TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)                          AGE
+tidb-cluster-discovery          ClusterIP   10.98.10.70      &lt;none&gt;        10261/TCP                        83s
+tidb-cluster-grafana            NodePort    10.96.109.41     &lt;none&gt;        3000:32416/TCP                   83s
+tidb-cluster-monitor-reloader   NodePort    10.110.218.98    &lt;none&gt;        9089:32371/TCP                   83s
+tidb-cluster-pd                 ClusterIP   10.103.39.52     &lt;none&gt;        2379/TCP                         82s
+tidb-cluster-pd-peer            ClusterIP   None             &lt;none&gt;        2380/TCP                         82s
+tidb-cluster-prometheus         NodePort    10.110.101.169   &lt;none&gt;        9090:31686/TCP                   83s
+tidb-cluster-tidb               NodePort    10.108.230.95    &lt;none&gt;        4000:32409/TCP,10080:30948/TCP   83s
+</code></pre></td></tr></table>
+</div>
+</div><p>修改名为 tidb-cluster-tidb 的 Service 的 NodePort，改为 4000映射到节点的40000端口，方便记忆。</p>
+<p>因为 kube-apiserver 中配置的默认的 NodePort 范围为 30000-32767，所以需要修改下，改为 30000-60000。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ kubectl edit svc -n tidb-cluster tidb-cluster-tidb
+service/tidb-cluster-tidb edited
+$ kubectl get svc -n tidb-cluster 
+NAME                            TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)                          AGE
+tidb-cluster-discovery          ClusterIP   10.98.10.70      &lt;none&gt;        10261/TCP                        9m18s
+tidb-cluster-grafana            NodePort    10.96.109.41     &lt;none&gt;        3000:32416/TCP                   9m18s
+tidb-cluster-monitor-reloader   NodePort    10.110.218.98    &lt;none&gt;        9089:32371/TCP                   9m18s
+tidb-cluster-pd                 ClusterIP   10.103.39.52     &lt;none&gt;        2379/TCP                         9m17s
+tidb-cluster-pd-peer            ClusterIP   None             &lt;none&gt;        2380/TCP                         9m17s
+tidb-cluster-prometheus         NodePort    10.110.101.169   &lt;none&gt;        9090:31686/TCP                   9m18s
+tidb-cluster-tidb               NodePort    10.108.230.95    &lt;none&gt;        4000:40000/TCP,10080:30948/TCP   9m18s
+</code></pre></td></tr></table>
+</div>
+</div><p>集群外可以通过 40000 端口访问了。默认 root 的密码为空，使用如下命令修改密码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">SET PASSWORD FOR &#39;root&#39;@&#39;%&#39; = &#39;oGJQmu3pwu&#39;; FLUSH PRIVILEGES;
+</code></pre></td></tr></table>
+</div>
+</div><p>granfa监控页面可以通过端口 32416 访问。</p>
+<p>将51saas的数据库从143:3306导入到tidb中，报错：
+[ERR] 8004 - transaction too large, len:300001
+参考：https://pingcap.com/docs-cn/v3.0/reference/error-codes/
+8004 单个事务过大，原因及解决方法请参考这里
+4.3.3 Transaction too large 是什么原因，怎么解决？
+由于分布式事务要做两阶段提交，并且底层还需要做 Raft 复制，如果一个事务非常大，会使得提交过程非常慢，并且会卡住下面的 Raft 复制流程。为了避免系统出现被卡住的情况，我们对事务的大小做了限制：
+单个事务包含的 SQL 语句不超过 5000 条（默认）
+单条 KV entry 不超过 6MB
+KV entry 的总条数不超过 30w
+KV entry 的总大小不超过 100MB
+在 Google 的 Cloud Spanner 上面，也有类似的限制。</p>
+<p>再次安装 ， 使用 helm v3</p>
+<p>配置 PingCAP 官方 chart 仓库</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">helm repo add pingcap https://charts.pingcap.org/
+</code></pre></td></tr></table>
+</div>
+</div><p>检查是否配置成功</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">helm search repo pingcap 
+NAME                  	CHART VERSION	APP VERSION	DESCRIPTION                            
+pingcap/tidb-backup   	v1.0.3       	           	A Helm chart for TiDB Backup or Restore
+pingcap/tidb-cluster  	v1.0.3       	           	A Helm chart for TiDB Cluster          
+pingcap/tidb-lightning	dev          	           	A Helm chart for TiDB Lightning        
+pingcap/tidb-operator 	v1.0.3       	           	tidb-operator Helm chart for Kubernetes
+</code></pre></td></tr></table>
+</div>
+</div><p>安装 自定义资源</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">wget https://github.com/pingcap/tidb-operator/archive/v1.0.3.tar.gz
+tar zxf v1.0.3.tar.gz
+kubectl apply -f tidb-operator-1.0.3/manifests/crd.yaml
+</code></pre></td></tr></table>
+</div>
+</div><p>检查 crd</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># kubectl get crd tidbclusters.pingcap.com
+NAME                       CREATED AT
+tidbclusters.pingcap.com   2019-10-24T07:31:31Z
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">wget https://github.com/pingcap/tidb-operator/releases/download/v1.0.3/tidb-operator-chart-v1.0.3.tgz
+tar zxf tidb-operator-chart-v1.0.3.tgz
+</code></pre></td></tr></table>
+</div>
+</div><p>修改 tidb-operator/values.yaml，修改内容如下</p>
+<ul>
+<li>timezone修改为 Asia/Shanghai</li>
+<li>defaultStorageClassName 修改为 tidb-local-storage</li>
+<li>scheduler.kubeSchedulerImageName 修改为 registry.cn-hangzhou.aliyuncs.com/google_containers/kube-scheduler</li>
+</ul>
+<p>安装 tidb-operator chart</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">helm install ./tidb-operator --name-template=tidb-operator --namespace=tidb-admin --version=v1.0.3 -f tidb-operator/values.yaml
+</code></pre></td></tr></table>
+</div>
+</div><p>检查 tide-operator 是否安装成功</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">[root@k8s-m1 tidb]# helm ls -n tidb-admin
+NAME          NAMESPACE   REVISION  UPDATED                                 STATUS    CHART                 APP VERSION
+tidb-operator tidb-admin  1         2019-11-18 15:24:28.215966065 +0800 CST deployed  tidb-operator-v1.0.3  
+
+[root@k8s-m1 tidb]# kubectl get pods --namespace tidb-admin -l app.kubernetes.io/instance=tidb-operator
+NAME                                      READY   STATUS    RESTARTS   AGE
+tidb-controller-manager-95cbd5d8f-5gf4s   1/1     Running   0          3m24s
+tidb-scheduler-66c9ccb8b9-xwfmk           2/2     Running   0          3m24s
+</code></pre></td></tr></table>
+</div>
+</div><p>tidb-operator 运行成功后，开始部署 tidb-cluster</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">wget https://github.com/pingcap/tidb-operator/releases/download/v1.0.3/tidb-cluster-chart-v1.0.3.tgz
+tar zxf tidb-cluster-chart-v1.0.3.tgz
+</code></pre></td></tr></table>
+</div>
+</div><p>修改 tidb-cluster/values.yaml，修改内容如下：</p>
+<ul>
+<li>timezone 修改为 Asia/Shanghai</li>
+<li>pd 使用的 StorageClass 为  tidb-pd-local-storage ，3个pod，对应 pv 的容量为 1Gi</li>
+<li>tikv 使用的 StorageClass 为  tidb-kv-local-storage ，3个pod，对应 pv 的容量为 10Gi</li>
+<li>monitor 使用的 StorageClass 为  tidb-monitor-local-storage ，对应 pv 的容量为 10Gi</li>
+<li>binlog.pump 使用的 StorageClass 为  tidb-pump-local-storage ，对应 pv 的容量为 20Gi</li>
+<li>binlog.drainer 使用的 StorageClass 为  tidb-drainer-local-storage ，对应 pv 的容量为 10Gi</li>
+<li>scheduledBackup 使用的 StorageClass 为  tidb-scheduledbackup-local-storage ，对应 pv 的容量为 100Gi</li>
+</ul>
+<p>安装 tidb-cluster chart</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">helm install ./tidb-cluster --name-template=tidb-cluster --namespace=tidb-cluster --version=v1.0.3 -f tidb-cluster/values.yaml
+</code></pre></td></tr></table>
+</div>
+</div><p>检查 tidb-cluster 是否运行成功</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">[root@k8s-m1 tidb]# kubectl get pods --namespace tidb-cluster -l app.kubernetes.io/instance=tidb-cluster -o wide
+NAME                                      READY   STATUS    RESTARTS   AGE     IP              NODE     NOMINATED NODE   READINESS GATES
+tidb-cluster-discovery-56b7b8479b-jgh6k   1/1     Running   0          12m     172.30.182.26   c48-1    &lt;none&gt;           &lt;none&gt;
+tidb-cluster-monitor-7b7f584fc9-9z4k5     3/3     Running   0          12m     172.30.182.52   c48-1    &lt;none&gt;           &lt;none&gt;
+tidb-cluster-pd-0                         1/1     Running   0          12m     172.30.81.171   k8s-m2   &lt;none&gt;           &lt;none&gt;
+tidb-cluster-pd-1                         1/1     Running   0          12m     172.30.11.55    k8s-m3   &lt;none&gt;           &lt;none&gt;
+tidb-cluster-pd-2                         1/1     Running   0          12m     172.30.42.142   k8s-m1   &lt;none&gt;           &lt;none&gt;
+tidb-cluster-tidb-0                       2/2     Running   0          6m12s   172.30.182.44   c48-1    &lt;none&gt;           &lt;none&gt;
+tidb-cluster-tidb-1                       2/2     Running   0          6m12s   172.30.42.171   k8s-m1   &lt;none&gt;           &lt;none&gt;
+tidb-cluster-tikv-0                       1/1     Running   0          9m12s   172.30.42.145   k8s-m1   &lt;none&gt;           &lt;none&gt;
+tidb-cluster-tikv-1                       1/1     Running   0          9m12s   172.30.11.3     k8s-m3   &lt;none&gt;           &lt;none&gt;
+tidb-cluster-tikv-2                       1/1     Running   0          9m12s   172.30.81.168   k8s-m2   &lt;none&gt;           &lt;none&gt;
+[root@k8s-m1 tidb]# kubectl get services --namespace tidb-cluster -l app.kubernetes.io/instance=tidb-cluster
+NAME                            TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)                          AGE
+tidb-cluster-discovery          ClusterIP   10.99.62.162     &lt;none&gt;        10261/TCP                        13m
+tidb-cluster-grafana            NodePort    10.101.233.134   &lt;none&gt;        3000:39821/TCP                   13m
+tidb-cluster-monitor-reloader   NodePort    10.104.235.74    &lt;none&gt;        9089:32135/TCP                   13m
+tidb-cluster-pd                 ClusterIP   10.98.189.149    &lt;none&gt;        2379/TCP                         13m
+tidb-cluster-pd-peer            ClusterIP   None             &lt;none&gt;        2380/TCP                         13m
+tidb-cluster-prometheus         NodePort    10.106.206.24    &lt;none&gt;        9090:59683/TCP                   13m
+tidb-cluster-tidb               NodePort    10.106.198.189   &lt;none&gt;        4000:58911/TCP,10080:52494/TCP   13m
+tidb-cluster-tidb-peer          ClusterIP   None             &lt;none&gt;        10080/TCP                        6m29s
+tidb-cluster-tikv-peer          ClusterIP   None             &lt;none&gt;        20160/TCP                        9m29s
+</code></pre></td></tr></table>
+</div>
+</div><p>修改名为 tidb-cluster-tidb 的 Service 的 NodePort，改为 4000映射到节点的40000端口，方便记忆。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">kubectl edit svc -n tidb-cluster tidb-cluster-tidb
+</code></pre></td></tr></table>
+</div>
+</div><p>默认 tidb 的用户名为 root ，密码为空，登录 tidb 后使用如下命令修改 root 用户密码。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SET</span> <span class="n">PASSWORD</span> <span class="k">FOR</span> <span class="s1">&#39;root&#39;</span><span class="o">@</span><span class="s1">&#39;%&#39;</span> <span class="o">=</span> <span class="s1">&#39;DrDMnmsl8a&#39;</span><span class="p">;</span> <span class="n">FLUSH</span> <span class="k">PRIVILEGES</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>tidb cluster 监控页面，通过 svc/tidb-cluster-grafana 可知暴漏的端口为 39821 ，该 grafana 的用户名密码为 admin/admin 。</p>
+<p>至此， tidb 就安装好了。</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2019-10-24</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/tidb-v3.0-%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://msdemt.github.io/tidb-v3.0-%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" data-title="Tidb V3"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://msdemt.github.io/tidb-v3.0-%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="https://msdemt.github.io/tidb-v3.0-%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" data-title="Tidb V3"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://msdemt.github.io/tidb-v3.0-%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" data-title="Tidb V3"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@2.14.0/icons/line.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://msdemt.github.io/tidb-v3.0-%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" data-title="Tidb V3" data-ralateuid="xxxx"><i class="fab fa-weibo fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/vscode%E7%9A%84%E4%BD%BF%E7%94%A8/" class="prev" rel="prev" title="Vscode的使用"><i class="fas fa-angle-left fa-fw"></i>Vscode的使用</a>
+            <a href="/jenkins%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95/" class="next" rel="next" title="Jenkins安装记录">Jenkins安装记录<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.72.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">hekai</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/smooth-scroll@16.1.3/dist/smooth-scroll.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.37.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.8/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.2.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.0/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

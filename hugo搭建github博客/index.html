@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Hugo搭建GitHub博客 - MyBlog</title><meta name="Description" content="我的博客"><meta property="og:title" content="Hugo搭建GitHub博客" />
+<meta property="og:description" content="win10 安装 Hugo 在 Hugo Release 页面下载对应操作系统的 Hugo 二进制文件。 如 win10 64 位系统下载 hugo_0.56.3_Windows-64bit.zip ，将该文件解压到指定目录，如 D:\Develop\Hugo\bin 。 配置 Hugo 环境变量 win10 系统变量 PATH 添加 D:\Develop\Hugo\bin 使用 Hugo 创" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://msdemt.github.io/hugo%E6%90%AD%E5%BB%BAgithub%E5%8D%9A%E5%AE%A2/" />
+<meta property="og:image" content="https://msdemt.github.io/logo.png"/>
+<meta property="article:published_time" content="2019-08-01T18:08:25+08:00" />
+<meta property="article:modified_time" content="2019-08-01T18:08:25+08:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://msdemt.github.io/logo.png"/>
+
+<meta name="twitter:title" content="Hugo搭建GitHub博客"/>
+<meta name="twitter:description" content="win10 安装 Hugo 在 Hugo Release 页面下载对应操作系统的 Hugo 二进制文件。 如 win10 64 位系统下载 hugo_0.56.3_Windows-64bit.zip ，将该文件解压到指定目录，如 D:\Develop\Hugo\bin 。 配置 Hugo 环境变量 win10 系统变量 PATH 添加 D:\Develop\Hugo\bin 使用 Hugo 创"/>
+<meta name="application-name" content="MyBlog">
+<meta name="apple-mobile-web-app-title" content="MyBlog"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://msdemt.github.io/hugo%E6%90%AD%E5%BB%BAgithub%E5%8D%9A%E5%AE%A2/" /><link rel="prev" href="https://msdemt.github.io/about/" /><link rel="next" href="https://msdemt.github.io/idea%E6%94%AF%E6%8C%81%E8%87%AA%E5%8A%A8%E6%B3%A8%E9%87%8A/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Hugo搭建GitHub博客",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/msdemt.github.io\/hugo%E6%90%AD%E5%BB%BAgithub%E5%8D%9A%E5%AE%A2\/"
+        },"image": ["https:\/\/msdemt.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","wordcount":  3128 ,
+        "url": "https:\/\/msdemt.github.io\/hugo%E6%90%AD%E5%BB%BAgithub%E5%8D%9A%E5%AE%A2\/","datePublished": "2019-08-01T18:08:25+08:00","dateModified": "2019-08-01T18:08:25+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": "https:\/\/msdemt.github.io\/images\/avatar.png"},"author": {
+                "@type": "Person",
+                "name": "hekai"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="MyBlog"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>MyBlog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/categories/documentation/"> 文档 </a><a class="menu-item" href="/about/"> 关于 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="MyBlog"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>MyBlog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/categories/documentation/" title="">文档</a><a class="menu-item" href="/about/" title="">关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Hugo搭建GitHub博客</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>hekai</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2019-08-01">2019-08-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 3128 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 7 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#win10-安装-hugo">win10 安装 Hugo</a></li>
+    <li><a href="#使用-hugo-创建静态网页">使用 Hugo 创建静态网页</a></li>
+    <li><a href="#将静态网页部署到-github">将静态网页部署到 GitHub</a></li>
+    <li><a href="#问题汇总">问题汇总</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="win10-安装-hugo">win10 安装 Hugo</h2>
+<ol>
+<li>在 <a href="https://github.com/gohugoio/hugo/releases" target="_blank" rel="noopener noreffer">Hugo Release</a> 页面下载对应操作系统的 Hugo 二进制文件。<br>
+如 win10 64 位系统下载 hugo_0.56.3_Windows-64bit.zip ，将该文件解压到指定目录，如 <code>D:\Develop\Hugo\bin</code> 。</li>
+<li>配置 Hugo 环境变量<br>
+win10 系统变量 <code>PATH</code> 添加 <code>D:\Develop\Hugo\bin</code></li>
+</ol>
+<h2 id="使用-hugo-创建静态网页">使用 Hugo 创建静态网页</h2>
+<ol>
+<li>
+<p>进入期望存储项目的目录，如 <code>D:\workspace\vscode\git</code> ，在该目录打开终端（ windows 下为 cmd 或 powershell）进行操作，或者使用 vscode 打开期望存储项目的目录，点击 <code>ctrl+~</code> 打开 terminal ，进行操作</p>
+</li>
+<li>
+<p>在当前目录生成名为 mysite 的站点<br>
+命令如下， mysite 为生成的项目名</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">hugo new site mysite
+</code></pre></td></tr></table>
+</div>
+</div><p>执行后内容如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">PS D:<span class="se">\w</span>orkspace<span class="se">\v</span>scode<span class="se">\g</span>it&gt; hugo new site mysite
+Congratulations! Your new Hugo site is created in D:<span class="se">\w</span>orkspace<span class="se">\v</span>scode<span class="se">\g</span>it<span class="se">\m</span>ysite.
+
+Just a few more steps and you<span class="err">&#39;</span>re ready to go:
+
+1. Download a theme into the same-named folder.
+Choose a theme from https://themes.gohugo.io/ or
+create your own with the <span class="s2">&#34;hugo new theme &lt;THEMENAME&gt;&#34;</span> command.
+2. Perhaps you want to add some content. You can add single files
+with <span class="s2">&#34;hugo new &lt;SECTIONNAME&gt;\&lt;FILENAME&gt;.&lt;FORMAT&gt;&#34;</span>.
+3. Start the built-in live server via <span class="s2">&#34;hugo server&#34;</span>.
+
+Visit https://gohugo.io/ <span class="k">for</span> quickstart guide and full documentation.
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>进入 <code>mysite</code> 站点，查看生成的项目目录结构</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">PS D:<span class="se">\w</span>orkspace<span class="se">\v</span>scode<span class="se">\g</span>it&gt; <span class="nb">cd</span> .<span class="se">\m</span>ysite<span class="se">\
+</span><span class="se"></span>PS D:<span class="se">\w</span>orkspace<span class="se">\v</span>scode<span class="se">\g</span>it<span class="se">\m</span>ysite&gt; ls
+
+
+    目录: D:<span class="se">\w</span>orkspace<span class="se">\v</span>scode<span class="se">\g</span>it<span class="se">\m</span>ysite
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+d-----       2019-08-01     11:25                archetypes
+d-----       2019-08-01     11:25                content
+d-----       2019-08-01     11:25                data
+d-----       2019-08-01     11:25                layouts
+d-----       2019-08-01     11:25                static
+d-----       2019-08-01     11:25                themes
+-a----       2019-08-01     11:25             <span class="m">82</span> config.toml
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>config.toml</strong> 是网站的配置文件，包括 baseurl， title， copyright 等等网站参数</li>
+<li><strong>archetypes</strong>：包括内容类型，在创建新内容时自动生成内容的配置</li>
+<li><strong>content</strong>：包括网站内容，全部使用 markdown 格式</li>
+<li><strong>layouts</strong>：包括了网站的模版，决定内容如何呈现</li>
+<li><strong>static</strong>：包括了 css，js， fonts， media 等，决定网站的外观</li>
+</ul>
+</li>
+<li>
+<p>安装主题<br>
+Hugo 社区提供了一些可用的主题，使用如下命令将所有的主题下载到 <code>themes</code> 目录下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">git clone --depth <span class="m">1</span> --recursive https://github.com/gohugoio/hugoThemes.git themes
+</code></pre></td></tr></table>
+</div>
+</div><p>或者下载特定的主题，使用如下命令下载 beautifulhugo 主题到 <code>themes/beautifulhugo</code> 目录</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">git clone https://github.com/halogenica/beautifulhugo.git themes/beautifulhugo
+</code></pre></td></tr></table>
+</div>
+</div><p>将 <code>themes/beautifulhugo/exampleSite/config.toml</code> 文件内容拷贝到 <code>mysite</code> 目录中，覆盖原文件内容。</p>
+</li>
+<li>
+<p>创建新页面</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">PS D:<span class="se">\w</span>orkspace<span class="se">\v</span>scode<span class="se">\g</span>it<span class="se">\m</span>ysite&gt; hugo new post/about.md
+D:<span class="se">\w</span>orkspace<span class="se">\v</span>scode<span class="se">\g</span>it<span class="se">\m</span>ysite<span class="se">\c</span>ontent<span class="se">\p</span>ost<span class="se">\a</span>bout.md created
+</code></pre></td></tr></table>
+</div>
+</div><p>进入 <code>content/</code> 目录，可以看到多了一个 <code>post</code> 目录，里面有新建的 <code>about.md</code> 文件。打开文件可以看到时间和文件名等信息已经自动加到文件开头，包括标题、创建时间、是否为草稿等。</p>
+<p>about.md 中添加 Hello Hugo! ，添加后内容如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">PS D:<span class="se">\w</span>orkspace<span class="se">\v</span>scode<span class="se">\g</span>it<span class="se">\m</span>ysite&gt; cat .<span class="se">\c</span>ontent<span class="se">\p</span>ost<span class="se">\a</span>bout.md
+---
+title: <span class="s2">&#34;About&#34;</span>
+date: 2019-08-01T13:11:32+08:00
+draft: <span class="nb">true</span>
+---
+
+Hello Hugo!
+</code></pre></td></tr></table>
+</div>
+</div><p>&mdash; 标记的内容是 YAML 格式的，可以换成 TOML 格式（使用 +++ 标记）或者 JSON 格式。<br>
+<strong>hugo new</strong> 命令生成的文章前面包括的那几行，是用来设置文章属性的，这些属性使用的是 yaml 语法。</p>
+<ul>
+<li><strong>title</strong> 设置文章第一级标题，一个 md 文档中只能有一个一级标题。</li>
+<li><strong>date</strong> 时间标签，页面上默认显示 n 篇最新的文章。</li>
+<li><strong>draft</strong> 设置为 false 的时候会被编译为 HTML ， true 则不会编译和发表。</li>
+<li><strong>tags</strong> 数组，可以设置多个标签，逗号隔开， Hugo 会自动在你博客主页下生成标签的子 URL ，通过这个 URL 可以看到所有具有该标签的文章。</li>
+<li><strong>categories</strong> 文章分类，跟 Tag 功能差不多，只能设置一个字符串。</li>
+</ul>
+<p>更多详见： <a href="https://gohugo.io/content-management/front-matter/">https://gohugo.io/content-management/front-matter/</a></p>
+</li>
+<li>
+<p>运行 hugo</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">hugo server -t beautifulhugo --buildDrafts
+</code></pre></td></tr></table>
+</div>
+</div><p>-t 参数的意思是使用特定主题渲染页面，注意到 about.md 目前是作为草稿，即 draft 参数设置为 true ，运行 Hugo 时要加上 <code>--buildDrafts</code> 参数才会将标记为草稿的页面生成  HTML 。<br>
+在浏览器输入 <a href="http://localhost:1313">http://localhost:1313</a> ，就可以看到我们刚刚创建的页面。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">PS D:<span class="se">\w</span>orkspace<span class="se">\v</span>scode<span class="se">\g</span>it<span class="se">\m</span>ysite&gt; hugo server -t beautifulhugo --buildDrafts
+Building sites …
+                <span class="p">|</span> EN
++------------------+-----+
+Pages            <span class="p">|</span>  <span class="m">10</span>
+Paginator pages  <span class="p">|</span>   <span class="m">0</span>
+Non-page files   <span class="p">|</span>   <span class="m">0</span>
+Static files     <span class="p">|</span> <span class="m">183</span>
+Processed images <span class="p">|</span>   <span class="m">0</span>
+Aliases          <span class="p">|</span>   <span class="m">2</span>
+Sitemaps         <span class="p">|</span>   <span class="m">1</span>
+Cleaned          <span class="p">|</span>   <span class="m">0</span>
+
+Total in <span class="m">2581</span> ms
+Watching <span class="k">for</span> changes in D:<span class="se">\w</span>orkspace<span class="se">\v</span>scode<span class="se">\g</span>it<span class="se">\m</span>ysite<span class="se">\{</span>archetypes,content,data,layouts,static,themes<span class="o">}</span>
+Watching <span class="k">for</span> config changes in D:<span class="se">\w</span>orkspace<span class="se">\v</span>scode<span class="se">\g</span>it<span class="se">\m</span>ysite<span class="se">\c</span>onfig.toml
+Environment: <span class="s2">&#34;development&#34;</span>
+Serving pages from memory
+Running in Fast Render Mode. For full rebuilds on change: hugo server --disableFastRender
+Web Server is available at http://localhost:1313/ <span class="o">(</span><span class="nb">bind</span> address 127.0.0.1<span class="o">)</span>
+Press Ctrl+C to stop
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+<h2 id="将静态网页部署到-github">将静态网页部署到 GitHub</h2>
+<p>首先在 GitHub 上创建一个 Repository ，命名为 <code>msdemt.github.io</code> （ msdemt 替换为你的 github 用户名）。</p>
+<p>修改 <code>mysite/config.toml</code> 文件， <code>baseurl</code> 配置为自己的 <code>github</code> 用户名，如本文的配置为</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nv">baseurl</span> <span class="o">=</span> <span class="s2">&#34;https://msdemt.github.io&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>在站点根目录执行 <code>Hugo</code> 命令生成最终页面：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">hugo --theme<span class="o">=</span>beautifulhugo
+</code></pre></td></tr></table>
+</div>
+</div><p>如果一切顺利，所有 <code>draft</code> 为 false 的静态页面都会生成到 <code>public</code> 目录，将 <code>pubilc</code> 目录里所有文件 push 到刚创建的 Repository 的 master 分支。</p>
+<p>在 <code>git shell</code> 或 <code>cmd</code> 中执行如下命令将 <code>public</code> 中的内容提交到 github 中</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="nb">cd</span> public
+git init
+git remote add origin https://github.com/msdemt/msdemt.github.io.git
+git add -A
+git commit -m <span class="s2">&#34;init&#34;</span>
+git push -u origin master
+</code></pre></td></tr></table>
+</div>
+</div><p>详细步骤如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">PS D:<span class="se">\w</span>orkspace<span class="se">\v</span>scode<span class="se">\g</span>it<span class="se">\m</span>ysite&gt; hugo --theme<span class="o">=</span>beautifulhugo
+Building sites …
+                <span class="p">|</span> EN
++------------------+-----+
+Pages            <span class="p">|</span>  <span class="m">10</span>
+Paginator pages  <span class="p">|</span>   <span class="m">0</span>
+Non-page files   <span class="p">|</span>   <span class="m">0</span>
+Static files     <span class="p">|</span> <span class="m">183</span>
+Processed images <span class="p">|</span>   <span class="m">0</span>
+Aliases          <span class="p">|</span>   <span class="m">2</span>
+Sitemaps         <span class="p">|</span>   <span class="m">1</span>
+Cleaned          <span class="p">|</span>   <span class="m">0</span>
+
+Total in <span class="m">4167</span> ms
+PS D:<span class="se">\w</span>orkspace<span class="se">\v</span>scode<span class="se">\g</span>it<span class="se">\m</span>ysite&gt; <span class="nb">cd</span> .<span class="se">\p</span>ublic<span class="se">\
+</span><span class="se"></span>PS D:<span class="se">\w</span>orkspace<span class="se">\v</span>scode<span class="se">\g</span>it<span class="se">\m</span>ysite<span class="se">\p</span>ublic&gt; git init
+Initialized empty Git repository in D:/workspace/vscode/git/mysite/public/.git/
+PS D:<span class="se">\w</span>orkspace<span class="se">\v</span>scode<span class="se">\g</span>it<span class="se">\m</span>ysite<span class="se">\p</span>ublic&gt; git remote add origin https://github.com/msdemt/msdemt.github.io.git
+PS D:<span class="se">\w</span>orkspace<span class="se">\v</span>scode<span class="se">\g</span>it<span class="se">\m</span>ysite<span class="se">\p</span>ublic&gt; git add -A
+PS D:<span class="se">\w</span>orkspace<span class="se">\v</span>scode<span class="se">\g</span>it<span class="se">\m</span>ysite<span class="se">\p</span>ublic&gt; git commit -m <span class="s2">&#34;init&#34;</span>
+<span class="o">[</span>master <span class="o">(</span>root-commit<span class="o">)</span> f5d1d02<span class="o">]</span> init
+<span class="m">196</span> files changed, <span class="m">23076</span> insertions<span class="o">(</span>+<span class="o">)</span>
+create mode <span class="m">100644</span> 404.html
+create mode <span class="m">100644</span> categories/index.html
+create mode <span class="m">100644</span> categories/index.xml
+create mode <span class="m">100644</span> css/bootstrap.min.css
+create mode <span class="m">100644</span> css/codeblock.css
+create mode <span class="m">100644</span> css/fonts.css
+... ...
+create mode <span class="m">100644</span> tags/index.html
+create mode <span class="m">100644</span> tags/index.xml
+PS D:<span class="se">\w</span>orkspace<span class="se">\v</span>scode<span class="se">\g</span>it<span class="se">\m</span>ysite<span class="se">\p</span>ublic&gt; git push -u origin master
+Counting objects: 216, <span class="k">done</span>.
+Delta compression using up to <span class="m">4</span> threads.
+Compressing objects: 100% <span class="o">(</span>210/210<span class="o">)</span>, <span class="k">done</span>.
+Writing objects: 100% <span class="o">(</span>216/216<span class="o">)</span>, 4.70 MiB <span class="p">|</span> 156.00 KiB/s, <span class="k">done</span>.
+Total <span class="m">216</span> <span class="o">(</span>delta 10<span class="o">)</span>, reused <span class="m">0</span> <span class="o">(</span>delta 0<span class="o">)</span>
+remote: Resolving deltas: 100% <span class="o">(</span>10/10<span class="o">)</span>, <span class="k">done</span>.
+To https://github.com/msdemt/msdemt.github.io.git
+* <span class="o">[</span>new branch<span class="o">]</span>      master -&gt; master
+Branch <span class="s1">&#39;master&#39;</span> <span class="nb">set</span> up to track remote branch <span class="s1">&#39;master&#39;</span> from <span class="s1">&#39;origin&#39;</span>.
+</code></pre></td></tr></table>
+</div>
+</div><p>也可以使用子模块的方式安装主题，
+如安装 loveit 主题到 themes 目录下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">git submodule add https://github.com/dillonzq/LoveIt.git themes/LoveIt
+</code></pre></td></tr></table>
+</div>
+</div><p>安装 zozo 主题到 themes 目录下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">git submodule add  https://github.com/varkai/hugo-theme-zozo.git themes/zozo
+</code></pre></td></tr></table>
+</div>
+</div><p>为了便于开发和部署，可以将 hugo 生成的静态网页存放的 public 目录作为 github 静态网页仓库的子模块
+如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">git submodule add https://github.com/msdemt/msdemt.github.io.git public
+</code></pre></td></tr></table>
+</div>
+</div><p>下载mysite项目，同时下载依赖的子模块</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">git clone https://github.com/msdemt/mysite.git --recursive
+</code></pre></td></tr></table>
+</div>
+</div><p>将子模块更新到最新版本</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">git submodule update --remote
+</code></pre></td></tr></table>
+</div>
+</div><p>进入 public 目录，执行如下命令，执行了之后才可以提交该子模块的内容</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">cd public
+git checkout origin master
+</code></pre></td></tr></table>
+</div>
+</div><p>进入mysite目录，增加 博客文章，之后执行 hugo 命令生成博客内容</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">cd ..
+hugo
+</code></pre></td></tr></table>
+</div>
+</div><p>在进入public 目录，将博客内容提交到github</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">cd public
+git add .
+git commit -m &#34;test&#34;
+git push origin master
+</code></pre></td></tr></table>
+</div>
+</div><p>再进入mysite目录，更新子模块public到最新版本</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">cd ..
+git submodule update --remote
+</code></pre></td></tr></table>
+</div>
+</div><p>然后将mysite项目提交到github</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">git add .
+git commit -m &#34;test&#34;
+git push origin master
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="问题汇总">问题汇总</h2>
+<p><strong>问题1：</strong><br>
+生成最终页面时指定了 baseUrl ，将页面部署到 github 上时，页面出错</p>
+<p>解决：baseUrl 在 hugo 命令是指定或在 config.toml 中指定一次即可。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">hugo --theme<span class="o">=</span>beautifulhugo --baseUrl<span class="o">=</span><span class="s2">&#34;http://msdemt.github.io/&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="../../images/hugo%e6%90%ad%e5%bb%bagithub%e5%bc%82%e5%b8%b8%e7%95%8c%e9%9d%a21%e5%b1%95%e7%a4%ba.png"
+        data-srcset="../../images/hugo%e6%90%ad%e5%bb%bagithub%e5%bc%82%e5%b8%b8%e7%95%8c%e9%9d%a21%e5%b1%95%e7%a4%ba.png, ../../images/hugo%e6%90%ad%e5%bb%bagithub%e5%bc%82%e5%b8%b8%e7%95%8c%e9%9d%a21%e5%b1%95%e7%a4%ba.png 1.5x, ../../images/hugo%e6%90%ad%e5%bb%bagithub%e5%bc%82%e5%b8%b8%e7%95%8c%e9%9d%a21%e5%b1%95%e7%a4%ba.png 2x"
+        data-sizes="auto"
+        alt="../../images/hugo搭建github异常界面1展示.png"
+        title="image" />
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="../../images/hugo%e6%90%ad%e5%bb%bagithub%e5%bc%82%e5%b8%b8%e7%95%8c%e9%9d%a21%e9%94%99%e8%af%af%e4%bf%a1%e6%81%af.png"
+        data-srcset="../../images/hugo%e6%90%ad%e5%bb%bagithub%e5%bc%82%e5%b8%b8%e7%95%8c%e9%9d%a21%e9%94%99%e8%af%af%e4%bf%a1%e6%81%af.png, ../../images/hugo%e6%90%ad%e5%bb%bagithub%e5%bc%82%e5%b8%b8%e7%95%8c%e9%9d%a21%e9%94%99%e8%af%af%e4%bf%a1%e6%81%af.png 1.5x, ../../images/hugo%e6%90%ad%e5%bb%bagithub%e5%bc%82%e5%b8%b8%e7%95%8c%e9%9d%a21%e9%94%99%e8%af%af%e4%bf%a1%e6%81%af.png 2x"
+        data-sizes="auto"
+        alt="../../images/hugo搭建github异常界面1错误信息.png"
+        title="image" /></p>
+<p><strong>问题2：</strong><br>
+生成最终页面时未指定baseUrl，同时也未在mysite/config.toml文件中指定baseUrl时，将页面部署到github上，页面出错</p>
+<p>解决：baseUrl 在 hugo 命令是指定或在 config.toml 中指定一次即可。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">hugo --theme<span class="o">=</span>beautifulhugo
+</code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="../../images/hugo%e6%90%ad%e5%bb%bagithub%e5%bc%82%e5%b8%b8%e7%95%8c%e9%9d%a22%e9%94%99%e8%af%af%e4%bf%a1%e6%81%af.png"
+        data-srcset="../../images/hugo%e6%90%ad%e5%bb%bagithub%e5%bc%82%e5%b8%b8%e7%95%8c%e9%9d%a22%e9%94%99%e8%af%af%e4%bf%a1%e6%81%af.png, ../../images/hugo%e6%90%ad%e5%bb%bagithub%e5%bc%82%e5%b8%b8%e7%95%8c%e9%9d%a22%e9%94%99%e8%af%af%e4%bf%a1%e6%81%af.png 1.5x, ../../images/hugo%e6%90%ad%e5%bb%bagithub%e5%bc%82%e5%b8%b8%e7%95%8c%e9%9d%a22%e9%94%99%e8%af%af%e4%bf%a1%e6%81%af.png 2x"
+        data-sizes="auto"
+        alt="../../images/hugo搭建github异常界面2错误信息.png"
+        title="image" /></p>
+<p><strong>问题3：</strong></p>
+<p>默认 Hugo 生成的 HTML 页面只有两级标题，对于多级标题的文章，生成标题目录（ tables of content）后会发现本来为三级标题但是显示的是二级标题。</p>
+<p>github 上的大佬已经有了解决办法，详见：
+<a href="https://github.com/gohugoio/hugo/issues/1778">https://github.com/gohugoio/hugo/issues/1778</a>
+<a href="https://gist.github.com/pyrrho/1d77cdb98ba58c7547f2cdb3fb325c62">https://gist.github.com/pyrrho/1d77cdb98ba58c7547f2cdb3fb325c62</a></p>
+<p>解决办法：</p>
+<ol>
+<li>
+<p>将 tables-of-contents.html 放入 themes/beautifulhugo/layouts/partials 目录下，作者认为 4 级标题就够用了，所以配置了最高级别 4 ，下面的文件中配置为了 6 ，tables-of-contents.html 的内容如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html">{{/* This partial was derived from the conversations in and around
+    https://github.com/gohugoio/hugo/issues/1778 -- most directly skyzyx&#39;s
+    gist; https://gist.github.com/skyzyx/a796d66f6a124f057f3374eff0b3f99a
+*/}}
+
+{{/* Minimum heading level to include; default is h2. */}}
+{{- $minLevel := 2 -}}
+{{/* Minimum heading level to include; default is h4. */}}
+{{- $maxLevel := 6 -}}
+{{/* Search for headings as specified by $minLevel and $maxLevel, ignoring those
+    that contain no text (ex; &#34;<span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>&#34; will be ignored).
+*/}}
+{{- $regex := printf &#34;<span class="p">&lt;</span><span class="nt">h</span><span class="err">[%</span><span class="na">d-</span><span class="err">%</span><span class="na">d</span><span class="err">].*?</span><span class="p">&gt;</span>(.|\n])+?<span class="err">&lt;</span>/h[%d-%d]&gt;&#34; $minLevel $maxLevel $minLevel $maxLevel -}}
+{{- $headings := findRE $regex .Content -}}
+
+{{/* Skip generation if there are no (suitable) headings. */}}
+{{- $hasHeadings  := ge (len $headings) 1 -}}
+{{- if $hasHeadings -}}
+<span class="p">&lt;</span><span class="nt">nav</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;enclosing-block&#34;</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;customize-as-needed&#34;</span><span class="p">&gt;</span>
+{{- .Scratch.Set &#34;toc__last-level&#34; (sub $minLevel 1) -}}
+{{- range $heading := $headings -}}
+    {{- $headingLevel   := substr $heading 2 1 | int -}}
+    {{- $headingID      := index (findRE &#34;id=.([a-z0-9-_])*&#34; $heading) 0 | after 4 -}}
+    {{- $headingTextRaw := substr (index (findRE &#34;&gt;.*<span class="err">&lt;</span>/h&#34; $heading 1) 0) 1 -3 -}}
+    {{/* There may be an anchor tag wrapping some or all of the heading text.
+        We don&#39;t want those tags in our ToC text, so lets get rid of them. */}}
+    {{- $headingText    := replaceRE &#34;<span class="err">&lt;</span>/?a.*?&gt;&#34; &#34;&#34; $headingTextRaw | markdownify }}
+    {{- $lastLevel := $.Scratch.Get &#34;toc__last-level&#34; -}}
+    {{- $href := printf &#34;#%s&#34; $headingID -}}
+    {{- $levelSeq := seq $lastLevel $headingLevel | after 1 -}}
+    {{- $.Scratch.Set &#34;toc__last-level&#34; $headingLevel -}}
+
+    {{- if gt $headingLevel $lastLevel -}}
+    {{- range $l := $levelSeq -}}
+        <span class="p">&lt;</span><span class="nt">ul</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;table-of-contents__h{{ $l }}&#34;</span><span class="p">&gt;&lt;</span><span class="nt">li</span><span class="p">&gt;</span>
+    {{- end -}}
+    {{- else if lt $headingLevel $lastLevel -}}
+    {{- range $l := $levelSeq -}}
+        <span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+    {{- end -}}
+    <span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">li</span><span class="p">&gt;</span>
+    {{- else -}}
+    <span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">li</span><span class="p">&gt;</span>
+    {{- end -}}
+    <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;{{ $href }}&#34;</span><span class="p">&gt;</span>{{ $headingText }}<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+{{- end -}}
+
+{{- range seq ($.Scratch.Get &#34;toc__last-level&#34;) (sub $minLevel 1) | after 1 -}}
+    <span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+{{- end -}}
+<span class="p">&lt;/</span><span class="nt">nav</span><span class="p">&gt;</span>
+{{- end -}}
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>在 themes/beautifulhugo/layouts/_default/single.html 页面中加入</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html">{{- partial &#34;tables-of-contents.html&#34; . -}}
+</code></pre></td></tr></table>
+</div>
+</div><p>加入后 single.html 内容如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html">{{ define &#34;main&#34; }}
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;container&#34;</span> <span class="na">role</span><span class="o">=</span><span class="s">&#34;main&#34;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;row&#34;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1&#34;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">article</span> <span class="na">role</span><span class="o">=</span><span class="s">&#34;main&#34;</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;blog-post&#34;</span><span class="p">&gt;</span>
+        {{- partial &#34;tables-of-contents.html&#34; . -}}
+        {{ .Content }}
+
+        {{ if .Params.tags }}
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;blog-tags&#34;</span><span class="p">&gt;</span>
+            {{ range .Params.tags }}
+            <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;{{ $.Site.LanguagePrefix | absURL }}/tags/{{ . | urlize }}/&#34;</span><span class="p">&gt;</span>{{ . }}<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span><span class="ni">&amp;nbsp;</span>
+            {{ end }}
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+        {{ end }}
+
+        {{ if $.Param &#34;socialShare&#34; }}
+            <span class="p">&lt;</span><span class="nt">hr</span><span class="p">/&gt;</span>
+            <span class="p">&lt;</span><span class="nt">section</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;social-share&#34;</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;list-inline footer-links&#34;</span><span class="p">&gt;</span>
+                {{ partial &#34;share-links&#34; . }}
+            <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+            <span class="p">&lt;/</span><span class="nt">section</span><span class="p">&gt;</span>
+        {{ end }}
+
+        {{ if .Site.Params.showRelatedPosts }}
+        {{ $related := .Site.RegularPages.Related . | first 3 }}
+        {{ with $related }}
+        <span class="p">&lt;</span><span class="nt">h4</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;see-also&#34;</span><span class="p">&gt;</span>{{ i18n &#34;seeAlso&#34; }}<span class="p">&lt;/</span><span class="nt">h4</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
+        {{ range . }}
+            <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;{{ .RelPermalink }}&#34;</span><span class="p">&gt;</span>{{ .Title }}<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+        {{ end }}
+        <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+        {{ end }}
+        {{ end }}
+    <span class="p">&lt;/</span><span class="nt">article</span><span class="p">&gt;</span>
+
+    {{ if ne .Type &#34;page&#34; }}
+        <span class="p">&lt;</span><span class="nt">ul</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;pager blog-pager&#34;</span><span class="p">&gt;</span>
+        {{ if .PrevInSection }}
+            <span class="p">&lt;</span><span class="nt">li</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;previous&#34;</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;{{ .PrevInSection.Permalink }}&#34;</span> <span class="na">data-toggle</span><span class="o">=</span><span class="s">&#34;tooltip&#34;</span> <span class="na">data-placement</span><span class="o">=</span><span class="s">&#34;top&#34;</span> <span class="na">title</span><span class="o">=</span><span class="s">&#34;{{ .PrevInSection.Title }}&#34;</span><span class="p">&gt;</span><span class="ni">&amp;larr;</span> {{ i18n &#34;previousPost&#34; }}<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+            <span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+        {{ end }}
+        {{ if .NextInSection }}
+            <span class="p">&lt;</span><span class="nt">li</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;next&#34;</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;{{ .NextInSection.Permalink }}&#34;</span> <span class="na">data-toggle</span><span class="o">=</span><span class="s">&#34;tooltip&#34;</span> <span class="na">data-placement</span><span class="o">=</span><span class="s">&#34;top&#34;</span> <span class="na">title</span><span class="o">=</span><span class="s">&#34;{{ .NextInSection.Title }}&#34;</span><span class="p">&gt;</span>{{ i18n &#34;nextPost&#34; }} <span class="ni">&amp;rarr;</span><span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+            <span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+        {{ end }}
+        <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+    {{ end }}
+
+
+    {{ if (.Params.comments) | or (and (or (not (isset .Params &#34;comments&#34;)) (eq .Params.comments nil)) (and .Site.Params.comments (ne .Type &#34;page&#34;))) }}
+        {{ if .Site.DisqusShortname }}
+        {{ if .Site.Params.delayDisqus }}
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;disqus-comments&#34;</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">button</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;show-comments&#34;</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;btn btn-default&#34;</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;button&#34;</span><span class="p">&gt;</span>{{ i18n &#34;show&#34; }} <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;disqus-comment-count&#34;</span> <span class="na">data-disqus-url</span><span class="o">=</span><span class="s">&#34;{{ trim .Permalink &#34;</span><span class="err">/&#34;</span> <span class="err">}}&#34;</span><span class="p">&gt;</span>{{ i18n &#34;comments&#34; }}<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;disqus_thread&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+            <span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text/javascript&#34;</span><span class="p">&gt;</span>
+            <span class="kd">var</span> <span class="nx">disqus_config</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">page</span><span class="p">.</span><span class="nx">url</span> <span class="o">=</span> <span class="s1">&#39;{{ trim .Permalink &#34;/&#34; }}&#39;</span><span class="p">;</span>
+            <span class="p">};</span>
+
+        <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+        {{ else }}
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;disqus-comments&#34;</span><span class="p">&gt;</span>
+            {{ template &#34;_internal/disqus.html&#34; . }}
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+        {{ end }}
+        {{ end }}
+        {{ if .Site.Params.staticman }}
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;staticman-comments&#34;</span><span class="p">&gt;</span>
+            {{ partial &#34;staticman-comments.html&#34; . }}
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+        {{ end }}
+    {{ end }}
+
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+{{ end }}
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+<p>进行以上后改后，md 文档使用 hugo 生成 HTML 页面后会自动加入标题目录，不需要在 md 文档中再次加入标题目录了。</p>
+<p>这种方法的缺点是会导致博客中所有的文章，如果有标题的话，都会自动生成标题目录，如果不希望这样的话，还有一个办法，是将正确的标题目录替换到 HTML 文件中。</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2019-08-01</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/hugo%E6%90%AD%E5%BB%BAgithub%E5%8D%9A%E5%AE%A2/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://msdemt.github.io/hugo%E6%90%AD%E5%BB%BAgithub%E5%8D%9A%E5%AE%A2/" data-title="Hugo搭建GitHub博客"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://msdemt.github.io/hugo%E6%90%AD%E5%BB%BAgithub%E5%8D%9A%E5%AE%A2/"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="https://msdemt.github.io/hugo%E6%90%AD%E5%BB%BAgithub%E5%8D%9A%E5%AE%A2/" data-title="Hugo搭建GitHub博客"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://msdemt.github.io/hugo%E6%90%AD%E5%BB%BAgithub%E5%8D%9A%E5%AE%A2/" data-title="Hugo搭建GitHub博客"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@2.14.0/icons/line.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://msdemt.github.io/hugo%E6%90%AD%E5%BB%BAgithub%E5%8D%9A%E5%AE%A2/" data-title="Hugo搭建GitHub博客" data-ralateuid="xxxx"><i class="fab fa-weibo fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/about/" class="prev" rel="prev" title="About"><i class="fas fa-angle-left fa-fw"></i>About</a>
+            <a href="/idea%E6%94%AF%E6%8C%81%E8%87%AA%E5%8A%A8%E6%B3%A8%E9%87%8A/" class="next" rel="next" title="Idea支持自动注释">Idea支持自动注释<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.72.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">hekai</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/smooth-scroll@16.1.3/dist/smooth-scroll.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.37.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.8/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.2.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.0/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
