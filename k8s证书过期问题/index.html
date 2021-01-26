@@ -20,7 +20,7 @@
 <meta name="application-name" content="MyBlog">
 <meta name="apple-mobile-web-app-title" content="MyBlog"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://msdemt.github.io/k8s%E8%AF%81%E4%B9%A6%E8%BF%87%E6%9C%9F%E9%97%AE%E9%A2%98/" /><link rel="prev" href="https://msdemt.github.io/mermaid/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://msdemt.github.io/k8s%E8%AF%81%E4%B9%A6%E8%BF%87%E6%9C%9F%E9%97%AE%E9%A2%98/" /><link rel="prev" href="https://msdemt.github.io/mermaid/" /><link rel="next" href="https://msdemt.github.io/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-1-01-%E5%A4%8D%E6%9D%82%E5%BA%A6/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
@@ -137,7 +137,7 @@ NAME     STATUS      ROLES           AGE    VERSION
 k8s-m1   NotReady    master,worker   256d   v1.6.2
 k8s-m2   Ready       master,worker   256d   v1.6.2
 k8s-m3   Ready       master,worker   256d   v1.6.2
-<span class="o">[</span>root@k8s-m1 ~<span class="o">]</span># 
+<span class="o">[</span>root@k8s-m1 ~<span class="o">]</span><span class="c1"># </span>
 </code></pre></td></tr></table>
 </div>
 </div><p>node的状态为NotReady，但是可以执行k8s的命令。</p>
@@ -212,7 +212,7 @@ Unable to connect to the server: x509: certificate has expired or is not yet val
 Unable to connect to the server: x509: certificate has expired or is not yet valid
 <span class="o">[</span>root@c48-1 pki<span class="o">]</span><span class="c1"># kubectl get cs</span>
 Unable to connect to the server: x509: certificate has expired or is not yet valid
-<span class="o">[</span>root@c48-1 pki<span class="o">]</span># 
+<span class="o">[</span>root@c48-1 pki<span class="o">]</span><span class="c1"># </span>
 </code></pre></td></tr></table>
 </div>
 </div><p>发现，若证书到期，k8s的命令无法执行，且k8s上的容器服务无法正常提供服务。</p>
@@ -459,7 +459,7 @@ admin-key.pem   ca.csr          ca.pem       flanneld.csr   kubelet-client.key  
 <span class="o">[</span>root@k8s-1 ssl<span class="o">]</span><span class="c1"># vi /usr/lib/systemd/system/kubelet^C</span>
 <span class="o">[</span>root@k8s-1 ssl<span class="o">]</span><span class="c1"># openssl x509 -noout -in kubelet.crt -enddate</span>
 <span class="nv">notAfter</span><span class="o">=</span>Jun <span class="m">19</span> 09:22:59 <span class="m">2019</span> GMT
-<span class="o">[</span>root@k8s-1 ssl<span class="o">]</span>#
+<span class="o">[</span>root@k8s-1 ssl<span class="o">]</span><span class="c1">#</span>
 </code></pre></td></tr></table>
 </div>
 </div><p><img
@@ -496,12 +496,13 @@ admin-key.pem   ca.csr          ca.pem       flanneld.csr   kubelet-client.key  
         </section>
     </div>
 
-    <div class="post-nav"><a href="/mermaid/" class="prev" rel="prev" title="Mermaid"><i class="fas fa-angle-left fa-fw"></i>Mermaid</a></div>
+    <div class="post-nav"><a href="/mermaid/" class="prev" rel="prev" title="Mermaid"><i class="fas fa-angle-left fa-fw"></i>Mermaid</a>
+            <a href="/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-1-01-%E5%A4%8D%E6%9D%82%E5%BA%A6/" class="next" rel="next" title="恋上数据结构与算法-1-01-复杂度">恋上数据结构与算法-1-01-复杂度<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 </article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.72.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
-                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">hekai</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.80.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2021</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">hekai</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>
 

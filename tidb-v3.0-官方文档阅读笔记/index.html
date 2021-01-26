@@ -476,29 +476,29 @@ kubectl delete pv local-pv-5b8d1757
 </span><span class="lnt">23
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="k">apiVersion</span><span class="p">:</span><span class="w"> </span>v1<span class="w">
-</span><span class="w"></span><span class="k">kind</span><span class="p">:</span><span class="w"> </span>PersistentVolume<span class="w">
-</span><span class="w"></span><span class="k">metadata</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="k">name</span><span class="p">:</span><span class="w"> </span>example-pv<span class="w">
-</span><span class="w"></span><span class="k">spec</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="k">capacity</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="k">storage</span><span class="p">:</span><span class="w"> </span>100Gi<span class="w">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">PersistentVolume</span><span class="w">
+</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">example-pv</span><span class="w">
+</span><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">capacity</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">storage</span><span class="p">:</span><span class="w"> </span><span class="l">100Gi</span><span class="w">
 </span><span class="w">  </span><span class="c"># volumeMode field requires BlockVolume Alpha feature gate to be enabled.</span><span class="w">
-</span><span class="w">  </span><span class="k">volumeMode</span><span class="p">:</span><span class="w"> </span>Filesystem<span class="w">
-</span><span class="w">  </span><span class="k">accessModes</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span>- ReadWriteOnce<span class="w">
-</span><span class="w">  </span><span class="k">persistentVolumeReclaimPolicy</span><span class="p">:</span><span class="w"> </span>Delete<span class="w">
-</span><span class="w">  </span><span class="k">storageClassName</span><span class="p">:</span><span class="w"> </span>local-storage<span class="w">
-</span><span class="w">  </span><span class="k">local</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="k">path</span><span class="p">:</span><span class="w"> </span>/mnt/disks/ssd1<span class="w">
-</span><span class="w">  </span><span class="k">nodeAffinity</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="k">required</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span><span class="k">nodeSelectorTerms</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="k">matchExpressions</span><span class="p">:</span><span class="w">
-</span><span class="w">        </span>- <span class="k">key</span><span class="p">:</span><span class="w"> </span>kubernetes.io/hostname<span class="w">
-</span><span class="w">          </span><span class="k">operator</span><span class="p">:</span><span class="w"> </span>In<span class="w">
-</span><span class="w">          </span><span class="k">values</span><span class="p">:</span><span class="w">
-</span><span class="w">          </span>- example-node<span class="w">
+</span><span class="w">  </span><span class="nt">volumeMode</span><span class="p">:</span><span class="w"> </span><span class="l">Filesystem</span><span class="w">
+</span><span class="w">  </span><span class="nt">accessModes</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span>- <span class="l">ReadWriteOnce</span><span class="w">
+</span><span class="w">  </span><span class="nt">persistentVolumeReclaimPolicy</span><span class="p">:</span><span class="w"> </span><span class="l">Delete</span><span class="w">
+</span><span class="w">  </span><span class="nt">storageClassName</span><span class="p">:</span><span class="w"> </span><span class="l">local-storage</span><span class="w">
+</span><span class="w">  </span><span class="nt">local</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/mnt/disks/ssd1</span><span class="w">
+</span><span class="w">  </span><span class="nt">nodeAffinity</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">nodeSelectorTerms</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="nt">matchExpressions</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span>- <span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l">kubernetes.io/hostname</span><span class="w">
+</span><span class="w">          </span><span class="nt">operator</span><span class="p">:</span><span class="w"> </span><span class="l">In</span><span class="w">
+</span><span class="w">          </span><span class="nt">values</span><span class="p">:</span><span class="w">
+</span><span class="w">          </span>- <span class="l">example-node</span><span class="w">
 </span></code></pre></td></tr></table>
 </div>
 </div><p>PersistentVolume <code>nodeAffinity</code> is required when using local volumes. It enables the Kubernetes scheduler to correctly schedule Pods using local volumes to the correct node.<br>
@@ -941,8 +941,8 @@ tidb-cluster-tikv-peer          ClusterIP   None             &lt;none&gt;       
 </div>
 </article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.72.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
-                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">hekai</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.80.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2021</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">hekai</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>
 

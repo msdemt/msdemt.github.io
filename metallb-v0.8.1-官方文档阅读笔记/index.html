@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/msdemt.github.io\/metallb-v0.8.1-%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0\/"
-        },"image": ["https:\/\/msdemt.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","wordcount":  8037 ,
+        },"image": ["https:\/\/msdemt.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","wordcount":  8079 ,
         "url": "https:\/\/msdemt.github.io\/metallb-v0.8.1-%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0\/","datePublished": "2019-10-16T20:40:02+08:00","dateModified": "2019-10-16T20:40:02+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": "https:\/\/msdemt.github.io\/images\/avatar.png"},"author": {
@@ -106,7 +106,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">MetalLB-v0.8.1-官方文档阅读笔记</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>hekai</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2019-10-16">2019-10-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 8037 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2019-10-16">2019-10-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 8079 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 17 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -349,11 +349,11 @@ compatibility</a>.</p>
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="c"># kustomization.yml</span><span class="w">
-</span><span class="w"></span><span class="k">namespace</span><span class="p">:</span><span class="w"> </span>metallb-system<span class="w">
+</span><span class="w"></span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">metallb-system</span><span class="w">
 </span><span class="w">
-</span><span class="w"></span><span class="k">resources</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span>- github.com/danderson/metallb//manifests<span class="p">?</span>ref=v0<span class="m">.8.2</span><span class="w">
-</span><span class="w">  </span>- configmap.yml<span class="w"> 
+</span><span class="w"></span><span class="nt">resources</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span>- <span class="l">github.com/danderson/metallb//manifests?ref=v0.8.2</span><span class="w">
+</span><span class="w">  </span>- <span class="l">configmap.yml </span><span class="w">
 </span></code></pre></td></tr></table>
 </div>
 </div><p>If you want to use a <a href="https://github.com/kubernetes-sigs/kustomize/blob/master/examples/configGeneration.md" target="_blank" rel="noopener noreffer">configMapGenerator</a> for config file, you want to tell kustomize not to append a hash to the configMap, as MetalLB is waiting for a configMap named <code>config</code> (see <a href="https://github.com/kubernetes-sigs/kustomize/blob/master/examples/generatorOptions.md" target="_blank" rel="noopener noreffer">https://github.com/kubernetes-sigs/kustomize/blob/master/examples/generatorOptions.md</a>):</p>
@@ -375,18 +375,18 @@ compatibility</a>.</p>
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="c"># kustomization.yml</span><span class="w">
-</span><span class="w"></span><span class="k">namespace</span><span class="p">:</span><span class="w"> </span>metallb-system<span class="w">
+</span><span class="w"></span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">metallb-system</span><span class="w">
 </span><span class="w">
-</span><span class="w"></span><span class="k">resources</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span>- github.com/danderson/metallb//manifests<span class="p">?</span>ref=v0<span class="m">.8.2</span><span class="w">
+</span><span class="w"></span><span class="nt">resources</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span>- <span class="l">github.com/danderson/metallb//manifests?ref=v0.8.2</span><span class="w">
 </span><span class="w">
-</span><span class="w"></span><span class="k">configMapGenerator</span><span class="p">:</span><span class="w">
-</span><span class="w"></span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>config<span class="w">
-</span><span class="w">  </span><span class="k">files</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span>- configs/config<span class="w">
+</span><span class="w"></span><span class="nt">configMapGenerator</span><span class="p">:</span><span class="w">
+</span><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">config</span><span class="w">
+</span><span class="w">  </span><span class="nt">files</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span>- <span class="l">configs/config</span><span class="w">
 </span><span class="w">
-</span><span class="w"></span><span class="k">generatorOptions</span><span class="p">:</span><span class="w">
-</span><span class="w"> </span><span class="k">disableNameSuffixHash</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="w"></span><span class="nt">generatorOptions</span><span class="p">:</span><span class="w">
+</span><span class="w"> </span><span class="nt">disableNameSuffixHash</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span></code></pre></td></tr></table>
 </div>
 </div><h3 id="installation-with-helm">Installation with Helm</h3>
@@ -490,18 +490,18 @@ bug</a> for details.</p>
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="k">apiVersion</span><span class="p">:</span><span class="w"> </span>v1<span class="w">
-</span><span class="w"></span><span class="k">kind</span><span class="p">:</span><span class="w"> </span>ConfigMap<span class="w">
-</span><span class="w"></span><span class="k">metadata</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="k">namespace</span><span class="p">:</span><span class="w"> </span>metallb-system<span class="w">
-</span><span class="w">  </span><span class="k">name</span><span class="p">:</span><span class="w"> </span>config<span class="w">
-</span><span class="w"></span><span class="k">data</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="k">config</span><span class="p">:</span><span class="w"> </span><span class="sd">|
-</span><span class="sd">    address-pools:</span><span class="w">
-</span><span class="w">    </span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>default<span class="w">
-</span><span class="w">      </span><span class="k">protocol</span><span class="p">:</span><span class="w"> </span>layer2<span class="w">
-</span><span class="w">      </span><span class="k">addresses</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="m">192.168.1.240-192.168.1.250</span><span class="w">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">ConfigMap</span><span class="w">
+</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">metallb-system</span><span class="w">
+</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">config</span><span class="w">
+</span><span class="w"></span><span class="nt">data</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">config</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
+</span><span class="sd">    address-pools:
+</span><span class="sd">    - name: default
+</span><span class="sd">      protocol: layer2
+</span><span class="sd">      addresses:
+</span><span class="sd">      - 192.168.1.240-192.168.1.250</span><span class="w">    
 </span></code></pre></td></tr></table>
 </div>
 </div><h3 id="bgp-configuration">BGP configuration</h3>
@@ -533,22 +533,22 @@ bug</a> for details.</p>
 </span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="k">apiVersion</span><span class="p">:</span><span class="w"> </span>v1<span class="w">
-</span><span class="w"></span><span class="k">kind</span><span class="p">:</span><span class="w"> </span>ConfigMap<span class="w">
-</span><span class="w"></span><span class="k">metadata</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="k">namespace</span><span class="p">:</span><span class="w"> </span>metallb-system<span class="w">
-</span><span class="w">  </span><span class="k">name</span><span class="p">:</span><span class="w"> </span>config<span class="w">
-</span><span class="w"></span><span class="k">data</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="k">config</span><span class="p">:</span><span class="w"> </span><span class="sd">|
-</span><span class="sd">    peers:</span><span class="w">
-</span><span class="w">    </span>- <span class="k">peer-address</span><span class="p">:</span><span class="w"> </span><span class="m">10.0.0.1</span><span class="w">
-</span><span class="w">      </span><span class="k">peer-asn</span><span class="p">:</span><span class="w"> </span><span class="m">64501</span><span class="w">
-</span><span class="w">      </span><span class="k">my-asn</span><span class="p">:</span><span class="w"> </span><span class="m">64500</span><span class="w">
-</span><span class="w">    </span><span class="k">address-pools</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>default<span class="w">
-</span><span class="w">      </span><span class="k">protocol</span><span class="p">:</span><span class="w"> </span>bgp<span class="w">
-</span><span class="w">      </span><span class="k">addresses</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="m">192.168.10.0</span>/<span class="m">24</span><span class="w">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">ConfigMap</span><span class="w">
+</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">metallb-system</span><span class="w">
+</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">config</span><span class="w">
+</span><span class="w"></span><span class="nt">data</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">config</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
+</span><span class="sd">    peers:
+</span><span class="sd">    - peer-address: 10.0.0.1
+</span><span class="sd">      peer-asn: 64501
+</span><span class="sd">      my-asn: 64500
+</span><span class="sd">    address-pools:
+</span><span class="sd">    - name: default
+</span><span class="sd">      protocol: bgp
+</span><span class="sd">      addresses:
+</span><span class="sd">      - 192.168.10.0/24</span><span class="w">    
 </span></code></pre></td></tr></table>
 </div>
 </div><h4 id="advertisement-configuration">Advertisement configuration</h4>
@@ -585,30 +585,30 @@ bug</a> for details.</p>
 </span><span class="lnt">24
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="k">apiVersion</span><span class="p">:</span><span class="w"> </span>v1<span class="w">
-</span><span class="w"></span><span class="k">kind</span><span class="p">:</span><span class="w"> </span>ConfigMap<span class="w">
-</span><span class="w"></span><span class="k">metadata</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="k">namespace</span><span class="p">:</span><span class="w"> </span>metallb-system<span class="w">
-</span><span class="w">  </span><span class="k">name</span><span class="p">:</span><span class="w"> </span>config<span class="w">
-</span><span class="w"></span><span class="k">data</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="k">config</span><span class="p">:</span><span class="w"> </span><span class="sd">|
-</span><span class="sd">    peers:</span><span class="w">
-</span><span class="w">    </span>- <span class="k">peer-address</span><span class="p">:</span><span class="w"> </span><span class="m">10.0.0.1</span><span class="w">
-</span><span class="w">      </span><span class="k">peer-asn</span><span class="p">:</span><span class="w"> </span><span class="m">64501</span><span class="w">
-</span><span class="w">      </span><span class="k">my-asn</span><span class="p">:</span><span class="w"> </span><span class="m">64500</span><span class="w">
-</span><span class="w">    </span><span class="k">address-pools</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>default<span class="w">
-</span><span class="w">      </span><span class="k">protocol</span><span class="p">:</span><span class="w"> </span>bgp<span class="w">
-</span><span class="w">      </span><span class="k">addresses</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="m">198.51.100.0</span>/<span class="m">24</span><span class="w">
-</span><span class="w">      </span><span class="k">bgp-advertisements</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="k">aggregation-length</span><span class="p">:</span><span class="w"> </span><span class="m">32</span><span class="w">
-</span><span class="w">        </span><span class="k">localpref</span><span class="p">:</span><span class="w"> </span><span class="m">100</span><span class="w">
-</span><span class="w">        </span><span class="k">communities</span><span class="p">:</span><span class="w">
-</span><span class="w">        </span>- no-advertise<span class="w">
-</span><span class="w">      </span>- <span class="k">aggregation-length</span><span class="p">:</span><span class="w"> </span><span class="m">24</span><span class="w">
-</span><span class="w">    </span><span class="k">bgp-communities</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span><span class="k">no-advertise</span><span class="p">:</span><span class="w"> </span><span class="m">65535</span><span class="p">:</span><span class="m">65282</span><span class="w">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">ConfigMap</span><span class="w">
+</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">metallb-system</span><span class="w">
+</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">config</span><span class="w">
+</span><span class="w"></span><span class="nt">data</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">config</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
+</span><span class="sd">    peers:
+</span><span class="sd">    - peer-address: 10.0.0.1
+</span><span class="sd">      peer-asn: 64501
+</span><span class="sd">      my-asn: 64500
+</span><span class="sd">    address-pools:
+</span><span class="sd">    - name: default
+</span><span class="sd">      protocol: bgp
+</span><span class="sd">      addresses:
+</span><span class="sd">      - 198.51.100.0/24
+</span><span class="sd">      bgp-advertisements:
+</span><span class="sd">      - aggregation-length: 32
+</span><span class="sd">        localpref: 100
+</span><span class="sd">        communities:
+</span><span class="sd">        - no-advertise
+</span><span class="sd">      - aggregation-length: 24
+</span><span class="sd">    bgp-communities:
+</span><span class="sd">      no-advertise: 65535:65282</span><span class="w">    
 </span></code></pre></td></tr></table>
 </div>
 </div><p>With this configuration, if we create a service with IP 198.51.100.10, the BGP peer(s) will receive two routes:</p>
@@ -696,21 +696,21 @@ bug</a> for details.</p>
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="k">peers</span><span class="p">:</span><span class="w">
-</span><span class="w"></span>- <span class="k">peer-address</span><span class="p">:</span><span class="w"> </span><span class="m">10.0.0.1</span><span class="w">
-</span><span class="w">  </span><span class="k">peer-asn</span><span class="p">:</span><span class="w"> </span><span class="m">64501</span><span class="w">
-</span><span class="w">  </span><span class="k">my-asn</span><span class="p">:</span><span class="w"> </span><span class="m">64500</span><span class="w">
-</span><span class="w">  </span><span class="k">node-selectors</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span>- <span class="k">match-labels</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span><span class="k">rack</span><span class="p">:</span><span class="w"> </span>frontend<span class="w">
-</span><span class="w">    </span><span class="k">match-expressions</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span>- <span class="k">key</span><span class="p">:</span><span class="w"> </span>network-speed<span class="w">
-</span><span class="w">      </span><span class="k">operator</span><span class="p">:</span><span class="w"> </span>NotIn<span class="w">
-</span><span class="w">      </span><span class="k">values</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>slow<span class="p">]</span><span class="w">
-</span><span class="w">  </span>- <span class="k">match-expressions</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span>- <span class="k">key</span><span class="p">:</span><span class="w"> </span>kubernetes.io/hostname<span class="w">
-</span><span class="w">      </span><span class="k">operator</span><span class="p">:</span><span class="w"> </span>In<span class="w">
-</span><span class="w">      </span><span class="k">values</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>hostA<span class="p">,</span><span class="w"> </span>hostB<span class="p">]</span><span class="w">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">peers</span><span class="p">:</span><span class="w">
+</span><span class="w"></span>- <span class="nt">peer-address</span><span class="p">:</span><span class="w"> </span><span class="m">10.0.0.1</span><span class="w">
+</span><span class="w">  </span><span class="nt">peer-asn</span><span class="p">:</span><span class="w"> </span><span class="m">64501</span><span class="w">
+</span><span class="w">  </span><span class="nt">my-asn</span><span class="p">:</span><span class="w"> </span><span class="m">64500</span><span class="w">
+</span><span class="w">  </span><span class="nt">node-selectors</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span>- <span class="nt">match-labels</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">rack</span><span class="p">:</span><span class="w"> </span><span class="l">frontend</span><span class="w">
+</span><span class="w">    </span><span class="nt">match-expressions</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span>- <span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l">network-speed</span><span class="w">
+</span><span class="w">      </span><span class="nt">operator</span><span class="p">:</span><span class="w"> </span><span class="l">NotIn</span><span class="w">
+</span><span class="w">      </span><span class="nt">values</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">slow]</span><span class="w">
+</span><span class="w">  </span>- <span class="nt">match-expressions</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span>- <span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l">kubernetes.io/hostname</span><span class="w">
+</span><span class="w">      </span><span class="nt">operator</span><span class="p">:</span><span class="w"> </span><span class="l">In</span><span class="w">
+</span><span class="w">      </span><span class="nt">values</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">hostA, hostB]</span><span class="w">
 </span></code></pre></td></tr></table>
 </div>
 </div><h3 id="advanced-address-pool-configuration">Advanced address pool configuration</h3>
@@ -734,16 +734,16 @@ bug</a> for details.</p>
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="c"># Rest of config omitted for brevity</span><span class="w">
-</span><span class="w"></span><span class="k">address-pools</span><span class="p">:</span><span class="w">
-</span><span class="w"></span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>cheap<span class="w">
-</span><span class="w">  </span><span class="k">protocol</span><span class="p">:</span><span class="w"> </span>bgp<span class="w">
-</span><span class="w">  </span><span class="k">addresses</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span>- <span class="m">192.168.144.0</span>/<span class="m">20</span><span class="w">
-</span><span class="w"></span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>expensive<span class="w">
-</span><span class="w">  </span><span class="k">protocol</span><span class="p">:</span><span class="w"> </span>bgp<span class="w">
-</span><span class="w">  </span><span class="k">addresses</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span>- <span class="m">42.176.25.64</span>/<span class="m">30</span><span class="w">
-</span><span class="w">  </span><span class="k">auto-assign</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span><span class="w"></span><span class="nt">address-pools</span><span class="p">:</span><span class="w">
+</span><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">cheap</span><span class="w">
+</span><span class="w">  </span><span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l">bgp</span><span class="w">
+</span><span class="w">  </span><span class="nt">addresses</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span>- <span class="m">192.168.144.0</span><span class="l">/20</span><span class="w">
+</span><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">expensive</span><span class="w">
+</span><span class="w">  </span><span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l">bgp</span><span class="w">
+</span><span class="w">  </span><span class="nt">addresses</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span>- <span class="m">42.176.25.64</span><span class="l">/30</span><span class="w">
+</span><span class="w">  </span><span class="nt">auto-assign</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
 </span></code></pre></td></tr></table>
 </div>
 </div><p>Addresses can still be specifically allocated from the &ldquo;expensive&rdquo; pool with the methods described in the <a href="https://metallb.universe.tf/usage/#requesting-specific-ips" target="_blank" rel="noopener noreffer">usage</a> section.</p>
@@ -1046,19 +1046,19 @@ bug</a> for details.</p>
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="k">apiVersion</span><span class="p">:</span><span class="w"> </span>v1<span class="w">
-</span><span class="w"></span><span class="k">kind</span><span class="p">:</span><span class="w"> </span>Service<span class="w">
-</span><span class="w"></span><span class="k">metadata</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="k">name</span><span class="p">:</span><span class="w"> </span>nginx<span class="w">
-</span><span class="w">  </span><span class="k">annotations</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="k">metallb.universe.tf/address-pool</span><span class="p">:</span><span class="w"> </span>production-public-ips<span class="w">
-</span><span class="w"></span><span class="k">spec</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="k">ports</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span>- <span class="k">port</span><span class="p">:</span><span class="w"> </span><span class="m">80</span><span class="w">
-</span><span class="w">    </span><span class="k">targetPort</span><span class="p">:</span><span class="w"> </span><span class="m">80</span><span class="w">
-</span><span class="w">  </span><span class="k">selector</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="k">app</span><span class="p">:</span><span class="w"> </span>nginx<span class="w">
-</span><span class="w">  </span><span class="k">type</span><span class="p">:</span><span class="w"> </span>LoadBalancer<span class="w">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Service</span><span class="w">
+</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
+</span><span class="w">  </span><span class="nt">annotations</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">metallb.universe.tf/address-pool</span><span class="p">:</span><span class="w"> </span><span class="l">production-public-ips</span><span class="w">
+</span><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span>- <span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="m">80</span><span class="w">
+</span><span class="w">    </span><span class="nt">targetPort</span><span class="p">:</span><span class="w"> </span><span class="m">80</span><span class="w">
+</span><span class="w">  </span><span class="nt">selector</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
+</span><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">LoadBalancer</span><span class="w">
 </span></code></pre></td></tr></table>
 </div>
 </div><h3 id="traffic-policies">Traffic policies</h3>
@@ -1127,8 +1127,8 @@ bug</a> for details.</p>
 </div>
 </article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.72.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
-                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">hekai</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.80.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2021</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">hekai</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>
 

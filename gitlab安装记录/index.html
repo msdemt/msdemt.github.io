@@ -20,7 +20,7 @@
 <meta name="application-name" content="MyBlog">
 <meta name="apple-mobile-web-app-title" content="MyBlog"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://msdemt.github.io/gitlab%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95/" /><link rel="prev" href="https://msdemt.github.io/jenkins%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95/" /><link rel="next" href="https://msdemt.github.io/git%E5%91%BD%E4%BB%A4/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://msdemt.github.io/gitlab%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95/" /><link rel="prev" href="https://msdemt.github.io/jenkins%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95/" /><link rel="next" href="https://msdemt.github.io/git%E5%AD%90%E6%A8%A1%E5%9D%97%E7%9A%84%E4%BD%BF%E7%94%A8/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/msdemt.github.io\/gitlab%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95\/"
-        },"image": ["https:\/\/msdemt.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","wordcount":  6804 ,
+        },"image": ["https:\/\/msdemt.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","wordcount":  6834 ,
         "url": "https:\/\/msdemt.github.io\/gitlab%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95\/","datePublished": "2019-11-01T19:11:25+08:00","dateModified": "2019-11-01T19:11:25+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": "https:\/\/msdemt.github.io\/images\/avatar.png"},"author": {
@@ -106,7 +106,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">Gitlab安装记录</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>hekai</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2019-11-01">2019-11-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 6804 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2019-11-01">2019-11-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 6834 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 14 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -497,79 +497,79 @@ WARNING: $ sudo gitlab-runner...
 </span><span class="lnt">73
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-yaml" data-lang="yaml">...<span class="w"> </span>...<span class="w">
-</span><span class="w"></span>---<span class="w">
-</span><span class="w"></span><span class="k">apiVersion</span><span class="p">:</span><span class="w"> </span>v1<span class="w">
-</span><span class="w"></span><span class="k">kind</span><span class="p">:</span><span class="w"> </span>ConfigMap<span class="w">
-</span><span class="w"></span><span class="k">metadata</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="k">name</span><span class="p">:</span><span class="w"> </span>coredns<span class="w">
-</span><span class="w">  </span><span class="k">namespace</span><span class="p">:</span><span class="w"> </span>kube-system<span class="w">
-</span><span class="w">  </span><span class="k">labels</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span><span class="k">addonmanager.kubernetes.io/mode</span><span class="p">:</span><span class="w"> </span>EnsureExists<span class="w">
-</span><span class="w"></span><span class="k">data</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="k">Corefile</span><span class="p">:</span><span class="w"> </span><span class="sd">|
-</span><span class="sd">    .:53 {</span><span class="w">
-</span><span class="w">        </span>errors<span class="w">
-</span><span class="w">        </span>health<span class="w">
-</span><span class="w">        </span>hosts<span class="w"> </span>{<span class="w">
-</span><span class="w">            </span>fallthrough<span class="w">
-</span><span class="w">        </span>}<span class="w">
-</span><span class="w">        </span>kubernetes<span class="w"> </span>cluster.local<span class="w"> </span>in-addr.arpa<span class="w"> </span>ip6.arpa<span class="w"> </span>{<span class="w">
-</span><span class="w">            </span>pods<span class="w"> </span>insecure<span class="w">
-</span><span class="w">            </span>upstream<span class="w">
-</span><span class="w">            </span>fallthrough<span class="w"> </span>in-addr.arpa<span class="w"> </span>ip6.arpa<span class="w">
-</span><span class="w">            </span>ttl<span class="w"> </span><span class="m">30</span><span class="w">
-</span><span class="w">        </span>}<span class="w">
-</span><span class="w">        </span>prometheus<span class="w"> </span><span class="p">:</span><span class="m">9153</span><span class="w">
-</span><span class="w">        </span>forward<span class="w"> </span>.<span class="w"> </span>/etc/resolv.conf<span class="w">
-</span><span class="w">        </span>cache<span class="w"> </span><span class="m">30</span><span class="w">
-</span><span class="w">        </span>loop<span class="w">
-</span><span class="w">        </span>reload<span class="w">
-</span><span class="w">        </span>loadbalance<span class="w">
-</span><span class="w">    </span>}<span class="w">
-</span><span class="w"></span>---<span class="w">
-</span><span class="w"></span><span class="k">apiVersion</span><span class="p">:</span><span class="w"> </span>apps/v1<span class="w">
-</span><span class="w"></span><span class="k">kind</span><span class="p">:</span><span class="w"> </span>Deployment<span class="w">
-</span><span class="w"></span><span class="k">metadata</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="k">name</span><span class="p">:</span><span class="w"> </span>coredns<span class="w">
-</span><span class="w">  </span><span class="k">namespace</span><span class="p">:</span><span class="w"> </span>kube-system<span class="w">
-</span><span class="w">  </span><span class="k">labels</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="k">k8s-app</span><span class="p">:</span><span class="w"> </span>kube-dns<span class="w">
-</span><span class="w">    </span><span class="k">kubernetes.io/cluster-service</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;true&#34;</span><span class="w">
-</span><span class="w">    </span><span class="k">addonmanager.kubernetes.io/mode</span><span class="p">:</span><span class="w"> </span>Reconcile<span class="w">
-</span><span class="w">    </span><span class="k">kubernetes.io/name</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;CoreDNS&#34;</span><span class="w">
-</span><span class="w"></span><span class="k">spec</span><span class="p">:</span><span class="w">
-</span><span class="w"></span>...<span class="w"> </span>...<span class="w">
-</span><span class="w">      </span><span class="k">containers</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>coredns<span class="w">
-</span><span class="w">        </span><span class="k">image</span><span class="p">:</span><span class="w"> </span>coredns/coredns<span class="p">:</span><span class="m">1.4.0</span><span class="w">
-</span><span class="w"></span>...<span class="w"> </span>...<span class="w">
-</span><span class="w">        </span><span class="k">volumeMounts</span><span class="p">:</span><span class="w">
-</span><span class="w">        </span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>config-volume<span class="w">
-</span><span class="w">          </span><span class="k">mountPath</span><span class="p">:</span><span class="w"> </span>/etc/coredns<span class="w">
-</span><span class="w">          </span><span class="k">readOnly</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-</span><span class="w">        </span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>host-time<span class="w">
-</span><span class="w">          </span><span class="k">mountPath</span><span class="p">:</span><span class="w"> </span>/etc/localtime<span class="w">
-</span><span class="w">          </span><span class="k">readOnly</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-</span><span class="w">        </span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>hosts<span class="w">
-</span><span class="w">          </span><span class="k">mountPath</span><span class="p">:</span><span class="w"> </span>/etc/hosts<span class="w">
-</span><span class="w">          </span><span class="k">readOnly</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-</span><span class="w"></span>...<span class="w"> </span>...<span class="w">
-</span><span class="w">      </span><span class="k">volumes</span><span class="p">:</span><span class="w">
-</span><span class="w">        </span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>config-volume<span class="w">
-</span><span class="w">          </span><span class="k">configMap</span><span class="p">:</span><span class="w">
-</span><span class="w">            </span><span class="k">name</span><span class="p">:</span><span class="w"> </span>coredns<span class="w">
-</span><span class="w">            </span><span class="k">items</span><span class="p">:</span><span class="w">
-</span><span class="w">            </span>- <span class="k">key</span><span class="p">:</span><span class="w"> </span>Corefile<span class="w">
-</span><span class="w">              </span><span class="k">path</span><span class="p">:</span><span class="w"> </span>Corefile<span class="w">
-</span><span class="w">        </span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>host-time<span class="w">
-</span><span class="w">          </span><span class="k">hostPath</span><span class="p">:</span><span class="w">
-</span><span class="w">            </span><span class="k">path</span><span class="p">:</span><span class="w"> </span>/etc/localtime<span class="w">
-</span><span class="w">        </span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>hosts<span class="w">
-</span><span class="w">          </span><span class="k">hostPath</span><span class="p">:</span><span class="w">
-</span><span class="w">            </span><span class="k">path</span><span class="p">:</span><span class="w"> </span>/etc/hosts<span class="w">
-</span><span class="w"></span>---<span class="w">
-</span><span class="w"></span>...<span class="w"> </span>...<span class="w">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nn">...</span><span class="w"> </span><span class="l">...</span><span class="w">
+</span><span class="w"></span><span class="nn">---</span><span class="w">
+</span><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">ConfigMap</span><span class="w">
+</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">coredns</span><span class="w">
+</span><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">kube-system</span><span class="w">
+</span><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">addonmanager.kubernetes.io/mode</span><span class="p">:</span><span class="w"> </span><span class="l">EnsureExists</span><span class="w">
+</span><span class="w"></span><span class="nt">data</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">Corefile</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
+</span><span class="sd">    .:53 {
+</span><span class="sd">        errors
+</span><span class="sd">        health
+</span><span class="sd">        hosts {
+</span><span class="sd">            fallthrough
+</span><span class="sd">        }
+</span><span class="sd">        kubernetes cluster.local in-addr.arpa ip6.arpa {
+</span><span class="sd">            pods insecure
+</span><span class="sd">            upstream
+</span><span class="sd">            fallthrough in-addr.arpa ip6.arpa
+</span><span class="sd">            ttl 30
+</span><span class="sd">        }
+</span><span class="sd">        prometheus :9153
+</span><span class="sd">        forward . /etc/resolv.conf
+</span><span class="sd">        cache 30
+</span><span class="sd">        loop
+</span><span class="sd">        reload
+</span><span class="sd">        loadbalance
+</span><span class="sd">    }</span><span class="w">    
+</span><span class="w"></span><span class="nn">---</span><span class="w">
+</span><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">apps/v1</span><span class="w">
+</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Deployment</span><span class="w">
+</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">coredns</span><span class="w">
+</span><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">kube-system</span><span class="w">
+</span><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">k8s-app</span><span class="p">:</span><span class="w"> </span><span class="l">kube-dns</span><span class="w">
+</span><span class="w">    </span><span class="nt">kubernetes.io/cluster-service</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;true&#34;</span><span class="w">
+</span><span class="w">    </span><span class="nt">addonmanager.kubernetes.io/mode</span><span class="p">:</span><span class="w"> </span><span class="l">Reconcile</span><span class="w">
+</span><span class="w">    </span><span class="nt">kubernetes.io/name</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;CoreDNS&#34;</span><span class="w">
+</span><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span><span class="w"></span><span class="nn">...</span><span class="w"> </span><span class="l">...</span><span class="w">
+</span><span class="w">      </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">coredns</span><span class="w">
+</span><span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">coredns/coredns:1.4.0</span><span class="w">
+</span><span class="w"></span><span class="nn">...</span><span class="w"> </span><span class="l">...</span><span class="w">
+</span><span class="w">        </span><span class="nt">volumeMounts</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">config-volume</span><span class="w">
+</span><span class="w">          </span><span class="nt">mountPath</span><span class="p">:</span><span class="w"> </span><span class="l">/etc/coredns</span><span class="w">
+</span><span class="w">          </span><span class="nt">readOnly</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="w">        </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">host-time</span><span class="w">
+</span><span class="w">          </span><span class="nt">mountPath</span><span class="p">:</span><span class="w"> </span><span class="l">/etc/localtime</span><span class="w">
+</span><span class="w">          </span><span class="nt">readOnly</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="w">        </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">hosts</span><span class="w">
+</span><span class="w">          </span><span class="nt">mountPath</span><span class="p">:</span><span class="w"> </span><span class="l">/etc/hosts</span><span class="w">
+</span><span class="w">          </span><span class="nt">readOnly</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="w"></span><span class="nn">...</span><span class="w"> </span><span class="l">...</span><span class="w">
+</span><span class="w">      </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">config-volume</span><span class="w">
+</span><span class="w">          </span><span class="nt">configMap</span><span class="p">:</span><span class="w">
+</span><span class="w">            </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">coredns</span><span class="w">
+</span><span class="w">            </span><span class="nt">items</span><span class="p">:</span><span class="w">
+</span><span class="w">            </span>- <span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l">Corefile</span><span class="w">
+</span><span class="w">              </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">Corefile</span><span class="w">
+</span><span class="w">        </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">host-time</span><span class="w">
+</span><span class="w">          </span><span class="nt">hostPath</span><span class="p">:</span><span class="w">
+</span><span class="w">            </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/etc/localtime</span><span class="w">
+</span><span class="w">        </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">hosts</span><span class="w">
+</span><span class="w">          </span><span class="nt">hostPath</span><span class="p">:</span><span class="w">
+</span><span class="w">            </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/etc/hosts</span><span class="w">
+</span><span class="w"></span><span class="nn">---</span><span class="w">
+</span><span class="w"></span><span class="nn">...</span><span class="w"> </span><span class="l">...</span><span class="w">
 </span></code></pre></td></tr></table>
 </div>
 </div><p>更新好后，重新部署下 coredns</p>
@@ -714,72 +714,72 @@ gitlab runner 提供如下选项：</p>
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="c"># Source: gitlab/charts/gitlab-runner/templates/deployment.yaml</span><span class="w">
-</span><span class="w"></span><span class="k">apiVersion</span><span class="p">:</span><span class="w"> </span>apps/v1<span class="w">
-</span><span class="w"></span><span class="k">kind</span><span class="p">:</span><span class="w"> </span>Deployment<span class="w">
-</span><span class="w"></span><span class="k">metadata</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="k">name</span><span class="p">:</span><span class="w"> </span>mygitlab-gitlab-runner<span class="w">
-</span><span class="w">  </span><span class="k">namespace</span><span class="p">:</span><span class="w"> </span>gitlab<span class="w">
-</span><span class="w"></span>...<span class="w"> </span>...<span class="w">
-</span><span class="w"></span><span class="k">spec</span><span class="p">:</span><span class="w">
-</span><span class="w"></span>...<span class="w"> </span>...<span class="w">
-</span><span class="w">      </span><span class="k">initContainers</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>configure<span class="w">
-</span><span class="w">        </span><span class="k">command</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;sh&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;/config/configure&#39;</span><span class="p">]</span><span class="w">
-</span><span class="w">        </span><span class="k">image</span><span class="p">:</span><span class="w"> </span>gitlab/gitlab-runner<span class="p">:</span>alpine-v12<span class="m">.4.0</span><span class="w">
-</span><span class="w"></span>...<span class="w"> </span>...<span class="w">
-</span><span class="w">        </span><span class="k">volumeMounts</span><span class="p">:</span><span class="w">
-</span><span class="w">        </span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>runner-secrets<span class="w">
-</span><span class="w">          </span><span class="k">mountPath</span><span class="p">:</span><span class="w"> </span>/secrets<span class="w">
-</span><span class="w">          </span><span class="k">readOnly</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
-</span><span class="w">        </span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>scripts<span class="w">
-</span><span class="w">          </span><span class="k">mountPath</span><span class="p">:</span><span class="w"> </span>/config<span class="w">
-</span><span class="w">          </span><span class="k">readOnly</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-</span><span class="w">        </span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>init-runner-secrets<span class="w">
-</span><span class="w">          </span><span class="k">mountPath</span><span class="p">:</span><span class="w"> </span>/init-secrets<span class="w">
-</span><span class="w">          </span><span class="k">readOnly</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-</span><span class="w"></span>...<span class="w"> </span>...<span class="w">
-</span><span class="w">      </span><span class="k">containers</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>mygitlab-gitlab-runner<span class="w">
-</span><span class="w">        </span><span class="k">image</span><span class="p">:</span><span class="w"> </span>gitlab/gitlab-runner<span class="p">:</span>alpine-v12<span class="m">.4.0</span><span class="w">
-</span><span class="w">        </span><span class="k">imagePullPolicy</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;IfNotPresent&#34;</span><span class="w">
-</span><span class="w">        </span><span class="k">command</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;/bin/bash&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;/scripts/entrypoint&#34;</span><span class="p">]</span><span class="w">
-</span><span class="w"></span>...<span class="w"> </span>...<span class="w">
-</span><span class="w">        </span><span class="k">volumeMounts</span><span class="p">:</span><span class="w">
-</span><span class="w">        </span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>runner-secrets<span class="w">
-</span><span class="w">          </span><span class="k">mountPath</span><span class="p">:</span><span class="w"> </span>/secrets<span class="w">
-</span><span class="w">        </span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>etc-gitlab-runner<span class="w">
-</span><span class="w">          </span><span class="k">mountPath</span><span class="p">:</span><span class="w"> </span>/home/gitlab-runner/.gitlab-runner<span class="w">
-</span><span class="w">        </span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>gitlab-runner-crt<span class="w">
-</span><span class="w">          </span><span class="k">mountPath</span><span class="p">:</span><span class="w"> </span>/home/gitlab-runner/.gitlab-runner/certs/<span class="w">
-</span><span class="w">        </span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>scripts<span class="w">
-</span><span class="w">          </span><span class="k">mountPath</span><span class="p">:</span><span class="w"> </span>/scripts<span class="w">
-</span><span class="w">        </span><span class="k">resources</span><span class="p">:</span><span class="w">
+</span><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">apps/v1</span><span class="w">
+</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Deployment</span><span class="w">
+</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">mygitlab-gitlab-runner</span><span class="w">
+</span><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">gitlab</span><span class="w">
+</span><span class="w"></span><span class="nn">...</span><span class="w"> </span><span class="l">...</span><span class="w">
+</span><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span><span class="w"></span><span class="nn">...</span><span class="w"> </span><span class="l">...</span><span class="w">
+</span><span class="w">      </span><span class="nt">initContainers</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">configure</span><span class="w">
+</span><span class="w">        </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;sh&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;/config/configure&#39;</span><span class="p">]</span><span class="w">
+</span><span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">gitlab/gitlab-runner:alpine-v12.4.0</span><span class="w">
+</span><span class="w"></span><span class="nn">...</span><span class="w"> </span><span class="l">...</span><span class="w">
+</span><span class="w">        </span><span class="nt">volumeMounts</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">runner-secrets</span><span class="w">
+</span><span class="w">          </span><span class="nt">mountPath</span><span class="p">:</span><span class="w"> </span><span class="l">/secrets</span><span class="w">
+</span><span class="w">          </span><span class="nt">readOnly</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span><span class="w">        </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">scripts</span><span class="w">
+</span><span class="w">          </span><span class="nt">mountPath</span><span class="p">:</span><span class="w"> </span><span class="l">/config</span><span class="w">
+</span><span class="w">          </span><span class="nt">readOnly</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="w">        </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">init-runner-secrets</span><span class="w">
+</span><span class="w">          </span><span class="nt">mountPath</span><span class="p">:</span><span class="w"> </span><span class="l">/init-secrets</span><span class="w">
+</span><span class="w">          </span><span class="nt">readOnly</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="w"></span><span class="nn">...</span><span class="w"> </span><span class="l">...</span><span class="w">
+</span><span class="w">      </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">mygitlab-gitlab-runner</span><span class="w">
+</span><span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">gitlab/gitlab-runner:alpine-v12.4.0</span><span class="w">
+</span><span class="w">        </span><span class="nt">imagePullPolicy</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;IfNotPresent&#34;</span><span class="w">
+</span><span class="w">        </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;/bin/bash&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;/scripts/entrypoint&#34;</span><span class="p">]</span><span class="w">
+</span><span class="w"></span><span class="nn">...</span><span class="w"> </span><span class="l">...</span><span class="w">
+</span><span class="w">        </span><span class="nt">volumeMounts</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">runner-secrets</span><span class="w">
+</span><span class="w">          </span><span class="nt">mountPath</span><span class="p">:</span><span class="w"> </span><span class="l">/secrets</span><span class="w">
+</span><span class="w">        </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">etc-gitlab-runner</span><span class="w">
+</span><span class="w">          </span><span class="nt">mountPath</span><span class="p">:</span><span class="w"> </span><span class="l">/home/gitlab-runner/.gitlab-runner</span><span class="w">
+</span><span class="w">        </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">gitlab-runner-crt</span><span class="w">
+</span><span class="w">          </span><span class="nt">mountPath</span><span class="p">:</span><span class="w"> </span><span class="l">/home/gitlab-runner/.gitlab-runner/certs/</span><span class="w">
+</span><span class="w">        </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">scripts</span><span class="w">
+</span><span class="w">          </span><span class="nt">mountPath</span><span class="p">:</span><span class="w"> </span><span class="l">/scripts</span><span class="w">
+</span><span class="w">        </span><span class="nt">resources</span><span class="p">:</span><span class="w">
 </span><span class="w">          </span>{}<span class="w">
-</span><span class="w">      </span><span class="k">volumes</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>runner-secrets<span class="w">
-</span><span class="w">        </span><span class="k">emptyDir</span><span class="p">:</span><span class="w">
-</span><span class="w">          </span><span class="k">medium</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;Memory&#34;</span><span class="w">
-</span><span class="w">      </span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>etc-gitlab-runner<span class="w">
-</span><span class="w">        </span><span class="k">emptyDir</span><span class="p">:</span><span class="w">
-</span><span class="w">          </span><span class="k">medium</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;Memory&#34;</span><span class="w">
-</span><span class="w">      </span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>gitlab-runner-crt<span class="w">
-</span><span class="w">        </span><span class="k">secret</span><span class="p">:</span><span class="w">
-</span><span class="w">          </span><span class="k">secretName</span><span class="p">:</span><span class="w"> </span>gitlab.k8s.abc.crt<span class="w">
-</span><span class="w">      </span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>init-runner-secrets<span class="w">
-</span><span class="w">        </span><span class="k">projected</span><span class="p">:</span><span class="w">
-</span><span class="w">          </span><span class="k">sources</span><span class="p">:</span><span class="w">
-</span><span class="w">            </span>- <span class="k">secret</span><span class="p">:</span><span class="w">
-</span><span class="w">                </span><span class="k">name</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;mygitlab-minio-secret&#34;</span><span class="w">
-</span><span class="w">            </span>- <span class="k">secret</span><span class="p">:</span><span class="w">
-</span><span class="w">                </span><span class="k">name</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;mygitlab-gitlab-runner-secret&#34;</span><span class="w">
-</span><span class="w">                </span><span class="k">items</span><span class="p">:</span><span class="w">
-</span><span class="w">                  </span>- <span class="k">key</span><span class="p">:</span><span class="w"> </span>runner-registration-token<span class="w">
-</span><span class="w">                    </span><span class="k">path</span><span class="p">:</span><span class="w"> </span>runner-registration-token<span class="w">
-</span><span class="w">                  </span>- <span class="k">key</span><span class="p">:</span><span class="w"> </span>runner-token<span class="w">
-</span><span class="w">                    </span><span class="k">path</span><span class="p">:</span><span class="w"> </span>runner-token<span class="w">
-</span><span class="w">      </span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>scripts<span class="w">
-</span><span class="w">        </span><span class="k">configMap</span><span class="p">:</span><span class="w">
-</span><span class="w">          </span><span class="k">name</span><span class="p">:</span><span class="w"> </span>mygitlab-gitlab-runner<span class="w">
+</span><span class="w">      </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">runner-secrets</span><span class="w">
+</span><span class="w">        </span><span class="nt">emptyDir</span><span class="p">:</span><span class="w">
+</span><span class="w">          </span><span class="nt">medium</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;Memory&#34;</span><span class="w">
+</span><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">etc-gitlab-runner</span><span class="w">
+</span><span class="w">        </span><span class="nt">emptyDir</span><span class="p">:</span><span class="w">
+</span><span class="w">          </span><span class="nt">medium</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;Memory&#34;</span><span class="w">
+</span><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">gitlab-runner-crt</span><span class="w">
+</span><span class="w">        </span><span class="nt">secret</span><span class="p">:</span><span class="w">
+</span><span class="w">          </span><span class="nt">secretName</span><span class="p">:</span><span class="w"> </span><span class="l">gitlab.k8s.abc.crt</span><span class="w">
+</span><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">init-runner-secrets</span><span class="w">
+</span><span class="w">        </span><span class="nt">projected</span><span class="p">:</span><span class="w">
+</span><span class="w">          </span><span class="nt">sources</span><span class="p">:</span><span class="w">
+</span><span class="w">            </span>- <span class="nt">secret</span><span class="p">:</span><span class="w">
+</span><span class="w">                </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;mygitlab-minio-secret&#34;</span><span class="w">
+</span><span class="w">            </span>- <span class="nt">secret</span><span class="p">:</span><span class="w">
+</span><span class="w">                </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;mygitlab-gitlab-runner-secret&#34;</span><span class="w">
+</span><span class="w">                </span><span class="nt">items</span><span class="p">:</span><span class="w">
+</span><span class="w">                  </span>- <span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l">runner-registration-token</span><span class="w">
+</span><span class="w">                    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">runner-registration-token</span><span class="w">
+</span><span class="w">                  </span>- <span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l">runner-token</span><span class="w">
+</span><span class="w">                    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">runner-token</span><span class="w">
+</span><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">scripts</span><span class="w">
+</span><span class="w">        </span><span class="nt">configMap</span><span class="p">:</span><span class="w">
+</span><span class="w">          </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">mygitlab-gitlab-runner</span><span class="w">
 </span></code></pre></td></tr></table>
 </div>
 </div><p>再次执行，就解决 gitlab runner 证书授权的问题了。</p>
@@ -1150,9 +1150,9 @@ export release=mygitlab</p>
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="o">[</span>root@k8s-m1 gitlab-v2.5.1<span class="o">]</span><span class="c1"># kubectl delete secret -n gitlab gitlab-outgoing-smtp-pwd-secret</span> 
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="o">[</span>root@k8s-m1 gitlab-v2.5.1<span class="o">]</span><span class="c1"># kubectl delete secret -n gitlab gitlab-outgoing-smtp-pwd-secret </span>
 secret <span class="s2">&#34;gitlab-outgoing-smtp-pwd-secret&#34;</span> deleted
-<span class="o">[</span>root@k8s-m1 gitlab-v2.5.1<span class="o">]</span><span class="c1"># kubectl delete secret -n gitlab gitlab-incoming-imap-pwd-secret</span> 
+<span class="o">[</span>root@k8s-m1 gitlab-v2.5.1<span class="o">]</span><span class="c1"># kubectl delete secret -n gitlab gitlab-incoming-imap-pwd-secret </span>
 secret <span class="s2">&#34;gitlab-incoming-imap-pwd-secret&#34;</span> deleted
 <span class="o">[</span>root@k8s-m1 gitlab-v2.5.1<span class="o">]</span><span class="c1"># cat gitlab-outgoing-smtp-pwd-key</span>
 xxxxxxxxxxxx
@@ -1326,12 +1326,12 @@ namespace/gitlab created
     </div>
 
     <div class="post-nav"><a href="/jenkins%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95/" class="prev" rel="prev" title="Jenkins安装记录"><i class="fas fa-angle-left fa-fw"></i>Jenkins安装记录</a>
-            <a href="/git%E5%91%BD%E4%BB%A4/" class="next" rel="next" title="Git命令">Git命令<i class="fas fa-angle-right fa-fw"></i></a></div>
+            <a href="/git%E5%AD%90%E6%A8%A1%E5%9D%97%E7%9A%84%E4%BD%BF%E7%94%A8/" class="next" rel="next" title="git子模块的使用">git子模块的使用<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 </article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.72.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
-                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">hekai</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.80.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2021</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">hekai</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>
 

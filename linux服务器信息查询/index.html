@@ -433,42 +433,42 @@ Swap:            0B          0B          0B
 </span><span class="lnt">45
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">uname -a <span class="c1"># 查看内核/操作系统/CPU信息的linux系统信息</span>  
-head -n l /etc/issue <span class="c1"># 查看操作系统版本</span>  
-cat /proc/cpuinfo <span class="c1"># 查看CPU信息</span>  
-hostname <span class="c1"># 查看计算机名的linux系统信息命令</span>  
-lspci -tv <span class="c1"># 列出所有PCI设备</span>  
-lsusb -tv <span class="c1"># 列出所有USB设备的linux系统信息命令</span>  
-lsmod <span class="c1"># 列出加载的内核模块</span>  
-env <span class="c1"># 查看环境变量资源</span>  
-free -m <span class="c1"># 查看内存使用量和交换区使用量</span>  
-df -h <span class="c1"># 查看各分区使用情况</span>  
-du -sh <span class="c1"># 查看指定目录的大小</span>  
-grep MemTotal /proc/meminfo <span class="c1"># 查看内存总量</span>  
-grep MemFree /proc/meminfo <span class="c1"># 查看空闲内存量</span>  
-uptime <span class="c1"># 查看系统运行时间、用户数、负载</span>  
-cat /proc/loadavg <span class="c1"># 查看系统负载磁盘和分区</span>  
-mount <span class="p">|</span> column -t <span class="c1"># 查看挂接的分区状态</span>  
-fdisk -l <span class="c1"># 查看所有分区</span>  
-swapon -s <span class="c1"># 查看所有交换分区</span>  
-hdparm -i /dev/hda <span class="c1"># 查看磁盘参数(仅适用于IDE设备)</span>  
-dmesg <span class="p">|</span> grep IDE <span class="c1"># 查看启动时IDE设备检测状况网络</span>  
+<pre class="chroma"><code class="language-shell" data-lang="shell">uname -a <span class="c1"># 查看内核/操作系统/CPU信息的linux系统信息  </span>
+head -n l /etc/issue <span class="c1"># 查看操作系统版本  </span>
+cat /proc/cpuinfo <span class="c1"># 查看CPU信息  </span>
+hostname <span class="c1"># 查看计算机名的linux系统信息命令  </span>
+lspci -tv <span class="c1"># 列出所有PCI设备  </span>
+lsusb -tv <span class="c1"># 列出所有USB设备的linux系统信息命令  </span>
+lsmod <span class="c1"># 列出加载的内核模块  </span>
+env <span class="c1"># 查看环境变量资源  </span>
+free -m <span class="c1"># 查看内存使用量和交换区使用量  </span>
+df -h <span class="c1"># 查看各分区使用情况  </span>
+du -sh <span class="c1"># 查看指定目录的大小  </span>
+grep MemTotal /proc/meminfo <span class="c1"># 查看内存总量  </span>
+grep MemFree /proc/meminfo <span class="c1"># 查看空闲内存量  </span>
+uptime <span class="c1"># 查看系统运行时间、用户数、负载  </span>
+cat /proc/loadavg <span class="c1"># 查看系统负载磁盘和分区  </span>
+mount <span class="p">|</span> column -t <span class="c1"># 查看挂接的分区状态  </span>
+fdisk -l <span class="c1"># 查看所有分区  </span>
+swapon -s <span class="c1"># 查看所有交换分区  </span>
+hdparm -i /dev/hda <span class="c1"># 查看磁盘参数(仅适用于IDE设备)  </span>
+dmesg <span class="p">|</span> grep IDE <span class="c1"># 查看启动时IDE设备检测状况网络  </span>
 ifconfig <span class="c1"># 查看所有网络接口的属性</span>
 iptables -L <span class="c1"># 查看防火墙设置</span>
 route -n <span class="c1"># 查看路由表</span>
-netstat -lntp <span class="c1"># 查看所有监听端口</span>  
+netstat -lntp <span class="c1"># 查看所有监听端口  </span>
 netstat -antp <span class="c1"># 查看所有已经建立的连接</span>
-netstat -s <span class="c1"># 查看网络统计信息进程</span>  
+netstat -s <span class="c1"># 查看网络统计信息进程  </span>
 ps -ef <span class="c1"># 查看所有进程</span>
-top <span class="c1"># 实时显示进程状态用户</span>  
+top <span class="c1"># 实时显示进程状态用户  </span>
 w <span class="c1"># 查看活动用户</span>
-id <span class="c1"># 查看指定用户信息</span>  
+id <span class="c1"># 查看指定用户信息  </span>
 last <span class="c1"># 查看用户登录日志</span>
-cut -d: -f1 /etc/passwd <span class="c1"># 查看系统所有用户</span>  
+cut -d: -f1 /etc/passwd <span class="c1"># 查看系统所有用户  </span>
 cut -d: -f1 /etc/group <span class="c1"># 查看系统所有组</span>
-crontab -l <span class="c1"># 查看当前用户的计划任务服务</span>  
+crontab -l <span class="c1"># 查看当前用户的计划任务服务  </span>
 chkconfig –list <span class="c1"># 列出所有系统服务</span>
-chkconfig –list <span class="p">|</span> grep on <span class="c1"># 列出所有启动的系统服务程序</span>  
+chkconfig –list <span class="p">|</span> grep on <span class="c1"># 列出所有启动的系统服务程序  </span>
 rpm -qa <span class="c1"># 查看所有安装的软件包</span>
 cat /proc/cpuinfo ：查看CPU相关参数的linux系统命令  
 cat /proc/partitions ：查看linux硬盘和分区信息的系统信息命令
@@ -512,8 +512,8 @@ cat /proc/swaps ：查看所有swap分区的信息
 </div>
 </article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.72.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
-                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">hekai</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.80.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2021</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">hekai</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>
 

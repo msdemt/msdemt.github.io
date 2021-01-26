@@ -220,6 +220,8 @@ To https://github.com/msdemt/msdemt.github.io.git
 Branch 'master' set up to track remote branch 'master' from 'origin'.
 ```
 
+## 实战
+
 也可以使用子模块的方式安装主题，
 如安装 loveit 主题到 themes 目录下：
 ```

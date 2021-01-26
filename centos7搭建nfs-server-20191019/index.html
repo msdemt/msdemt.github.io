@@ -206,35 +206,35 @@ nfs 除了主程序端口 2049 和 rpcbind 的端口 111 是固定的，还会�
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-shell" data-lang="shell"><span class="o">[</span>root@k8s-1 nfs-client<span class="o">]</span><span class="c1"># cat /etc/sysconfig/nfs</span>
-#
+<span class="c1">#</span>
 <span class="c1"># Note: For new values to take effect the nfs-config service</span>
 <span class="c1"># has to be restarted with the following command:</span>
 <span class="c1">#    systemctl restart nfs-config</span>
-#
+<span class="c1">#</span>
 <span class="c1"># Optional arguments passed to in-kernel lockd</span>
 <span class="c1">#LOCKDARG=</span>
 <span class="c1"># TCP port rpc.lockd should listen on.</span>
 <span class="nv">LOCKD_TCPPORT</span><span class="o">=</span><span class="m">32803</span>
 <span class="c1"># UDP port rpc.lockd should listen on.</span>
 <span class="nv">LOCKD_UDPPORT</span><span class="o">=</span><span class="m">32769</span>
-#
+<span class="c1">#</span>
 <span class="c1"># Optional arguments passed to rpc.nfsd. See rpc.nfsd(8)</span>
 <span class="nv">RPCNFSDARGS</span><span class="o">=</span><span class="s2">&#34;&#34;</span>
 <span class="c1"># Number of nfs server processes to be started.</span>
 <span class="c1"># The default is 8.</span>
 <span class="c1">#RPCNFSDCOUNT=16</span>
-#
+<span class="c1">#</span>
 <span class="c1"># Set V4 grace period in seconds</span>
 <span class="c1">#NFSD_V4_GRACE=90</span>
-#
+<span class="c1">#</span>
 <span class="c1"># Set V4 lease period in seconds</span>
 <span class="c1">#NFSD_V4_LEASE=90</span>
-#
+<span class="c1">#</span>
 <span class="c1"># Optional arguments passed to rpc.mountd. See rpc.mountd(8)</span>
 <span class="nv">RPCMOUNTDOPTS</span><span class="o">=</span><span class="s2">&#34;&#34;</span>
 <span class="c1"># Port rpc.mountd should listen on.</span>
 <span class="nv">MOUNTD_PORT</span><span class="o">=</span><span class="m">892</span>
-#
+<span class="c1">#</span>
 <span class="c1"># Optional arguments passed to rpc.statd. See rpc.statd(8)</span>
 <span class="nv">STATDARG</span><span class="o">=</span><span class="s2">&#34;&#34;</span>
 <span class="c1"># Port rpc.statd should listen on.</span>
@@ -244,14 +244,14 @@ nfs 除了主程序端口 2049 和 rpcbind 的端口 111 是固定的，还会�
 <span class="nv">STATD_OUTGOING_PORT</span><span class="o">=</span><span class="m">2020</span>
 <span class="c1"># Specify callout program</span>
 <span class="c1">#STATD_HA_CALLOUT=&#34;/usr/local/bin/foo&#34;</span>
-#
-#
+<span class="c1">#</span>
+<span class="c1">#</span>
 <span class="c1"># Optional arguments passed to sm-notify. See sm-notify(8)</span>
 <span class="nv">SMNOTIFYARGS</span><span class="o">=</span><span class="s2">&#34;&#34;</span>
-#
+<span class="c1">#</span>
 <span class="c1"># Optional arguments passed to rpc.idmapd. See rpc.idmapd(8)</span>
 <span class="nv">RPCIDMAPDARGS</span><span class="o">=</span><span class="s2">&#34;&#34;</span>
-#
+<span class="c1">#</span>
 <span class="c1"># Optional arguments passed to rpc.gssd. See rpc.gssd(8)</span>
 <span class="c1"># Note: The rpc-gssd service will not start unless the</span>
 <span class="c1">#       file /etc/krb5.keytab exists. If an alternate</span>
@@ -260,10 +260,10 @@ nfs 除了主程序端口 2049 和 rpcbind 的端口 111 是固定的，还会�
 <span class="c1">#       systemd unit file under the ConditionPathExists</span>
 <span class="c1">#       parameter</span>
 <span class="nv">RPCGSSDARGS</span><span class="o">=</span><span class="s2">&#34;&#34;</span>
-#
+<span class="c1">#</span>
 <span class="c1"># Enable usage of gssproxy. See gssproxy-mech(8).</span>
 <span class="nv">GSS_USE_PROXY</span><span class="o">=</span><span class="s2">&#34;yes&#34;</span>
-#
+<span class="c1">#</span>
 <span class="c1"># Optional arguments passed to blkmapd. See blkmapd(8)</span>
 <span class="nv">BLKMAPDARGS</span><span class="o">=</span><span class="s2">&#34;&#34;</span>
 </code></pre></td></tr></table>
@@ -427,8 +427,8 @@ systemctl <span class="nb">enable</span> --now nfs
 </div>
 </article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.72.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
-                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">hekai</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.80.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2021</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">hekai</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>
 

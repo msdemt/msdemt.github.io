@@ -1,0 +1,2155 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>恋上数据结构与算法-1-09-AVL树 - MyBlog</title><meta name="Description" content="我的博客"><meta property="og:title" content="恋上数据结构与算法-1-09-AVL树" />
+<meta property="og:description" content="AVL树 AVL树是最早发明的自平衡二叉搜索树之一 AVL取名与两位发明者的名字 G.M.Adelson-Velsky 和 E.M.Landis （来自苏联的科学家） 平衡因子（Balance Factor）" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://msdemt.github.io/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-1-09-avl%E6%A0%91/" />
+<meta property="og:image" content="https://msdemt.github.io/logo.png"/>
+<meta property="article:published_time" content="2020-09-18T15:29:46+08:00" />
+<meta property="article:modified_time" content="2020-09-18T15:29:46+08:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://msdemt.github.io/logo.png"/>
+
+<meta name="twitter:title" content="恋上数据结构与算法-1-09-AVL树"/>
+<meta name="twitter:description" content="AVL树 AVL树是最早发明的自平衡二叉搜索树之一 AVL取名与两位发明者的名字 G.M.Adelson-Velsky 和 E.M.Landis （来自苏联的科学家） 平衡因子（Balance Factor）"/>
+<meta name="application-name" content="MyBlog">
+<meta name="apple-mobile-web-app-title" content="MyBlog"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://msdemt.github.io/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-1-09-avl%E6%A0%91/" /><link rel="prev" href="https://msdemt.github.io/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-1-08-%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/" /><link rel="next" href="https://msdemt.github.io/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-1-10-b%E6%A0%91/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "恋上数据结构与算法-1-09-AVL树",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/msdemt.github.io\/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-1-09-avl%E6%A0%91\/"
+        },"image": ["https:\/\/msdemt.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "算法, 数据结构, java","wordcount":  5004 ,
+        "url": "https:\/\/msdemt.github.io\/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-1-09-avl%E6%A0%91\/","datePublished": "2020-09-18T15:29:46+08:00","dateModified": "2020-09-18T15:29:46+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": "https:\/\/msdemt.github.io\/images\/avatar.png"},"author": {
+                "@type": "Person",
+                "name": "hekai"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="MyBlog"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>MyBlog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/categories/documentation/"> 文档 </a><a class="menu-item" href="/about/"> 关于 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="MyBlog"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>MyBlog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/categories/documentation/" title="">文档</a><a class="menu-item" href="/about/" title="">关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">恋上数据结构与算法-1-09-AVL树</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>hekai</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E7%AE%97%E6%B3%95/"><i class="far fa-folder fa-fw"></i>算法</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-09-18">2020-09-18</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 5004 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 10 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#avl树">AVL树</a>
+      <ul>
+        <li><a href="#平衡对比">平衡对比</a></li>
+        <li><a href="#简单的继承结构">简单的继承结构</a></li>
+        <li><a href="#添加导致的失衡">添加导致的失衡</a>
+          <ul>
+            <li><a href="#ll---右旋转单旋">LL - 右旋转（单旋）</a></li>
+            <li><a href="#rr---左旋转单旋">RR - 左旋转（单旋）</a></li>
+            <li><a href="#lr---rr左旋转ll右旋转双旋">LR - RR左旋转，LL右旋转（双旋）</a></li>
+            <li><a href="#rl---ll右旋转rr左旋转双旋">RL - LL右旋转，RR左旋转（双旋）</a></li>
+            <li><a href="#实现">实现</a></li>
+          </ul>
+        </li>
+        <li><a href="#删除导致的失衡">删除导致的失衡</a>
+          <ul>
+            <li><a href="#ll---右旋转单旋-1">LL - 右旋转（单旋）</a></li>
+            <li><a href="#rr---左旋转单旋-1">RR - 左旋转（单旋）</a></li>
+            <li><a href="#lr---rr左旋转ll右旋转双旋-1">LR - RR左旋转，LL右旋转（双旋）</a></li>
+            <li><a href="#rl---ll右旋转rr左旋转双旋-1">RL - LL右旋转，RR左旋转（双旋）</a></li>
+            <li><a href="#实现-1">实现</a></li>
+          </ul>
+        </li>
+        <li><a href="#总结">总结</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="avl树">AVL树</h2>
+<p>AVL树是最早发明的自平衡二叉搜索树之一</p>
+<p>AVL取名与两位发明者的名字</p>
+<ul>
+<li>G.M.Adelson-Velsky 和 E.M.Landis （来自苏联的科学家）</li>
+</ul>
+<p><strong>平衡因子</strong>（Balance Factor）：某结点的左右子树的高度差</p>
+<p>AVL树的特点</p>
+<ul>
+<li>每个节点的平衡因子只可能是 1、0、-1（绝对值 &lt;= 1，如果超过 1，称之为“失衡”）</li>
+<li>每个节点的左右子树高度差不超过 1</li>
+<li>搜索、添加、删除的时间复杂度是 O(log n)</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="../../../../images/%e6%81%8b%e4%b8%8a%e7%ae%97%e6%b3%95%e4%b8%8e%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84/1-09-AVL%e6%a0%91/20200918-AVL%e6%a0%91%e7%9a%84%e5%b9%b3%e8%a1%a1.png"
+        data-srcset="../../../../images/%e6%81%8b%e4%b8%8a%e7%ae%97%e6%b3%95%e4%b8%8e%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84/1-09-AVL%e6%a0%91/20200918-AVL%e6%a0%91%e7%9a%84%e5%b9%b3%e8%a1%a1.png, ../../../../images/%e6%81%8b%e4%b8%8a%e7%ae%97%e6%b3%95%e4%b8%8e%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84/1-09-AVL%e6%a0%91/20200918-AVL%e6%a0%91%e7%9a%84%e5%b9%b3%e8%a1%a1.png 1.5x, ../../../../images/%e6%81%8b%e4%b8%8a%e7%ae%97%e6%b3%95%e4%b8%8e%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84/1-09-AVL%e6%a0%91/20200918-AVL%e6%a0%91%e7%9a%84%e5%b9%b3%e8%a1%a1.png 2x"
+        data-sizes="auto"
+        alt="../../../../images/恋上算法与数据结构/1-09-AVL树/20200918-AVL树的平衡.png"
+        title="AVL树的平衡" /></p>
+<h3 id="平衡对比">平衡对比</h3>
+<p>输入数据：35、37、34、56、25、62、57、9、74、32、94、80、75、100、16、82</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="../../../../images/%e6%81%8b%e4%b8%8a%e7%ae%97%e6%b3%95%e4%b8%8e%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84/1-09-AVL%e6%a0%91/20200918-%e5%b9%b3%e8%a1%a1%e5%af%b9%e6%af%94.png"
+        data-srcset="../../../../images/%e6%81%8b%e4%b8%8a%e7%ae%97%e6%b3%95%e4%b8%8e%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84/1-09-AVL%e6%a0%91/20200918-%e5%b9%b3%e8%a1%a1%e5%af%b9%e6%af%94.png, ../../../../images/%e6%81%8b%e4%b8%8a%e7%ae%97%e6%b3%95%e4%b8%8e%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84/1-09-AVL%e6%a0%91/20200918-%e5%b9%b3%e8%a1%a1%e5%af%b9%e6%af%94.png 1.5x, ../../../../images/%e6%81%8b%e4%b8%8a%e7%ae%97%e6%b3%95%e4%b8%8e%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84/1-09-AVL%e6%a0%91/20200918-%e5%b9%b3%e8%a1%a1%e5%af%b9%e6%af%94.png 2x"
+        data-sizes="auto"
+        alt="../../../../images/恋上算法与数据结构/1-09-AVL树/20200918-平衡对比.png"
+        title="平衡对比" /></p>
+<h3 id="简单的继承结构">简单的继承结构</h3>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="../../../../images/%e6%81%8b%e4%b8%8a%e7%ae%97%e6%b3%95%e4%b8%8e%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84/1-09-AVL%e6%a0%91/20200918-%e7%ae%80%e5%8d%95%e7%9a%84%e7%bb%a7%e6%89%bf%e7%bb%93%e6%9e%84.png"
+        data-srcset="../../../../images/%e6%81%8b%e4%b8%8a%e7%ae%97%e6%b3%95%e4%b8%8e%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84/1-09-AVL%e6%a0%91/20200918-%e7%ae%80%e5%8d%95%e7%9a%84%e7%bb%a7%e6%89%bf%e7%bb%93%e6%9e%84.png, ../../../../images/%e6%81%8b%e4%b8%8a%e7%ae%97%e6%b3%95%e4%b8%8e%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84/1-09-AVL%e6%a0%91/20200918-%e7%ae%80%e5%8d%95%e7%9a%84%e7%bb%a7%e6%89%bf%e7%bb%93%e6%9e%84.png 1.5x, ../../../../images/%e6%81%8b%e4%b8%8a%e7%ae%97%e6%b3%95%e4%b8%8e%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84/1-09-AVL%e6%a0%91/20200918-%e7%ae%80%e5%8d%95%e7%9a%84%e7%bb%a7%e6%89%bf%e7%bb%93%e6%9e%84.png 2x"
+        data-sizes="auto"
+        alt="../../../../images/恋上算法与数据结构/1-09-AVL树/20200918-简单的继承结构.png"
+        title="简单的继承结构" /></p>
+<p>二叉树实现</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span><span class="lnt">164
+</span><span class="lnt">165
+</span><span class="lnt">166
+</span><span class="lnt">167
+</span><span class="lnt">168
+</span><span class="lnt">169
+</span><span class="lnt">170
+</span><span class="lnt">171
+</span><span class="lnt">172
+</span><span class="lnt">173
+</span><span class="lnt">174
+</span><span class="lnt">175
+</span><span class="lnt">176
+</span><span class="lnt">177
+</span><span class="lnt">178
+</span><span class="lnt">179
+</span><span class="lnt">180
+</span><span class="lnt">181
+</span><span class="lnt">182
+</span><span class="lnt">183
+</span><span class="lnt">184
+</span><span class="lnt">185
+</span><span class="lnt">186
+</span><span class="lnt">187
+</span><span class="lnt">188
+</span><span class="lnt">189
+</span><span class="lnt">190
+</span><span class="lnt">191
+</span><span class="lnt">192
+</span><span class="lnt">193
+</span><span class="lnt">194
+</span><span class="lnt">195
+</span><span class="lnt">196
+</span><span class="lnt">197
+</span><span class="lnt">198
+</span><span class="lnt">199
+</span><span class="lnt">200
+</span><span class="lnt">201
+</span><span class="lnt">202
+</span><span class="lnt">203
+</span><span class="lnt">204
+</span><span class="lnt">205
+</span><span class="lnt">206
+</span><span class="lnt">207
+</span><span class="lnt">208
+</span><span class="lnt">209
+</span><span class="lnt">210
+</span><span class="lnt">211
+</span><span class="lnt">212
+</span><span class="lnt">213
+</span><span class="lnt">214
+</span><span class="lnt">215
+</span><span class="lnt">216
+</span><span class="lnt">217
+</span><span class="lnt">218
+</span><span class="lnt">219
+</span><span class="lnt">220
+</span><span class="lnt">221
+</span><span class="lnt">222
+</span><span class="lnt">223
+</span><span class="lnt">224
+</span><span class="lnt">225
+</span><span class="lnt">226
+</span><span class="lnt">227
+</span><span class="lnt">228
+</span><span class="lnt">229
+</span><span class="lnt">230
+</span><span class="lnt">231
+</span><span class="lnt">232
+</span><span class="lnt">233
+</span><span class="lnt">234
+</span><span class="lnt">235
+</span><span class="lnt">236
+</span><span class="lnt">237
+</span><span class="lnt">238
+</span><span class="lnt">239
+</span><span class="lnt">240
+</span><span class="lnt">241
+</span><span class="lnt">242
+</span><span class="lnt">243
+</span><span class="lnt">244
+</span><span class="lnt">245
+</span><span class="lnt">246
+</span><span class="lnt">247
+</span><span class="lnt">248
+</span><span class="lnt">249
+</span><span class="lnt">250
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="nn">org.msdemt.demo.tree</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.msdemt.demo.printer.BinaryTreeInfo</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.LinkedList</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Queue</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">BinaryTree</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="kd">implements</span> <span class="n">BinaryTreeInfo</span> <span class="o">{</span>
+
+    <span class="kd">protected</span> <span class="kt">int</span> <span class="n">size</span><span class="o">;</span>
+    <span class="kd">protected</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">root</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">size</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">size</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isEmpty</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">size</span> <span class="o">==</span> <span class="n">0</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">clear</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">root</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="n">size</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">preorder</span><span class="o">(</span><span class="n">Visitor</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">visitor</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">visitor</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="k">return</span><span class="o">;</span>
+        <span class="n">preorder</span><span class="o">(</span><span class="n">root</span><span class="o">,</span> <span class="n">visitor</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">preorder</span><span class="o">(</span><span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">node</span><span class="o">,</span> <span class="n">Visitor</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">visitor</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">node</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">visitor</span><span class="o">.</span><span class="na">stop</span><span class="o">)</span> <span class="k">return</span><span class="o">;</span>
+
+        <span class="n">visitor</span><span class="o">.</span><span class="na">stop</span> <span class="o">=</span> <span class="n">visitor</span><span class="o">.</span><span class="na">visit</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">element</span><span class="o">);</span>
+        <span class="n">preorder</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">left</span><span class="o">,</span> <span class="n">visitor</span><span class="o">);</span>
+        <span class="n">preorder</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">right</span><span class="o">,</span> <span class="n">visitor</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">inorder</span><span class="o">(</span><span class="n">Visitor</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">visitor</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">visitor</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="k">return</span><span class="o">;</span>
+        <span class="n">inorder</span><span class="o">(</span><span class="n">root</span><span class="o">,</span> <span class="n">visitor</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">inorder</span><span class="o">(</span><span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">node</span><span class="o">,</span> <span class="n">Visitor</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">visitor</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">node</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">visitor</span><span class="o">.</span><span class="na">stop</span><span class="o">)</span> <span class="k">return</span><span class="o">;</span>
+
+        <span class="n">inorder</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">left</span><span class="o">,</span> <span class="n">visitor</span><span class="o">);</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">visitor</span><span class="o">.</span><span class="na">stop</span><span class="o">)</span> <span class="k">return</span><span class="o">;</span>
+        <span class="n">visitor</span><span class="o">.</span><span class="na">stop</span> <span class="o">=</span> <span class="n">visitor</span><span class="o">.</span><span class="na">visit</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">element</span><span class="o">);</span>
+        <span class="n">inorder</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">right</span><span class="o">,</span> <span class="n">visitor</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">postorder</span><span class="o">(</span><span class="n">Visitor</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">visitor</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">visitor</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="k">return</span><span class="o">;</span>
+        <span class="n">postorder</span><span class="o">(</span><span class="n">root</span><span class="o">,</span> <span class="n">visitor</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">postorder</span><span class="o">(</span><span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">node</span><span class="o">,</span> <span class="n">Visitor</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">visitor</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">node</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">visitor</span><span class="o">.</span><span class="na">stop</span><span class="o">)</span> <span class="k">return</span><span class="o">;</span>
+
+        <span class="n">postorder</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">left</span><span class="o">,</span> <span class="n">visitor</span><span class="o">);</span>
+        <span class="n">postorder</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">right</span><span class="o">,</span> <span class="n">visitor</span><span class="o">);</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">visitor</span><span class="o">.</span><span class="na">stop</span><span class="o">)</span> <span class="k">return</span><span class="o">;</span>
+        <span class="n">visitor</span><span class="o">.</span><span class="na">stop</span> <span class="o">=</span> <span class="n">visitor</span><span class="o">.</span><span class="na">visit</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">element</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">levelOrder</span><span class="o">(</span><span class="n">Visitor</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">visitor</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">root</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">visitor</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="k">return</span><span class="o">;</span>
+
+        <span class="n">Queue</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;&gt;</span> <span class="n">queue</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LinkedList</span><span class="o">&lt;&gt;();</span>
+        <span class="n">queue</span><span class="o">.</span><span class="na">offer</span><span class="o">(</span><span class="n">root</span><span class="o">);</span>
+
+        <span class="k">while</span> <span class="o">(!</span><span class="n">queue</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+            <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">node</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="na">poll</span><span class="o">();</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">visitor</span><span class="o">.</span><span class="na">visit</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">element</span><span class="o">))</span> <span class="k">return</span><span class="o">;</span>
+
+            <span class="k">if</span> <span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">left</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">queue</span><span class="o">.</span><span class="na">offer</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">left</span><span class="o">);</span>
+            <span class="o">}</span>
+
+            <span class="k">if</span> <span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">right</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">queue</span><span class="o">.</span><span class="na">offer</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">right</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isComplete</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">root</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+        <span class="n">Queue</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;&gt;</span> <span class="n">queue</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LinkedList</span><span class="o">&lt;&gt;();</span>
+        <span class="n">queue</span><span class="o">.</span><span class="na">offer</span><span class="o">(</span><span class="n">root</span><span class="o">);</span>
+
+        <span class="kt">boolean</span> <span class="n">leaf</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+        <span class="k">while</span> <span class="o">(!</span><span class="n">queue</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+            <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">node</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="na">poll</span><span class="o">();</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">leaf</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">node</span><span class="o">.</span><span class="na">isLeaf</span><span class="o">())</span> <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+
+            <span class="k">if</span> <span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">left</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">queue</span><span class="o">.</span><span class="na">offer</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">left</span><span class="o">);</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">right</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+            <span class="o">}</span>
+
+            <span class="k">if</span> <span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">right</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">queue</span><span class="o">.</span><span class="na">offer</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">right</span><span class="o">);</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span> <span class="c1">// 后面遍历的节点都必须是叶子节点
+</span><span class="c1"></span>                <span class="n">leaf</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+
+        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">height</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">root</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="k">return</span> <span class="n">0</span><span class="o">;</span>
+
+        <span class="kt">int</span> <span class="n">height</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">levelSize</span> <span class="o">=</span> <span class="n">1</span><span class="o">;</span>
+        <span class="n">Queue</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;&gt;</span> <span class="n">queue</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LinkedList</span><span class="o">&lt;&gt;();</span>
+        <span class="n">queue</span><span class="o">.</span><span class="na">offer</span><span class="o">(</span><span class="n">root</span><span class="o">);</span>
+
+        <span class="k">while</span> <span class="o">(!</span><span class="n">queue</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+            <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">node</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="na">poll</span><span class="o">();</span>
+            <span class="n">levelSize</span><span class="o">--;</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">left</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">queue</span><span class="o">.</span><span class="na">offer</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">left</span><span class="o">);</span>
+            <span class="o">}</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">right</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">queue</span><span class="o">.</span><span class="na">offer</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">right</span><span class="o">);</span>
+            <span class="o">}</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">levelSize</span> <span class="o">==</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">levelSize</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="na">size</span><span class="o">();</span>
+                <span class="n">height</span><span class="o">++;</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">height</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">height2</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">height</span><span class="o">(</span><span class="n">root</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kt">int</span> <span class="nf">height</span><span class="o">(</span><span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">node</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">node</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="k">return</span> <span class="n">0</span><span class="o">;</span>
+        <span class="k">return</span> <span class="n">1</span> <span class="o">+</span> <span class="n">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">height</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">left</span><span class="o">),</span> <span class="n">height</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">right</span><span class="o">));</span>
+    <span class="o">}</span>
+
+
+    <span class="kd">protected</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">createNode</span><span class="o">(</span><span class="n">E</span> <span class="n">element</span><span class="o">,</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">parent</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="n">Node</span><span class="o">&lt;&gt;(</span><span class="n">element</span><span class="o">,</span> <span class="n">parent</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">protected</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">predecessor</span><span class="o">(</span><span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">node</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">node</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+
+        <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">p</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="na">left</span><span class="o">;</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">p</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">while</span> <span class="o">(</span><span class="n">p</span><span class="o">.</span><span class="na">right</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="na">right</span><span class="o">;</span>
+            <span class="o">}</span>
+            <span class="k">return</span> <span class="n">p</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="k">while</span> <span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">parent</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">node</span> <span class="o">==</span> <span class="n">node</span><span class="o">.</span><span class="na">parent</span><span class="o">.</span><span class="na">left</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">node</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="na">parent</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="k">return</span> <span class="n">node</span><span class="o">.</span><span class="na">parent</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">protected</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">successor</span><span class="o">(</span><span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">node</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">node</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+
+        <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">p</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="na">right</span><span class="o">;</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">p</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">while</span> <span class="o">(</span><span class="n">p</span><span class="o">.</span><span class="na">left</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="na">left</span><span class="o">;</span>
+            <span class="o">}</span>
+            <span class="k">return</span> <span class="n">p</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">parent</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">node</span> <span class="o">==</span> <span class="n">node</span><span class="o">.</span><span class="na">parent</span><span class="o">.</span><span class="na">right</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">node</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="na">parent</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">node</span><span class="o">.</span><span class="na">parent</span><span class="o">;</span>
+    <span class="o">}</span>
+
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">Visitor</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="o">{</span>
+        <span class="kt">boolean</span> <span class="n">stop</span><span class="o">;</span>
+
+        <span class="kd">abstract</span> <span class="kt">boolean</span> <span class="nf">visit</span><span class="o">(</span><span class="n">E</span> <span class="n">element</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">protected</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="o">{</span>
+        <span class="n">E</span> <span class="n">element</span><span class="o">;</span>
+        <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">left</span><span class="o">;</span>
+        <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">right</span><span class="o">;</span>
+        <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">parent</span><span class="o">;</span>
+
+        <span class="kd">public</span> <span class="nf">Node</span><span class="o">(</span><span class="n">E</span> <span class="n">element</span><span class="o">,</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">parent</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">element</span> <span class="o">=</span> <span class="n">element</span><span class="o">;</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">parent</span> <span class="o">=</span> <span class="n">parent</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isLeaf</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">left</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">right</span> <span class="o">==</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">hasTwoChildren</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">left</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">right</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isLeftChild</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">parent</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="k">this</span> <span class="o">==</span> <span class="n">parent</span><span class="o">.</span><span class="na">left</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isRightChild</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">parent</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="k">this</span> <span class="o">==</span> <span class="n">parent</span><span class="o">.</span><span class="na">right</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">sibling</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">isLeftChild</span><span class="o">())</span> <span class="o">{</span>
+                <span class="k">return</span> <span class="n">parent</span><span class="o">.</span><span class="na">right</span><span class="o">;</span>
+            <span class="o">}</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">isRightChild</span><span class="o">())</span> <span class="o">{</span>
+                <span class="k">return</span> <span class="n">parent</span><span class="o">.</span><span class="na">left</span><span class="o">;</span>
+            <span class="o">}</span>
+            <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="n">Object</span> <span class="nf">root</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">root</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="n">Object</span> <span class="nf">left</span><span class="o">(</span><span class="n">Object</span> <span class="n">node</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="o">((</span><span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;)</span> <span class="n">node</span><span class="o">).</span><span class="na">left</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="n">Object</span> <span class="nf">right</span><span class="o">(</span><span class="n">Object</span> <span class="n">node</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="o">((</span><span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;)</span> <span class="n">node</span><span class="o">).</span><span class="na">right</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="n">Object</span> <span class="nf">string</span><span class="o">(</span><span class="n">Object</span> <span class="n">node</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">node</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>二叉搜索树实现</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="nn">org.msdemt.demo.tree</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.Comparator</span><span class="o">;</span>
+
+<span class="nd">@SuppressWarnings</span><span class="o">(</span><span class="s">&#34;unchecked&#34;</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">BST</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="kd">extends</span> <span class="n">BinaryTree</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="n">Comparator</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">comparator</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">BST</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nf">BST</span><span class="o">(</span><span class="n">Comparator</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">comparator</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">comparator</span> <span class="o">=</span> <span class="n">comparator</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">add</span><span class="o">(</span><span class="n">E</span> <span class="n">element</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">elementNotNullCheck</span><span class="o">(</span><span class="n">element</span><span class="o">);</span>
+
+        <span class="c1">// 添加第一个节点
+</span><span class="c1"></span>        <span class="k">if</span> <span class="o">(</span><span class="n">root</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">root</span> <span class="o">=</span> <span class="n">createNode</span><span class="o">(</span><span class="n">element</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
+            <span class="n">size</span><span class="o">++;</span>
+
+            <span class="c1">// 新添加节点之后的处理
+</span><span class="c1"></span>            <span class="n">afterAdd</span><span class="o">(</span><span class="n">root</span><span class="o">);</span>
+            <span class="k">return</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="c1">// 添加的不是第一个节点
+</span><span class="c1"></span>        <span class="c1">// 找到父节点
+</span><span class="c1"></span>        <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">parent</span> <span class="o">=</span> <span class="n">root</span><span class="o">;</span>
+        <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">node</span> <span class="o">=</span> <span class="n">root</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">cmp</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+        <span class="k">do</span> <span class="o">{</span>
+            <span class="n">cmp</span> <span class="o">=</span> <span class="n">compare</span><span class="o">(</span><span class="n">element</span><span class="o">,</span> <span class="n">node</span><span class="o">.</span><span class="na">element</span><span class="o">);</span>
+            <span class="n">parent</span> <span class="o">=</span> <span class="n">node</span><span class="o">;</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">cmp</span> <span class="o">&gt;</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">node</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="na">right</span><span class="o">;</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">cmp</span> <span class="o">&lt;</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">node</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="na">left</span><span class="o">;</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span> <span class="c1">// 相等
+</span><span class="c1"></span>                <span class="n">node</span><span class="o">.</span><span class="na">element</span> <span class="o">=</span> <span class="n">element</span><span class="o">;</span>
+                <span class="k">return</span><span class="o">;</span>
+            <span class="o">}</span>
+        <span class="o">}</span> <span class="k">while</span> <span class="o">(</span><span class="n">node</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">);</span>
+
+        <span class="c1">// 看看插入到父节点的哪个位置
+</span><span class="c1"></span>        <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">newNode</span> <span class="o">=</span> <span class="n">createNode</span><span class="o">(</span><span class="n">element</span><span class="o">,</span> <span class="n">parent</span><span class="o">);</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">cmp</span> <span class="o">&gt;</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">parent</span><span class="o">.</span><span class="na">right</span> <span class="o">=</span> <span class="n">newNode</span><span class="o">;</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="n">parent</span><span class="o">.</span><span class="na">left</span> <span class="o">=</span> <span class="n">newNode</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="n">size</span><span class="o">++;</span>
+
+        <span class="c1">// 新添加节点之后的处理
+</span><span class="c1"></span>        <span class="n">afterAdd</span><span class="o">(</span><span class="n">newNode</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="cm">/**
+</span><span class="cm">     * 添加node之后的调整
+</span><span class="cm">     *
+</span><span class="cm">     * @param node 新添加的节点
+</span><span class="cm">     */</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">afterAdd</span><span class="o">(</span><span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">node</span><span class="o">)</span> <span class="o">{</span>
+    <span class="o">}</span>
+
+    <span class="cm">/**
+</span><span class="cm">     * 删除node之后的调整
+</span><span class="cm">     *
+</span><span class="cm">     * @param node 被删除的节点
+</span><span class="cm">     */</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">afterRemove</span><span class="o">(</span><span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">node</span><span class="o">)</span> <span class="o">{</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">remove</span><span class="o">(</span><span class="n">E</span> <span class="n">element</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">remove</span><span class="o">(</span><span class="n">node</span><span class="o">(</span><span class="n">element</span><span class="o">));</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">contains</span><span class="o">(</span><span class="n">E</span> <span class="n">element</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">node</span><span class="o">(</span><span class="n">element</span><span class="o">)</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">remove</span><span class="o">(</span><span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">node</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">node</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="k">return</span><span class="o">;</span>
+
+        <span class="n">size</span><span class="o">--;</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">hasTwoChildren</span><span class="o">())</span> <span class="o">{</span> <span class="c1">// 度为2的节点
+</span><span class="c1"></span>            <span class="c1">// 找到后继节点
+</span><span class="c1"></span>            <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">s</span> <span class="o">=</span> <span class="n">successor</span><span class="o">(</span><span class="n">node</span><span class="o">);</span>
+            <span class="c1">// 用后继节点的值覆盖度为2的节点的值
+</span><span class="c1"></span>            <span class="n">node</span><span class="o">.</span><span class="na">element</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="na">element</span><span class="o">;</span>
+            <span class="c1">// 删除后继节点
+</span><span class="c1"></span>            <span class="n">node</span> <span class="o">=</span> <span class="n">s</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="c1">// 删除node节点（node的度必然是1或者0）
+</span><span class="c1"></span>        <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">replacement</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="na">left</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">?</span> <span class="n">node</span><span class="o">.</span><span class="na">left</span> <span class="o">:</span> <span class="n">node</span><span class="o">.</span><span class="na">right</span><span class="o">;</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">replacement</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span> <span class="c1">// node是度为1的节点
+</span><span class="c1"></span>            <span class="c1">// 更改parent
+</span><span class="c1"></span>            <span class="n">replacement</span><span class="o">.</span><span class="na">parent</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="na">parent</span><span class="o">;</span>
+            <span class="c1">// 更改parent的left、right的指向
+</span><span class="c1"></span>            <span class="k">if</span> <span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">parent</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span> <span class="c1">// node是度为1的节点并且是根节点
+</span><span class="c1"></span>                <span class="n">root</span> <span class="o">=</span> <span class="n">replacement</span><span class="o">;</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">node</span> <span class="o">==</span> <span class="n">node</span><span class="o">.</span><span class="na">parent</span><span class="o">.</span><span class="na">left</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">node</span><span class="o">.</span><span class="na">parent</span><span class="o">.</span><span class="na">left</span> <span class="o">=</span> <span class="n">replacement</span><span class="o">;</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span> <span class="c1">// node == node.parent.right
+</span><span class="c1"></span>                <span class="n">node</span><span class="o">.</span><span class="na">parent</span><span class="o">.</span><span class="na">right</span> <span class="o">=</span> <span class="n">replacement</span><span class="o">;</span>
+            <span class="o">}</span>
+
+            <span class="c1">// 删除节点之后的处理
+</span><span class="c1"></span>            <span class="n">afterRemove</span><span class="o">(</span><span class="n">node</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">parent</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span> <span class="c1">// node是叶子节点并且是根节点
+</span><span class="c1"></span>            <span class="n">root</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+
+            <span class="c1">// 删除节点之后的处理
+</span><span class="c1"></span>            <span class="n">afterRemove</span><span class="o">(</span><span class="n">node</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span> <span class="c1">// node是叶子节点，但不是根节点
+</span><span class="c1"></span>            <span class="k">if</span> <span class="o">(</span><span class="n">node</span> <span class="o">==</span> <span class="n">node</span><span class="o">.</span><span class="na">parent</span><span class="o">.</span><span class="na">left</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">node</span><span class="o">.</span><span class="na">parent</span><span class="o">.</span><span class="na">left</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span> <span class="c1">// node == node.parent.right
+</span><span class="c1"></span>                <span class="n">node</span><span class="o">.</span><span class="na">parent</span><span class="o">.</span><span class="na">right</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+            <span class="o">}</span>
+
+            <span class="c1">// 删除节点之后的处理
+</span><span class="c1"></span>            <span class="n">afterRemove</span><span class="o">(</span><span class="n">node</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">node</span><span class="o">(</span><span class="n">E</span> <span class="n">element</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">node</span> <span class="o">=</span> <span class="n">root</span><span class="o">;</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">node</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">cmp</span> <span class="o">=</span> <span class="n">compare</span><span class="o">(</span><span class="n">element</span><span class="o">,</span> <span class="n">node</span><span class="o">.</span><span class="na">element</span><span class="o">);</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">cmp</span> <span class="o">==</span> <span class="n">0</span><span class="o">)</span> <span class="k">return</span> <span class="n">node</span><span class="o">;</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">cmp</span> <span class="o">&gt;</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">node</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="na">right</span><span class="o">;</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span> <span class="c1">// cmp &lt; 0
+</span><span class="c1"></span>                <span class="n">node</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="na">left</span><span class="o">;</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="cm">/**
+</span><span class="cm">     * @return 返回值等于0，代表e1和e2相等；返回值大于0，代表e1大于e2；返回值小于于0，代表e1小于e2
+</span><span class="cm">     */</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="nf">compare</span><span class="o">(</span><span class="n">E</span> <span class="n">e1</span><span class="o">,</span> <span class="n">E</span> <span class="n">e2</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">comparator</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">comparator</span><span class="o">.</span><span class="na">compare</span><span class="o">(</span><span class="n">e1</span><span class="o">,</span> <span class="n">e2</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="o">((</span><span class="n">Comparable</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;)</span> <span class="n">e1</span><span class="o">).</span><span class="na">compareTo</span><span class="o">(</span><span class="n">e2</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">elementNotNullCheck</span><span class="o">(</span><span class="n">E</span> <span class="n">element</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">element</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="o">(</span><span class="s">&#34;element must not be null&#34;</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>AVL树实现</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span><span class="lnt">164
+</span><span class="lnt">165
+</span><span class="lnt">166
+</span><span class="lnt">167
+</span><span class="lnt">168
+</span><span class="lnt">169
+</span><span class="lnt">170
+</span><span class="lnt">171
+</span><span class="lnt">172
+</span><span class="lnt">173
+</span><span class="lnt">174
+</span><span class="lnt">175
+</span><span class="lnt">176
+</span><span class="lnt">177
+</span><span class="lnt">178
+</span><span class="lnt">179
+</span><span class="lnt">180
+</span><span class="lnt">181
+</span><span class="lnt">182
+</span><span class="lnt">183
+</span><span class="lnt">184
+</span><span class="lnt">185
+</span><span class="lnt">186
+</span><span class="lnt">187
+</span><span class="lnt">188
+</span><span class="lnt">189
+</span><span class="lnt">190
+</span><span class="lnt">191
+</span><span class="lnt">192
+</span><span class="lnt">193
+</span><span class="lnt">194
+</span><span class="lnt">195
+</span><span class="lnt">196
+</span><span class="lnt">197
+</span><span class="lnt">198
+</span><span class="lnt">199
+</span><span class="lnt">200
+</span><span class="lnt">201
+</span><span class="lnt">202
+</span><span class="lnt">203
+</span><span class="lnt">204
+</span><span class="lnt">205
+</span><span class="lnt">206
+</span><span class="lnt">207
+</span><span class="lnt">208
+</span><span class="lnt">209
+</span><span class="lnt">210
+</span><span class="lnt">211
+</span><span class="lnt">212
+</span><span class="lnt">213
+</span><span class="lnt">214
+</span><span class="lnt">215
+</span><span class="lnt">216
+</span><span class="lnt">217
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="nn">org.msdemt.demo.tree</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.Comparator</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">AVLTree</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="kd">extends</span> <span class="n">BST</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nf">AVLTree</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nf">AVLTree</span><span class="o">(</span><span class="n">Comparator</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">comparator</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">(</span><span class="n">comparator</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">afterAdd</span><span class="o">(</span><span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">node</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">while</span> <span class="o">((</span><span class="n">node</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="na">parent</span><span class="o">)</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">isBalanced</span><span class="o">(</span><span class="n">node</span><span class="o">))</span> <span class="o">{</span>
+                <span class="c1">// 更新高度
+</span><span class="c1"></span>                <span class="n">updateHeight</span><span class="o">(</span><span class="n">node</span><span class="o">);</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                <span class="c1">// 恢复平衡
+</span><span class="c1"></span>                <span class="n">rebalance</span><span class="o">(</span><span class="n">node</span><span class="o">);</span>
+                <span class="c1">// 整棵树恢复平衡
+</span><span class="c1"></span>                <span class="k">break</span><span class="o">;</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">afterRemove</span><span class="o">(</span><span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">node</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">while</span> <span class="o">((</span><span class="n">node</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="na">parent</span><span class="o">)</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">isBalanced</span><span class="o">(</span><span class="n">node</span><span class="o">))</span> <span class="o">{</span>
+                <span class="c1">// 更新高度
+</span><span class="c1"></span>                <span class="n">updateHeight</span><span class="o">(</span><span class="n">node</span><span class="o">);</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                <span class="c1">// 恢复平衡
+</span><span class="c1"></span>                <span class="n">rebalance</span><span class="o">(</span><span class="n">node</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">createNode</span><span class="o">(</span><span class="n">E</span> <span class="n">element</span><span class="o">,</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">parent</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="n">AVLNode</span><span class="o">&lt;&gt;(</span><span class="n">element</span><span class="o">,</span> <span class="n">parent</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="cm">/**
+</span><span class="cm">     * 恢复平衡
+</span><span class="cm">     *
+</span><span class="cm">     * @param grand 高度最低的那个不平衡节点
+</span><span class="cm">     */</span>
+    <span class="nd">@SuppressWarnings</span><span class="o">(</span><span class="s">&#34;unused&#34;</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">rebalance2</span><span class="o">(</span><span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">grand</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">parent</span> <span class="o">=</span> <span class="o">((</span><span class="n">AVLNode</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;)</span> <span class="n">grand</span><span class="o">).</span><span class="na">tallerChild</span><span class="o">();</span>
+        <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">node</span> <span class="o">=</span> <span class="o">((</span><span class="n">AVLNode</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;)</span> <span class="n">parent</span><span class="o">).</span><span class="na">tallerChild</span><span class="o">();</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">parent</span><span class="o">.</span><span class="na">isLeftChild</span><span class="o">())</span> <span class="o">{</span> <span class="c1">// L
+</span><span class="c1"></span>            <span class="k">if</span> <span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">isLeftChild</span><span class="o">())</span> <span class="o">{</span> <span class="c1">// LL
+</span><span class="c1"></span>                <span class="n">rotateRight</span><span class="o">(</span><span class="n">grand</span><span class="o">);</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span> <span class="c1">// LR
+</span><span class="c1"></span>                <span class="n">rotateLeft</span><span class="o">(</span><span class="n">parent</span><span class="o">);</span>
+                <span class="n">rotateRight</span><span class="o">(</span><span class="n">grand</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span> <span class="c1">// R
+</span><span class="c1"></span>            <span class="k">if</span> <span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">isLeftChild</span><span class="o">())</span> <span class="o">{</span> <span class="c1">// RL
+</span><span class="c1"></span>                <span class="n">rotateRight</span><span class="o">(</span><span class="n">parent</span><span class="o">);</span>
+                <span class="n">rotateLeft</span><span class="o">(</span><span class="n">grand</span><span class="o">);</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span> <span class="c1">// RR
+</span><span class="c1"></span>                <span class="n">rotateLeft</span><span class="o">(</span><span class="n">grand</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="cm">/**
+</span><span class="cm">     * 恢复平衡
+</span><span class="cm">     *
+</span><span class="cm">     * @param grand 高度最低的那个不平衡节点
+</span><span class="cm">     */</span>
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">rebalance</span><span class="o">(</span><span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">grand</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">parent</span> <span class="o">=</span> <span class="o">((</span><span class="n">AVLNode</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;)</span> <span class="n">grand</span><span class="o">).</span><span class="na">tallerChild</span><span class="o">();</span>
+        <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">node</span> <span class="o">=</span> <span class="o">((</span><span class="n">AVLNode</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;)</span> <span class="n">parent</span><span class="o">).</span><span class="na">tallerChild</span><span class="o">();</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">parent</span><span class="o">.</span><span class="na">isLeftChild</span><span class="o">())</span> <span class="o">{</span> <span class="c1">// L
+</span><span class="c1"></span>            <span class="k">if</span> <span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">isLeftChild</span><span class="o">())</span> <span class="o">{</span> <span class="c1">// LL
+</span><span class="c1"></span>                <span class="n">rotate</span><span class="o">(</span><span class="n">grand</span><span class="o">,</span> <span class="n">node</span><span class="o">,</span> <span class="n">node</span><span class="o">.</span><span class="na">right</span><span class="o">,</span> <span class="n">parent</span><span class="o">,</span> <span class="n">parent</span><span class="o">.</span><span class="na">right</span><span class="o">,</span> <span class="n">grand</span><span class="o">);</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span> <span class="c1">// LR
+</span><span class="c1"></span>                <span class="n">rotate</span><span class="o">(</span><span class="n">grand</span><span class="o">,</span> <span class="n">parent</span><span class="o">,</span> <span class="n">node</span><span class="o">.</span><span class="na">left</span><span class="o">,</span> <span class="n">node</span><span class="o">,</span> <span class="n">node</span><span class="o">.</span><span class="na">right</span><span class="o">,</span> <span class="n">grand</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span> <span class="c1">// R
+</span><span class="c1"></span>            <span class="k">if</span> <span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">isLeftChild</span><span class="o">())</span> <span class="o">{</span> <span class="c1">// RL
+</span><span class="c1"></span>                <span class="n">rotate</span><span class="o">(</span><span class="n">grand</span><span class="o">,</span> <span class="n">grand</span><span class="o">,</span> <span class="n">node</span><span class="o">.</span><span class="na">left</span><span class="o">,</span> <span class="n">node</span><span class="o">,</span> <span class="n">node</span><span class="o">.</span><span class="na">right</span><span class="o">,</span> <span class="n">parent</span><span class="o">);</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span> <span class="c1">// RR
+</span><span class="c1"></span>                <span class="n">rotate</span><span class="o">(</span><span class="n">grand</span><span class="o">,</span> <span class="n">grand</span><span class="o">,</span> <span class="n">parent</span><span class="o">.</span><span class="na">left</span><span class="o">,</span> <span class="n">parent</span><span class="o">,</span> <span class="n">node</span><span class="o">.</span><span class="na">left</span><span class="o">,</span> <span class="n">node</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">rotate</span><span class="o">(</span>
+            <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">r</span><span class="o">,</span> <span class="c1">// 子树的根节点
+</span><span class="c1"></span>            <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">b</span><span class="o">,</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">c</span><span class="o">,</span>
+            <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">d</span><span class="o">,</span>
+            <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">e</span><span class="o">,</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">f</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// 让d成为这棵子树的根节点
+</span><span class="c1"></span>        <span class="n">d</span><span class="o">.</span><span class="na">parent</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="na">parent</span><span class="o">;</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">r</span><span class="o">.</span><span class="na">isLeftChild</span><span class="o">())</span> <span class="o">{</span>
+            <span class="n">r</span><span class="o">.</span><span class="na">parent</span><span class="o">.</span><span class="na">left</span> <span class="o">=</span> <span class="n">d</span><span class="o">;</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">r</span><span class="o">.</span><span class="na">isRightChild</span><span class="o">())</span> <span class="o">{</span>
+            <span class="n">r</span><span class="o">.</span><span class="na">parent</span><span class="o">.</span><span class="na">right</span> <span class="o">=</span> <span class="n">d</span><span class="o">;</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="n">root</span> <span class="o">=</span> <span class="n">d</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="c1">//b-c
+</span><span class="c1"></span>        <span class="n">b</span><span class="o">.</span><span class="na">right</span> <span class="o">=</span> <span class="n">c</span><span class="o">;</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">c</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">c</span><span class="o">.</span><span class="na">parent</span> <span class="o">=</span> <span class="n">b</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="n">updateHeight</span><span class="o">(</span><span class="n">b</span><span class="o">);</span>
+
+        <span class="c1">// e-f
+</span><span class="c1"></span>        <span class="n">f</span><span class="o">.</span><span class="na">left</span> <span class="o">=</span> <span class="n">e</span><span class="o">;</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">e</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">e</span><span class="o">.</span><span class="na">parent</span> <span class="o">=</span> <span class="n">f</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="n">updateHeight</span><span class="o">(</span><span class="n">f</span><span class="o">);</span>
+
+        <span class="c1">// b-d-f
+</span><span class="c1"></span>        <span class="n">d</span><span class="o">.</span><span class="na">left</span> <span class="o">=</span> <span class="n">b</span><span class="o">;</span>
+        <span class="n">d</span><span class="o">.</span><span class="na">right</span> <span class="o">=</span> <span class="n">f</span><span class="o">;</span>
+        <span class="n">b</span><span class="o">.</span><span class="na">parent</span> <span class="o">=</span> <span class="n">d</span><span class="o">;</span>
+        <span class="n">f</span><span class="o">.</span><span class="na">parent</span> <span class="o">=</span> <span class="n">d</span><span class="o">;</span>
+        <span class="n">updateHeight</span><span class="o">(</span><span class="n">d</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">rotateLeft</span><span class="o">(</span><span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">grand</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">parent</span> <span class="o">=</span> <span class="n">grand</span><span class="o">.</span><span class="na">right</span><span class="o">;</span>
+        <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">child</span> <span class="o">=</span> <span class="n">parent</span><span class="o">.</span><span class="na">left</span><span class="o">;</span>
+        <span class="n">grand</span><span class="o">.</span><span class="na">right</span> <span class="o">=</span> <span class="n">child</span><span class="o">;</span>
+        <span class="n">parent</span><span class="o">.</span><span class="na">left</span> <span class="o">=</span> <span class="n">grand</span><span class="o">;</span>
+        <span class="n">afterRotate</span><span class="o">(</span><span class="n">grand</span><span class="o">,</span> <span class="n">parent</span><span class="o">,</span> <span class="n">child</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">rotateRight</span><span class="o">(</span><span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">grand</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">parent</span> <span class="o">=</span> <span class="n">grand</span><span class="o">.</span><span class="na">left</span><span class="o">;</span>
+        <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">child</span> <span class="o">=</span> <span class="n">parent</span><span class="o">.</span><span class="na">right</span><span class="o">;</span>
+        <span class="n">grand</span><span class="o">.</span><span class="na">left</span> <span class="o">=</span> <span class="n">child</span><span class="o">;</span>
+        <span class="n">parent</span><span class="o">.</span><span class="na">right</span> <span class="o">=</span> <span class="n">grand</span><span class="o">;</span>
+        <span class="n">afterRotate</span><span class="o">(</span><span class="n">grand</span><span class="o">,</span> <span class="n">parent</span><span class="o">,</span> <span class="n">child</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">afterRotate</span><span class="o">(</span><span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">grand</span><span class="o">,</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">parent</span><span class="o">,</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">child</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// 让parent称为子树的根节点
+</span><span class="c1"></span>        <span class="n">parent</span><span class="o">.</span><span class="na">parent</span> <span class="o">=</span> <span class="n">grand</span><span class="o">.</span><span class="na">parent</span><span class="o">;</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">grand</span><span class="o">.</span><span class="na">isLeftChild</span><span class="o">())</span> <span class="o">{</span>
+            <span class="n">grand</span><span class="o">.</span><span class="na">parent</span><span class="o">.</span><span class="na">left</span> <span class="o">=</span> <span class="n">parent</span><span class="o">;</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">grand</span><span class="o">.</span><span class="na">isRightChild</span><span class="o">())</span> <span class="o">{</span>
+            <span class="n">grand</span><span class="o">.</span><span class="na">parent</span><span class="o">.</span><span class="na">right</span> <span class="o">=</span> <span class="n">parent</span><span class="o">;</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span> <span class="c1">// grand是root节点
+</span><span class="c1"></span>            <span class="n">root</span> <span class="o">=</span> <span class="n">parent</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="c1">// 更新child的parent
+</span><span class="c1"></span>        <span class="k">if</span> <span class="o">(</span><span class="n">child</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">child</span><span class="o">.</span><span class="na">parent</span> <span class="o">=</span> <span class="n">grand</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="c1">// 更新grand的parent
+</span><span class="c1"></span>        <span class="n">grand</span><span class="o">.</span><span class="na">parent</span> <span class="o">=</span> <span class="n">parent</span><span class="o">;</span>
+
+        <span class="c1">// 更新高度
+</span><span class="c1"></span>        <span class="n">updateHeight</span><span class="o">(</span><span class="n">grand</span><span class="o">);</span>
+        <span class="n">updateHeight</span><span class="o">(</span><span class="n">parent</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kt">boolean</span> <span class="nf">isBalanced</span><span class="o">(</span><span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">node</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">Math</span><span class="o">.</span><span class="na">abs</span><span class="o">(((</span><span class="n">AVLNode</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;)</span> <span class="n">node</span><span class="o">).</span><span class="na">balanceFactor</span><span class="o">())</span> <span class="o">&lt;=</span> <span class="n">1</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">updateHeight</span><span class="o">(</span><span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">node</span><span class="o">)</span> <span class="o">{</span>
+        <span class="o">((</span><span class="n">AVLNode</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;)</span> <span class="n">node</span><span class="o">).</span><span class="na">updateHeight</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">AVLNode</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="kd">extends</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">height</span> <span class="o">=</span> <span class="n">1</span><span class="o">;</span>
+
+        <span class="kd">public</span> <span class="nf">AVLNode</span><span class="o">(</span><span class="n">E</span> <span class="n">element</span><span class="o">,</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">parent</span><span class="o">)</span> <span class="o">{</span>
+            <span class="kd">super</span><span class="o">(</span><span class="n">element</span><span class="o">,</span> <span class="n">parent</span><span class="o">);</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="kt">int</span> <span class="nf">balanceFactor</span><span class="o">()</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">leftHeight</span> <span class="o">=</span> <span class="n">left</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">?</span> <span class="n">0</span> <span class="o">:</span> <span class="o">((</span><span class="n">AVLNode</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;)</span> <span class="n">left</span><span class="o">).</span><span class="na">height</span><span class="o">;</span>
+            <span class="kt">int</span> <span class="n">rightHeight</span> <span class="o">=</span> <span class="n">right</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">?</span> <span class="n">0</span> <span class="o">:</span> <span class="o">((</span><span class="n">AVLNode</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;)</span> <span class="n">right</span><span class="o">).</span><span class="na">height</span><span class="o">;</span>
+            <span class="k">return</span> <span class="n">leftHeight</span> <span class="o">-</span> <span class="n">rightHeight</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">updateHeight</span><span class="o">()</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">leftHeight</span> <span class="o">=</span> <span class="n">left</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">?</span> <span class="n">0</span> <span class="o">:</span> <span class="o">((</span><span class="n">AVLNode</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;)</span> <span class="n">left</span><span class="o">).</span><span class="na">height</span><span class="o">;</span>
+            <span class="kt">int</span> <span class="n">rightHeight</span> <span class="o">=</span> <span class="n">right</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">?</span> <span class="n">0</span> <span class="o">:</span> <span class="o">((</span><span class="n">AVLNode</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;)</span> <span class="n">right</span><span class="o">).</span><span class="na">height</span><span class="o">;</span>
+            <span class="n">height</span> <span class="o">=</span> <span class="n">1</span> <span class="o">+</span> <span class="n">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">leftHeight</span><span class="o">,</span> <span class="n">rightHeight</span><span class="o">);</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">tallerChild</span><span class="o">()</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">leftHeight</span> <span class="o">=</span> <span class="n">left</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">?</span> <span class="n">0</span> <span class="o">:</span> <span class="o">((</span><span class="n">AVLNode</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;)</span> <span class="n">left</span><span class="o">).</span><span class="na">height</span><span class="o">;</span>
+            <span class="kt">int</span> <span class="n">rightHeight</span> <span class="o">=</span> <span class="n">right</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">?</span> <span class="n">0</span> <span class="o">:</span> <span class="o">((</span><span class="n">AVLNode</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;)</span> <span class="n">right</span><span class="o">).</span><span class="na">height</span><span class="o">;</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">leftHeight</span> <span class="o">&gt;</span> <span class="n">rightHeight</span><span class="o">)</span> <span class="k">return</span> <span class="n">left</span><span class="o">;</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">leftHeight</span> <span class="o">&lt;</span> <span class="n">rightHeight</span><span class="o">)</span> <span class="k">return</span> <span class="n">right</span><span class="o">;</span>
+            <span class="k">return</span> <span class="n">isLeftChild</span><span class="o">()</span> <span class="o">?</span> <span class="n">left</span> <span class="o">:</span> <span class="n">right</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
+            <span class="n">String</span> <span class="n">parentString</span> <span class="o">=</span> <span class="s">&#34;null&#34;</span><span class="o">;</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">parent</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">parentString</span> <span class="o">=</span> <span class="n">parent</span><span class="o">.</span><span class="na">element</span><span class="o">.</span><span class="na">toString</span><span class="o">();</span>
+            <span class="o">}</span>
+            <span class="k">return</span> <span class="n">element</span> <span class="o">+</span> <span class="s">&#34;_p(&#34;</span> <span class="o">+</span> <span class="n">parentString</span> <span class="o">+</span> <span class="s">&#34;)_h(&#34;</span> <span class="o">+</span> <span class="n">height</span> <span class="o">+</span> <span class="s">&#34;)&#34;</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="添加导致的失衡">添加导致的失衡</h3>
+<p>示例：往下面这棵树中添加 13</p>
+<p>最坏情况：可能会导致所有祖先节点都失衡</p>
+<p>父节点、非祖先节点，都不可能失衡</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="../../../../images/%e6%81%8b%e4%b8%8a%e7%ae%97%e6%b3%95%e4%b8%8e%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84/1-09-AVL%e6%a0%91/20200918-%e6%b7%bb%e5%8a%a0%e5%af%bc%e8%87%b4%e7%9a%84%e5%a4%b1%e8%a1%a1.png"
+        data-srcset="../../../../images/%e6%81%8b%e4%b8%8a%e7%ae%97%e6%b3%95%e4%b8%8e%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84/1-09-AVL%e6%a0%91/20200918-%e6%b7%bb%e5%8a%a0%e5%af%bc%e8%87%b4%e7%9a%84%e5%a4%b1%e8%a1%a1.png, ../../../../images/%e6%81%8b%e4%b8%8a%e7%ae%97%e6%b3%95%e4%b8%8e%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84/1-09-AVL%e6%a0%91/20200918-%e6%b7%bb%e5%8a%a0%e5%af%bc%e8%87%b4%e7%9a%84%e5%a4%b1%e8%a1%a1.png 1.5x, ../../../../images/%e6%81%8b%e4%b8%8a%e7%ae%97%e6%b3%95%e4%b8%8e%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84/1-09-AVL%e6%a0%91/20200918-%e6%b7%bb%e5%8a%a0%e5%af%bc%e8%87%b4%e7%9a%84%e5%a4%b1%e8%a1%a1.png 2x"
+        data-sizes="auto"
+        alt="../../../../images/恋上算法与数据结构/1-09-AVL树/20200918-添加导致的失衡.png"
+        title="添加导致的失衡" /></p>
+<h4 id="ll---右旋转单旋">LL - 右旋转（单旋）</h4>
+<p>T0 添加一个元素，会导致祖先节点 g 失衡</p>
+<p>添加的节点（T1或T2上添加） 位于 失衡节点 g 的 左边、左边 方向，所以称为 LL</p>
+<p>这种情况对 g 进行右旋转</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="../../../../images/%e6%81%8b%e4%b8%8a%e7%ae%97%e6%b3%95%e4%b8%8e%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84/1-09-AVL%e6%a0%91/20200918-%e5%8f%b3%e6%97%8b%e8%bd%ac.png"
+        data-srcset="../../../../images/%e6%81%8b%e4%b8%8a%e7%ae%97%e6%b3%95%e4%b8%8e%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84/1-09-AVL%e6%a0%91/20200918-%e5%8f%b3%e6%97%8b%e8%bd%ac.png, ../../../../images/%e6%81%8b%e4%b8%8a%e7%ae%97%e6%b3%95%e4%b8%8e%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84/1-09-AVL%e6%a0%91/20200918-%e5%8f%b3%e6%97%8b%e8%bd%ac.png 1.5x, ../../../../images/%e6%81%8b%e4%b8%8a%e7%ae%97%e6%b3%95%e4%b8%8e%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84/1-09-AVL%e6%a0%91/20200918-%e5%8f%b3%e6%97%8b%e8%bd%ac.png 2x"
+        data-sizes="auto"
+        alt="../../../../images/恋上算法与数据结构/1-09-AVL树/20200918-右旋转.png"
+        title="右旋转" /></p>
+<p>解决办法：右旋转</p>
+<ul>
+<li>
+<p>g.left = p.right</p>
+</li>
+<li>
+<p>p.right = g</p>
+</li>
+<li>
+<p>让 p 成为这棵子树的根节点</p>
+</li>
+<li>
+<p>仍然是一棵二叉搜索树：T0 &lt; n &lt; T1 &lt; p &lt; T2 &lt; g &lt; T3</p>
+</li>
+<li>
+<p>整棵树都达到平衡</p>
+</li>
+<li>
+<p>还需要注意维护的内容</p>
+<ul>
+<li>T2、p、g 的 parent 属性</li>
+<li>先后更新 g、p 的高度</li>
+</ul>
+</li>
+</ul>
+<p>有些教程里，将右旋转叫做 zig，旋转之后的状态叫做 zigged</p>
+<h4 id="rr---左旋转单旋">RR - 左旋转（单旋）</h4>
+<p>T3 添加一个元素，会导致祖先节点 g 失衡</p>
+<p>添加的节点（T2或T3上添加） 位于 失衡节点 g 的 右边、右边 方向，所以称为 RR</p>
+<p>这种情况对 g 进行左旋转</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="../../../../images/%e6%81%8b%e4%b8%8a%e7%ae%97%e6%b3%95%e4%b8%8e%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84/1-09-AVL%e6%a0%91/20200918-%e5%b7%a6%e6%97%8b%e8%bd%ac.png"
+        data-srcset="../../../../images/%e6%81%8b%e4%b8%8a%e7%ae%97%e6%b3%95%e4%b8%8e%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84/1-09-AVL%e6%a0%91/20200918-%e5%b7%a6%e6%97%8b%e8%bd%ac.png, ../../../../images/%e6%81%8b%e4%b8%8a%e7%ae%97%e6%b3%95%e4%b8%8e%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84/1-09-AVL%e6%a0%91/20200918-%e5%b7%a6%e6%97%8b%e8%bd%ac.png 1.5x, ../../../../images/%e6%81%8b%e4%b8%8a%e7%ae%97%e6%b3%95%e4%b8%8e%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84/1-09-AVL%e6%a0%91/20200918-%e5%b7%a6%e6%97%8b%e8%bd%ac.png 2x"
+        data-sizes="auto"
+        alt="../../../../images/恋上算法与数据结构/1-09-AVL树/20200918-左旋转.png"
+        title="左旋转" /></p>
+<p>解决办法：左旋转</p>
+<ul>
+<li>
+<p>g.right = p.left</p>
+</li>
+<li>
+<p>p.left = g</p>
+</li>
+<li>
+<p>让 p 成为这棵子树的根节点</p>
+</li>
+<li>
+<p>仍然是一棵二叉搜索树：T0 &lt; g &lt; T1 &lt; p &lt; T2 &lt; n &lt; T3</p>
+</li>
+<li>
+<p>整棵树都达到平衡</p>
+</li>
+<li>
+<p>还需要注意维护的内容</p>
+<ul>
+<li>T1、p、g 的 parent 属性</li>
+<li>先后更新 g、p 的高度</li>
+</ul>
+</li>
+</ul>
+<p>有些教程里将左旋转叫做 zag，旋转之后的状态叫做 zagged</p>
+<h4 id="lr---rr左旋转ll右旋转双旋">LR - RR左旋转，LL右旋转（双旋）</h4>
+<p>T2 添加元素，导致祖先节点 g 失衡</p>
+<p>添加的节点（T1或T2） 位于 失衡节点 g 的 左边、右边 方向，所以称为 LR</p>
+<p>这种情况先对 p 进行左旋转，让 n 成为子树的根节点，此时 g 是 LL 的情况，在对 g 进行一次右旋转，最终搞定</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="../../../../images/%e6%81%8b%e4%b8%8a%e7%ae%97%e6%b3%95%e4%b8%8e%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84/1-09-AVL%e6%a0%91/20200918-%e5%85%88%e5%b7%a6%e6%97%8b%e5%86%8d%e5%8f%b3%e6%97%8b.png"
+        data-srcset="../../../../images/%e6%81%8b%e4%b8%8a%e7%ae%97%e6%b3%95%e4%b8%8e%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84/1-09-AVL%e6%a0%91/20200918-%e5%85%88%e5%b7%a6%e6%97%8b%e5%86%8d%e5%8f%b3%e6%97%8b.png, ../../../../images/%e6%81%8b%e4%b8%8a%e7%ae%97%e6%b3%95%e4%b8%8e%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84/1-09-AVL%e6%a0%91/20200918-%e5%85%88%e5%b7%a6%e6%97%8b%e5%86%8d%e5%8f%b3%e6%97%8b.png 1.5x, ../../../../images/%e6%81%8b%e4%b8%8a%e7%ae%97%e6%b3%95%e4%b8%8e%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84/1-09-AVL%e6%a0%91/20200918-%e5%85%88%e5%b7%a6%e6%97%8b%e5%86%8d%e5%8f%b3%e6%97%8b.png 2x"
+        data-sizes="auto"
+        alt="../../../../images/恋上算法与数据结构/1-09-AVL树/20200918-先左旋再右旋.png"
+        title="先左旋再右旋" /></p>
+<h4 id="rl---ll右旋转rr左旋转双旋">RL - LL右旋转，RR左旋转（双旋）</h4>
+<p>在失衡节点 g 的右方向、左方向添加节点导致的失衡，这种情况先对 p 进行一次右旋转，选择之后 n 成为子树根节点，这时 g 符合 RR 情况，对 g 进行一次左旋转</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="../../../../images/%e6%81%8b%e4%b8%8a%e7%ae%97%e6%b3%95%e4%b8%8e%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84/1-09-AVL%e6%a0%91/20200918-%e5%85%88%e5%8f%b3%e6%97%8b%e5%86%8d%e5%b7%a6%e6%97%8b.png"
+        data-srcset="../../../../images/%e6%81%8b%e4%b8%8a%e7%ae%97%e6%b3%95%e4%b8%8e%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84/1-09-AVL%e6%a0%91/20200918-%e5%85%88%e5%8f%b3%e6%97%8b%e5%86%8d%e5%b7%a6%e6%97%8b.png, ../../../../images/%e6%81%8b%e4%b8%8a%e7%ae%97%e6%b3%95%e4%b8%8e%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84/1-09-AVL%e6%a0%91/20200918-%e5%85%88%e5%8f%b3%e6%97%8b%e5%86%8d%e5%b7%a6%e6%97%8b.png 1.5x, ../../../../images/%e6%81%8b%e4%b8%8a%e7%ae%97%e6%b3%95%e4%b8%8e%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84/1-09-AVL%e6%a0%91/20200918-%e5%85%88%e5%8f%b3%e6%97%8b%e5%86%8d%e5%b7%a6%e6%97%8b.png 2x"
+        data-sizes="auto"
+        alt="../../../../images/恋上算法与数据结构/1-09-AVL树/20200918-先右旋再左旋.png"
+        title="先右旋再左旋" /></p>
+<h4 id="实现">实现</h4>
+<p>AVLNode 继承 二叉树的 Node，维护高度的属性</p>
+<p>二叉树的 Node</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">protected</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="n">E</span> <span class="n">element</span><span class="o">;</span>
+    <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">left</span><span class="o">;</span>
+    <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">right</span><span class="o">;</span>
+    <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">parent</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">Node</span><span class="o">(</span><span class="n">E</span> <span class="n">element</span><span class="o">,</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">parent</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">element</span> <span class="o">=</span> <span class="n">element</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">parent</span> <span class="o">=</span> <span class="n">parent</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isLeaf</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">left</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">right</span> <span class="o">==</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">hasTwoChildren</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">left</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">right</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isLeftChild</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">parent</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="k">this</span> <span class="o">==</span> <span class="n">parent</span><span class="o">.</span><span class="na">left</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isRightChild</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">parent</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="k">this</span> <span class="o">==</span> <span class="n">parent</span><span class="o">.</span><span class="na">right</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">sibling</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">isLeftChild</span><span class="o">())</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">parent</span><span class="o">.</span><span class="na">right</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">isRightChild</span><span class="o">())</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">parent</span><span class="o">.</span><span class="na">left</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>AVLNode的实现</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">AVLNode</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="kd">extends</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">height</span> <span class="o">=</span> <span class="n">1</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">AVLNode</span><span class="o">(</span><span class="n">E</span> <span class="n">element</span><span class="o">,</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">parent</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">(</span><span class="n">element</span><span class="o">,</span> <span class="n">parent</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">balanceFactor</span><span class="o">()</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">leftHeight</span> <span class="o">=</span> <span class="n">left</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">?</span> <span class="n">0</span> <span class="o">:</span> <span class="o">((</span><span class="n">AVLNode</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;)</span> <span class="n">left</span><span class="o">).</span><span class="na">height</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">rightHeight</span> <span class="o">=</span> <span class="n">right</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">?</span> <span class="n">0</span> <span class="o">:</span> <span class="o">((</span><span class="n">AVLNode</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;)</span> <span class="n">right</span><span class="o">).</span><span class="na">height</span><span class="o">;</span>
+        <span class="k">return</span> <span class="n">leftHeight</span> <span class="o">-</span> <span class="n">rightHeight</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">updateHeight</span><span class="o">()</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">leftHeight</span> <span class="o">=</span> <span class="n">left</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">?</span> <span class="n">0</span> <span class="o">:</span> <span class="o">((</span><span class="n">AVLNode</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;)</span> <span class="n">left</span><span class="o">).</span><span class="na">height</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">rightHeight</span> <span class="o">=</span> <span class="n">right</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">?</span> <span class="n">0</span> <span class="o">:</span> <span class="o">((</span><span class="n">AVLNode</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;)</span> <span class="n">right</span><span class="o">).</span><span class="na">height</span><span class="o">;</span>
+        <span class="n">height</span> <span class="o">=</span> <span class="n">1</span> <span class="o">+</span> <span class="n">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">leftHeight</span><span class="o">,</span> <span class="n">rightHeight</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">tallerChild</span><span class="o">()</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">leftHeight</span> <span class="o">=</span> <span class="n">left</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">?</span> <span class="n">0</span> <span class="o">:</span> <span class="o">((</span><span class="n">AVLNode</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;)</span> <span class="n">left</span><span class="o">).</span><span class="na">height</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">rightHeight</span> <span class="o">=</span> <span class="n">right</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">?</span> <span class="n">0</span> <span class="o">:</span> <span class="o">((</span><span class="n">AVLNode</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;)</span> <span class="n">right</span><span class="o">).</span><span class="na">height</span><span class="o">;</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">leftHeight</span> <span class="o">&gt;</span> <span class="n">rightHeight</span><span class="o">)</span> <span class="k">return</span> <span class="n">left</span><span class="o">;</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">leftHeight</span> <span class="o">&lt;</span> <span class="n">rightHeight</span><span class="o">)</span> <span class="k">return</span> <span class="n">right</span><span class="o">;</span>
+        <span class="k">return</span> <span class="n">isLeftChild</span><span class="o">()</span> <span class="o">?</span> <span class="n">left</span> <span class="o">:</span> <span class="n">right</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">String</span> <span class="n">parentString</span> <span class="o">=</span> <span class="s">&#34;null&#34;</span><span class="o">;</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">parent</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">parentString</span> <span class="o">=</span> <span class="n">parent</span><span class="o">.</span><span class="na">element</span><span class="o">.</span><span class="na">toString</span><span class="o">();</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">element</span> <span class="o">+</span> <span class="s">&#34;_p(&#34;</span> <span class="o">+</span> <span class="n">parentString</span> <span class="o">+</span> <span class="s">&#34;)_h(&#34;</span> <span class="o">+</span> <span class="n">height</span> <span class="o">+</span> <span class="s">&#34;)&#34;</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>AVL中判断节点是否平衡</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="kt">boolean</span> <span class="nf">isBalanced</span><span class="o">(</span><span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">node</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">Math</span><span class="o">.</span><span class="na">abs</span><span class="o">(((</span><span class="n">AVLNode</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;)</span> <span class="n">node</span><span class="o">).</span><span class="na">balanceFactor</span><span class="o">())</span> <span class="o">&lt;=</span> <span class="n">1</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>AVL中添加节点后更新高度</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="nd">@Override</span>
+<span class="kd">protected</span> <span class="kt">void</span> <span class="nf">afterAdd</span><span class="o">(</span><span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">node</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">while</span> <span class="o">((</span><span class="n">node</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="na">parent</span><span class="o">)</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">isBalanced</span><span class="o">(</span><span class="n">node</span><span class="o">))</span> <span class="o">{</span>
+            <span class="c1">// 更新高度
+</span><span class="c1"></span>            <span class="n">updateHeight</span><span class="o">(</span><span class="n">node</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="c1">// 恢复平衡
+</span><span class="c1"></span>            <span class="n">rebalance</span><span class="o">(</span><span class="n">node</span><span class="o">);</span>
+            <span class="c1">// 整棵树恢复平衡
+</span><span class="c1"></span>            <span class="k">break</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">updateHeight</span><span class="o">(</span><span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">node</span><span class="o">)</span> <span class="o">{</span>
+    <span class="o">((</span><span class="n">AVLNode</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;)</span> <span class="n">node</span><span class="o">).</span><span class="na">updateHeight</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>恢复平衡</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="cm">/**
+</span><span class="cm"> * 恢复平衡
+</span><span class="cm"> *
+</span><span class="cm"> * @param grand 高度最低的那个不平衡节点
+</span><span class="cm"> */</span>
+<span class="nd">@SuppressWarnings</span><span class="o">(</span><span class="s">&#34;unused&#34;</span><span class="o">)</span>
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">rebalance</span><span class="o">(</span><span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">grand</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">parent</span> <span class="o">=</span> <span class="o">((</span><span class="n">AVLNode</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;)</span> <span class="n">grand</span><span class="o">).</span><span class="na">tallerChild</span><span class="o">();</span>
+    <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">node</span> <span class="o">=</span> <span class="o">((</span><span class="n">AVLNode</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;)</span> <span class="n">parent</span><span class="o">).</span><span class="na">tallerChild</span><span class="o">();</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">parent</span><span class="o">.</span><span class="na">isLeftChild</span><span class="o">())</span> <span class="o">{</span> <span class="c1">// L
+</span><span class="c1"></span>        <span class="k">if</span> <span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">isLeftChild</span><span class="o">())</span> <span class="o">{</span> <span class="c1">// LL
+</span><span class="c1"></span>            <span class="n">rotateRight</span><span class="o">(</span><span class="n">grand</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span> <span class="c1">// LR
+</span><span class="c1"></span>            <span class="n">rotateLeft</span><span class="o">(</span><span class="n">parent</span><span class="o">);</span>
+            <span class="n">rotateRight</span><span class="o">(</span><span class="n">grand</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span> <span class="c1">// R
+</span><span class="c1"></span>        <span class="k">if</span> <span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">isLeftChild</span><span class="o">())</span> <span class="o">{</span> <span class="c1">// RL
+</span><span class="c1"></span>            <span class="n">rotateRight</span><span class="o">(</span><span class="n">parent</span><span class="o">);</span>
+            <span class="n">rotateLeft</span><span class="o">(</span><span class="n">grand</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span> <span class="c1">// RR
+</span><span class="c1"></span>            <span class="n">rotateLeft</span><span class="o">(</span><span class="n">grand</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">rotateLeft</span><span class="o">(</span><span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">grand</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">parent</span> <span class="o">=</span> <span class="n">grand</span><span class="o">.</span><span class="na">right</span><span class="o">;</span>
+    <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">child</span> <span class="o">=</span> <span class="n">parent</span><span class="o">.</span><span class="na">left</span><span class="o">;</span>
+    <span class="n">grand</span><span class="o">.</span><span class="na">right</span> <span class="o">=</span> <span class="n">child</span><span class="o">;</span>
+    <span class="n">parent</span><span class="o">.</span><span class="na">left</span> <span class="o">=</span> <span class="n">grand</span><span class="o">;</span>
+    <span class="n">afterRotate</span><span class="o">(</span><span class="n">grand</span><span class="o">,</span> <span class="n">parent</span><span class="o">,</span> <span class="n">child</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">rotateRight</span><span class="o">(</span><span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">grand</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">parent</span> <span class="o">=</span> <span class="n">grand</span><span class="o">.</span><span class="na">left</span><span class="o">;</span>
+    <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">child</span> <span class="o">=</span> <span class="n">parent</span><span class="o">.</span><span class="na">right</span><span class="o">;</span>
+    <span class="n">grand</span><span class="o">.</span><span class="na">left</span> <span class="o">=</span> <span class="n">child</span><span class="o">;</span>
+    <span class="n">parent</span><span class="o">.</span><span class="na">right</span> <span class="o">=</span> <span class="n">grand</span><span class="o">;</span>
+    <span class="n">afterRotate</span><span class="o">(</span><span class="n">grand</span><span class="o">,</span> <span class="n">parent</span><span class="o">,</span> <span class="n">child</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>恢复平衡的优化，统一旋转的操作</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="../../../../images/%e6%81%8b%e4%b8%8a%e7%ae%97%e6%b3%95%e4%b8%8e%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84/1-09-AVL%e6%a0%91/20200918-%e7%bb%9f%e4%b8%80%e6%97%8b%e8%bd%ac%e6%93%8d%e4%bd%9c.png"
+        data-srcset="../../../../images/%e6%81%8b%e4%b8%8a%e7%ae%97%e6%b3%95%e4%b8%8e%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84/1-09-AVL%e6%a0%91/20200918-%e7%bb%9f%e4%b8%80%e6%97%8b%e8%bd%ac%e6%93%8d%e4%bd%9c.png, ../../../../images/%e6%81%8b%e4%b8%8a%e7%ae%97%e6%b3%95%e4%b8%8e%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84/1-09-AVL%e6%a0%91/20200918-%e7%bb%9f%e4%b8%80%e6%97%8b%e8%bd%ac%e6%93%8d%e4%bd%9c.png 1.5x, ../../../../images/%e6%81%8b%e4%b8%8a%e7%ae%97%e6%b3%95%e4%b8%8e%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84/1-09-AVL%e6%a0%91/20200918-%e7%bb%9f%e4%b8%80%e6%97%8b%e8%bd%ac%e6%93%8d%e4%bd%9c.png 2x"
+        data-sizes="auto"
+        alt="../../../../images/恋上算法与数据结构/1-09-AVL树/20200918-统一旋转操作.png"
+        title="统一旋转操作" /></p>
+<p>根据二叉搜索树的性质，a &lt; b &lt; c &lt; d &lt; e &lt; f &lt; g</p>
+<p>最终恢复平衡的样子都是一样的，所以搞清楚对应的 a、b、c、d、e、f、g 是谁就可以了</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="cm">/**
+</span><span class="cm"> * 恢复平衡
+</span><span class="cm"> *
+</span><span class="cm"> * @param grand 高度最低的那个不平衡节点
+</span><span class="cm"> */</span>
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">rebalance</span><span class="o">(</span><span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">grand</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">parent</span> <span class="o">=</span> <span class="o">((</span><span class="n">AVLNode</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;)</span> <span class="n">grand</span><span class="o">).</span><span class="na">tallerChild</span><span class="o">();</span>
+    <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">node</span> <span class="o">=</span> <span class="o">((</span><span class="n">AVLNode</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;)</span> <span class="n">parent</span><span class="o">).</span><span class="na">tallerChild</span><span class="o">();</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">parent</span><span class="o">.</span><span class="na">isLeftChild</span><span class="o">())</span> <span class="o">{</span> <span class="c1">// L
+</span><span class="c1"></span>        <span class="k">if</span> <span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">isLeftChild</span><span class="o">())</span> <span class="o">{</span> <span class="c1">// LL
+</span><span class="c1"></span>            <span class="n">rotate</span><span class="o">(</span><span class="n">grand</span><span class="o">,</span> <span class="n">node</span><span class="o">,</span> <span class="n">node</span><span class="o">.</span><span class="na">right</span><span class="o">,</span> <span class="n">parent</span><span class="o">,</span> <span class="n">parent</span><span class="o">.</span><span class="na">right</span><span class="o">,</span> <span class="n">grand</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span> <span class="c1">// LR
+</span><span class="c1"></span>            <span class="n">rotate</span><span class="o">(</span><span class="n">grand</span><span class="o">,</span> <span class="n">parent</span><span class="o">,</span> <span class="n">node</span><span class="o">.</span><span class="na">left</span><span class="o">,</span> <span class="n">node</span><span class="o">,</span> <span class="n">node</span><span class="o">.</span><span class="na">right</span><span class="o">,</span> <span class="n">grand</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span> <span class="c1">// R
+</span><span class="c1"></span>        <span class="k">if</span> <span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">isLeftChild</span><span class="o">())</span> <span class="o">{</span> <span class="c1">// RL
+</span><span class="c1"></span>            <span class="n">rotate</span><span class="o">(</span><span class="n">grand</span><span class="o">,</span> <span class="n">grand</span><span class="o">,</span> <span class="n">node</span><span class="o">.</span><span class="na">left</span><span class="o">,</span> <span class="n">node</span><span class="o">,</span> <span class="n">node</span><span class="o">.</span><span class="na">right</span><span class="o">,</span> <span class="n">parent</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span> <span class="c1">// RR
+</span><span class="c1"></span>            <span class="n">rotate</span><span class="o">(</span><span class="n">grand</span><span class="o">,</span> <span class="n">grand</span><span class="o">,</span> <span class="n">parent</span><span class="o">.</span><span class="na">left</span><span class="o">,</span> <span class="n">parent</span><span class="o">,</span> <span class="n">node</span><span class="o">.</span><span class="na">left</span><span class="o">,</span> <span class="n">node</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">rotate</span><span class="o">(</span>
+        <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">r</span><span class="o">,</span> <span class="c1">// 子树的根节点
+</span><span class="c1"></span>        <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">b</span><span class="o">,</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">c</span><span class="o">,</span>
+        <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">d</span><span class="o">,</span>
+        <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">e</span><span class="o">,</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">f</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">// 让d成为这棵子树的根节点
+</span><span class="c1"></span>    <span class="n">d</span><span class="o">.</span><span class="na">parent</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="na">parent</span><span class="o">;</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">r</span><span class="o">.</span><span class="na">isLeftChild</span><span class="o">())</span> <span class="o">{</span>
+        <span class="n">r</span><span class="o">.</span><span class="na">parent</span><span class="o">.</span><span class="na">left</span> <span class="o">=</span> <span class="n">d</span><span class="o">;</span>
+    <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">r</span><span class="o">.</span><span class="na">isRightChild</span><span class="o">())</span> <span class="o">{</span>
+        <span class="n">r</span><span class="o">.</span><span class="na">parent</span><span class="o">.</span><span class="na">right</span> <span class="o">=</span> <span class="n">d</span><span class="o">;</span>
+    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+        <span class="n">root</span> <span class="o">=</span> <span class="n">d</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="c1">//b-c
+</span><span class="c1"></span>    <span class="n">b</span><span class="o">.</span><span class="na">right</span> <span class="o">=</span> <span class="n">c</span><span class="o">;</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">c</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">c</span><span class="o">.</span><span class="na">parent</span> <span class="o">=</span> <span class="n">b</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="n">updateHeight</span><span class="o">(</span><span class="n">b</span><span class="o">);</span>
+
+    <span class="c1">// e-f
+</span><span class="c1"></span>    <span class="n">f</span><span class="o">.</span><span class="na">left</span> <span class="o">=</span> <span class="n">e</span><span class="o">;</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">e</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">e</span><span class="o">.</span><span class="na">parent</span> <span class="o">=</span> <span class="n">f</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="n">updateHeight</span><span class="o">(</span><span class="n">f</span><span class="o">);</span>
+
+    <span class="c1">// b-d-f
+</span><span class="c1"></span>    <span class="n">d</span><span class="o">.</span><span class="na">left</span> <span class="o">=</span> <span class="n">b</span><span class="o">;</span>
+    <span class="n">d</span><span class="o">.</span><span class="na">right</span> <span class="o">=</span> <span class="n">f</span><span class="o">;</span>
+    <span class="n">b</span><span class="o">.</span><span class="na">parent</span> <span class="o">=</span> <span class="n">d</span><span class="o">;</span>
+    <span class="n">f</span><span class="o">.</span><span class="na">parent</span> <span class="o">=</span> <span class="n">d</span><span class="o">;</span>
+    <span class="n">updateHeight</span><span class="o">(</span><span class="n">d</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="删除导致的失衡">删除导致的失衡</h3>
+<p>示例：删除子树中的 16</p>
+<p>可能会导致<strong>父节点</strong>或<strong>祖先节点</strong>失衡（只有 1 个节点会失衡），其他节点，都不可能失衡</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="../../../../images/%e6%81%8b%e4%b8%8a%e7%ae%97%e6%b3%95%e4%b8%8e%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84/1-09-AVL%e6%a0%91/20200918-%e5%88%a0%e9%99%a4%e5%af%bc%e8%87%b4%e7%9a%84%e5%a4%b1%e8%a1%a1.png"
+        data-srcset="../../../../images/%e6%81%8b%e4%b8%8a%e7%ae%97%e6%b3%95%e4%b8%8e%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84/1-09-AVL%e6%a0%91/20200918-%e5%88%a0%e9%99%a4%e5%af%bc%e8%87%b4%e7%9a%84%e5%a4%b1%e8%a1%a1.png, ../../../../images/%e6%81%8b%e4%b8%8a%e7%ae%97%e6%b3%95%e4%b8%8e%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84/1-09-AVL%e6%a0%91/20200918-%e5%88%a0%e9%99%a4%e5%af%bc%e8%87%b4%e7%9a%84%e5%a4%b1%e8%a1%a1.png 1.5x, ../../../../images/%e6%81%8b%e4%b8%8a%e7%ae%97%e6%b3%95%e4%b8%8e%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84/1-09-AVL%e6%a0%91/20200918-%e5%88%a0%e9%99%a4%e5%af%bc%e8%87%b4%e7%9a%84%e5%a4%b1%e8%a1%a1.png 2x"
+        data-sizes="auto"
+        alt="../../../../images/恋上算法与数据结构/1-09-AVL树/20200918-删除导致的失衡.png"
+        title="删除导致的失衡" /></p>
+<h4 id="ll---右旋转单旋-1">LL - 右旋转（单旋）</h4>
+<p>假设删除 T3 的红色节点，此时节点 g 会失去平衡，因为此时属于 LL 情况，所以需要对 g 进行右旋转</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="../../../../images/%e6%81%8b%e4%b8%8a%e7%ae%97%e6%b3%95%e4%b8%8e%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84/1-09-AVL%e6%a0%91/20200918-%e5%88%a0%e9%99%a4%e5%af%bc%e8%87%b4%e5%a4%b1%e8%a1%a1-%e5%8f%b3%e6%97%8b%e8%bd%ac.png"
+        data-srcset="../../../../images/%e6%81%8b%e4%b8%8a%e7%ae%97%e6%b3%95%e4%b8%8e%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84/1-09-AVL%e6%a0%91/20200918-%e5%88%a0%e9%99%a4%e5%af%bc%e8%87%b4%e5%a4%b1%e8%a1%a1-%e5%8f%b3%e6%97%8b%e8%bd%ac.png, ../../../../images/%e6%81%8b%e4%b8%8a%e7%ae%97%e6%b3%95%e4%b8%8e%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84/1-09-AVL%e6%a0%91/20200918-%e5%88%a0%e9%99%a4%e5%af%bc%e8%87%b4%e5%a4%b1%e8%a1%a1-%e5%8f%b3%e6%97%8b%e8%bd%ac.png 1.5x, ../../../../images/%e6%81%8b%e4%b8%8a%e7%ae%97%e6%b3%95%e4%b8%8e%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84/1-09-AVL%e6%a0%91/20200918-%e5%88%a0%e9%99%a4%e5%af%bc%e8%87%b4%e5%a4%b1%e8%a1%a1-%e5%8f%b3%e6%97%8b%e8%bd%ac.png 2x"
+        data-sizes="auto"
+        alt="../../../../images/恋上算法与数据结构/1-09-AVL树/20200918-删除导致失衡-右旋转.png"
+        title="删除导致失衡-右旋转" /></p>
+<p>如果绿色节点不存在，更高层的祖先节点可能也会失衡，需要再次恢复平衡，然后有可能导致更高层的祖先节点失衡&hellip;</p>
+<p>极端情况下，所有祖先节点都需要进行恢复平衡的操作，共 O(log n) 次调整</p>
+<h4 id="rr---左旋转单旋-1">RR - 左旋转（单旋）</h4>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="../../../../images/%e6%81%8b%e4%b8%8a%e7%ae%97%e6%b3%95%e4%b8%8e%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84/1-09-AVL%e6%a0%91/20200918-%e5%88%a0%e9%99%a4%e5%af%bc%e8%87%b4%e5%a4%b1%e8%a1%a1-%e5%b7%a6%e6%97%8b%e8%bd%ac.png"
+        data-srcset="../../../../images/%e6%81%8b%e4%b8%8a%e7%ae%97%e6%b3%95%e4%b8%8e%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84/1-09-AVL%e6%a0%91/20200918-%e5%88%a0%e9%99%a4%e5%af%bc%e8%87%b4%e5%a4%b1%e8%a1%a1-%e5%b7%a6%e6%97%8b%e8%bd%ac.png, ../../../../images/%e6%81%8b%e4%b8%8a%e7%ae%97%e6%b3%95%e4%b8%8e%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84/1-09-AVL%e6%a0%91/20200918-%e5%88%a0%e9%99%a4%e5%af%bc%e8%87%b4%e5%a4%b1%e8%a1%a1-%e5%b7%a6%e6%97%8b%e8%bd%ac.png 1.5x, ../../../../images/%e6%81%8b%e4%b8%8a%e7%ae%97%e6%b3%95%e4%b8%8e%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84/1-09-AVL%e6%a0%91/20200918-%e5%88%a0%e9%99%a4%e5%af%bc%e8%87%b4%e5%a4%b1%e8%a1%a1-%e5%b7%a6%e6%97%8b%e8%bd%ac.png 2x"
+        data-sizes="auto"
+        alt="../../../../images/恋上算法与数据结构/1-09-AVL树/20200918-删除导致失衡-左旋转.png"
+        title="删除导致失衡-左旋转" /></p>
+<h4 id="lr---rr左旋转ll右旋转双旋-1">LR - RR左旋转，LL右旋转（双旋）</h4>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="../../../../images/%e6%81%8b%e4%b8%8a%e7%ae%97%e6%b3%95%e4%b8%8e%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84/1-09-AVL%e6%a0%91/20200918-%e5%88%a0%e9%99%a4%e5%af%bc%e8%87%b4%e5%a4%b1%e8%a1%a1-%e5%b7%a6%e6%97%8b%e5%8f%b3%e6%97%8b.png"
+        data-srcset="../../../../images/%e6%81%8b%e4%b8%8a%e7%ae%97%e6%b3%95%e4%b8%8e%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84/1-09-AVL%e6%a0%91/20200918-%e5%88%a0%e9%99%a4%e5%af%bc%e8%87%b4%e5%a4%b1%e8%a1%a1-%e5%b7%a6%e6%97%8b%e5%8f%b3%e6%97%8b.png, ../../../../images/%e6%81%8b%e4%b8%8a%e7%ae%97%e6%b3%95%e4%b8%8e%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84/1-09-AVL%e6%a0%91/20200918-%e5%88%a0%e9%99%a4%e5%af%bc%e8%87%b4%e5%a4%b1%e8%a1%a1-%e5%b7%a6%e6%97%8b%e5%8f%b3%e6%97%8b.png 1.5x, ../../../../images/%e6%81%8b%e4%b8%8a%e7%ae%97%e6%b3%95%e4%b8%8e%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84/1-09-AVL%e6%a0%91/20200918-%e5%88%a0%e9%99%a4%e5%af%bc%e8%87%b4%e5%a4%b1%e8%a1%a1-%e5%b7%a6%e6%97%8b%e5%8f%b3%e6%97%8b.png 2x"
+        data-sizes="auto"
+        alt="../../../../images/恋上算法与数据结构/1-09-AVL树/20200918-删除导致失衡-左旋右旋.png"
+        title="删除导致失衡-左旋右旋" /></p>
+<h4 id="rl---ll右旋转rr左旋转双旋-1">RL - LL右旋转，RR左旋转（双旋）</h4>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="../../../../images/%e6%81%8b%e4%b8%8a%e7%ae%97%e6%b3%95%e4%b8%8e%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84/1-09-AVL%e6%a0%91/20200918-%e5%88%a0%e9%99%a4%e5%af%bc%e8%87%b4%e5%a4%b1%e8%a1%a1-%e5%8f%b3%e6%97%8b%e5%b7%a6%e6%97%8b.png"
+        data-srcset="../../../../images/%e6%81%8b%e4%b8%8a%e7%ae%97%e6%b3%95%e4%b8%8e%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84/1-09-AVL%e6%a0%91/20200918-%e5%88%a0%e9%99%a4%e5%af%bc%e8%87%b4%e5%a4%b1%e8%a1%a1-%e5%8f%b3%e6%97%8b%e5%b7%a6%e6%97%8b.png, ../../../../images/%e6%81%8b%e4%b8%8a%e7%ae%97%e6%b3%95%e4%b8%8e%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84/1-09-AVL%e6%a0%91/20200918-%e5%88%a0%e9%99%a4%e5%af%bc%e8%87%b4%e5%a4%b1%e8%a1%a1-%e5%8f%b3%e6%97%8b%e5%b7%a6%e6%97%8b.png 1.5x, ../../../../images/%e6%81%8b%e4%b8%8a%e7%ae%97%e6%b3%95%e4%b8%8e%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84/1-09-AVL%e6%a0%91/20200918-%e5%88%a0%e9%99%a4%e5%af%bc%e8%87%b4%e5%a4%b1%e8%a1%a1-%e5%8f%b3%e6%97%8b%e5%b7%a6%e6%97%8b.png 2x"
+        data-sizes="auto"
+        alt="../../../../images/恋上算法与数据结构/1-09-AVL树/20200918-删除导致失衡-右旋左旋.png"
+        title="删除导致失衡-右旋左旋" /></p>
+<h4 id="实现-1">实现</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="nd">@Override</span>
+<span class="kd">protected</span> <span class="kt">void</span> <span class="nf">afterRemove</span><span class="o">(</span><span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">node</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">while</span> <span class="o">((</span><span class="n">node</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="na">parent</span><span class="o">)</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">isBalanced</span><span class="o">(</span><span class="n">node</span><span class="o">))</span> <span class="o">{</span>
+            <span class="c1">// 更新高度
+</span><span class="c1"></span>            <span class="n">updateHeight</span><span class="o">(</span><span class="n">node</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="c1">// 恢复平衡
+</span><span class="c1"></span>            <span class="n">rebalance</span><span class="o">(</span><span class="n">node</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="总结">总结</h3>
+<p>添加</p>
+<ul>
+<li>可能导致所有祖先节点都失衡</li>
+<li>只要让高度最低的失衡节点恢复平衡，整棵树就恢复平衡（仅需 O(1) 次调整）</li>
+</ul>
+<p>删除</p>
+<ul>
+<li>可能会导致父节点或祖先节点失衡（只有 1 个节点会失衡）</li>
+<li>恢复平衡后，可能会导致更高层的祖先节点失衡（最多需要 O(log n) 次调整）</li>
+</ul>
+<p>平均复杂度</p>
+<ul>
+<li>搜索：O(log n)</li>
+<li>添加：O(log n)，仅需 O(1) 次的旋转操作</li>
+<li>删除：O(log n)，最多需要 O(log n) 次的旋转操作</li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2020-09-18</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-1-09-avl%E6%A0%91/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://msdemt.github.io/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-1-09-avl%E6%A0%91/" data-title="恋上数据结构与算法-1-09-AVL树" data-hashtags="算法,数据结构,java"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://msdemt.github.io/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-1-09-avl%E6%A0%91/" data-hashtag="算法"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="https://msdemt.github.io/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-1-09-avl%E6%A0%91/" data-title="恋上数据结构与算法-1-09-AVL树"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://msdemt.github.io/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-1-09-avl%E6%A0%91/" data-title="恋上数据结构与算法-1-09-AVL树"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@2.14.0/icons/line.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://msdemt.github.io/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-1-09-avl%E6%A0%91/" data-title="恋上数据结构与算法-1-09-AVL树" data-ralateuid="xxxx"><i class="fab fa-weibo fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E7%AE%97%E6%B3%95/">算法</a>,&nbsp;<a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>,&nbsp;<a href="/tags/java/">java</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-1-08-%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/" class="prev" rel="prev" title="恋上数据结构与算法-1-08-平衡二叉搜索树"><i class="fas fa-angle-left fa-fw"></i>恋上数据结构与算法-1-08-平衡二叉搜索树</a>
+            <a href="/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-1-10-b%E6%A0%91/" class="next" rel="next" title="恋上数据结构与算法-1-10-B树">恋上数据结构与算法-1-10-B树<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.80.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2021</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">hekai</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/smooth-scroll@16.1.3/dist/smooth-scroll.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.37.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.8/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.2.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.0/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
