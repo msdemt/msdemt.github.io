@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Idea配置数据库连接 - MyBlog</title><meta name="Description" content="我的博客"><meta property="og:title" content="Idea配置数据库连接" />
+<meta property="og:description" content="idea配置数据库连接时，提示如下错误 1 Server returns invalid timezone. Need to set &#39;serverTimezone&#39; property. 点击 set timezone 默认的 serverTimezone 为 UTC utc 为协调世界时，又称世界统一时间、世界标准时间，不属于任何时区" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://msdemt.github.io/posts/idea/idea%E9%85%8D%E7%BD%AE%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5/" />
+<meta property="og:image" content="https://msdemt.github.io/logo.png"/>
+<meta property="article:published_time" content="2021-01-27T08:42:10+08:00" />
+<meta property="article:modified_time" content="2021-01-27T08:42:10+08:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://msdemt.github.io/logo.png"/>
+
+<meta name="twitter:title" content="Idea配置数据库连接"/>
+<meta name="twitter:description" content="idea配置数据库连接时，提示如下错误 1 Server returns invalid timezone. Need to set &#39;serverTimezone&#39; property. 点击 set timezone 默认的 serverTimezone 为 UTC utc 为协调世界时，又称世界统一时间、世界标准时间，不属于任何时区"/>
+<meta name="application-name" content="LoveIt">
+<meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://msdemt.github.io/posts/idea/idea%E9%85%8D%E7%BD%AE%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5/" /><link rel="prev" href="https://msdemt.github.io/posts/java/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/java8%E5%AE%9E%E7%8E%B0%E9%9B%86%E5%90%88%E7%9A%84%E5%B9%B6%E9%9B%86%E5%B7%AE%E9%9B%86%E4%BA%A4%E9%9B%86/" /><link rel="next" href="https://msdemt.github.io/posts/java/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/maven-jar%E5%8C%85%E4%B8%8B%E8%BD%BD%E4%B8%8D%E5%AE%8C%E6%95%B4%E5%87%BA%E7%8E%B0lastupdated%E7%BB%93%E5%B0%BE%E6%96%87%E4%BB%B6/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Idea配置数据库连接",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/msdemt.github.io\/posts\/idea\/idea%E9%85%8D%E7%BD%AE%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5\/"
+        },"image": ["https:\/\/msdemt.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","wordcount":  1003 ,
+        "url": "https:\/\/msdemt.github.io\/posts\/idea\/idea%E9%85%8D%E7%BD%AE%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5\/","datePublished": "2021-01-27T08:42:10+08:00","dateModified": "2021-01-27T08:42:10+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": "https:\/\/msdemt.github.io\/images\/avatar.png"},"author": {
+                "@type": "Person",
+                "name": "xxxx"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="MyBlog"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>MyBlog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/categories/documentation/"> 文档 </a><a class="menu-item" href="/about/"> 关于 </a><a class="menu-item" href="https://github.com/dillonzq/LoveIt" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="MyBlog"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>MyBlog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/categories/documentation/" title="">文档</a><a class="menu-item" href="/about/" title="">关于</a><a class="menu-item" href="https://github.com/dillonzq/LoveIt" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Idea配置数据库连接</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>xxxx</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-01-27">2021-01-27</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1003 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
+            </div><div class="content" id="content"><p>idea配置数据库连接时，提示如下错误</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/20210127-idea-servertimezone.png"
+        data-srcset="/images/20210127-idea-servertimezone.png, /images/20210127-idea-servertimezone.png 1.5x, /images/20210127-idea-servertimezone.png 2x"
+        data-sizes="auto"
+        alt="/images/20210127-idea-servertimezone.png"
+        title="20210127-idea-servertimezone" /></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">Server returns invalid timezone. Need to <span class="nb">set</span> <span class="s1">&#39;serverTimezone&#39;</span> property.
+</code></pre></td></tr></table>
+</div>
+</div><p>点击 set timezone</p>
+<p>默认的 serverTimezone 为 UTC</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/20210127-%e9%bb%98%e8%ae%a4serverTimezone.png"
+        data-srcset="/images/20210127-%e9%bb%98%e8%ae%a4serverTimezone.png, /images/20210127-%e9%bb%98%e8%ae%a4serverTimezone.png 1.5x, /images/20210127-%e9%bb%98%e8%ae%a4serverTimezone.png 2x"
+        data-sizes="auto"
+        alt="/images/20210127-默认serverTimezone.png"
+        title="20210127-默认serverTimezone" /></p>
+<p>utc 为协调世界时，又称世界统一时间、世界标准时间，不属于任何时区，这套时间系统被应用于许多互联网和万维网的标准中，例如，网络时间协议就是协调世界时在互联网中使用的一种方式。</p>
+<p>中国大陆、中国香港、中国澳门、中国台湾、蒙古国、新加坡、马来西亚、菲律宾、西澳大利亚州的时间与UTC的时差均为+8，也就是UTC+8。</p>
+<p>但是，配置成 UTC+8 会报错：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="o">[</span>S1009<span class="o">]</span> No timezone mapping entry <span class="k">for</span> <span class="s1">&#39;UTC+8&#39;</span>
+com.mysql.cj.exceptions.WrongArgumentException: No timezone mapping entry <span class="k">for</span> <span class="s1">&#39;UTC+8&#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>查看mysql文档中对时区的支持：https://dev.mysql.com/doc/refman/8.0/en/time-zone-support.html</p>
+<p>查看到mysql支持的timezone是根据操作系统判断的</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="o">[</span>root@vultrguest ~<span class="o">]</span><span class="c1"># ls /usr/share/zoneinfo/</span>
+Africa      Australia  Cuba     Etc      GMT-0      Indian       Kwajalein    MST7MDT  Portugal    ROC        Universal     zone.tab
+America     Brazil     EET      Europe   GMT0       Iran         leapseconds  Navajo   posix       ROK        US            Zulu
+Antarctica  Canada     Egypt    GB       Greenwich  iso3166.tab  Libya        NZ       posixrules  Singapore  UTC
+Arctic      CET        Eire     GB-Eire  Hongkong   Israel       MET          NZ-CHAT  PRC         Turkey     WET
+Asia        Chile      EST      GMT      HST        Jamaica      Mexico       Pacific  PST8PDT     tzdata.zi  W-SU
+Atlantic    CST6CDT    EST5EDT  GMT+0    Iceland    Japan        MST          Poland   right       UCT        zone1970.tab
+<span class="o">[</span>root@vultrguest ~<span class="o">]</span><span class="c1"># ls /usr/share/zoneinfo/Asia/</span>
+Aden       Bahrain     Chongqing  Gaza         Jerusalem    Kuala_Lumpur  Novokuznetsk  Rangoon        Tashkent       Ulan_Bator
+Almaty     Baku        Chungking  Harbin       Kabul        Kuching       Novosibirsk   Riyadh         Tbilisi        Urumqi
+Amman      Bangkok     Colombo    Hebron       Kamchatka    Kuwait        Omsk          Saigon         Tehran         Ust-Nera
+Anadyr     Barnaul     Dacca      Ho_Chi_Minh  Karachi      Macao         Oral          Sakhalin       Tel_Aviv       Vientiane
+Aqtau      Beirut      Damascus   Hong_Kong    Kashgar      Macau         Phnom_Penh    Samarkand      Thimbu         Vladivostok
+Aqtobe     Bishkek     Dhaka      Hovd         Kathmandu    Magadan       Pontianak     Seoul          Thimphu        Yakutsk
+Ashgabat   Brunei      Dili       Irkutsk      Katmandu     Makassar      Pyongyang     Shanghai       Tokyo          Yangon
+Ashkhabad  Calcutta    Dubai      Istanbul     Khandyga     Manila        Qatar         Singapore      Tomsk          Yekaterinburg
+Atyrau     Chita       Dushanbe   Jakarta      Kolkata      Muscat        Qostanay      Srednekolymsk  Ujung_Pandang  Yerevan
+Baghdad    Choibalsan  Famagusta  Jayapura     Krasnoyarsk  Nicosia       Qyzylorda     Taipei         Ulaanbaatar
+<span class="o">[</span>root@vultrguest ~<span class="o">]</span><span class="c1"># </span>
+</code></pre></td></tr></table>
+</div>
+</div><p>使用Aisa/Shanghai就可以了</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/20210127-%e9%85%8d%e7%bd%ae%e4%b8%8a%e6%b5%b7%e6%97%b6%e5%8c%ba.png"
+        data-srcset="/images/20210127-%e9%85%8d%e7%bd%ae%e4%b8%8a%e6%b5%b7%e6%97%b6%e5%8c%ba.png, /images/20210127-%e9%85%8d%e7%bd%ae%e4%b8%8a%e6%b5%b7%e6%97%b6%e5%8c%ba.png 1.5x, /images/20210127-%e9%85%8d%e7%bd%ae%e4%b8%8a%e6%b5%b7%e6%97%b6%e5%8c%ba.png 2x"
+        data-sizes="auto"
+        alt="/images/20210127-配置上海时区.png"
+        title="配置上海时区" /></p>
+<p>扩展：</p>
+<p>jdbc中的url里也有时区配置，示例如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">url: jdbc:mysql://127.0.0.1:3306/simple_demo?useSSL=false&amp;useUnicode=true&amp;characterEncoding=utf8&amp;serverTimezone=Asia/Shanghai
+</code></pre></td></tr></table>
+</div>
+</div><p>此处serverTimezone也是指的mysql时区，也可以写为GMT+8，即</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">url: jdbc:mysql://127.0.0.1:3306/simple_demo?useSSL=false&amp;useUnicode=true&amp;characterEncoding=utf8&amp;serverTimezone=GMT%2B8
+</code></pre></td></tr></table>
+</div>
+</div><p>GMT时间就是英国格林威治时间，也就是世界标准时间，是本初子午线上的地方时，是0时区的区时，与我国的标准时间北京时间（东八区）相差8小时，即晚8小时，故可以使用GMT+8表示北京时间。</p>
+<p>问题来了，Aisa/Shanghai 和 GMT+8 的时间相同吗？</p>
+<p>参考：https://www.zhihu.com/question/270709626/answer/357054228</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">ParseException</span> <span class="o">{</span>
+        <span class="n">SimpleDateFormat</span> <span class="n">sdf</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SimpleDateFormat</span><span class="o">(</span><span class="s">&#34;yyyy-MM-dd HH:mm:ss&#34;</span><span class="o">);</span>
+        <span class="n">sdf</span><span class="o">.</span><span class="na">setTimeZone</span><span class="o">(</span><span class="n">TimeZone</span><span class="o">.</span><span class="na">getTimeZone</span><span class="o">(</span><span class="s">&#34;Asia/Shanghai&#34;</span><span class="o">));</span>
+        <span class="n">Date</span> <span class="n">date</span> <span class="o">=</span> <span class="n">sdf</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">&#34;1988-08-13 13:13:13&#34;</span><span class="o">);</span>
+        <span class="n">TimeZone</span><span class="o">.</span><span class="na">setDefault</span><span class="o">(</span><span class="n">TimeZone</span><span class="o">.</span><span class="na">getTimeZone</span><span class="o">(</span><span class="s">&#34;Asia/Shanghai&#34;</span><span class="o">));</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;date = &#34;</span> <span class="o">+</span> <span class="n">date</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span> <span class="c1">//date = Sat Aug 13 13:13:13 CDT 1988
+</span><span class="c1"></span>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;date = &#34;</span> <span class="o">+</span> <span class="n">date</span><span class="o">.</span><span class="na">getTime</span><span class="o">());</span> <span class="c1">//date = 587448793000
+</span><span class="c1"></span>
+        <span class="n">sdf</span><span class="o">.</span><span class="na">setTimeZone</span><span class="o">(</span><span class="n">TimeZone</span><span class="o">.</span><span class="na">getTimeZone</span><span class="o">(</span><span class="s">&#34;GMT+8&#34;</span><span class="o">));</span>
+        <span class="n">date</span> <span class="o">=</span> <span class="n">sdf</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">&#34;1988-08-13 13:13:13&#34;</span><span class="o">);</span>
+        <span class="n">TimeZone</span><span class="o">.</span><span class="na">setDefault</span><span class="o">(</span><span class="n">TimeZone</span><span class="o">.</span><span class="na">getTimeZone</span><span class="o">(</span><span class="s">&#34;GMT+8&#34;</span><span class="o">));</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;date = &#34;</span> <span class="o">+</span> <span class="n">date</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span> <span class="c1">//date = Sat Aug 13 13:13:13 GMT+08:00 1988
+</span><span class="c1"></span>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;date = &#34;</span> <span class="o">+</span> <span class="n">date</span><span class="o">.</span><span class="na">getTime</span><span class="o">());</span> <span class="c1">//date = 587452393000
+</span><span class="c1"></span>
+        <span class="cm">/*
+</span><span class="cm">        时间戳相差一个小时
+</span><span class="cm">        587452393000 - 587448793000 = 3600000 毫秒 = 1 小时
+</span><span class="cm">
+</span><span class="cm">        中国曾经实行过夏令时，使用Asia/Shanghai时会处理夏令时。使用GMT+8时不会处理夏令时，因为GMT+8不能确定是哪个国家
+</span><span class="cm">        1992年以后就没有这个问题了
+</span><span class="cm">         */</span>
+    <span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>所以，可以认为 Aisa/Shanghai 和 GMT+8 的时间是相同的。</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2021-01-27</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/posts/idea/idea%E9%85%8D%E7%BD%AE%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://msdemt.github.io/posts/idea/idea%E9%85%8D%E7%BD%AE%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5/" data-title="Idea配置数据库连接"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://msdemt.github.io/posts/idea/idea%E9%85%8D%E7%BD%AE%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5/"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="https://msdemt.github.io/posts/idea/idea%E9%85%8D%E7%BD%AE%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5/" data-title="Idea配置数据库连接"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://msdemt.github.io/posts/idea/idea%E9%85%8D%E7%BD%AE%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5/" data-title="Idea配置数据库连接"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@2.14.0/icons/line.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://msdemt.github.io/posts/idea/idea%E9%85%8D%E7%BD%AE%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5/" data-title="Idea配置数据库连接" data-ralateuid="xxxx"><i class="fab fa-weibo fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/java/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/java8%E5%AE%9E%E7%8E%B0%E9%9B%86%E5%90%88%E7%9A%84%E5%B9%B6%E9%9B%86%E5%B7%AE%E9%9B%86%E4%BA%A4%E9%9B%86/" class="prev" rel="prev" title="Java8实现集合的并集、差集、交集"><i class="fas fa-angle-left fa-fw"></i>Java8实现集合的并集、差集、交集</a>
+            <a href="/posts/java/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/maven-jar%E5%8C%85%E4%B8%8B%E8%BD%BD%E4%B8%8D%E5%AE%8C%E6%95%B4%E5%87%BA%E7%8E%B0lastupdated%E7%BB%93%E5%B0%BE%E6%96%87%E4%BB%B6/" class="next" rel="next" title="Maven-jar包下载不完整，出现lastUpdated结尾文件">Maven-jar包下载不完整，出现lastUpdated结尾文件<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.80.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2021</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">xxxx</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/smooth-scroll@16.1.3/dist/smooth-scroll.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.37.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/algoliasearch@4.2.0/dist/algoliasearch-lite.umd.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.2.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.0/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"search":{"algoliaAppID":"PASDMWALPK","algoliaIndex":"index.zh-cn","algoliaSearchKey":"b42948e51daaa93df92381c8e2ac0f93","highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"algolia"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

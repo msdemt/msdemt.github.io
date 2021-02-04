@@ -3,13 +3,12 @@
         <title>centos7 - 标签 - MyBlog</title>
         <link>https://msdemt.github.io/tags/centos7/</link>
         <description>centos7 - 标签 - MyBlog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>276516848@qq.com (hekai)</managingEditor>
-            <webMaster>276516848@qq.com (hekai)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 19 Oct 2019 22:39:03 &#43;0800</lastBuildDate><atom:link href="https://msdemt.github.io/tags/centos7/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 19 Oct 2019 22:39:03 &#43;0800</lastBuildDate><atom:link href="https://msdemt.github.io/tags/centos7/" rel="self" type="application/rss+xml" /><item>
     <title>Centos7搭建NFS-Server-20191019</title>
-    <link>https://msdemt.github.io/centos7%E6%90%AD%E5%BB%BAnfs-server-20191019/</link>
+    <link>https://msdemt.github.io/posts/linux/centos7%E6%90%AD%E5%BB%BAnfs-server-20191019/</link>
     <pubDate>Sat, 19 Oct 2019 22:39:03 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://msdemt.github.io/centos7%E6%90%AD%E5%BB%BAnfs-server-20191019/</guid>
+    <guid>https://msdemt.github.io/posts/linux/centos7%E6%90%AD%E5%BB%BAnfs-server-20191019/</guid>
     <description><![CDATA[在k8s-1安装nfs server nfs客户端和服务端都安装nfs-utils包，安装时会同时安装rpcbind。安装后会创建nfsnobody用户和]]></description>
 </item></channel>
 </rss>

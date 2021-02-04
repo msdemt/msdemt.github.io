@@ -3,13 +3,12 @@
         <title>documentation - 分类 - MyBlog</title>
         <link>https://msdemt.github.io/categories/documentation/</link>
         <description>documentation - 分类 - MyBlog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>276516848@qq.com (hekai)</managingEditor>
-            <webMaster>276516848@qq.com (hekai)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Tue, 23 Jun 2020 08:57:08 &#43;0800</lastBuildDate><atom:link href="https://msdemt.github.io/categories/documentation/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Tue, 23 Jun 2020 08:57:08 &#43;0800</lastBuildDate><atom:link href="https://msdemt.github.io/categories/documentation/" rel="self" type="application/rss+xml" /><item>
     <title>K8s证书过期问题</title>
-    <link>https://msdemt.github.io/k8s%E8%AF%81%E4%B9%A6%E8%BF%87%E6%9C%9F%E9%97%AE%E9%A2%98/</link>
+    <link>https://msdemt.github.io/posts/k8s/k8s%E8%AF%81%E4%B9%A6%E8%BF%87%E6%9C%9F%E9%97%AE%E9%A2%98/</link>
     <pubDate>Tue, 23 Jun 2020 08:57:08 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://msdemt.github.io/k8s%E8%AF%81%E4%B9%A6%E8%BF%87%E6%9C%9F%E9%97%AE%E9%A2%98/</guid>
+    <guid>https://msdemt.github.io/posts/k8s/k8s%E8%AF%81%E4%B9%A6%E8%BF%87%E6%9C%9F%E9%97%AE%E9%A2%98/</guid>
     <description><![CDATA[20190620 问题： 下午出现了线上环境k8s上的docker容器服务无法接收请求的问题。具体表现如下 1 2 3 4 5 6 [root@k8s-m1 ~]# kubectl get nodes NAME STATUS ROLES AGE VERSION k8s-m1 NotReady master,worker 256d v1.6.2 k8s-m2 Ready master,worker 256d v1.6.2]]></description>
 </item></channel>
 </rss>

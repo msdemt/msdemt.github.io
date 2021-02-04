@@ -3,76 +3,75 @@
         <title>java - 标签 - MyBlog</title>
         <link>https://msdemt.github.io/tags/java/</link>
         <description>java - 标签 - MyBlog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>276516848@qq.com (hekai)</managingEditor>
-            <webMaster>276516848@qq.com (hekai)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 24 Sep 2020 16:05:32 &#43;0800</lastBuildDate><atom:link href="https://msdemt.github.io/tags/java/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 24 Sep 2020 16:05:32 &#43;0800</lastBuildDate><atom:link href="https://msdemt.github.io/tags/java/" rel="self" type="application/rss+xml" /><item>
     <title>恋上数据结构与算法-1-18-Trie</title>
-    <link>https://msdemt.github.io/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-1-18-trie/</link>
+    <link>https://msdemt.github.io/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-1-18-trie/</link>
     <pubDate>Thu, 24 Sep 2020 16:05:32 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://msdemt.github.io/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-1-18-trie/</guid>
+    <guid>https://msdemt.github.io/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-1-18-trie/</guid>
     <description><![CDATA[需求 如何判定一堆不重复的字符串是否以某个前缀开头？ 用Set\Map存储字符串 遍历所有字符串进行判断 时间复杂度 O(n) 有没有更优的数据结构实现前缀搜]]></description>
 </item><item>
     <title>恋上数据结构与算法-1-17-哈夫曼树</title>
-    <link>https://msdemt.github.io/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-1-17-%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91/</link>
+    <link>https://msdemt.github.io/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-1-17-%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91/</link>
     <pubDate>Thu, 24 Sep 2020 15:42:25 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://msdemt.github.io/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-1-17-%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91/</guid>
+    <guid>https://msdemt.github.io/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-1-17-%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91/</guid>
     <description><![CDATA[哈夫曼编码 哈夫曼编码，又称为霍夫曼编码，它是现代压缩算法的基础 假设要把字符串 ABBBCCCCCCCCDDDDDDEE 转成二进制编码进行传输 可以转为 ASCII 编码（65-69， 100000]]></description>
 </item><item>
     <title>恋上数据结构与算法-1-16-优先级队列</title>
-    <link>https://msdemt.github.io/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-1-16-%E4%BC%98%E5%85%88%E7%BA%A7%E9%98%9F%E5%88%97/</link>
+    <link>https://msdemt.github.io/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-1-16-%E4%BC%98%E5%85%88%E7%BA%A7%E9%98%9F%E5%88%97/</link>
     <pubDate>Thu, 24 Sep 2020 15:25:21 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://msdemt.github.io/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-1-16-%E4%BC%98%E5%85%88%E7%BA%A7%E9%98%9F%E5%88%97/</guid>
+    <guid>https://msdemt.github.io/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-1-16-%E4%BC%98%E5%85%88%E7%BA%A7%E9%98%9F%E5%88%97/</guid>
     <description><![CDATA[优先级队列（Priority Queue） 优先级队列也是个队列，因此提供如下接口 1 2 3 4 5 6 int size(); //元素的数量 boolean isEmpty(); //是否为空 void enQueue(E element); //入队 E]]></description>
 </item><item>
     <title>恋上数据结构与算法-1-15-二叉堆</title>
-    <link>https://msdemt.github.io/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-1-15-%E4%BA%8C%E5%8F%89%E5%A0%86/</link>
+    <link>https://msdemt.github.io/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-1-15-%E4%BA%8C%E5%8F%89%E5%A0%86/</link>
     <pubDate>Thu, 24 Sep 2020 13:04:14 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://msdemt.github.io/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-1-15-%E4%BA%8C%E5%8F%89%E5%A0%86/</guid>
+    <guid>https://msdemt.github.io/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-1-15-%E4%BA%8C%E5%8F%89%E5%A0%86/</guid>
     <description><![CDATA[思考 设计一种数据结构，用来存放整数，要求提供 3 个接口 添加元素 获取最大值 删除最大值 有没有更优的数据结构？ 堆 获取最大值：O(1)、删除最大值：O]]></description>
 </item><item>
     <title>恋上数据结构与算法-1-14-哈希表</title>
-    <link>https://msdemt.github.io/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-1-14-%E5%93%88%E5%B8%8C%E8%A1%A8/</link>
+    <link>https://msdemt.github.io/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-1-14-%E5%93%88%E5%B8%8C%E8%A1%A8/</link>
     <pubDate>Tue, 22 Sep 2020 13:10:37 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://msdemt.github.io/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-1-14-%E5%93%88%E5%B8%8C%E8%A1%A8/</guid>
+    <guid>https://msdemt.github.io/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-1-14-%E5%93%88%E5%B8%8C%E8%A1%A8/</guid>
     <description><![CDATA[哈希表 TreeMap 分析 时间复杂度（平均） 添加、删除、搜索：O(log n) 特点 key 必须具备可比较性（TreeMap是由红黑树实现的） 元素的分布是有顺序的 在实]]></description>
 </item><item>
     <title>恋上数据结构与算法-1-13-映射</title>
-    <link>https://msdemt.github.io/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-1-13-%E6%98%A0%E5%B0%84/</link>
+    <link>https://msdemt.github.io/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-1-13-%E6%98%A0%E5%B0%84/</link>
     <pubDate>Tue, 22 Sep 2020 10:58:51 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://msdemt.github.io/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-1-13-%E6%98%A0%E5%B0%84/</guid>
+    <guid>https://msdemt.github.io/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-1-13-%E6%98%A0%E5%B0%84/</guid>
     <description><![CDATA[映射 Map 在有些编程语言中也叫做字典（dictionary，比如 Python、Objective-C、Swift 等） Map 的每一个 key 是唯一的 Map 的接口]]></description>
 </item><item>
     <title>恋上数据结构与算法-1-12-集合</title>
-    <link>https://msdemt.github.io/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-1-12-%E9%9B%86%E5%90%88/</link>
+    <link>https://msdemt.github.io/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-1-12-%E9%9B%86%E5%90%88/</link>
     <pubDate>Tue, 22 Sep 2020 10:26:29 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://msdemt.github.io/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-1-12-%E9%9B%86%E5%90%88/</guid>
+    <guid>https://msdemt.github.io/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-1-12-%E9%9B%86%E5%90%88/</guid>
     <description><![CDATA[集合（set） 集合的特点 不存放重复的元素 常用于去重 存放新增IP，统计新增IP量 存放词汇，统计词汇量 &hellip;&hellip; 集合的接口 1 2 3 4 5 6 7 8 9 10 11 12 13 14 public]]></description>
 </item><item>
     <title>恋上数据结构与算法-1-11-红黑树</title>
-    <link>https://msdemt.github.io/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-1-11-%E7%BA%A2%E9%BB%91%E6%A0%91/</link>
+    <link>https://msdemt.github.io/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-1-11-%E7%BA%A2%E9%BB%91%E6%A0%91/</link>
     <pubDate>Mon, 21 Sep 2020 09:33:49 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://msdemt.github.io/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-1-11-%E7%BA%A2%E9%BB%91%E6%A0%91/</guid>
+    <guid>https://msdemt.github.io/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-1-11-%E7%BA%A2%E9%BB%91%E6%A0%91/</guid>
     <description><![CDATA[红黑树（Red Black Tree） 红黑树也是一种自平衡的二叉搜索树 以前也叫做平衡二叉 B 树（Symmetric Binary B-tree） 红黑树必须满足以下 5 条性]]></description>
 </item><item>
     <title>恋上数据结构与算法-1-10-B树</title>
-    <link>https://msdemt.github.io/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-1-10-b%E6%A0%91/</link>
+    <link>https://msdemt.github.io/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-1-10-b%E6%A0%91/</link>
     <pubDate>Mon, 21 Sep 2020 09:05:39 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://msdemt.github.io/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-1-10-b%E6%A0%91/</guid>
+    <guid>https://msdemt.github.io/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-1-10-b%E6%A0%91/</guid>
     <description><![CDATA[B 树（B-tree、B-树） B 树是一种平衡的多路搜索树，多用于文件系统、数据库的实现 仔细观察 B 树，有什么特点？ 1 个节点可以存储超过 2 个元素，]]></description>
 </item><item>
     <title>恋上数据结构与算法-1-09-AVL树</title>
-    <link>https://msdemt.github.io/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-1-09-avl%E6%A0%91/</link>
+    <link>https://msdemt.github.io/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-1-09-avl%E6%A0%91/</link>
     <pubDate>Fri, 18 Sep 2020 15:29:46 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://msdemt.github.io/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-1-09-avl%E6%A0%91/</guid>
+    <guid>https://msdemt.github.io/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%81%8B%E4%B8%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-1-09-avl%E6%A0%91/</guid>
     <description><![CDATA[AVL树 AVL树是最早发明的自平衡二叉搜索树之一 AVL取名与两位发明者的名字 G.M.Adelson-Velsky 和 E.M.Landis （来自苏联的科学家） 平衡因子（Balance Factor）]]></description>
 </item></channel>
 </rss>
