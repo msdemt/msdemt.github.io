@@ -6,7 +6,7 @@
         <meta name="robots" content="noodp" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
         <title>Springboot统一异常处理 - MyBlog</title><meta name="Description" content="我的博客"><meta property="og:title" content="Springboot统一异常处理" />
-<meta property="og:description" content="参考： https://www.jianshu.com/p/3f3d9e8d1efa https://www.jianshu.com/p/179daa24ef52 https://www.cnblogs.com/wang-yaz/p/13225830.html 本文使用的 spring boot 版本为 2.4.2 使用 ExceptionHandler 注解处理 Controller 异常 Spring 3.0 版本新增了 @ExceptionHandler 注解，它的作用是：若在某个 Controller 类中定义一个异常处理方法，并在该异常处理方" />
+<meta property="og:description" content="参考： https://www.jianshu.com/p/3f3d9e8d1efa https://www.jianshu.com/p/179daa24ef52 https://www.cnblogs.com/wang-yaz/p/13225830.html https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-error-handling 本文使用的 spring boot 版本为 2.4.2 使用 ExceptionHandler 注解处理 Controller 异常 Spring 3.0 版本新增了 @ExceptionHandler 注解，它的作用是：若在某个 Controller 类中定义一个异常处理方法，并在该异常处理" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://msdemt.github.io/posts/java/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/springboot%E7%BB%9F%E4%B8%80%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/" />
 <meta property="og:image" content="https://msdemt.github.io/logo.png"/>
@@ -16,7 +16,7 @@
 <meta name="twitter:image" content="https://msdemt.github.io/logo.png"/>
 
 <meta name="twitter:title" content="Springboot统一异常处理"/>
-<meta name="twitter:description" content="参考： https://www.jianshu.com/p/3f3d9e8d1efa https://www.jianshu.com/p/179daa24ef52 https://www.cnblogs.com/wang-yaz/p/13225830.html 本文使用的 spring boot 版本为 2.4.2 使用 ExceptionHandler 注解处理 Controller 异常 Spring 3.0 版本新增了 @ExceptionHandler 注解，它的作用是：若在某个 Controller 类中定义一个异常处理方法，并在该异常处理方"/>
+<meta name="twitter:description" content="参考： https://www.jianshu.com/p/3f3d9e8d1efa https://www.jianshu.com/p/179daa24ef52 https://www.cnblogs.com/wang-yaz/p/13225830.html https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-error-handling 本文使用的 spring boot 版本为 2.4.2 使用 ExceptionHandler 注解处理 Controller 异常 Spring 3.0 版本新增了 @ExceptionHandler 注解，它的作用是：若在某个 Controller 类中定义一个异常处理方法，并在该异常处理"/>
 <meta name="application-name" content="LoveIt">
 <meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/msdemt.github.io\/posts\/java\/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB\/springboot%E7%BB%9F%E4%B8%80%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86\/"
-        },"image": ["https:\/\/msdemt.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","wordcount":  10955 ,
+        },"image": ["https:\/\/msdemt.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","wordcount":  10956 ,
         "url": "https:\/\/msdemt.github.io\/posts\/java\/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB\/springboot%E7%BB%9F%E4%B8%80%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86\/","datePublished": "2021-02-01T15:48:46+08:00","dateModified": "2021-02-01T15:48:46+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": "https:\/\/msdemt.github.io\/images\/avatar.png"},"author": {
@@ -106,7 +106,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">Springboot统一异常处理</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>xxxx</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-02-01">2021-02-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 10955 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-02-01">2021-02-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 10956 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 22 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -142,7 +142,8 @@
 <p>参考：<br>
 <a href="https://www.jianshu.com/p/3f3d9e8d1efa">https://www.jianshu.com/p/3f3d9e8d1efa</a><br>
 <a href="https://www.jianshu.com/p/179daa24ef52">https://www.jianshu.com/p/179daa24ef52</a><br>
-<a href="https://www.cnblogs.com/wang-yaz/p/13225830.html">https://www.cnblogs.com/wang-yaz/p/13225830.html</a></p>
+<a href="https://www.cnblogs.com/wang-yaz/p/13225830.html">https://www.cnblogs.com/wang-yaz/p/13225830.html</a><br>
+<a href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-error-handling">https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-error-handling</a></p>
 </blockquote>
 <p>本文使用的 <code>spring boot</code> 版本为 <code>2.4.2</code></p>
 <h2 id="使用-exceptionhandler-注解处理-controller-异常">使用 ExceptionHandler 注解处理 Controller 异常</h2>

@@ -5,6 +5,7 @@
 > https://www.jianshu.com/p/3f3d9e8d1efa  
 > https://www.jianshu.com/p/179daa24ef52  
 > https://www.cnblogs.com/wang-yaz/p/13225830.html  
+> https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-error-handling
 
 
 本文使用的 `spring boot` 版本为 `2.4.2`

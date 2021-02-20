@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Springboot国际化 - MyBlog</title><meta name="Description" content="我的博客"><meta property="og:title" content="Springboot国际化" />
+<meta property="og:description" content="参考： https://www.toutiao.com/i6800527379874710029/ 介绍 国际化，也叫 i18n ，因为国际化的英文是 internationalization ，在首尾字母之间有 18 个字母，所以叫 i18n 。我们的应用如果做了国际化，就可以在不同的语言环境下显示" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://msdemt.github.io/posts/java/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/springboot%E5%9B%BD%E9%99%85%E5%8C%96/" />
+<meta property="og:image" content="https://msdemt.github.io/logo.png"/>
+<meta property="article:published_time" content="2021-02-04T09:14:49+08:00" />
+<meta property="article:modified_time" content="2021-02-04T09:14:49+08:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://msdemt.github.io/logo.png"/>
+
+<meta name="twitter:title" content="Springboot国际化"/>
+<meta name="twitter:description" content="参考： https://www.toutiao.com/i6800527379874710029/ 介绍 国际化，也叫 i18n ，因为国际化的英文是 internationalization ，在首尾字母之间有 18 个字母，所以叫 i18n 。我们的应用如果做了国际化，就可以在不同的语言环境下显示"/>
+<meta name="application-name" content="LoveIt">
+<meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://msdemt.github.io/posts/java/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/springboot%E5%9B%BD%E9%99%85%E5%8C%96/" /><link rel="prev" href="https://msdemt.github.io/posts/idea/idea%E9%85%8D%E7%BD%AE%E5%AD%97%E7%AC%A6%E9%9B%86%E7%BC%96%E7%A0%81/" /><link rel="next" href="https://msdemt.github.io/posts/java/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/springboot%E9%A1%B9%E7%9B%AE%E8%BF%90%E8%A1%8C%E9%9C%80%E8%A6%81%E4%BD%BF%E7%94%A8%E4%B8%B4%E6%97%B6%E7%9B%AE%E5%BD%95/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Springboot国际化",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/msdemt.github.io\/posts\/java\/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB\/springboot%E5%9B%BD%E9%99%85%E5%8C%96\/"
+        },"image": ["https:\/\/msdemt.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","wordcount":  1441 ,
+        "url": "https:\/\/msdemt.github.io\/posts\/java\/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB\/springboot%E5%9B%BD%E9%99%85%E5%8C%96\/","datePublished": "2021-02-04T09:14:49+08:00","dateModified": "2021-02-04T09:14:49+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": "https:\/\/msdemt.github.io\/images\/avatar.png"},"author": {
+                "@type": "Person",
+                "name": "xxxx"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="MyBlog"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>MyBlog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/categories/documentation/"> 文档 </a><a class="menu-item" href="/about/"> 关于 </a><a class="menu-item" href="https://github.com/dillonzq/LoveIt" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="MyBlog"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>MyBlog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/categories/documentation/" title="">文档</a><a class="menu-item" href="/about/" title="">关于</a><a class="menu-item" href="https://github.com/dillonzq/LoveIt" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Springboot国际化</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>xxxx</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-02-04">2021-02-04</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1441 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#介绍">介绍</a></li>
+    <li><a href="#实践">实践</a></li>
+    <li><a href="#自定义解析方式">自定义解析方式</a></li>
+    <li><a href="#自定义资源位置">自定义资源位置</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><blockquote>
+<p>参考：<br>
+<a href="https://www.toutiao.com/i6800527379874710029/">https://www.toutiao.com/i6800527379874710029/</a></p>
+</blockquote>
+<h2 id="介绍">介绍</h2>
+<p>国际化，也叫 <code>i18n</code> ，因为国际化的英文是 <code>internationalization</code> ，在首尾字母之间有 <code>18</code> 个字母，所以叫 <code>i18n</code> 。我们的应用如果做了国际化，就可以在不同的语言环境下显示不同的语言。</p>
+<p>在 <code>Spring</code> 中，通过 <code>AcceptHeaderLocaleResolver</code> 对国际化提供支持，开发者通过简单的配置，就可以在项目中使用国际化的功能了。</p>
+<p>在 <code>Spring Boot</code> 中，我们可以通过几行代码就能实现国际化的功能。</p>
+<p><code>Spring</code> 和 <code>Spring Boot</code> 的国际化支持，都是通过 <code>AcceptHeaderLocaleResolver</code> 解析器完成的，该解析器默认通过判断请求头中的 Accept-Language 字段来判断当前请求所属的语言环境，进而响应所属的语言。</p>
+<p><code>spring boot</code> 项目启动时，会自动配置 <code>org.springframework.boot.autoconfigure.context.MessageSourceAutoConfiguration</code> 类（可以通过查看 <code>spring-boot-autoconfigure-2.4.2.jar!\META-INF\spring.factories``，该文件中配置了该自动配置类），MessageSourceAutoConfiguration</code> 自动配置类进行配置时，会由 <code>spring</code> 容器新建 <code>org.springframework.context.MessageSource</code> 实例，并将该实例放在 <code>spring</code> 容器中，这样，我们就可以通过 <code>@Autowired</code> 在 <code>spring boot</code> 项目中引入该实例，从而进行国际化配置了。</p>
+<h2 id="实践">实践</h2>
+<p>下面进行 <code>spring boot</code> 国际化项目实践</p>
+<ol>
+<li>
+<p>使用 <code>idea</code> 新建一个 <code>spring boot</code> 项目，添加 <code>spring-boot-starter-web</code> 依赖</p>
+</li>
+<li>
+<p>在 <code>/src/main/resources</code> 目录下，新建文件 <code>messages.properties</code> 、<code>messages_zh_CN.properties</code> 、<code>messages_en_US.properties</code> 、 <code>messages_zh_TW.properties</code></p>
+<p><code>messages.properties</code> 是默认的语言配置，<code>zh_CN</code> 是简体中文，<code>en_US</code> 是英语（美国），<code>zh_TW</code> 是繁体中文</p>
+<p>向 <code>messages.properties</code> 添加如下内容</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">hello=你好，世界
+</code></pre></td></tr></table>
+</div>
+</div><p>向 <code>messages_zh_CN.properties</code> 添加如下内容</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">hello=你好，世界
+test=测试
+</code></pre></td></tr></table>
+</div>
+</div><p>向 <code>messages_en_US.properties</code> 添加如下内容</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">hello=Hello, World
+test=test
+</code></pre></td></tr></table>
+</div>
+</div><p>向 <code>messages_zh_TW.properties</code> 添加如下内容</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">hello=妳好，世界
+test=測試
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>创建 <code>HelloController</code> ，内容如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="nn">com.example.i18ndemo.controller</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.context.MessageSource</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.context.i18n.LocaleContextHolder</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RequestMapping</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RestController</span><span class="o">;</span>
+
+<span class="nd">@RestController</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">HelloController</span> <span class="o">{</span>
+
+    <span class="n">MessageSource</span> <span class="n">messageSource</span><span class="o">;</span>
+
+    <span class="nd">@Autowired</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setMessageSource</span><span class="o">(</span><span class="n">MessageSource</span> <span class="n">messageSource</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">messageSource</span> <span class="o">=</span> <span class="n">messageSource</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@RequestMapping</span><span class="o">(</span><span class="s">&#34;/hello&#34;</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">hello</span><span class="o">(){</span>
+        <span class="k">return</span> <span class="n">messageSource</span><span class="o">.</span><span class="na">getMessage</span><span class="o">(</span><span class="s">&#34;hello&#34;</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="n">LocaleContextHolder</span><span class="o">.</span><span class="na">getLocale</span><span class="o">());</span>
+    <span class="o">}</span>
+
+    <span class="nd">@RequestMapping</span><span class="o">(</span><span class="s">&#34;/test&#34;</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">test</span><span class="o">(){</span>
+        <span class="k">return</span> <span class="n">messageSource</span><span class="o">.</span><span class="na">getMessage</span><span class="o">(</span><span class="s">&#34;test&#34;</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="n">LocaleContextHolder</span><span class="o">.</span><span class="na">getLocale</span><span class="o">());</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>在 <code>HelloController</code> 中可以直接注入 <code>MessageSource</code> 实例，然后调用该实例的 <code>getMessge</code> 方法获取变量的值，第一个参数是要获取变量的 <code>key</code> ，第二个参数是如果 值 中有占位符，可以在第二个参数传入占位符对应的值，第三个参数传递一个 <code>Locale</code> 实例，相当于当前的语言环境。</p>
+</li>
+<li>
+<p>启动该项目</p>
+</li>
+<li>
+<p>使用 <code>idea</code> 自带的 <code>http client</code> 进行测试</p>
+<p>在 <code>src/test</code> 目录新建 <code>test.http</code> ，添加如下内容</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">###
+GET http://localhost:8080/test
+Accept-Language: en-US
+</code></pre></td></tr></table>
+</div>
+</div><p>运行该测试，可以得到 <code>test</code></p>
+<p>将 <code>Accept-Language</code> 改为其他语言，可以得到对应语言的 <code>test</code> 的值</p>
+</li>
+</ol>
+<h2 id="自定义解析方式">自定义解析方式</h2>
+<p>多语言环境默认是通过请求头的 <code>Accept-Language</code> 判断响应的语言，我们也可以自定义语言解析方式，例如通过请求 <code>url</code> 参数传入该请求希望响应的语言。</p>
+<p>添加如下配置类</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="nn">com.example.i18ndemo.config</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Bean</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Configuration</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.servlet.LocaleResolver</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.servlet.config.annotation.InterceptorRegistry</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.servlet.config.annotation.WebMvcConfigurer</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.servlet.i18n.LocaleChangeInterceptor</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.servlet.i18n.SessionLocaleResolver</span><span class="o">;</span>
+
+<span class="nd">@Configuration</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">I18nConfig</span> <span class="kd">implements</span> <span class="n">WebMvcConfigurer</span> <span class="o">{</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">addInterceptors</span><span class="o">(</span><span class="n">InterceptorRegistry</span> <span class="n">registry</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">LocaleChangeInterceptor</span> <span class="n">interceptor</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LocaleChangeInterceptor</span><span class="o">();</span>
+        <span class="n">interceptor</span><span class="o">.</span><span class="na">setParamName</span><span class="o">(</span><span class="s">&#34;lang&#34;</span><span class="o">);</span>
+        <span class="n">registry</span><span class="o">.</span><span class="na">addInterceptor</span><span class="o">(</span><span class="n">interceptor</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Bean</span>
+    <span class="n">LocaleResolver</span> <span class="nf">localeResolver</span><span class="o">(){</span>
+        <span class="n">SessionLocaleResolver</span> <span class="n">sessionLocaleResolver</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SessionLocaleResolver</span><span class="o">();</span>
+        <span class="k">return</span> <span class="n">sessionLocaleResolver</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>在上述配置中，我们配置了一个 LocalResolver 实例，该实例会替换默认的 AcceptHeaderLocaleResolver ，不同于 AcceptHeaderLocaleResolver 通过请求头来判断当前环境， SessionLocaleResolver 会将客户端的 Locale 保存到 HttpSession 对象中。</p>
+<p>另外，还配置了一个拦截器，这个拦截器会拦截请求中 key 为 lang 的参数（不配置的话是 locale），这个参数指定了当前的环境信息。</p>
+<p>配置完成后，启动项目</p>
+<p>在 test.http 中添加如下测试内容</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">###
+GET http://localhost:8080/test?lang=en-US
+</code></pre></td></tr></table>
+</div>
+</div><p>通过在请求中添加 lang 来指定当前的环境信息，这个只需要指定一次即可，在 session 不变的情况下，下次请求可以不必带上 lang 参数，服务端已经知道当前的环境信息了（当前环境信息已存在 session 中）。</p>
+<h2 id="自定义资源位置">自定义资源位置</h2>
+<p>默认情况下，多语言的配置文件位于 /src/main/resources 目录下，如果希望自定义，也是可以的，比如将多语言配置文件置于 /src/main/resources/i18n 目录下</p>
+<p>但是将多语言配置文件置于 /src/main/resources/i18n 后，spring boot 去 resources 目录下找不到，需要告知 spring boot 多语言配置文件的新位置，需要在 application.yml 文件中配置如下参数</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-yml" data-lang="yml"><span class="nt">spring</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">messages</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="c"># 配置i18n配置文件的路径</span><span class="w">
+</span><span class="w">    </span><span class="nt">basename</span><span class="p">:</span><span class="w"> </span><span class="l">i18n/messages</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2021-02-04</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/posts/java/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/springboot%E5%9B%BD%E9%99%85%E5%8C%96/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://msdemt.github.io/posts/java/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/springboot%E5%9B%BD%E9%99%85%E5%8C%96/" data-title="Springboot国际化"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://msdemt.github.io/posts/java/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/springboot%E5%9B%BD%E9%99%85%E5%8C%96/"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="https://msdemt.github.io/posts/java/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/springboot%E5%9B%BD%E9%99%85%E5%8C%96/" data-title="Springboot国际化"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://msdemt.github.io/posts/java/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/springboot%E5%9B%BD%E9%99%85%E5%8C%96/" data-title="Springboot国际化"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@2.14.0/icons/line.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://msdemt.github.io/posts/java/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/springboot%E5%9B%BD%E9%99%85%E5%8C%96/" data-title="Springboot国际化" data-ralateuid="xxxx"><i class="fab fa-weibo fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/idea/idea%E9%85%8D%E7%BD%AE%E5%AD%97%E7%AC%A6%E9%9B%86%E7%BC%96%E7%A0%81/" class="prev" rel="prev" title="Idea配置字符集编码"><i class="fas fa-angle-left fa-fw"></i>Idea配置字符集编码</a>
+            <a href="/posts/java/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/springboot%E9%A1%B9%E7%9B%AE%E8%BF%90%E8%A1%8C%E9%9C%80%E8%A6%81%E4%BD%BF%E7%94%A8%E4%B8%B4%E6%97%B6%E7%9B%AE%E5%BD%95/" class="next" rel="next" title="Springboot项目运行需要使用临时目录">Springboot项目运行需要使用临时目录<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.80.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2021</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">xxxx</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/smooth-scroll@16.1.3/dist/smooth-scroll.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.37.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/algoliasearch@4.2.0/dist/algoliasearch-lite.umd.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.2.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.0/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"search":{"algoliaAppID":"PASDMWALPK","algoliaIndex":"index.zh-cn","algoliaSearchKey":"b42948e51daaa93df92381c8e2ac0f93","highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"algolia"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

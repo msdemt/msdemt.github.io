@@ -5,32 +5,32 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-        <title>Idea配置字符集编码 - MyBlog</title><meta name="Description" content="我的博客"><meta property="og:title" content="Idea配置字符集编码" />
-<meta property="og:description" content="idea 安装后，第一件事应该就是配置下字符集编码，因为默认情况下，idea 新建某些文件时使用的是操作系统的默认编码，该编码可能为 GBK ，然而我们平常使" />
+        <title>ContextPath介绍 - MyBlog</title><meta name="Description" content="我的博客"><meta property="og:title" content="ContextPath介绍" />
+<meta property="og:description" content="我们在写 jsp 页面的时候，经常会看到 &lt;%=request.getContextPath()%&gt; ，这个 ContextPath 指的是项目部署到 servlet 容器中的上下文名称。 spring boot 项目，使用内嵌的tomcat 运行时，contextpat" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://msdemt.github.io/posts/idea/idea%E9%85%8D%E7%BD%AE%E5%AD%97%E7%AC%A6%E9%9B%86%E7%BC%96%E7%A0%81/" />
+<meta property="og:url" content="https://msdemt.github.io/posts/java/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/contextpath%E4%BB%8B%E7%BB%8D/" />
 <meta property="og:image" content="https://msdemt.github.io/logo.png"/>
-<meta property="article:published_time" content="2021-02-03T15:26:05+08:00" />
-<meta property="article:modified_time" content="2021-02-03T15:26:05+08:00" />
+<meta property="article:published_time" content="2021-02-09T09:51:31+08:00" />
+<meta property="article:modified_time" content="2021-02-09T09:51:31+08:00" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://msdemt.github.io/logo.png"/>
 
-<meta name="twitter:title" content="Idea配置字符集编码"/>
-<meta name="twitter:description" content="idea 安装后，第一件事应该就是配置下字符集编码，因为默认情况下，idea 新建某些文件时使用的是操作系统的默认编码，该编码可能为 GBK ，然而我们平常使"/>
+<meta name="twitter:title" content="ContextPath介绍"/>
+<meta name="twitter:description" content="我们在写 jsp 页面的时候，经常会看到 &lt;%=request.getContextPath()%&gt; ，这个 ContextPath 指的是项目部署到 servlet 容器中的上下文名称。 spring boot 项目，使用内嵌的tomcat 运行时，contextpat"/>
 <meta name="application-name" content="LoveIt">
 <meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://msdemt.github.io/posts/idea/idea%E9%85%8D%E7%BD%AE%E5%AD%97%E7%AC%A6%E9%9B%86%E7%BC%96%E7%A0%81/" /><link rel="prev" href="https://msdemt.github.io/posts/java/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/springboot%E7%BB%9F%E4%B8%80%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/" /><link rel="next" href="https://msdemt.github.io/posts/java/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/springboot%E5%9B%BD%E9%99%85%E5%8C%96/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://msdemt.github.io/posts/java/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/contextpath%E4%BB%8B%E7%BB%8D/" /><link rel="prev" href="https://msdemt.github.io/posts/java/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/request%E5%92%8Cresponse%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/" /><link rel="next" href="https://msdemt.github.io/posts/java/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/%E4%BD%BF%E7%94%A8jackson%E5%AE%9E%E7%8E%B0json%E5%AF%B9%E8%B1%A1map%E4%B9%8B%E9%97%B4%E7%9A%84%E8%BD%AC%E6%8D%A2/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "Idea配置字符集编码",
+        "headline": "ContextPath介绍",
         "inLanguage": "zh-CN",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "https:\/\/msdemt.github.io\/posts\/idea\/idea%E9%85%8D%E7%BD%AE%E5%AD%97%E7%AC%A6%E9%9B%86%E7%BC%96%E7%A0%81\/"
-        },"image": ["https:\/\/msdemt.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","wordcount":  526 ,
-        "url": "https:\/\/msdemt.github.io\/posts\/idea\/idea%E9%85%8D%E7%BD%AE%E5%AD%97%E7%AC%A6%E9%9B%86%E7%BC%96%E7%A0%81\/","datePublished": "2021-02-03T15:26:05+08:00","dateModified": "2021-02-03T15:26:05+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@id": "https:\/\/msdemt.github.io\/posts\/java\/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB\/contextpath%E4%BB%8B%E7%BB%8D\/"
+        },"image": ["https:\/\/msdemt.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","wordcount":  333 ,
+        "url": "https:\/\/msdemt.github.io\/posts\/java\/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB\/contextpath%E4%BB%8B%E7%BB%8D\/","datePublished": "2021-02-09T09:51:31+08:00","dateModified": "2021-02-09T09:51:31+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": "https:\/\/msdemt.github.io\/images\/avatar.png"},"author": {
                 "@type": "Person",
@@ -104,41 +104,64 @@
                 <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">目录</h2>
             <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animated flipInX">Idea配置字符集编码</h1><div class="post-meta">
+        </div><article class="page single"><h1 class="single-title animated flipInX">ContextPath介绍</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>xxxx</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-02-03">2021-02-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 526 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-02-09">2021-02-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 333 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
                     <span><i class="details-icon fas fa-angle-right"></i></span>
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
-            </div><div class="content" id="content"><p>idea 安装后，第一件事应该就是配置下字符集编码，因为默认情况下，idea 新建某些文件时使用的是操作系统的默认编码，该编码可能为 GBK ，然而我们平常使用的编码是 UTF-8 。</p>
-<p>gbk 编码的文件，使用 utf-8 打开后会出现中文乱码的问题。</p>
-<p>安装 idea 后，在左栏中选择 Customize ，然后选择 All settings ，依次点击 Editor -&gt; File Encodings -&gt; 将本页的字符集编码修改为 UTF-8 ，然后保存。这样就配置好idea的默认项目的字符集编码了。新建的项目和新打开的项目都会使用该字符集编码。</p>
-<p>如果，安装 idea 后，打开过某个项目A，那么该项目的字符集编码配置会保存在 .idea 文件夹中，当然，现在该项目的字符集编码应该为系统字符集编码，比如 GBK ，这不是我们期望的。</p>
-<ul>
-<li>解决方式1：在idea中打开该项目，然后依次点击 File -&gt; Settings -&gt; Editor -&gt; File Encodings -&gt; 将本页的字符集编码修改为 UTF-8 ，然后保存。</li>
-<li>解决方式2: 删除该项目下的 .idea 文件夹，然后使用上述方法配置 idea 的默认字符集编码，然后重新打开该项目</li>
-</ul>
-<p>建议，同时配置下包自动导入，可以在开发中节省时间。在左栏中选择 Customize ，然后选择 All settings ，依次点击 Editor -&gt; General -&gt; Auto Import -&gt; 选中 Add unambiguous import on the fly 和 Optimize imports on the fly</p>
-<p>这个 All Settings 配置 也可以在已打开项目的 idea 页面 中 File -&gt; New Projects Settings -&gt; Settings For New Projects 进行配置。</p>
-<p>建议，配置下 Annotation Processing ，lombok需要该功能，位置：File -&gt; New Projects Settings -&gt; Settings For New Projects -&gt; Build, Execution, Deployment -&gt; Compiler -&gt; Annotation Processors -&gt; 选中 Enable annotation processing -&gt; Apply</p>
+            </div><div class="content" id="content"><p>我们在写 jsp 页面的时候，经常会看到 <code>&lt;%=request.getContextPath()%&gt;</code> ，这个 ContextPath 指的是项目部署到 servlet 容器中的上下文名称。</p>
+<p>spring boot 项目，使用内嵌的tomcat 运行时，contextpath 默认是 / ，因此我们才能通过 localhost:8080 访问 springboot 应用。</p>
+<p>可以通过在 application.properties 配置 <code>server.servlet.context-path</code> 修改 contextpath 的值，比如将 contextpath 修改为项目名</p>
+<p>注意：contextPath 必须以 / 开头</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">server.servlet.context-path=/${spring.application.name}
+</code></pre></td></tr></table>
+</div>
+</div><p>当然，也可以引用 maven 中的 artifactId 来配置 contextPath</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">server.servlet.context-path=/@artifactId@
+</code></pre></td></tr></table>
+</div>
+</div><p>springboot 项目配置 ContextPath 后，就不能直接通过 localhost:8080 访问项目了，需要使用 localhost:8080/ContextPathName 来访问</p>
+<p>比如将 ContextPath 配置为 abc</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">server.servlet.context-path=/abc
+</code></pre></td></tr></table>
+</div>
+</div><p>那么访问的地址就为： <code>http://localhost:8080/abc</code></p>
+<p>对于部署在外置的 tomcat 中的应用， ContextPath 指的是该应用在 tomcat/webapps 中的包名，即在 tomcat 中的上下文名称。</p>
+<p>我们在写 jsp 的时候，如果引用某个静态资源或者 form 表单提交时，都需要使用 <code>&lt;%=request.getContextPath()%&gt;</code> 指定该应用的上下文名称（因为 springboot 默认上下文名称为 <code>/</code> ，所以不指定也可以。），否则就会出现找不到对应资源的情况。</p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>更新于 2021-02-03</span>
+                <span>更新于 2021-02-09</span>
             </div>
             <div class="post-info-license"></div>
         </div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
-                            <a class="link-to-markdown" href="/posts/idea/idea%E9%85%8D%E7%BD%AE%E5%AD%97%E7%AC%A6%E9%9B%86%E7%BC%96%E7%A0%81/index.md" target="_blank">阅读原始文档</a>
+                            <a class="link-to-markdown" href="/posts/java/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/contextpath%E4%BB%8B%E7%BB%8D/index.md" target="_blank">阅读原始文档</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://msdemt.github.io/posts/idea/idea%E9%85%8D%E7%BD%AE%E5%AD%97%E7%AC%A6%E9%9B%86%E7%BC%96%E7%A0%81/" data-title="Idea配置字符集编码"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://msdemt.github.io/posts/idea/idea%E9%85%8D%E7%BD%AE%E5%AD%97%E7%AC%A6%E9%9B%86%E7%BC%96%E7%A0%81/"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="https://msdemt.github.io/posts/idea/idea%E9%85%8D%E7%BD%AE%E5%AD%97%E7%AC%A6%E9%9B%86%E7%BC%96%E7%A0%81/" data-title="Idea配置字符集编码"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://msdemt.github.io/posts/idea/idea%E9%85%8D%E7%BD%AE%E5%AD%97%E7%AC%A6%E9%9B%86%E7%BC%96%E7%A0%81/" data-title="Idea配置字符集编码"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@2.14.0/icons/line.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://msdemt.github.io/posts/idea/idea%E9%85%8D%E7%BD%AE%E5%AD%97%E7%AC%A6%E9%9B%86%E7%BC%96%E7%A0%81/" data-title="Idea配置字符集编码" data-ralateuid="xxxx"><i class="fab fa-weibo fa-fw"></i></a></span>
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://msdemt.github.io/posts/java/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/contextpath%E4%BB%8B%E7%BB%8D/" data-title="ContextPath介绍"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://msdemt.github.io/posts/java/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/contextpath%E4%BB%8B%E7%BB%8D/"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="https://msdemt.github.io/posts/java/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/contextpath%E4%BB%8B%E7%BB%8D/" data-title="ContextPath介绍"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://msdemt.github.io/posts/java/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/contextpath%E4%BB%8B%E7%BB%8D/" data-title="ContextPath介绍"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@2.14.0/icons/line.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://msdemt.github.io/posts/java/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/contextpath%E4%BB%8B%E7%BB%8D/" data-title="ContextPath介绍" data-ralateuid="xxxx"><i class="fab fa-weibo fa-fw"></i></a></span>
             </div>
         </div>
     </div>
@@ -150,8 +173,8 @@
         </section>
     </div>
 
-    <div class="post-nav"><a href="/posts/java/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/springboot%E7%BB%9F%E4%B8%80%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/" class="prev" rel="prev" title="Springboot统一异常处理"><i class="fas fa-angle-left fa-fw"></i>Springboot统一异常处理</a>
-            <a href="/posts/java/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/springboot%E5%9B%BD%E9%99%85%E5%8C%96/" class="next" rel="next" title="Springboot国际化">Springboot国际化<i class="fas fa-angle-right fa-fw"></i></a></div>
+    <div class="post-nav"><a href="/posts/java/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/request%E5%92%8Cresponse%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/" class="prev" rel="prev" title="Request和Response中文乱码"><i class="fas fa-angle-left fa-fw"></i>Request和Response中文乱码</a>
+            <a href="/posts/java/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/%E4%BD%BF%E7%94%A8jackson%E5%AE%9E%E7%8E%B0json%E5%AF%B9%E8%B1%A1map%E4%B9%8B%E9%97%B4%E7%9A%84%E8%BD%AC%E6%8D%A2/" class="next" rel="next" title="使用jackson实现json、对象、map之间的转换">使用jackson实现json、对象、map之间的转换<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 </article></div>
             </main><footer class="footer">

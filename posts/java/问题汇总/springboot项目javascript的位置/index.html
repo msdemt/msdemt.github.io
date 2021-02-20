@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>SpringBoot项目JavaScript的位置 - MyBlog</title><meta name="Description" content="我的博客"><meta property="og:title" content="SpringBoot项目JavaScript的位置" />
+<meta property="og:description" content="参考： https://www.cnblogs.com/AinRain/p/3793602.html https://www.zhihu.com/question/23196829 介绍 java script 代码该放在页面的什么地方呢？ js 代码需要放在 head 或 body 里。 区别 在 HTML head 部分的 JavaScript 会在被调用的时候才执行 在 HTML body 部分的 JavaScript 会在页面加载的时" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://msdemt.github.io/posts/java/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/springboot%E9%A1%B9%E7%9B%AEjavascript%E7%9A%84%E4%BD%8D%E7%BD%AE/" />
+<meta property="og:image" content="https://msdemt.github.io/logo.png"/>
+<meta property="article:published_time" content="2021-02-07T13:51:20+08:00" />
+<meta property="article:modified_time" content="2021-02-07T13:51:20+08:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://msdemt.github.io/logo.png"/>
+
+<meta name="twitter:title" content="SpringBoot项目JavaScript的位置"/>
+<meta name="twitter:description" content="参考： https://www.cnblogs.com/AinRain/p/3793602.html https://www.zhihu.com/question/23196829 介绍 java script 代码该放在页面的什么地方呢？ js 代码需要放在 head 或 body 里。 区别 在 HTML head 部分的 JavaScript 会在被调用的时候才执行 在 HTML body 部分的 JavaScript 会在页面加载的时"/>
+<meta name="application-name" content="LoveIt">
+<meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://msdemt.github.io/posts/java/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/springboot%E9%A1%B9%E7%9B%AEjavascript%E7%9A%84%E4%BD%8D%E7%BD%AE/" /><link rel="prev" href="https://msdemt.github.io/posts/java/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/springboot%E9%A1%B9%E7%9B%AE%E9%9B%86%E6%88%90jsp/" /><link rel="next" href="https://msdemt.github.io/posts/java/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/jsp%E4%BD%BF%E7%94%A8var%E5%87%BA%E7%8E%B0%E8%AD%A6%E5%91%8A/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "SpringBoot项目JavaScript的位置",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/msdemt.github.io\/posts\/java\/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB\/springboot%E9%A1%B9%E7%9B%AEjavascript%E7%9A%84%E4%BD%8D%E7%BD%AE\/"
+        },"image": ["https:\/\/msdemt.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","wordcount":  1184 ,
+        "url": "https:\/\/msdemt.github.io\/posts\/java\/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB\/springboot%E9%A1%B9%E7%9B%AEjavascript%E7%9A%84%E4%BD%8D%E7%BD%AE\/","datePublished": "2021-02-07T13:51:20+08:00","dateModified": "2021-02-07T13:51:20+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": "https:\/\/msdemt.github.io\/images\/avatar.png"},"author": {
+                "@type": "Person",
+                "name": "xxxx"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="MyBlog"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>MyBlog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/categories/documentation/"> 文档 </a><a class="menu-item" href="/about/"> 关于 </a><a class="menu-item" href="https://github.com/dillonzq/LoveIt" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="MyBlog"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>MyBlog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/categories/documentation/" title="">文档</a><a class="menu-item" href="/about/" title="">关于</a><a class="menu-item" href="https://github.com/dillonzq/LoveIt" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">SpringBoot项目JavaScript的位置</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>xxxx</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-02-07">2021-02-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1184 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#介绍">介绍</a></li>
+    <li><a href="#js-放在-head-部分">js 放在 head 部分</a></li>
+    <li><a href="#js-放在-body-部分">js 放在 body 部分</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><blockquote>
+<p>参考：<br>
+<a href="https://www.cnblogs.com/AinRain/p/3793602.html">https://www.cnblogs.com/AinRain/p/3793602.html</a>
+<a href="https://www.zhihu.com/question/23196829">https://www.zhihu.com/question/23196829</a></p>
+</blockquote>
+<h2 id="介绍">介绍</h2>
+<p>java script 代码该放在页面的什么地方呢？</p>
+<p>js 代码需要放在 head 或 body 里。</p>
+<p>区别</p>
+<ul>
+<li>在 HTML head 部分的 JavaScript 会在被调用的时候才执行</li>
+<li>在 HTML body 部分的 JavaScript 会在页面加载的时候被执行</li>
+</ul>
+<p>如果 js 中需要操作 dom 元素，那么 js 需要放在 body 其他内容的最后面，因为 jsp 是从上向下加载的，若在 dom 元素加载之前操作该 dom ，会出现错误。</p>
+<h2 id="js-放在-head-部分">js 放在 head 部分</h2>
+<p>js 放在 head ，当 js 被调用或事件触发才会执行，不能在 js 中直接操作 dom 元素，因为 head 里的 js 是在 body 里的 dom 元素之前加载，若在 head 的js 里操作 dom 元素，会出现错误。</p>
+<p>示例如下</p>
+<p><strong>示例1 js 代码直接放在 head 里</strong></p>
+<p>jsp 页面内容如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">&lt;%@ page contentType=&#34;text/html;charset=UTF-8&#34; language=&#34;java&#34; %&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Test&lt;/title&gt;
+
+    &lt;script&gt;
+        function alertAjaxTest (method, url) {
+            // 1. 创建 XMLHttpRequest 对象
+            let xmlHttp;
+            if (window.XMLHttpRequest) {
+                xmlHttp = new XMLHttpRequest();
+            } else {
+                xmlHttp = new ActiveXObject(&#34;Microsoft.XMLHTTP&#34;);
+            }
+            console.log(xmlHttp);
+            // 2. 发送 ajax 请求
+            xmlHttp.open(method, url, true);
+            xmlHttp.send();
+            // 3. 处理服务器响应
+            xmlHttp.onreadystatechange = function () {
+                if (xmlHttp.readyState == 4 &amp;&amp; xmlHttp.status == 200) {
+                    let t = xmlHttp.responseText;
+                    alert(t);
+                }
+            }
+        }
+    &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;input id=&#34;testButton&#34; type=&#34;button&#34; value=&#34;hello&#34; onclick=&#34;alertAjaxTest(&#39;GET&#39;, &#39;/ajax/content&#39;)&#34;/&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>示例2 通过外部文件引用 js 代码</strong></p>
+<p>jsp 文件内容如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">&lt;%@ page contentType=&#34;text/html;charset=UTF-8&#34; language=&#34;java&#34; %&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Test&lt;/title&gt;
+
+    &lt;script type=&#34;text/javascript&#34; src=&#34;&lt;%=request.getContextPath()%&gt;/js/test.js&#34;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;input id=&#34;testButton&#34; type=&#34;button&#34; value=&#34;hello&#34; onclick=&#34;alertAjaxTest(&#39;GET&#39;, &#39;/ajax/content&#39;)&#34;/&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre></td></tr></table>
+</div>
+</div><p>js 文件放在 src/main/resources/static/js 文件中</p>
+<p>因为 spring boot 会将 <code>/META-INF/resources</code> 、 <code>/public</code> 、 <code>/static</code> 、 <code>/public</code> 映射为静态资源目录，这些目录下的资源是可以直接访问的，所以在 jsp 文件中通过 <code>/js/test.js</code> 访问到 <code>test.js</code> 文件。</p>
+<p>test.js 文件内容如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">alertAjaxTest</span> <span class="p">(</span><span class="nx">method</span><span class="p">,</span> <span class="nx">url</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 1. 创建 XMLHttpRequest 对象
+</span><span class="c1"></span>    <span class="kd">let</span> <span class="nx">xmlHttp</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">XMLHttpRequest</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">xmlHttp</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">xmlHttp</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ActiveXObject</span><span class="p">(</span><span class="s2">&#34;Microsoft.XMLHTTP&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">xmlHttp</span><span class="p">);</span>
+    <span class="c1">// 2. 发送 ajax 请求
+</span><span class="c1"></span>    <span class="nx">xmlHttp</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="nx">method</span><span class="p">,</span> <span class="nx">url</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+    <span class="nx">xmlHttp</span><span class="p">.</span><span class="nx">send</span><span class="p">();</span>
+    <span class="c1">// 3. 处理服务器响应
+</span><span class="c1"></span>    <span class="nx">xmlHttp</span><span class="p">.</span><span class="nx">onreadystatechange</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">xmlHttp</span><span class="p">.</span><span class="nx">readyState</span> <span class="o">==</span> <span class="mi">4</span> <span class="o">&amp;&amp;</span> <span class="nx">xmlHttp</span><span class="p">.</span><span class="nx">status</span> <span class="o">==</span> <span class="mi">200</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kd">let</span> <span class="nx">t</span> <span class="o">=</span> <span class="nx">xmlHttp</span><span class="p">.</span><span class="nx">responseText</span><span class="p">;</span>
+            <span class="nx">alert</span><span class="p">(</span><span class="nx">t</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>在 chrome 浏览器中直接访问 test.js 会发现中文乱码了，在 chrome 中按 F12 打开浏览器开发工具，在控制台中输入 document.charset ，可以发现当前页面是 GBK 编码（当文件中未指定编码，浏览器会使用系统默认编码打开文件），但是我们的 test.jsp 使用的是 UTF-8 编码，所以出现了中文乱码。</p>
+<p>解决这个乱码问题可以将 test.js 改为 GBK 编码或者将系统默认编码改为 UTF-8 ，但是感觉这种方法适用性不高，不能从根本解决问题。</p>
+<p>没有在网上找到如何在 js 文件中指定编码的方法，好像 js 文件就不能在文件内部指定编码。最后乱码就乱码吧，以后尽量少在 js 文件里加中文描述，并且线上环境也不推荐使用带有注释的 js 。</p>
+<h2 id="js-放在-body-部分">js 放在 body 部分</h2>
+<p>注意：有两种情况，一种是在 js 中直接操作 dom 元素，一种是不直接操作 dom 元素。</p>
+<p>如果在 js 中直接操作 dom 元素，则 js 需要放在 body 其他内容的后面，示例如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">&lt;%@ page contentType=&#34;text/html;charset=UTF-8&#34; language=&#34;java&#34; %&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Test&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;input id=&#34;testButton&#34; type=&#34;button&#34; value=&#34;hello&#34;/&gt;
+
+
+&lt;script&gt;
+    document.getElementById(&#34;testButton&#34;).onclick = function () {
+        // 1. 创建 XMLHttpRequest 对象
+        let xmlHttp;
+        if (window.XMLHttpRequest) {
+            xmlHttp = new XMLHttpRequest();
+        } else {
+            xmlHttp = new ActiveXObject(&#34;Microsoft.XMLHTTP&#34;);
+        }
+        console.log(xmlHttp);
+        // 2. 发送 ajax 请求
+        xmlHttp.open(&#34;GET&#34;, &#34;/ajax/content&#34;, true);
+        xmlHttp.send();
+        // 3. 处理服务器响应
+        xmlHttp.onreadystatechange = function () {
+            if (xmlHttp.readyState == 4 &amp;&amp; xmlHttp.status == 200) {
+                let t = xmlHttp.responseText;
+                alert(t);
+            }
+        }
+    }
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre></td></tr></table>
+</div>
+</div><p>js 中不直接操作 dom 元素，此时放在 body 其他元素前面或后面都可以，示例如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">&lt;%@ page contentType=&#34;text/html;charset=UTF-8&#34; language=&#34;java&#34; %&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Test&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;script&gt;
+    function alertAjaxTest (method, url) {
+        // 1. 创建 XMLHttpRequest 对象
+        let xmlHttp;
+        if (window.XMLHttpRequest) {
+            xmlHttp = new XMLHttpRequest();
+        } else {
+            xmlHttp = new ActiveXObject(&#34;Microsoft.XMLHTTP&#34;);
+        }
+        console.log(xmlHttp);
+        // 2. 发送 ajax 请求
+        xmlHttp.open(method, url, true);
+        xmlHttp.send();
+        // 3. 处理服务器响应
+        xmlHttp.onreadystatechange = function () {
+            if (xmlHttp.readyState == 4 &amp;&amp; xmlHttp.status == 200) {
+                let t = xmlHttp.responseText;
+                alert(t);
+            }
+        }
+    }
+&lt;/script&gt;
+
+&lt;input id=&#34;testButton&#34; type=&#34;button&#34; value=&#34;hello&#34; onclick=&#34;alertAjaxTest(&#39;GET&#39;, &#39;/ajax/content&#39;)&#34;/&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2021-02-07</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/posts/java/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/springboot%E9%A1%B9%E7%9B%AEjavascript%E7%9A%84%E4%BD%8D%E7%BD%AE/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://msdemt.github.io/posts/java/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/springboot%E9%A1%B9%E7%9B%AEjavascript%E7%9A%84%E4%BD%8D%E7%BD%AE/" data-title="SpringBoot项目JavaScript的位置"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://msdemt.github.io/posts/java/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/springboot%E9%A1%B9%E7%9B%AEjavascript%E7%9A%84%E4%BD%8D%E7%BD%AE/"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="https://msdemt.github.io/posts/java/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/springboot%E9%A1%B9%E7%9B%AEjavascript%E7%9A%84%E4%BD%8D%E7%BD%AE/" data-title="SpringBoot项目JavaScript的位置"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://msdemt.github.io/posts/java/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/springboot%E9%A1%B9%E7%9B%AEjavascript%E7%9A%84%E4%BD%8D%E7%BD%AE/" data-title="SpringBoot项目JavaScript的位置"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@2.14.0/icons/line.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://msdemt.github.io/posts/java/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/springboot%E9%A1%B9%E7%9B%AEjavascript%E7%9A%84%E4%BD%8D%E7%BD%AE/" data-title="SpringBoot项目JavaScript的位置" data-ralateuid="xxxx"><i class="fab fa-weibo fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/java/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/springboot%E9%A1%B9%E7%9B%AE%E9%9B%86%E6%88%90jsp/" class="prev" rel="prev" title="Springboot项目集成jsp"><i class="fas fa-angle-left fa-fw"></i>Springboot项目集成jsp</a>
+            <a href="/posts/java/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/jsp%E4%BD%BF%E7%94%A8var%E5%87%BA%E7%8E%B0%E8%AD%A6%E5%91%8A/" class="next" rel="next" title="Jsp使用var出现警告">Jsp使用var出现警告<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.80.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2021</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">xxxx</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/smooth-scroll@16.1.3/dist/smooth-scroll.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.37.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/algoliasearch@4.2.0/dist/algoliasearch-lite.umd.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.2.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.0/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"search":{"algoliaAppID":"PASDMWALPK","algoliaIndex":"index.zh-cn","algoliaSearchKey":"b42948e51daaa93df92381c8e2ac0f93","highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"algolia"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
