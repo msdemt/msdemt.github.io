@@ -3,7 +3,8 @@
         <title>tag2 - 标签 - MyBlog</title>
         <link>https://msdemt.github.io/tags/tag2/</link>
         <description>tag2 - 标签 - MyBlog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 13 Oct 2019 21:05:21 &#43;0800</lastBuildDate><atom:link href="https://msdemt.github.io/tags/tag2/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>276516848@qq.com (hekai)</managingEditor>
+            <webMaster>276516848@qq.com (hekai)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 13 Oct 2019 21:05:21 &#43;0800</lastBuildDate><atom:link href="https://msdemt.github.io/tags/tag2/" rel="self" type="application/rss+xml" /><item>
     <title>Helm v2.14.3 官方文档阅读笔记</title>
     <link>https://msdemt.github.io/posts/k8s/helm-v2.14.3-%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/</link>
     <pubDate>Sun, 13 Oct 2019 21:05:21 &#43;0800</pubDate>

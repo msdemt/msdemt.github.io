@@ -3,7 +3,8 @@
         <title>所有文章 - MyBlog</title>
         <link>https://msdemt.github.io/posts/</link>
         <description>所有文章 | MyBlog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 18 Feb 2021 17:52:50 &#43;0800</lastBuildDate><atom:link href="https://msdemt.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>276516848@qq.com (hekai)</managingEditor>
+            <webMaster>276516848@qq.com (hekai)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 18 Feb 2021 17:52:50 &#43;0800</lastBuildDate><atom:link href="https://msdemt.github.io/posts/" rel="self" type="application/rss+xml" /><item>
     <title>Java线程API</title>
     <link>https://msdemt.github.io/posts/java/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/java%E7%BA%BF%E7%A8%8Bapi/</link>
     <pubDate>Thu, 18 Feb 2021 17:52:50 &#43;0800</pubDate>
