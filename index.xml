@@ -282,6 +282,28 @@ path为子模块存储的目录路径&lt;/p&gt;
 </description>
         </item>
         <item>
+        <title>stack主题categories图片无法显示</title>
+        <link>https://msdemt.github.io/p/stack-categories-image/</link>
+        <pubDate>Fri, 07 Jul 2023 00:00:00 +0000</pubDate>
+        
+        <guid>https://msdemt.github.io/p/stack-categories-image/</guid>
+        <description>&lt;p&gt;使用hugo-theme-stack主题时，将项目部署到github pages上后，发现categories图片无法显示&lt;/p&gt;
+&lt;p&gt;解决：
+在静态网页项目根目录下新建名为 &lt;code&gt;.nojekyll&lt;/code&gt; 的文件。&lt;/p&gt;
+&lt;p&gt;Github Pages 默认是基于 Jekyll 构建，Jekyll 是一个将纯文本转换为静态网站的工具，它构建的网站下各种目录都是特定的以下划线开头命名的文件夹，例如 _layouts、_posts ，它会忽略掉其它的以下划线开头的文件夹和文件。&lt;/p&gt;
+&lt;p&gt;.nojekyll 就是告诉 Github Pages 当前网站不是基于 Jekyll 构建的，不要忽略掉下划线开头的文件和文件夹。&lt;/p&gt;
+&lt;p&gt;可见 .nojekyll 主要就是用于 Github Pages 这种有默认规则的网站部署平台，如果是部署在自己的服务器上，可以把它删掉。&lt;/p&gt;
+&lt;p&gt;反之，如果你的网站不是 Jekyll 构建的，要部署到 Github Pages ，并且包含下划线开头的文件或文件夹，那么你就需要在根目录添加一个 .nojekyll 空文件。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;参考：&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://github.com/CaiJimmy/hugo-theme-stack/issues/726&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://github.com/CaiJimmy/hugo-theme-stack/issues/726&lt;/a&gt;&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://www.cnblogs.com/babywhale/p/13560573.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://www.cnblogs.com/babywhale/p/13560573.html&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
         <title>两数之和</title>
         <link>https://msdemt.github.io/p/two_sum/</link>
         <pubDate>Fri, 07 Jul 2023 00:00:00 +0000</pubDate>
