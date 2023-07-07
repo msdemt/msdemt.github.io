@@ -6,7 +6,259 @@
         <description>Recent content in Posts on 何凯的博客</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <lastBuildDate>Wed, 09 Sep 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://msdemt.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 07 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://msdemt.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>git回退版本</title>
+        <link>https://msdemt.github.io/p/git-rollback/</link>
+        <pubDate>Fri, 07 Jul 2023 00:00:00 +0000</pubDate>
+        
+        <guid>https://msdemt.github.io/p/git-rollback/</guid>
+        <description>&lt;img src="https://msdemt.github.io/p/git-rollback/1_Wjxx83j-qyiNvFBy1yOA1w.webp" alt="Featured image of post git回退版本" /&gt;&lt;h2 id=&#34;git的4个区&#34;&gt;git的4个区&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;工作区（Working Area）
+相当于工作空间的目录，即代码的存放位置&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;暂存区（Stage）
+也称为 &lt;code&gt;index&lt;/code&gt; ，用来跟踪已暂存文件，一般存在 &lt;code&gt;.git&lt;/code&gt; 下的 &lt;code&gt;index&lt;/code&gt; 文件，所以有时也称暂存区为索引。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;本地仓库（Local Repository）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;远程仓库（Remote Repository）&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;git文件的5种状态&#34;&gt;git文件的5种状态&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;未修改（Origin）&lt;/li&gt;
+&lt;li&gt;已修改（Modified）&lt;/li&gt;
+&lt;li&gt;已暂存（Staged）&lt;/li&gt;
+&lt;li&gt;已提交（Committed）&lt;/li&gt;
+&lt;li&gt;已推送（Pushed）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://msdemt.github.io/images/git/git-status.dio.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;git区和状态&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;工作区中文件的初始状态是 &lt;code&gt;未修改&lt;/code&gt;，当我们修改文件后，其状态变为 &lt;code&gt;已修改&lt;/code&gt;，&lt;code&gt;git diff&lt;/code&gt; 命令可以查看已修改但未暂存的文件。（&lt;code&gt;git diff&lt;/code&gt;后输入 &lt;code&gt;q&lt;/code&gt; 可以退出）&lt;/li&gt;
+&lt;li&gt;通过 &lt;code&gt;git add&lt;/code&gt; 命令可以把已修改的文件添加到&lt;code&gt;暂存区&lt;/code&gt;，&lt;code&gt;git diff --cached&lt;/code&gt; 可以查看已暂存但未提交的文件。&lt;/li&gt;
+&lt;li&gt;通过 &lt;code&gt;git commit&lt;/code&gt; 将代码提交到&lt;code&gt;本地仓库&lt;/code&gt;，&lt;code&gt;git diff [本地分支] [远程分支]&lt;/code&gt; 可以查看已提交本地，但未推送到远程分支的文件。&lt;/li&gt;
+&lt;li&gt;通过 &lt;code&gt;git push&lt;/code&gt; 命令将本地分支推送到远程分支。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;回退相关命令&#34;&gt;回退相关命令&lt;/h2&gt;
+&lt;h3 id=&#34;git-reset-命令&#34;&gt;git reset 命令&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;git reset&lt;/code&gt; 是进行回退的具体命令，参数介绍如下&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;--soft&lt;/code&gt;: 仅仅将头指针恢复，已经 add 的暂存区及工作空间的文件修改不变。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--mixed&lt;/code&gt;: 将头指针恢复，已经 add 的暂存区也会恢复 ，工作空间的代码修改不变。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--hard&lt;/code&gt;: 头指针、暂存区和工作空间的修改都会恢复。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;git-log-命令&#34;&gt;git log 命令&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;git log&lt;/code&gt; 命令查看git的提交记录，但无法查看已经删除的记录。&lt;/p&gt;
+&lt;h3 id=&#34;git-reflog-命令&#34;&gt;git reflog 命令&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;git reflog&lt;/code&gt; 命令可以查看所有分支的所有操作记录（包括commit和已被删除的commit记录）&lt;/p&gt;
+&lt;h3 id=&#34;回退操作&#34;&gt;回退操作&lt;/h3&gt;
+&lt;p&gt;回退操作命令&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;将已修改或暂存但未提交的文件回退: &lt;code&gt;git reset --hard&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;将已提交未推送的版本回退: &lt;code&gt;git reset --hard origin/master&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;将已提交且推送的版本回退：
+&lt;ul&gt;
+&lt;li&gt;回退到某个版本：&lt;code&gt;git reset --hard &amp;lt;版本号&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;将回退的版本强制推送到远程仓库：&lt;code&gt;git push -f&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;--hard&lt;/code&gt; 可以替换为其他恢复等级，一般使用 &lt;code&gt;--soft&lt;/code&gt;，这样修改的内容不会丢失&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;版本号可以使用 &lt;code&gt;git log&lt;/code&gt; 或 &lt;code&gt;git reflog&lt;/code&gt; 查看，如 &lt;code&gt;git reset --hard 811aesfi8&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git reset --hard &amp;lt;版本号&amp;gt;&lt;/code&gt; 也可以替换为 &lt;code&gt;git reset --hard HEAD&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;回退到当前版本：&lt;code&gt;git reset --hard HEAD&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;回退到上一个版本：&lt;code&gt;git reset --hard HEAD^&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;回退到上两个版本：&lt;code&gt;git reset --hard HEAD^^&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;回退到上三个版本：&lt;code&gt;git reset --hard HEAD^^^&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;回退到上十个版本：&lt;code&gt;git reset --hard HEAD~10&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;git-远程覆盖本地&#34;&gt;git 远程覆盖本地&lt;/h2&gt;
+&lt;p&gt;可以执行如下命令将远程仓库的代码直接覆盖本地仓库&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;git fetch &amp;ndash;all&lt;/li&gt;
+&lt;li&gt;git reset &amp;ndash;hard origin/main&lt;/li&gt;
+&lt;li&gt;git pull&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;git fetch&lt;/code&gt; 是下载远程仓库的内容，不做任务的合并&lt;br&gt;
+&lt;code&gt;git reset&lt;/code&gt; 把 &lt;code&gt;HEAD&lt;/code&gt; 指向刚刚下载的最新版本&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;参考：&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/qing040513/article/details/109150075&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://blog.csdn.net/qing040513/article/details/109150075&lt;/a&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/gercke/article/details/119085963&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://blog.csdn.net/gercke/article/details/119085963&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
+        <title>git设置代理</title>
+        <link>https://msdemt.github.io/p/git-proxy/</link>
+        <pubDate>Fri, 07 Jul 2023 00:00:00 +0000</pubDate>
+        
+        <guid>https://msdemt.github.io/p/git-proxy/</guid>
+        <description>&lt;img src="https://msdemt.github.io/p/git-proxy/1_Wjxx83j-qyiNvFBy1yOA1w.webp" alt="Featured image of post git设置代理" /&gt;&lt;h2 id=&#34;添加代理&#34;&gt;添加代理&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;//http || https
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;git config --global http.proxy 127.0.0.1:7890
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;git config --global https.proxy 127.0.0.1:7890
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;//sock5代理
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;git config --global http.proxy socks5 127.0.0.1:7891
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;git config --global http.proxy socks5 127.0.0.1:7891
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;查看代理&#34;&gt;查看代理&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;git config --global --get http.proxy
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;git config --global --get https.proxy
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;取消代理&#34;&gt;取消代理&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;git config --global --unset http.proxy
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;git config --global --unset https.proxy
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;clash-for-windows-代理&#34;&gt;clash for windows 代理&lt;/h2&gt;
+&lt;p&gt;clash for windows 的 http 和 socks5 代理使用的是同一个端口。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;参考：&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/weimeibuqieryu/article/details/106793645&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://blog.csdn.net/weimeibuqieryu/article/details/106793645&lt;/a&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://github.com/Fndroid/clash_for_windows_pkg/issues/1244&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://github.com/Fndroid/clash_for_windows_pkg/issues/1244&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
+        <title>git子模块操作</title>
+        <link>https://msdemt.github.io/p/git-submodule/</link>
+        <pubDate>Fri, 07 Jul 2023 00:00:00 +0000</pubDate>
+        
+        <guid>https://msdemt.github.io/p/git-submodule/</guid>
+        <description>&lt;img src="https://msdemt.github.io/p/git-submodule/1_Wjxx83j-qyiNvFBy1yOA1w.webp" alt="Featured image of post git子模块操作" /&gt;&lt;h2 id=&#34;添加子模块&#34;&gt;添加子模块&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;git submodule add &amp;lt;url&amp;gt; &amp;lt;path&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;url为子模块git路径
+path为子模块存储的目录路径&lt;/p&gt;
+&lt;p&gt;如，将 hugo-theme-stack 项目作为子模块添加到本地项目的 themes 目录&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-v&#34; data-lang=&#34;v&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;git&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;submodule&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;add&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;https&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;//github.com/CaiJimmy/hugo-theme-stack.git themes
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;子模块添加成功后，执行 &lt;code&gt;git status&lt;/code&gt; 命令可以看到 &lt;code&gt;.gitmodules&lt;/code&gt; 文件已被修改，并新增了一个子模块&lt;/p&gt;
+&lt;p&gt;执行 &lt;code&gt;git diff --cached&lt;/code&gt; 命令可以查看修改内容&lt;/p&gt;
+&lt;p&gt;执行 &lt;code&gt;git commit&lt;/code&gt; 命令可以将子模块添加到本地仓库&lt;/p&gt;
+&lt;h2 id=&#34;使用子模块&#34;&gt;使用子模块&lt;/h2&gt;
+&lt;p&gt;直接克隆包含子模块的项目时，子模块目录下没有任何文件，需要在项目的根目录下执行如下命令，完成子模块的下载&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-v&#34; data-lang=&#34;v&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;git&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;submodule&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;init&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;git&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;submodule&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;update&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;或者&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-v&#34; data-lang=&#34;v&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;git&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;submodule&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;update&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;--&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;init&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;克隆项目的同时下载子模块&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;git clone &amp;lt;url&amp;gt; --recursive
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;更新子模块&#34;&gt;更新子模块&lt;/h2&gt;
+&lt;p&gt;子模块的维护者更新子模块后，使用子模块的项目必须手动更新子模块才可以使用最新的子模块。&lt;/p&gt;
+&lt;p&gt;在项目中，进入子模块目录下，执行 &lt;code&gt;git pull&lt;/code&gt; 更新，执行 &lt;code&gt;git log&lt;/code&gt; 可以查看子模块的更新内容。&lt;/p&gt;
+&lt;p&gt;之后进入项目根目录，使用 &lt;code&gt;git add&lt;/code&gt; 和 &lt;code&gt;git commit&lt;/code&gt; 命令将子模块更新到项目中，然后使用 &lt;code&gt;git push&lt;/code&gt; 命令将更新子模块的项目推送到远程仓库。&lt;/p&gt;
+&lt;p&gt;如果自己要修改子模块内容，需要子模块根路径下执行 &lt;code&gt;git checkout &amp;lt;分支名&amp;gt;&lt;/code&gt; ，然后才可以对该子模块进行提交。&lt;/p&gt;
+&lt;p&gt;将子模块修改提交后，如果希望将项目依赖的子模块更新到最新版本，需要在项目根路径下执行 &lt;code&gt;git submodule update --remote&lt;/code&gt;，然后将项目提交到远程仓库。&lt;/p&gt;
+&lt;h2 id=&#34;删除子模块&#34;&gt;删除子模块&lt;/h2&gt;
+&lt;p&gt;使用 &lt;code&gt;git submodule deinit &amp;lt;子模块名称&amp;gt;&lt;/code&gt; 和 &lt;code&gt;git rm &amp;lt;子模块名称&amp;gt;&lt;/code&gt; 命令卸载一个子模块。&lt;/p&gt;
+&lt;p&gt;如果添加 &amp;ndash;force 参数，则子模块工作区内即使有本地的修改，也会被移除。&lt;/p&gt;
+&lt;p&gt;例如，删除名为 test-submodule 子模块&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-v&#34; data-lang=&#34;v&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;git&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;submodule&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;deinit&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;test&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;submodule&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;git&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;rm&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;test&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;submodule&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;如果完全删除子模块，还需要删除项目根路径下的 &lt;code&gt;.gitmodules&lt;/code&gt; 文件和 &lt;code&gt;.git/modules&lt;/code&gt; 目录下的子模块文件&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;参考：&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/guotianqing/article/details/82391665&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://blog.csdn.net/guotianqing/article/details/82391665&lt;/a&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/Lee_queenie/article/details/127386151&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://blog.csdn.net/Lee_queenie/article/details/127386151&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
         <title>中文测试</title>
         <link>https://msdemt.github.io/p/test-chinese/</link>
         <pubDate>Wed, 09 Sep 2020 00:00:00 +0000</pubDate>

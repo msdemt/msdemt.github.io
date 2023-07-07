@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='git回退版本'>
+<title>git回退版本</title>
+
+<link rel='canonical' href='https://msdemt.github.io/p/git-rollback/'>
+
+<link rel="stylesheet" href="/scss/style.min.8191399262444ab68b72a18c97392f5349be20a1615d77445be51e974c144cff.css"><meta property='og:title' content='git回退版本'>
+<meta property='og:description' content='git回退版本'>
+<meta property='og:url' content='https://msdemt.github.io/p/git-rollback/'>
+<meta property='og:site_name' content='何凯的博客'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='git' /><meta property='article:published_time' content='2023-07-07T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2023-07-07T00:00:00&#43;00:00'/><meta property='og:image' content='https://msdemt.github.io/p/git-rollback/1_Wjxx83j-qyiNvFBy1yOA1w.webp' />
+<meta name="twitter:title" content="git回退版本">
+<meta name="twitter:description" content="git回退版本"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://msdemt.github.io/p/git-rollback/1_Wjxx83j-qyiNvFBy1yOA1w.webp' />
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu8bf57b87f6c84d6a9bc2eb369290e574_128598_300x0_resize_box_3.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">何凯的博客</a></h1>
+            <h2 class="site-description">The road is long and difficult, forge ahead.</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://github.com/CaiJimmy/hugo-theme-stack'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E9%93%BE%E6%8E%A5/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+                <li id="i18n-switch">  
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                    <select name="language" onchange="window.location.href = this.selectedOptions[0].value">
+                        
+                            <option value="https://msdemt.github.io/" selected>中文</option>
+                        
+                            <option value="https://msdemt.github.io/en/" >English</option>
+                        
+                    </select>
+                </li>
+            
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>暗色模式</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#git的4个区">git的4个区</a></li>
+    <li><a href="#git文件的5种状态">git文件的5种状态</a></li>
+    <li><a href="#回退相关命令">回退相关命令</a>
+      <ol>
+        <li><a href="#git-reset-命令">git reset 命令</a></li>
+        <li><a href="#git-log-命令">git log 命令</a></li>
+        <li><a href="#git-reflog-命令">git reflog 命令</a></li>
+        <li><a href="#回退操作">回退操作</a></li>
+      </ol>
+    </li>
+    <li><a href="#git-远程覆盖本地">git 远程覆盖本地</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/git-rollback/">
+                <img src="/p/git-rollback/1_Wjxx83j-qyiNvFBy1yOA1w_hufb4407888dbfcda01762496277a1213f_11862_800x0_resize_q75_h2_box_2.webp"
+                        srcset="/p/git-rollback/1_Wjxx83j-qyiNvFBy1yOA1w_hufb4407888dbfcda01762496277a1213f_11862_800x0_resize_q75_h2_box_2.webp 800w, /p/git-rollback/1_Wjxx83j-qyiNvFBy1yOA1w_hufb4407888dbfcda01762496277a1213f_11862_1600x0_resize_q75_h2_box_2.webp 1600w"
+                        width="800" 
+                        height="482" 
+                        loading="lazy"
+                        alt="Featured image of post git回退版本" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/git/" >
+                git
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/git-rollback/">git回退版本</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            git回退版本
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2023-07-07</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 2 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="git的4个区">git的4个区</h2>
+<ul>
+<li>
+<p>工作区（Working Area）
+相当于工作空间的目录，即代码的存放位置</p>
+</li>
+<li>
+<p>暂存区（Stage）
+也称为 <code>index</code> ，用来跟踪已暂存文件，一般存在 <code>.git</code> 下的 <code>index</code> 文件，所以有时也称暂存区为索引。</p>
+</li>
+<li>
+<p>本地仓库（Local Repository）</p>
+</li>
+<li>
+<p>远程仓库（Remote Repository）</p>
+</li>
+</ul>
+<h2 id="git文件的5种状态">git文件的5种状态</h2>
+<ul>
+<li>未修改（Origin）</li>
+<li>已修改（Modified）</li>
+<li>已暂存（Staged）</li>
+<li>已提交（Committed）</li>
+<li>已推送（Pushed）</li>
+</ul>
+<p><img src="/images/git/git-status.dio.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="git区和状态"
+	
+	
+></p>
+<ul>
+<li>工作区中文件的初始状态是 <code>未修改</code>，当我们修改文件后，其状态变为 <code>已修改</code>，<code>git diff</code> 命令可以查看已修改但未暂存的文件。（<code>git diff</code>后输入 <code>q</code> 可以退出）</li>
+<li>通过 <code>git add</code> 命令可以把已修改的文件添加到<code>暂存区</code>，<code>git diff --cached</code> 可以查看已暂存但未提交的文件。</li>
+<li>通过 <code>git commit</code> 将代码提交到<code>本地仓库</code>，<code>git diff [本地分支] [远程分支]</code> 可以查看已提交本地，但未推送到远程分支的文件。</li>
+<li>通过 <code>git push</code> 命令将本地分支推送到远程分支。</li>
+</ul>
+<h2 id="回退相关命令">回退相关命令</h2>
+<h3 id="git-reset-命令">git reset 命令</h3>
+<p><code>git reset</code> 是进行回退的具体命令，参数介绍如下</p>
+<ul>
+<li><code>--soft</code>: 仅仅将头指针恢复，已经 add 的暂存区及工作空间的文件修改不变。</li>
+<li><code>--mixed</code>: 将头指针恢复，已经 add 的暂存区也会恢复 ，工作空间的代码修改不变。</li>
+<li><code>--hard</code>: 头指针、暂存区和工作空间的修改都会恢复。</li>
+</ul>
+<h3 id="git-log-命令">git log 命令</h3>
+<p><code>git log</code> 命令查看git的提交记录，但无法查看已经删除的记录。</p>
+<h3 id="git-reflog-命令">git reflog 命令</h3>
+<p><code>git reflog</code> 命令可以查看所有分支的所有操作记录（包括commit和已被删除的commit记录）</p>
+<h3 id="回退操作">回退操作</h3>
+<p>回退操作命令</p>
+<ul>
+<li>将已修改或暂存但未提交的文件回退: <code>git reset --hard</code></li>
+<li>将已提交未推送的版本回退: <code>git reset --hard origin/master</code></li>
+<li>将已提交且推送的版本回退：
+<ul>
+<li>回退到某个版本：<code>git reset --hard &lt;版本号&gt;</code></li>
+<li>将回退的版本强制推送到远程仓库：<code>git push -f</code></li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><code>--hard</code> 可以替换为其他恢复等级，一般使用 <code>--soft</code>，这样修改的内容不会丢失</p>
+</blockquote>
+<p>版本号可以使用 <code>git log</code> 或 <code>git reflog</code> 查看，如 <code>git reset --hard 811aesfi8</code></p>
+<p><code>git reset --hard &lt;版本号&gt;</code> 也可以替换为 <code>git reset --hard HEAD</code></p>
+<ul>
+<li>回退到当前版本：<code>git reset --hard HEAD</code></li>
+<li>回退到上一个版本：<code>git reset --hard HEAD^</code></li>
+<li>回退到上两个版本：<code>git reset --hard HEAD^^</code></li>
+<li>回退到上三个版本：<code>git reset --hard HEAD^^^</code></li>
+<li>回退到上十个版本：<code>git reset --hard HEAD~10</code></li>
+</ul>
+<h2 id="git-远程覆盖本地">git 远程覆盖本地</h2>
+<p>可以执行如下命令将远程仓库的代码直接覆盖本地仓库</p>
+<ul>
+<li>git fetch &ndash;all</li>
+<li>git reset &ndash;hard origin/main</li>
+<li>git pull</li>
+</ul>
+<blockquote>
+<p><code>git fetch</code> 是下载远程仓库的内容，不做任务的合并<br>
+<code>git reset</code> 把 <code>HEAD</code> 指向刚刚下载的最新版本</p>
+</blockquote>
+<blockquote>
+<p>参考：<br>
+<a class="link" href="https://blog.csdn.net/qing040513/article/details/109150075"  target="_blank" rel="noopener"
+    >https://blog.csdn.net/qing040513/article/details/109150075</a>
+<a class="link" href="https://blog.csdn.net/gercke/article/details/119085963"  target="_blank" rel="noopener"
+    >https://blog.csdn.net/gercke/article/details/119085963</a></p>
+</blockquote>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/git/">git</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/git-submodule/">
+        
+        
+            <div class="article-image">
+                <img src="/p/git-submodule/_hufb4407888dbfcda01762496277a1213f_11862_928897ddf95d75e64051d740839c147a.webp" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post git子模块操作"
+                        data-key="git-submodule" 
+                        data-hash="md5-VMTzLrAW2EJKJaeiG&#43;gL0g==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">git子模块操作</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/git-proxy/">
+        
+        
+            <div class="article-image">
+                <img src="/p/git-proxy/_hufb4407888dbfcda01762496277a1213f_11862_928897ddf95d75e64051d740839c147a.webp" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post git设置代理"
+                        data-key="git-proxy" 
+                        data-hash="md5-VMTzLrAW2EJKJaeiG&#43;gL0g==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">git设置代理</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2023 何凯的博客
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.16.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

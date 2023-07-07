@@ -3,7 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://msdemt.github.io/</loc>
-    <lastmod>2020-09-09T00:00:00+00:00</lastmod>
+    <lastmod>2023-07-07T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -16,7 +16,7 @@
                 />
   </url><url>
     <loc>https://msdemt.github.io/categories/</loc>
-    <lastmod>2020-09-09T00:00:00+00:00</lastmod>
+    <lastmod>2023-07-07T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -28,8 +28,23 @@
                 href="https://msdemt.github.io/categories/"
                 />
   </url><url>
+    <loc>https://msdemt.github.io/tags/git/</loc>
+    <lastmod>2023-07-07T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://msdemt.github.io/categories/git/</loc>
+    <lastmod>2023-07-07T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://msdemt.github.io/p/git-rollback/</loc>
+    <lastmod>2023-07-07T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://msdemt.github.io/p/git-proxy/</loc>
+    <lastmod>2023-07-07T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://msdemt.github.io/p/git-submodule/</loc>
+    <lastmod>2023-07-07T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://msdemt.github.io/post/</loc>
-    <lastmod>2020-09-09T00:00:00+00:00</lastmod>
+    <lastmod>2023-07-07T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -39,6 +54,19 @@
                 rel="alternate"
                 hreflang="zh-cn"
                 href="https://msdemt.github.io/post/"
+                />
+  </url><url>
+    <loc>https://msdemt.github.io/tags/</loc>
+    <lastmod>2023-07-07T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://msdemt.github.io/en/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://msdemt.github.io/tags/"
                 />
   </url><url>
     <loc>https://msdemt.github.io/categories/stack/</loc>
@@ -133,19 +161,6 @@
                 rel="alternate"
                 hreflang="zh-cn"
                 href="https://msdemt.github.io/p/markdown-syntax-guide/"
-                />
-  </url><url>
-    <loc>https://msdemt.github.io/tags/</loc>
-    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://msdemt.github.io/en/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://msdemt.github.io/tags/"
                 />
   </url><url>
     <loc>https://msdemt.github.io/tags/themes/</loc>
