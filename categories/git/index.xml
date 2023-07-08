@@ -255,7 +255,7 @@ path为子模块存储的目录路径&lt;/p&gt;
 &lt;p&gt;子模块的维护者更新子模块后，使用子模块的项目必须手动更新子模块才可以使用最新的子模块。&lt;/p&gt;
 &lt;p&gt;在项目中，进入子模块目录下，执行 &lt;code&gt;git pull&lt;/code&gt; 更新，执行 &lt;code&gt;git log&lt;/code&gt; 可以查看子模块的更新内容。&lt;/p&gt;
 &lt;p&gt;之后进入项目根目录，使用 &lt;code&gt;git add&lt;/code&gt; 和 &lt;code&gt;git commit&lt;/code&gt; 命令将子模块更新到项目中，然后使用 &lt;code&gt;git push&lt;/code&gt; 命令将更新子模块的项目推送到远程仓库。&lt;/p&gt;
-&lt;p&gt;如果自己要修改子模块内容，需要子模块根路径下执行 &lt;code&gt;git checkout &amp;lt;分支名&amp;gt;&lt;/code&gt; ，然后才可以对该子模块进行提交。&lt;/p&gt;
+&lt;p&gt;如果自己要修改子模块内容，需要先在子模块根路径下执行 &lt;code&gt;git checkout &amp;lt;分支名&amp;gt;&lt;/code&gt; ，然后才可以对该子模块进行修改和提交，否则&lt;code&gt;git push&lt;/code&gt;提交时出现&lt;code&gt;Everything up-to-date&lt;/code&gt;。&lt;/p&gt;
 &lt;p&gt;将子模块修改提交后，如果希望将项目依赖的子模块更新到最新版本，需要在项目根路径下执行 &lt;code&gt;git submodule update --remote&lt;/code&gt;，然后将项目提交到远程仓库。&lt;/p&gt;
 &lt;h2 id=&#34;删除子模块&#34;&gt;删除子模块&lt;/h2&gt;
 &lt;p&gt;使用 &lt;code&gt;git submodule deinit &amp;lt;子模块名称&amp;gt;&lt;/code&gt; 和 &lt;code&gt;git rm &amp;lt;子模块名称&amp;gt;&lt;/code&gt; 命令卸载一个子模块。&lt;/p&gt;

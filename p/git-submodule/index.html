@@ -422,7 +422,7 @@ path为子模块存储的目录路径</p>
 <p>子模块的维护者更新子模块后，使用子模块的项目必须手动更新子模块才可以使用最新的子模块。</p>
 <p>在项目中，进入子模块目录下，执行 <code>git pull</code> 更新，执行 <code>git log</code> 可以查看子模块的更新内容。</p>
 <p>之后进入项目根目录，使用 <code>git add</code> 和 <code>git commit</code> 命令将子模块更新到项目中，然后使用 <code>git push</code> 命令将更新子模块的项目推送到远程仓库。</p>
-<p>如果自己要修改子模块内容，需要子模块根路径下执行 <code>git checkout &lt;分支名&gt;</code> ，然后才可以对该子模块进行提交。</p>
+<p>如果自己要修改子模块内容，需要先在子模块根路径下执行 <code>git checkout &lt;分支名&gt;</code> ，然后才可以对该子模块进行修改和提交，否则<code>git push</code>提交时出现<code>Everything up-to-date</code>。</p>
 <p>将子模块修改提交后，如果希望将项目依赖的子模块更新到最新版本，需要在项目根路径下执行 <code>git submodule update --remote</code>，然后将项目提交到远程仓库。</p>
 <h2 id="删除子模块">删除子模块</h2>
 <p>使用 <code>git submodule deinit &lt;子模块名称&gt;</code> 和 <code>git rm &lt;子模块名称&gt;</code> 命令卸载一个子模块。</p>

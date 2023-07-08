@@ -34,6 +34,12 @@
     <loc>https://msdemt.github.io/categories/git/</loc>
     <lastmod>2023-07-07T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>https://msdemt.github.io/categories/github/</loc>
+    <lastmod>2023-07-07T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://msdemt.github.io/p/github-pages-image/</loc>
+    <lastmod>2023-07-07T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://msdemt.github.io/p/git-rollback/</loc>
     <lastmod>2023-07-07T00:00:00+00:00</lastmod>
   </url><url>
@@ -49,6 +55,12 @@
     <loc>https://msdemt.github.io/categories/leetcode/</loc>
     <lastmod>2023-07-07T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>https://msdemt.github.io/tags/linux/</loc>
+    <lastmod>2023-07-07T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://msdemt.github.io/categories/linux/</loc>
+    <lastmod>2023-07-07T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://msdemt.github.io/post/</loc>
     <lastmod>2023-07-07T00:00:00+00:00</lastmod>
     <xhtml:link
@@ -61,22 +73,6 @@
                 hreflang="zh-cn"
                 href="https://msdemt.github.io/post/"
                 />
-  </url><url>
-    <loc>https://msdemt.github.io/categories/stack/</loc>
-    <lastmod>2023-07-07T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://msdemt.github.io/en/categories/stack/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://msdemt.github.io/categories/stack/"
-                />
-  </url><url>
-    <loc>https://msdemt.github.io/p/stack-categories-image/</loc>
-    <lastmod>2023-07-07T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://msdemt.github.io/tags/</loc>
     <lastmod>2023-07-07T00:00:00+00:00</lastmod>
@@ -91,8 +87,30 @@
                 href="https://msdemt.github.io/tags/"
                 />
   </url><url>
+    <loc>https://msdemt.github.io/tags/ubuntu/</loc>
+    <lastmod>2023-07-07T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://msdemt.github.io/p/ubuntu-vscode-font/</loc>
+    <lastmod>2023-07-07T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://msdemt.github.io/p/two_sum/</loc>
     <lastmod>2023-07-07T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://msdemt.github.io/p/ubuntu-root-pwd/</loc>
+    <lastmod>2022-11-23T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://msdemt.github.io/categories/stack/</loc>
+    <lastmod>2020-09-09T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://msdemt.github.io/en/categories/stack/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://msdemt.github.io/categories/stack/"
+                />
   </url><url>
     <loc>https://msdemt.github.io/p/test-chinese/</loc>
     <lastmod>2020-09-09T00:00:00+00:00</lastmod>
@@ -306,8 +324,6 @@
                 />
   </url><url>
     <loc>https://msdemt.github.io/categories/java/</loc>
-  </url><url>
-    <loc>https://msdemt.github.io/categories/linux/</loc>
   </url><url>
     <loc>https://msdemt.github.io/%E5%85%B3%E4%BA%8E/</loc>
     <xhtml:link
