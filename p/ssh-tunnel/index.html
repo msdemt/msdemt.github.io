@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='使用隧道代理实现多级ssh访问内网服务器'>
+<title>多级ssh访问内网服务器</title>
+
+<link rel='canonical' href='https://msdemt.github.io/p/ssh-tunnel/'>
+
+<link rel="stylesheet" href="/scss/style.min.ff300df33b80e2ac49809c825614392ed1c7b27591d65d3c4043602cd162e25f.css"><meta property='og:title' content='多级ssh访问内网服务器'>
+<meta property='og:description' content='使用隧道代理实现多级ssh访问内网服务器'>
+<meta property='og:url' content='https://msdemt.github.io/p/ssh-tunnel/'>
+<meta property='og:site_name' content='何凯的博客'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='linux' /><meta property='article:published_time' content='2023-07-19T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2023-07-19T00:00:00&#43;00:00'/><meta property='og:image' content='https://msdemt.github.io/p/ssh-tunnel/Linux-Symbole-2048x1158.png' />
+<meta name="twitter:title" content="多级ssh访问内网服务器">
+<meta name="twitter:description" content="使用隧道代理实现多级ssh访问内网服务器"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://msdemt.github.io/p/ssh-tunnel/Linux-Symbole-2048x1158.png' />
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu8bf57b87f6c84d6a9bc2eb369290e574_128598_300x0_resize_box_3.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">何凯的博客</a></h1>
+            <h2 class="site-description">The road is long and difficult, forge ahead.</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://github.com/msdemt'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E9%93%BE%E6%8E%A5/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+                <li id="i18n-switch">  
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                    <select name="language" onchange="window.location.href = this.selectedOptions[0].value">
+                        
+                            <option value="https://msdemt.github.io/" selected>中文</option>
+                        
+                            <option value="https://msdemt.github.io/en/" >English</option>
+                        
+                    </select>
+                </li>
+            
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>暗色模式</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#介绍">介绍</a></li>
+    <li><a href="#使用bitvise配置">使用bitvise配置</a></li>
+    <li><a href="#使用finalshell配置">使用finalshell配置</a></li>
+    <li><a href="#使用proxyjump配置">使用ProxyJump配置</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/ssh-tunnel/">
+                <img src="/p/ssh-tunnel/Linux-Symbole-2048x1158_hu6f8b26c03cc6e65572403f8d94a50599_544049_800x0_resize_box_3.png"
+                        srcset="/p/ssh-tunnel/Linux-Symbole-2048x1158_hu6f8b26c03cc6e65572403f8d94a50599_544049_800x0_resize_box_3.png 800w, /p/ssh-tunnel/Linux-Symbole-2048x1158_hu6f8b26c03cc6e65572403f8d94a50599_544049_1600x0_resize_box_3.png 1600w"
+                        width="800" 
+                        height="452" 
+                        loading="lazy"
+                        alt="Featured image of post 多级ssh访问内网服务器" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/linux/" style="background-color: #ff8033; color: #fff;">
+                linux
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/ssh-tunnel/">多级ssh访问内网服务器</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            使用隧道代理实现多级ssh访问内网服务器
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2023-07-19</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 4 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="介绍">介绍</h2>
+<p>工作中，生产环境的服务器是无法直接访问的，通常需要4A，访问比较麻烦，可以使用 <code>ssh隧道</code> 简化登录流程。</p>
+<p>如下图</p>
+<p><img src="/images/linux/common/ssh-tunnel.dio.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="流程"
+	
+	
+></p>
+<p>ssh登录<code>4A</code>后，无法直接访问 <code>server-2</code>，可以通过 <code>server-1</code> 服务器代理访问。</p>
+<p>具体流程</p>
+<ol>
+<li>ssh登录4A，新建隧道</li>
+<li>使用4A的隧道作为代理，ssh访问<code>server-1</code>服务器,在<code>server-1</code>上新建隧道</li>
+<li>使用<code>server-1</code>隧道代理访问<code>server-2</code>服务器</li>
+</ol>
+<h2 id="使用bitvise配置">使用bitvise配置</h2>
+<ol>
+<li>
+<p>安装<code>bitvise ssh client</code>，下载地址：https://www.bitvise.com/download-area</p>
+</li>
+<li>
+<p>新开一个bitvise页面，假设<code>4A</code>系统内网IP为<code>192.168.15.45:10011</code>，添加用户名、密码等登录信息，点击<code>Save profile</code>，将该配置保存。</p>
+</li>
+</ol>
+<p><img src="/images/linux/common/bitvise-1.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="bitvise-1"
+	
+	
+></p>
+<ol start="3">
+<li>新开一个bitvise页面，填入<code>server-1</code>的IP、端口和登录信息，在 <code>Proxy settings</code> 中，选择第二步保存的<code>4A</code>配置文件，这样就可以使用<code>4A</code>作为代理访问<code>server-1</code>了。（第二步不需要登录了）</li>
+</ol>
+<p><img src="/images/linux/common/bitvise-2.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="bitvise-2"
+	
+	
+></p>
+<p>因为的目标服务器<code>server-2</code>还需要使用<code>server-1</code>代理才可以访问，所以还需要打开<code>Services</code>选项卡，勾选<code>SOCKS/HTTP Proxy Forwarding</code>，将本地空闲的端口如<code>1079</code>填入<code>Listen Port</code>；</p>
+<p><img src="/images/linux/common/bitvise-3.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="bitvise-3"
+	
+	
+></p>
+<p>点击<code>Login</code>，登录到<code>server-1</code>服务器</p>
+<ol start="3">
+<li>打开一个新的bitvise页面，填入目标服务器 <code>server-2</code> 的IP、端口和登录信息，<code>Proxy Setting</code>配置使用<code>server-1</code>服务器开放的1079代理端口。</li>
+</ol>
+<p><img src="/images/linux/common/bitvise-4.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="bitvise-4"
+	
+	
+></p>
+<p>为了能够访问 <code>server-2</code> 服务器上的网页服务，比如<code>jenkins</code>，还需要在<code>Services</code>标签页中开放代理，比如使用本地未使用的端口<code>1080</code>作为代理端口</p>
+<p><img src="/images/linux/common/bitvise-5.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="bitvise-5"
+	
+	
+></p>
+<ol start="4">
+<li>本地浏览器可以使用<code>SwitchyOmega</code>插件，将目标服务器上的<code>jenkins</code>等地址配置使用<code>127.0.0.1:1080</code>代理访问。</li>
+</ol>
+<h2 id="使用finalshell配置">使用finalshell配置</h2>
+<p>bitvise仅支持windows系统，如果在linux（如：ubuntu）上访问目标服务器，可以使用finalshell</p>
+<ol>
+<li>建立<code>4A</code> SSH连接，配置<code>隧道</code>，<code>类型</code>：本地，<code>监听端口</code>：本地未占用的某个端口，如1078；<code>绑定IP</code>: 127.0.0.1，绑定本地IP；<code>目标地址</code>：使用该隧道访问的地址，此处为server-1服务器地址 10.246.100.5；<code>目标端口</code>：目标地址对应的端口，此处为 10000</li>
+</ol>
+<p><img src="/images/linux/common/finalshell-1.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="finalshell-1"
+	
+	
+>
+<img src="/images/linux/common/finalshell-2.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="finalshell-2"
+	
+	
+></p>
+<ol start="2">
+<li>建立<code>server-1</code>的SSH连接，<code>主机</code>和<code>端口</code>使用<code>4A</code>连接隧道中的<code>绑定ip</code>和<code>监听端口</code>，同时还需建立隧道，供访问<code>server-2</code>服务器代理。</li>
+</ol>
+<p><img src="/images/linux/common/finalshell-3.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="finalshell-3"
+	
+	
+>
+<img src="/images/linux/common/finalshell-4.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="finalshell-4"
+	
+	
+></p>
+<ol>
+<li>建立目标服务器<code>server-2</code>的SSH连接，同理，<code>主机</code>和<code>端口</code>填入<code>server-1</code>隧道的<code>绑定ip</code>和<code>监听端口</code>，这样就能访问到目标服务器了（需要同时开启4A和server-1的ssh连接），为了访问目标服务器上的网页，还需要在该连接上新建<code>socks5</code>代理隧道</li>
+</ol>
+<p><img src="/images/linux/common/finalshell-5.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="finalshell-5"
+	
+	
+>
+<img src="/images/linux/common/finalshell-6.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="finalshell-6"
+	
+	
+></p>
+<ol start="4">
+<li>本地浏览器可以使用<code>SwitchyOmega</code>插件，将目标服务器上的<code>jenkins</code>等地址配置使用<code>127.0.0.1:1080</code>代理访问。</li>
+</ol>
+<h2 id="使用proxyjump配置">使用ProxyJump配置</h2>
+<p>在linux系统上，也可以使用<code>ProxyJump</code>实现访问<code>server-2</code>服务器，缺点：无法配置socks5代理实现访问目标服务器的网页服务。</p>
+<blockquote>
+<p>如果想在 Windows 上使用 ssh 的 proxyjump 功能，需要使用一个支持该功能的 ssh 客户端。推荐使用 OpenSSH 。<br>
+Windows 安装 OpenSSH 参考：<br>
+<a class="link" href="https://learn.microsoft.com/zh-cn/windows-server/administration/openssh/openssh_install_firstuse"  target="_blank" rel="noopener"
+    >https://learn.microsoft.com/zh-cn/windows-server/administration/openssh/openssh_install_firstuse</a></p>
+</blockquote>
+<ol>
+<li>在 <code>$HOME/.ssh/config</code> 文件新增如下内容</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Host 55.250.10.20
+</span></span><span class="line"><span class="cl">    HostName 55.250.10.20
+</span></span><span class="line"><span class="cl">    User test
+</span></span><span class="line"><span class="cl">    Port 10000
+</span></span><span class="line"><span class="cl">    IdentityFile /opt/develop/ssh/id_rsa
+</span></span><span class="line"><span class="cl">    ProxyJump test@10.246.110.5:10000
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Host 10.246.110.5
+</span></span><span class="line"><span class="cl">    HostName 10.246.110.5
+</span></span><span class="line"><span class="cl">    User test
+</span></span><span class="line"><span class="cl">    Port 10000
+</span></span><span class="line"><span class="cl">    IdentityFile /opt/develop/ssh/id_rsa
+</span></span><span class="line"><span class="cl">    ProxyJump abc@192.168.15.45:10011
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>在终端输入 <code>ssh 55.250.10.20</code>，然后输入abc用户的密码，即可ssh连接到 <code>server-2</code> 服务器</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">user@00bafcjc-durwemo9n5:~/.ssh$ ssh 55.250.10.20
+</span></span><span class="line"><span class="cl">abc@192.168.15.45<span class="s1">&#39;s password: 
+</span></span></span><span class="line"><span class="cl"><span class="s1">The authenticity of host &#39;</span><span class="o">[</span>55.250.10.20<span class="o">]</span>:10000 <span class="o">(</span>&lt;no hostip <span class="k">for</span> proxy command&gt;<span class="o">)</span><span class="s1">&#39; can&#39;</span>t be established.
+</span></span><span class="line"><span class="cl">ECDSA key fingerprint is SHA256:TJctlnqugvdS+y7uP9M6DPjoiFHjBBYS9FtwBKBmHFk.
+</span></span><span class="line"><span class="cl">Are you sure you want to <span class="k">continue</span> connecting <span class="o">(</span>yes/no<span class="o">)</span>? yes
+</span></span><span class="line"><span class="cl">Warning: Permanently added <span class="s1">&#39;[55.250.10.20]:10000&#39;</span> <span class="o">(</span>ECDSA<span class="o">)</span> to the list of known hosts.
+</span></span><span class="line"><span class="cl">Linux host-55 5.10.0-18-amd64 <span class="c1">#1 SMP Debian 5.10.140-1 (2022-09-02) x86_64</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">The programs included with the Debian GNU/Linux system are free software<span class="p">;</span>
+</span></span><span class="line"><span class="cl">the exact distribution terms <span class="k">for</span> each program are described in the
+</span></span><span class="line"><span class="cl">individual files in /usr/share/doc/*/copyright.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+</span></span><span class="line"><span class="cl">permitted by applicable law.
+</span></span><span class="line"><span class="cl">Last login: Tue Jul <span class="m">25</span> 14:12:14 <span class="m">2023</span> from 10.63.143.23
+</span></span><span class="line"><span class="cl">secure@host-55:~$
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/linux/">linux</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/nginx-install/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/p/nginx-install/nginx-ar21.svg" loading="lazy" data-key="nginx-install" data-hash="/p/nginx-install/nginx-ar21.svg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">centos7系统安装nginx</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/ssh-proxy/">
+        
+        
+            <div class="article-image">
+                <img src="/p/ssh-proxy/_hu6f8b26c03cc6e65572403f8d94a50599_544049_2683bc2b4a4d71434235039fe2d68be7.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post SSH-ProxyJump跳转登录"
+                        data-key="ssh-proxy" 
+                        data-hash="md5-YABPhKOKTGBh8DmzGqEhKQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">SSH-ProxyJump跳转登录</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/ubuntu-fcitx/">
+        
+        
+            <div class="article-image">
+                <img src="/p/ubuntu-fcitx/ubuntu_logo.f9bf437dbb17bc0aaf8601750a56f89f_hu373a6c33440a9fb65cfc39e6a6372242_135517_250x150_fill_box_smart1_3.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post ubuntu18.04安装fcitx输入法框架"
+                        data-key="ubuntu-fcitx" 
+                        data-hash="md5-&#43;b9DfbsXvAqvhgF1Clb4nw==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">ubuntu18.04安装fcitx输入法框架</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/ubuntu-vscode-font/">
+        
+        
+            <div class="article-image">
+                <img src="/p/ubuntu-vscode-font/ubuntu_logo.f9bf437dbb17bc0aaf8601750a56f89f_hu373a6c33440a9fb65cfc39e6a6372242_135517_250x150_fill_box_smart1_3.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post ubuntu配置vscode字体"
+                        data-key="ubuntu-vscode-font" 
+                        data-hash="md5-&#43;b9DfbsXvAqvhgF1Clb4nw==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">ubuntu配置vscode字体</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/ubuntu-root-pwd/">
+        
+        
+            <div class="article-image">
+                <img src="/p/ubuntu-root-pwd/ubuntu_logo.f9bf437dbb17bc0aaf8601750a56f89f_hu373a6c33440a9fb65cfc39e6a6372242_135517_250x150_fill_box_smart1_3.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post ubuntu配置root密码"
+                        data-key="ubuntu-root-pwd" 
+                        data-hash="md5-&#43;b9DfbsXvAqvhgF1Clb4nw==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">ubuntu配置root密码</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2023 何凯的博客
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.17.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
