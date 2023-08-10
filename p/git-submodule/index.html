@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://msdemt.github.io/p/git-submodule/'>
 
-<link rel="stylesheet" href="/scss/style.min.ff300df33b80e2ac49809c825614392ed1c7b27591d65d3c4043602cd162e25f.css"><meta property='og:title' content='git子模块操作'>
+<link rel="stylesheet" href="/scss/style.min.83fdf04f357d6c514ee15e600463b045549e8b40c428f14454adecaa742b352f.css"><meta property='og:title' content='git子模块操作'>
 <meta property='og:description' content='git子模块的新增、删除'>
 <meta property='og:url' content='https://msdemt.github.io/p/git-submodule/'>
 <meta property='og:site_name' content='何凯的博客'>
@@ -270,6 +270,7 @@
     <li><a href="#使用子模块">使用子模块</a></li>
     <li><a href="#更新子模块">更新子模块</a></li>
     <li><a href="#删除子模块">删除子模块</a></li>
+    <li><a href="#问题">问题</a></li>
   </ol>
 </nav>
         </div>
@@ -350,7 +351,7 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 2 分钟
+                    阅读时长: 3 分钟
                 </time>
             </div>
         
@@ -388,7 +389,40 @@ path为子模块存储的目录路径</p>
 </div><p>子模块添加成功后，执行 <code>git status</code> 命令可以看到 <code>.gitmodules</code> 文件已被修改，并新增了一个子模块</p>
 <p>执行 <code>git diff --cached</code> 命令可以查看修改内容</p>
 <p>执行 <code>git commit</code> 命令可以将子模块添加到本地仓库</p>
-<h2 id="使用子模块">使用子模块</h2>
+<p>添加子模块时使用 <code>-b</code> 参数指定分支</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-v" data-lang="v"><span class="line"><span class="cl"><span class="nv">git</span> <span class="nv">submodule</span> <span class="nv">add</span> <span class="o">-</span><span class="nv">b</span> <span class="nv">main</span> <span class="p">[</span><span class="na">URL</span> <span class="na">to</span> <span class="na">Git</span> <span class="na">repo</span><span class="p">];</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>若子模块已添加，可以在 <code>.gitmodules</code> 中设置分支，其中 <code>public</code> 是主模块中安装子模块的名称， <code>stable</code> 是对应要设置的分支名称。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git config -f .gitmodules submodule.public.branch stable
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>执行后，会在 <code>.gitmodules</code> 中的子模块添加分支（<code>branch = main</code>），如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-v" data-lang="v"><span class="line"><span class="cl"><span class="p">[</span><span class="na">submodule</span> <span class="p">&#34;</span><span class="s2">public&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">	<span class="nv">path</span> <span class="o">=</span> <span class="nv">public</span>
+</span></span><span class="line"><span class="cl">	<span class="nv">url</span> <span class="o">=</span> <span class="nv">https</span><span class="p">:</span><span class="c1">//github.com/msdemt/msdemt.github.io.git
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nv">branch</span> <span class="o">=</span> <span class="nv">main</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="使用子模块">使用子模块</h2>
 <p>直接克隆包含子模块的项目时，子模块目录下没有任何文件，需要在项目的根目录下执行如下命令，完成子模块的下载</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -439,7 +473,60 @@ path为子模块存储的目录路径</p>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>如果完全删除子模块，还需要删除项目根路径下的 <code>.gitmodules</code> 文件和 <code>.git/modules</code> 目录下的子模块文件</p>
-<blockquote>
+<h2 id="问题">问题</h2>
+<ol>
+<li>子模块更新分支</li>
+</ol>
+<p>添加子模块</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git submodule add https://github.com/msdemt/msdemt.github.io.git public
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>子模块更新后，在父模块中更新子模块到最新版本</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git submodule update --remote
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>更新失败，错误如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">fatal: Needed a single revision
+</span></span><span class="line"><span class="cl">无法在子模组路径 <span class="s1">&#39;public&#39;</span> 中找到当前版本 origin/maste
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>发现父模块依赖的子模块分支为master，正确应该是main分支（子模块项目初始分支是master，后来我新增了main作为默认分支，删掉了master分支）</p>
+<p>参考：https://blog.csdn.net/weboof/article/details/108517187</p>
+<p>更新子模块的分支</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git config -f .gitmodules submodule.public.branch main
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>再执行更新子模块</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git submodule update --remote
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
 <p>参考：<br>
 <a class="link" href="https://blog.csdn.net/guotianqing/article/details/82391665"  target="_blank" rel="noopener"
     >https://blog.csdn.net/guotianqing/article/details/82391665</a>

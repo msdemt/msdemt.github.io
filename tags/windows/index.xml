@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>windows on 何凯的博客</title>
+        <link>https://msdemt.github.io/tags/windows/</link>
+        <description>Recent content in windows on 何凯的博客</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <lastBuildDate>Thu, 10 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://msdemt.github.io/tags/windows/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>wsl 安装</title>
+        <link>https://msdemt.github.io/p/wsl-install/</link>
+        <pubDate>Thu, 10 Aug 2023 00:00:00 +0000</pubDate>
+        
+        <guid>https://msdemt.github.io/p/wsl-install/</guid>
+        <description>&lt;h2 id=&#34;介绍&#34;&gt;介绍&lt;/h2&gt;
+&lt;p&gt;wsl 全称 The Windows Subsystem for Linux ，即适用于 Linux 的 Windows 子系统，可以让开发者在 windows 系统上按原样运行 GNU/Linux 环境 - 包括大多数命令行工具、实用工具和应用程序 - 且不会产生传统虚拟机或双启动设置开销。&lt;/p&gt;
+&lt;p&gt;WSL 2 是适用于 Linux 的 Windows 子系统体系结构的一个新版本，它支持适用于 Linux 的 Windows 子系统在 Windows 上运行 ELF64 Linux 二进制文件。 它的主要目标是提高文件系统性能，以及添加完全的系统调用兼容性。&lt;/p&gt;
+&lt;h2 id=&#34;安装&#34;&gt;安装&lt;/h2&gt;
+&lt;p&gt;系统： windows 11&lt;/p&gt;
+&lt;p&gt;在管理员模式下打开 &lt;code&gt;PowerShell&lt;/code&gt; 或 &lt;code&gt;Windows&lt;/code&gt; 命令提示符，方法是右键单击并选择“以管理员身份运行”，输入 &lt;code&gt;wsl --install&lt;/code&gt; 命令，然后重启计算机。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;wsl --install
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;此命令将启用运行 &lt;code&gt;WSL&lt;/code&gt; 并安装 &lt;code&gt;Linux&lt;/code&gt; 的 &lt;code&gt;Ubuntu&lt;/code&gt; 发行版所需的功能。&lt;/p&gt;
+&lt;h3 id=&#34;更改默认安装的-linux-发行版&#34;&gt;更改默认安装的 Linux 发行版&lt;/h3&gt;
+&lt;p&gt;默认情况下，安装的 &lt;code&gt;Linux&lt;/code&gt; 分发版为 &lt;code&gt;Ubuntu&lt;/code&gt;。 可以使用 &lt;code&gt;-d&lt;/code&gt; 标志进行更改。&lt;/p&gt;
+&lt;p&gt;若要更改安装的发行版，请输入：&lt;code&gt;wsl --install -d &amp;lt;Distribution Name&amp;gt;&lt;/code&gt;。 将 &lt;code&gt;&amp;lt;Distribution Name&amp;gt;&lt;/code&gt; 替换为要安装的发行版的名称。&lt;/p&gt;
+&lt;p&gt;若要查看可通过在线商店下载的可用 &lt;code&gt;Linux&lt;/code&gt; 发行版列表，请输入：&lt;code&gt;wsl --list --online&lt;/code&gt; 或 &lt;code&gt;wsl -l -o&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;若要在初始安装后安装其他 &lt;code&gt;Linux&lt;/code&gt; 发行版，还可使用命令：&lt;code&gt;wsl --install -d &amp;lt;Distribution Name&amp;gt;&lt;/code&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;检查正在运行的-wsl-版本&#34;&gt;检查正在运行的 WSL 版本&lt;/h3&gt;
+&lt;p&gt;可列出已安装的 &lt;code&gt;Linux&lt;/code&gt; 发行版，并通过在 &lt;code&gt;PowerShell&lt;/code&gt; 或 &lt;code&gt;Windows&lt;/code&gt; 命令提示符中输入以下命令来检查每个发行版的 &lt;code&gt;WSL&lt;/code&gt; 版本：&lt;code&gt;wsl -l -v&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;要在安装新的 &lt;code&gt;Linux&lt;/code&gt; 发行版时将默认版本设置为 &lt;code&gt;WSL 1&lt;/code&gt; 或 &lt;code&gt;WSL 2&lt;/code&gt;，请使用命令 &lt;code&gt;wsl --set-default-version &amp;lt;Version#&amp;gt;&lt;/code&gt;，将 &lt;code&gt;&amp;lt;Version#&amp;gt;&lt;/code&gt; 替换为 &lt;code&gt;1&lt;/code&gt; 或 &lt;code&gt;2&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;要设置与 &lt;code&gt;wsl&lt;/code&gt; 命令一起使用的默认 &lt;code&gt;Linux&lt;/code&gt; 发行版，请输入 &lt;code&gt;wsl -s &amp;lt;DistributionName&amp;gt;&lt;/code&gt; 或 &lt;code&gt;wsl --setdefault &amp;lt;DistributionName&amp;gt;&lt;/code&gt;，将 &lt;code&gt;&amp;lt;DistributionName&amp;gt;&lt;/code&gt; 替换为要使用的 &lt;code&gt;Linux&lt;/code&gt; 发行版的名称。 例如，从 &lt;code&gt;PowerShell/CMD&lt;/code&gt; 输入 &lt;code&gt;wsl -s Debian&lt;/code&gt;，将默认发行版设置为 &lt;code&gt;Debian&lt;/code&gt;。 现在从 &lt;code&gt;Powershell&lt;/code&gt; 运行 &lt;code&gt;wsl npm init&lt;/code&gt; 将在 &lt;code&gt;Debian&lt;/code&gt; 中运行 &lt;code&gt;npm init&lt;/code&gt; 命令。&lt;/p&gt;
+&lt;p&gt;要在 &lt;code&gt;PowerShell&lt;/code&gt; 或 &lt;code&gt;Windows&lt;/code&gt; 命令提示符下运行特定的 &lt;code&gt;WSL&lt;/code&gt; 发行版而不更改默认发行版，请使用命令 &lt;code&gt;wsl -d &amp;lt;DistributionName&amp;gt;&lt;/code&gt;，将 &lt;code&gt;&amp;lt;DistributionName&amp;gt;&lt;/code&gt; 替换为要使用的发行版的名称。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;参考：&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://learn.microsoft.com/zh-cn/windows/wsl&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://learn.microsoft.com/zh-cn/windows/wsl&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

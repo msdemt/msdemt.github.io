@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='linux编译安装软件时执行configure的原理'>
+<title>configure、make、make install 如何工作?</title>
+
+<link rel='canonical' href='https://msdemt.github.io/p/configure-make-makeinstall/'>
+
+<link rel="stylesheet" href="/scss/style.min.83fdf04f357d6c514ee15e600463b045549e8b40c428f14454adecaa742b352f.css"><meta property='og:title' content='configure、make、make install 如何工作?'>
+<meta property='og:description' content='linux编译安装软件时执行configure的原理'>
+<meta property='og:url' content='https://msdemt.github.io/p/configure-make-makeinstall/'>
+<meta property='og:site_name' content='何凯的博客'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='linux' /><meta property='article:published_time' content='2023-08-03T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2023-08-03T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="configure、make、make install 如何工作?">
+<meta name="twitter:description" content="linux编译安装软件时执行configure的原理">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu8bf57b87f6c84d6a9bc2eb369290e574_128598_300x0_resize_box_3.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">何凯的博客</a></h1>
+            <h2 class="site-description">The road is long and difficult, forge ahead.</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://github.com/msdemt'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E9%93%BE%E6%8E%A5/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+                <li id="i18n-switch">  
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                    <select name="language" onchange="window.location.href = this.selectedOptions[0].value">
+                        
+                            <option value="https://msdemt.github.io/" selected>中文</option>
+                        
+                            <option value="https://msdemt.github.io/en/" >English</option>
+                        
+                    </select>
+                </li>
+            
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>暗色模式</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#介绍">介绍</a></li>
+    <li><a href="#这些命令有什么作用">这些命令有什么作用？</a></li>
+    <li><a href="#这些脚本是怎么产生的">这些脚本是怎么产生的？</a></li>
+    <li><a href="#hello-world-案例">Hello World 案例</a>
+      <ol>
+        <li><a href="#创建-configure-脚本">创建 configure 脚本</a></li>
+        <li><a href="#创建-makefile-文件">创建 Makefile 文件</a></li>
+        <li><a href="#把它们放在一起">把它们放在一起</a></li>
+        <li><a href="#分发程序">分发程序</a></li>
+        <li><a href="#总览">总览</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/linux/" style="background-color: #ff8033; color: #fff;">
+                linux
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/configure-make-makeinstall/">configure、make、make install 如何工作?</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            linux编译安装软件时执行configure的原理
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2023-08-03</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 6 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="介绍">介绍</h2>
+<p>我们在 <code>linux</code> 上安装软件时,经常会使用如下命令</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">./configure
+</span></span><span class="line"><span class="cl">make
+</span></span><span class="line"><span class="cl">make install
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这些命令是怎么工作的呢？</p>
+<h2 id="这些命令有什么作用">这些命令有什么作用？</h2>
+<p><code>linux</code> 上使用源码编译安装软件通常有如下三步</p>
+<ol>
+<li>配置软件（Configure the software）</li>
+</ol>
+<p><code>configure</code> 脚本负责完成在指定系统上构建软件的准备工作，它确保后续的构建和安装过程中所有需要的依赖可以使用，并且找出使用这些依赖所需的任何信息。</p>
+<p><code>Unix/Linux</code> 程序经常使用 <code>C</code> 语言编写，所以我们经常需要 <code>C</code> 编译器来构建这些程序。在这个场景下, <code>configure</code> 脚本会确保你的系统中确实存在一个 <code>C</code> 编译器，并且找到这个 <code>C</code> 编译器的名字和位置。</p>
+<ol start="2">
+<li>构建软件（Build the software）</li>
+</ol>
+<p>一旦 <code>configure</code> 命令执行完成，我们可以调用 <code>make</code> 命令来构建软件。这个步骤会执行定义在 <code>Makefile</code> 文件中的一系列任务来将软件从源码构建为最终可执行程序。</p>
+<p>你下载的软件源码 <code>tar</code> 包通常不包含最终的 <code>Makefile</code> 文件，而是包含名为 <code>Makefile.in</code> 的模板文件。然后利用 <code>configure</code> 脚本针对当前的系统利用 <code>Makefile.in</code> 文件生成的定制化的 <code>Makefile</code> 文件。</p>
+<ol start="3">
+<li>安装软件（Install the software）</li>
+</ol>
+<p>现在软件已经构建完成，可以运行了，相关文件可以被拷贝到它们的最终目录。 <code>make install</code> 命令会将构建出的可执行文件和它的依赖库、文档拷贝到正确的位置。</p>
+<p>这通常意味着软件的二进制文件会被拷贝到你的 <code>PATH</code> 路径下，软件的操作手册会被拷贝到你的 <code>MANPATH</code> 路径下，同时软件依赖的其他文件也会被安全地保存到相应的位置。</p>
+<p>因为安装步骤也是定义在 <code>Makefile</code> 文件中，所以软件的安装位置可以通过某个参数传递给 <code>configure</code> 脚本，或者由 <code>configure</code> 脚本利用某个系统变量来实现指定安装位置。</p>
+<p>根据软件的安装位置，您可能需要升级此步骤的权限，以便可以将文件复制到系统目录。 使用 <code>sudo</code> 通常可以达到目的。</p>
+<h2 id="这些脚本是怎么产生的">这些脚本是怎么产生的？</h2>
+<p>上述步骤之所以能成功工作，是因为 <code>configure</code> 脚本会检查你的系统，并使用它找到的信息将 <code>Makefile.in</code> 模板转换为 <code>Makefile</code> 文件，但是 <code>configure</code> 脚本和 <code>Makefile.in</code> 模板是怎么产生的呢？</p>
+<p>如果你曾经打开过 <code>configure</code> 脚本，或者相关的 Makefile.in 文件，你会发现这些文件里包含几千行的脚本语句。有时候这些支持配置的脚本语句比要安装的程序的源代码还要长。</p>
+<p>即使利用已有的 <code>configure</code> 脚本文件开始编写，手动编写完成一个 <code>configure</code> 脚本也是非常艰巨的。不过不用担心：这些脚本不是手工构建的。</p>
+<p>以这种方式构建的软件通常使用一个叫做 <code>autotools</code> 的工具集进行打包。这个工具集包含 <code>autoconf</code>、<code>automake</code> 等工具，所有的这些工具使得维护软件生命周期变得很容易。最终用户不需要了解这些工具，同时让软件在不同的 <code>Unix/Linux</code> 系统的安装步骤变得简单。</p>
+<h2 id="hello-world-案例">Hello World 案例</h2>
+<p>我们以一个简单的 <code>Hello World</code> <code>C 语言</code>程序为例，来看看如何使用 <code>autotools</code> 工具集打包。</p>
+<p>下面是程序源代码，在一个名为 <code>main.c</code> 的文件中</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;Hello World</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="创建-configure-脚本">创建 configure 脚本</h3>
+<p>不需要手动编写 <code>configure</code> 脚本，我们需要创建一个使用 <code>m4sh</code> 语言（<code>m4</code> 宏命令和 <code>POSIX shell</code> 脚本的组合）编写的 <code>configure.ac</code> 文件来描述 <code>configure</code> 脚本需要做的事情。</p>
+<p>我们需要第一个调用的 <code>m4</code> 宏为 <code>AC_INIT</code>，它会初始化 <code>autoconf</code> 并且设置一些关于打包软件的基本信息。我们的软件名为 <code>helloworld</code>，版本为 <code>0.1</code>，维护者为 <code>george@thoughtbot.com</code>：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">AC_INIT([helloworld], [0.1], [george@thoughtbot.com])
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这个项目中我们会使用 <code>automake</code>，所以我们需要使用 <code>AM_INIT_AUTOMAKE</code> 宏命令来初始化 <code>automake</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">AM_INIT_AUTOMAKE
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>下面，我们需要告诉 <code>autoconf</code> 让 <code>configure</code> 脚本需要寻找的相关依赖，在本例中， <code>configure</code> 脚本仅需要使用 <code>C</code> 编译器，我们可以使用 <code>AC_PROG_CC</code> 宏命令设置。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">AC_PROG_CC
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果有其他的依赖项，那我们可以使用其他的 <code>m4</code> 宏命令来设置，如使用 <code>AC_PATH_PROG</code> 宏表示在用户的 <code>PATH</code> 路径中搜索一个特定的程序。</p>
+<p>此时我们已经列出了使用的依赖，前面有提到，<code>configure</code> 脚本会根据用户系统的系统信息和 <code>Makefile.in</code> 模板文件生成 <code>Makefile</code> 文件。</p>
+<p>下面一行使用 <code>AC_CONFIG_FILES</code> 宏命令告诉 <code>autoconf</code> 工具 <code>configure</code> 脚本文件需要做这些工作：<code>configure</code> 脚本文件需要找到一个名为 <code>Makefile.in</code> 的文件，将文件内的站位符使用对应的值替换，例如将 <code>@PACKAGE_VERSION@</code> 替换为 <code>0.1</code>，然后将结果写入到 <code>Makefile</code> 文件。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">AC_CONFIG_FILES([Makefile])
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>最后，当我们告诉 <code>autoconf</code> 工具所有 <code>configure</code> 脚本需要做的工作后，可以调用 <code>AC_OUTPUT</code> 宏命令输出脚本内容</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">AC_OUTPUT
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>下面是 <code>configure.ac</code> 中的所有代码，相比 4737 行的 <code>configure</code> 脚本文件，这些代码好多了。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">AC_INIT([helloworld], [0.1], [george@thoughtbot.com])
+</span></span><span class="line"><span class="cl">AM_INIT_AUTOMAKE
+</span></span><span class="line"><span class="cl">AC_PROG_CC
+</span></span><span class="line"><span class="cl">AC_CONFIG_FILES([Makefile])
+</span></span><span class="line"><span class="cl">AC_OUTPUT
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>还差一点我们就可以发布软件了，<code>configure</code> 脚本需要一个 <code>Makefile.in</code> 文件，将系统相关信息填充进去后，生成最终的 <code>Makefile</code> 文件。</p>
+<h3 id="创建-makefile-文件">创建 Makefile 文件</h3>
+<p>与 <code>configure</code> 脚本文件相比，<code>Makefile.in</code> 模板文件非常长且复杂。因此，我们不是手工编写，而是编写一个较短的 <code>Makefile.am</code> 文件，然后利用<code>automake</code> 使用该文件为我们生成 <code>Makefile.in</code> 文件。</p>
+<p>首先，我们需要设置一些参数来告诉 <code>automake</code> 工具本项目的结构，因为这里的例子不是标准的 <code>GNU</code> 项目的结构，所以结构声明为 <code>foreign</code> 。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">AUTOMAKE_OPTIONS = foreign
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>接下来告诉 <code>automake</code> 我们希望 <code>Makefile</code> 编译的软件名为 <code>helloworld</code>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">bin_PROGRAMS = helloworld
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这行包含了很多打包信息，感谢 <code>automake</code> 的<a class="link" href="http://www.gnu.org/software/automake/manual/html_node/Uniform.html"  target="_blank" rel="noopener"
+    >统一命名规则</a></p>
+<p><code>PROGRAMS</code> 后缀成为 <code>primary</code> 主要信息，它告诉 <code>automake</code> 工具 <code>helloworld</code> 文件具有哪些属性。例如 <code>PROGRAMS</code> 需要被编译，相比 <code>SCRIPTS</code> 和 <code>DATA</code> 文件不需要被编译。</p>
+<p><code>bin</code> 前缀告诉 <code>automake</code> 工具，这里列出的文件应该被安装到 <code>bindir</code> 变量指定的路径下。 <code>autotools</code> 工具还为我们定义了其他目录，包括 <code>bindir</code> , <code>libdir</code> , <code>pkglibdir</code> ，我们也可以自定义自己需要的目录。</p>
+<p>如果我们的程序有一部分是 <code>Ruby</code> 脚本，我们可以定义 <code>rubydir</code> 变量并且告诉 <code>automake</code> 安装我们的 <code>ruby</code> 文件到该路径。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">rubydir = $(datadir)/ruby
+</span></span><span class="line"><span class="cl">ruby_DATA = my_script.rb my_other_script.rb
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>可以在安装目录之前添加其他前缀，以进一步区分 <code>automake</code> 的行为。</p>
+<p>因为我们已经定义了 <code>RPOGRAM</code> ，我们需要告诉 <code>automake</code> 在哪里可以找到它的源文件。 在这种情况下，前缀是这些源文件构建的程序的名称，而不是它们将安装的位置：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">helloworld_SOURCES = main.c
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这是我们的 <code>helloworld</code> 程序的整个 <code>Makefile.am</code> 文件。 与 <code>configure.ac</code> 和 <code>configure</code> 脚本一样，它比它生成的 <code>Makefile.in</code> 要短得多：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">AUTOMAKE_OPTIONS = foreign
+</span></span><span class="line"><span class="cl">bin_PROGRAMS = helloworld
+</span></span><span class="line"><span class="cl">helloworld_SOURCES = main.c
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="把它们放在一起">把它们放在一起</h3>
+<p>现在我们已经编写了配置文件，我们可以运行 <code>autotools</code> 并生成完成的 <code>configure</code> 脚本和 <code>Makefile.in</code> 模板。</p>
+<p>首先，我们需要生成一个 <code>m4</code> 环境供 <code>autotools</code> 使用：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">aclocal
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>现在我们可以运行 auto<code>conf 将 </code>configure.ac<code>转换为</code>configure<code>脚本，并运行</code>automake<code>将</code>Makefile.am<code>转换为</code>Makefile.in`：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">autoconf
+</span></span><span class="line"><span class="cl">automake --add-missing
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="分发程序">分发程序</h3>
+<p>最终用户不需要查看我们的 <code>autotools</code> 工具的设置，因此我们可以分发 <code>configure</code> 脚本和 <code>Makefile.in</code>，而无需分发用于生成它们的所有文件。</p>
+<p>幸运的是，<code>autotools</code> 工具也将帮助我们进行分发。 <code>Makefile</code> 包含各种有趣的目标，包括构建项目 <code>tarball</code> 的目标，其中包含我们需要分发的所有文件：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">./configure
+</span></span><span class="line"><span class="cl">make dist
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>您甚至可以测试分发 <code>tarball</code> 是否可以在各种条件下安装：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">make distcheck
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="总览">总览</h3>
+<p>现在我们知道编译安装命令从何而来以及它是如何运作的！</p>
+<p>在维护者的系统上：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">aclocal <span class="c1"># Set up an m4 environment</span>
+</span></span><span class="line"><span class="cl">autoconf <span class="c1"># Generate configure from configure.ac</span>
+</span></span><span class="line"><span class="cl">automake --add-missing <span class="c1"># Generate Makefile.in from Makefile.am</span>
+</span></span><span class="line"><span class="cl">./configure <span class="c1"># Generate Makefile from Makefile.in</span>
+</span></span><span class="line"><span class="cl">make distcheck <span class="c1"># Use Makefile to build and test a tarball to distribute</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>在最终用户的系统上：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">./configure <span class="c1"># Generate Makefile from Makefile.in</span>
+</span></span><span class="line"><span class="cl">make <span class="c1"># Use Makefile to build the program</span>
+</span></span><span class="line"><span class="cl">make install <span class="c1"># Use Makefile to install the program</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>参考：<br>
+<a class="link" href="https://zhuanlan.zhihu.com/p/77813702"  target="_blank" rel="noopener"
+    >https://zhuanlan.zhihu.com/p/77813702</a><br>
+<a class="link" href="https://thoughtbot.com/blog/the-magic-behind-configure-make-make-install"  target="_blank" rel="noopener"
+    >https://thoughtbot.com/blog/the-magic-behind-configure-make-make-install</a></p>
+</blockquote>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/linux/">linux</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/docker-mariadb-5.5.60/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">docker 部署 mariadb-5.5.60</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/wsl-ubuntu-git-fail/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">wsl ubuntu git clone 失败</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/wsl-ubuntu-docker/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">wsl ubuntu 安装 docker</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/wsl-install/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">wsl 安装</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/sudo-su-root/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">sudo su - root 介绍</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2023 何凯的博客
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.17.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
