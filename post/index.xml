@@ -91,6 +91,83 @@
 </description>
         </item>
         <item>
+        <title>git凭证存储</title>
+        <link>https://msdemt.github.io/p/git-credential/</link>
+        <pubDate>Thu, 10 Aug 2023 00:00:00 +0000</pubDate>
+        
+        <guid>https://msdemt.github.io/p/git-credential/</guid>
+        <description>&lt;h2 id=&#34;介绍&#34;&gt;介绍&lt;/h2&gt;
+&lt;p&gt;在 &lt;code&gt;ubuntu&lt;/code&gt; 上使用 &lt;code&gt;git clone&lt;/code&gt; 下载时，每次都需要输入密码，而且，现在 &lt;code&gt;github&lt;/code&gt; 要求使用 &lt;code&gt;personal access token&lt;/code&gt;，无法直接输入密码了。&lt;/p&gt;
+&lt;p&gt;解决办法&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;git config --global credential.helper store
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;使用 &lt;code&gt;store&lt;/code&gt; 模式存储凭证，凭证用明文的形式存放在磁盘中，并且永不过期，存储位置： &lt;code&gt;~/.git-credentials&lt;/code&gt; 中。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;参考：&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E5%87%AD%E8%AF%81%E5%AD%98%E5%82%A8&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E5%87%AD%E8%AF%81%E5%AD%98%E5%82%A8&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;凭证存储&#34;&gt;凭证存储&lt;/h2&gt;
+&lt;p&gt;如果你使用的是 &lt;code&gt;SSH&lt;/code&gt; 方式连接远端，并且设置了一个没有口令的密钥，这样就可以在不输入用户名和密码的情况下安全地传输数据。 然而，这对 &lt;code&gt;HTTP&lt;/code&gt; 协议来说是不可能的 &amp;mdash; 每一个连接都是需要用户名和密码的。 这在使用双重认证的情况下会更麻烦，因为你需要输入一个随机生成并且毫无规律的 &lt;code&gt;token&lt;/code&gt; 作为密码。&lt;/p&gt;
+&lt;p&gt;幸运的是，&lt;code&gt;Git&lt;/code&gt; 拥有一个凭证系统来处理这个事情。 下面有一些 &lt;code&gt;Git&lt;/code&gt; 的选项：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;默认所有都不缓存。 每一次连接都会询问你的用户名和密码。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;“&lt;code&gt;cache&lt;/code&gt;” 模式会将凭证存放在内存中一段时间。 密码永远不会被存储在磁盘中，并且在15分钟后从内存中清除。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;“&lt;code&gt;store&lt;/code&gt;” 模式会将凭证用明文的形式存放在磁盘中，并且永不过期。 这意味着除非你修改了你在 &lt;code&gt;Git&lt;/code&gt; 服务器上的密码，否则你永远不需要再次输入你的凭证信息。 这种方式的缺点是你的密码是用明文的方式存放在你的 &lt;code&gt;home&lt;/code&gt; 目录下。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;如果你使用的是 &lt;code&gt;Mac&lt;/code&gt;，&lt;code&gt;Git&lt;/code&gt; 还有一种 “&lt;code&gt;osxkeychain&lt;/code&gt;” 模式，它会将凭证缓存到你系统用户的钥匙串中。 这种方式将凭证存放在磁盘中，并且永不过期，但是是被加密的，这种加密方式与存放 &lt;code&gt;HTTPS&lt;/code&gt; 凭证以及 &lt;code&gt;Safari&lt;/code&gt; 的自动填写是相同的。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;如果你使用的是 &lt;code&gt;Windows&lt;/code&gt;，你可以安装一个叫做 “&lt;code&gt;Git Credential Manager for Windows&lt;/code&gt;” 的辅助工具。 这和上面说的 “&lt;code&gt;osxkeychain&lt;/code&gt;” 十分类似，但是是使用 &lt;code&gt;Windows Credential Store&lt;/code&gt; 来控制敏感信息。 可以在 &lt;a class=&#34;link&#34; href=&#34;https://github.com/Microsoft/Git-Credential-Manager-for-Windows&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://github.com/Microsoft/Git-Credential-Manager-for-Windows&lt;/a&gt; 下载。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;你可以设置 Git 的配置来选择上述的一种方式&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ git config --global credential.helper cache
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;部分辅助工具有一些选项。 “&lt;code&gt;store&lt;/code&gt;” 模式可以接受一个 &lt;code&gt;--file &amp;lt;path&amp;gt;&lt;/code&gt; 参数，可以自定义存放密码的文件路径（默认是 &lt;code&gt;~/.git-credentials&lt;/code&gt; ）。 “&lt;code&gt;cache&lt;/code&gt;” 模式有 &lt;code&gt;--timeout &amp;lt;seconds&amp;gt;&lt;/code&gt; 参数，可以设置后台进程的存活时间（默认是 “&lt;code&gt;900&lt;/code&gt;”，也就是 &lt;code&gt;15&lt;/code&gt; 分钟）。 下面是一个配置 “&lt;code&gt;store&lt;/code&gt;” 模式自定义路径的例子：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ git config --global credential.helper &lt;span class=&#34;s1&#34;&gt;&amp;#39;store --file ~/.my-credentials&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;code&gt;Git&lt;/code&gt; 甚至允许你配置多个辅助工具。 当查找特定服务器的凭证时，&lt;code&gt;Git&lt;/code&gt; 会按顺序查询，并且在找到第一个回答时停止查询。 当保存凭证时，&lt;code&gt;Git&lt;/code&gt; 会将用户名和密码发送给 所有 配置列表中的辅助工具，它们会按自己的方式处理用户名和密码。 如果你在闪存上有一个凭证文件，但又希望在该闪存被拔出的情况下使用内存缓存来保存用户名密码，&lt;code&gt;.gitconfig&lt;/code&gt; 配置文件如下：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;[credential]
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    helper = store --file /mnt/thumbdrive/.git-credentials
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    helper = cache --timeout 30000
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+        </item>
+        <item>
         <title>wsl ubuntu git clone 失败</title>
         <link>https://msdemt.github.io/p/wsl-ubuntu-git-fail/</link>
         <pubDate>Thu, 10 Aug 2023 00:00:00 +0000</pubDate>

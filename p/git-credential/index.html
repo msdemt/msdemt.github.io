@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='git子模块的新增、删除'>
-<title>git子模块操作</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='git凭证存储：cache、store'>
+<title>git凭证存储</title>
 
-<link rel='canonical' href='https://msdemt.github.io/p/git-submodule/'>
+<link rel='canonical' href='https://msdemt.github.io/p/git-credential/'>
 
-<link rel="stylesheet" href="/scss/style.min.83fdf04f357d6c514ee15e600463b045549e8b40c428f14454adecaa742b352f.css"><meta property='og:title' content='git子模块操作'>
-<meta property='og:description' content='git子模块的新增、删除'>
-<meta property='og:url' content='https://msdemt.github.io/p/git-submodule/'>
+<link rel="stylesheet" href="/scss/style.min.83fdf04f357d6c514ee15e600463b045549e8b40c428f14454adecaa742b352f.css"><meta property='og:title' content='git凭证存储'>
+<meta property='og:description' content='git凭证存储：cache、store'>
+<meta property='og:url' content='https://msdemt.github.io/p/git-credential/'>
 <meta property='og:site_name' content='何凯的博客'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='git' /><meta property='article:published_time' content='2023-07-07T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2023-07-07T00:00:00&#43;00:00'/><meta property='og:image' content='https://msdemt.github.io/p/git-submodule/1_Wjxx83j-qyiNvFBy1yOA1w.webp' />
-<meta name="twitter:title" content="git子模块操作">
-<meta name="twitter:description" content="git子模块的新增、删除"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='https://msdemt.github.io/p/git-submodule/1_Wjxx83j-qyiNvFBy1yOA1w.webp' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='git' /><meta property='article:tag' content='linux' /><meta property='article:published_time' content='2023-08-10T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2023-08-10T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="git凭证存储">
+<meta name="twitter:description" content="git凭证存储：cache、store">
     </head>
     <body class="
     article-page
@@ -266,11 +265,8 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#添加子模块">添加子模块</a></li>
-    <li><a href="#使用子模块">使用子模块</a></li>
-    <li><a href="#更新子模块">更新子模块</a></li>
-    <li><a href="#删除子模块">删除子模块</a></li>
-    <li><a href="#问题">问题</a></li>
+    <li><a href="#介绍">介绍</a></li>
+    <li><a href="#凭证存储">凭证存储</a></li>
   </ol>
 </nav>
         </div>
@@ -282,20 +278,8 @@
 
 
             <main class="main full-width">
-    <article class="has-image main-article">
+    <article class="main-article">
     <header class="article-header">
-        <div class="article-image">
-            <a href="/p/git-submodule/">
-                <img src="/p/git-submodule/1_Wjxx83j-qyiNvFBy1yOA1w_hufb4407888dbfcda01762496277a1213f_11862_800x0_resize_q75_h2_box_2.webp"
-                        srcset="/p/git-submodule/1_Wjxx83j-qyiNvFBy1yOA1w_hufb4407888dbfcda01762496277a1213f_11862_800x0_resize_q75_h2_box_2.webp 800w, /p/git-submodule/1_Wjxx83j-qyiNvFBy1yOA1w_hufb4407888dbfcda01762496277a1213f_11862_1600x0_resize_q75_h2_box_2.webp 1600w"
-                        width="800" 
-                        height="482" 
-                        loading="lazy"
-                        alt="Featured image of post git子模块操作" />
-                
-            </a>
-        </div>
-    
 
     <div class="article-details">
     
@@ -310,12 +294,12 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/git-submodule/">git子模块操作</a>
+            <a href="/p/git-credential/">git凭证存储</a>
         </h2>
     
         
         <h3 class="article-subtitle">
-            git子模块的新增、删除
+            git凭证存储：cache、store
         </h3>
         
     </div>
@@ -336,7 +320,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2023-07-07</time>
+                <time class="article-time--published">2023-08-10</time>
             </div>
         
 
@@ -351,7 +335,7 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 3 分钟
+                    阅读时长: 2 分钟
                 </time>
             </div>
         
@@ -366,174 +350,76 @@
     <section class="article-content">
     
     
-    <h2 id="添加子模块">添加子模块</h2>
+    <h2 id="介绍">介绍</h2>
+<p>在 <code>ubuntu</code> 上使用 <code>git clone</code> 下载时，每次都需要输入密码，而且，现在 <code>github</code> 要求使用 <code>personal access token</code>，无法直接输入密码了。</p>
+<p>解决办法</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git submodule add &lt;url&gt; &lt;path&gt;
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git config --global credential.helper store
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>url为子模块git路径
-path为子模块存储的目录路径</p>
-<p>如，将 hugo-theme-stack 项目作为子模块添加到本地项目的 themes 目录</p>
+</div><p>使用 <code>store</code> 模式存储凭证，凭证用明文的形式存放在磁盘中，并且永不过期，存储位置： <code>~/.git-credentials</code> 中。</p>
+<blockquote>
+<p>参考：<br>
+<a class="link" href="https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E5%87%AD%E8%AF%81%E5%AD%98%E5%82%A8"  target="_blank" rel="noopener"
+    >https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E5%87%AD%E8%AF%81%E5%AD%98%E5%82%A8</a></p>
+</blockquote>
+<h2 id="凭证存储">凭证存储</h2>
+<p>如果你使用的是 <code>SSH</code> 方式连接远端，并且设置了一个没有口令的密钥，这样就可以在不输入用户名和密码的情况下安全地传输数据。 然而，这对 <code>HTTP</code> 协议来说是不可能的 &mdash; 每一个连接都是需要用户名和密码的。 这在使用双重认证的情况下会更麻烦，因为你需要输入一个随机生成并且毫无规律的 <code>token</code> 作为密码。</p>
+<p>幸运的是，<code>Git</code> 拥有一个凭证系统来处理这个事情。 下面有一些 <code>Git</code> 的选项：</p>
+<ul>
+<li>
+<p>默认所有都不缓存。 每一次连接都会询问你的用户名和密码。</p>
+</li>
+<li>
+<p>“<code>cache</code>” 模式会将凭证存放在内存中一段时间。 密码永远不会被存储在磁盘中，并且在15分钟后从内存中清除。</p>
+</li>
+<li>
+<p>“<code>store</code>” 模式会将凭证用明文的形式存放在磁盘中，并且永不过期。 这意味着除非你修改了你在 <code>Git</code> 服务器上的密码，否则你永远不需要再次输入你的凭证信息。 这种方式的缺点是你的密码是用明文的方式存放在你的 <code>home</code> 目录下。</p>
+</li>
+<li>
+<p>如果你使用的是 <code>Mac</code>，<code>Git</code> 还有一种 “<code>osxkeychain</code>” 模式，它会将凭证缓存到你系统用户的钥匙串中。 这种方式将凭证存放在磁盘中，并且永不过期，但是是被加密的，这种加密方式与存放 <code>HTTPS</code> 凭证以及 <code>Safari</code> 的自动填写是相同的。</p>
+</li>
+<li>
+<p>如果你使用的是 <code>Windows</code>，你可以安装一个叫做 “<code>Git Credential Manager for Windows</code>” 的辅助工具。 这和上面说的 “<code>osxkeychain</code>” 十分类似，但是是使用 <code>Windows Credential Store</code> 来控制敏感信息。 可以在 <a class="link" href="https://github.com/Microsoft/Git-Credential-Manager-for-Windows"  target="_blank" rel="noopener"
+    >https://github.com/Microsoft/Git-Credential-Manager-for-Windows</a> 下载。</p>
+</li>
+</ul>
+<p>你可以设置 Git 的配置来选择上述的一种方式</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-v" data-lang="v"><span class="line"><span class="cl"><span class="nv">git</span> <span class="nv">submodule</span> <span class="nv">add</span> <span class="nv">https</span><span class="p">:</span><span class="c1">//github.com/CaiJimmy/hugo-theme-stack.git themes
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><p>子模块添加成功后，执行 <code>git status</code> 命令可以看到 <code>.gitmodules</code> 文件已被修改，并新增了一个子模块</p>
-<p>执行 <code>git diff --cached</code> 命令可以查看修改内容</p>
-<p>执行 <code>git commit</code> 命令可以将子模块添加到本地仓库</p>
-<p>添加子模块时使用 <code>-b</code> 参数指定分支</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-v" data-lang="v"><span class="line"><span class="cl"><span class="nv">git</span> <span class="nv">submodule</span> <span class="nv">add</span> <span class="o">-</span><span class="nv">b</span> <span class="nv">main</span> <span class="p">[</span><span class="na">URL</span> <span class="na">to</span> <span class="na">Git</span> <span class="na">repo</span><span class="p">];</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ git config --global credential.helper cache
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>若子模块已添加，可以在 <code>.gitmodules</code> 中设置分支，其中 <code>public</code> 是主模块中安装子模块的名称， <code>stable</code> 是对应要设置的分支名称。</p>
+</div><p>部分辅助工具有一些选项。 “<code>store</code>” 模式可以接受一个 <code>--file &lt;path&gt;</code> 参数，可以自定义存放密码的文件路径（默认是 <code>~/.git-credentials</code> ）。 “<code>cache</code>” 模式有 <code>--timeout &lt;seconds&gt;</code> 参数，可以设置后台进程的存活时间（默认是 “<code>900</code>”，也就是 <code>15</code> 分钟）。 下面是一个配置 “<code>store</code>” 模式自定义路径的例子：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git config -f .gitmodules submodule.public.branch stable
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ git config --global credential.helper <span class="s1">&#39;store --file ~/.my-credentials&#39;</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>执行后，会在 <code>.gitmodules</code> 中的子模块添加分支（<code>branch = main</code>），如下</p>
+</div><p><code>Git</code> 甚至允许你配置多个辅助工具。 当查找特定服务器的凭证时，<code>Git</code> 会按顺序查询，并且在找到第一个回答时停止查询。 当保存凭证时，<code>Git</code> 会将用户名和密码发送给 所有 配置列表中的辅助工具，它们会按自己的方式处理用户名和密码。 如果你在闪存上有一个凭证文件，但又希望在该闪存被拔出的情况下使用内存缓存来保存用户名密码，<code>.gitconfig</code> 配置文件如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
-</span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-v" data-lang="v"><span class="line"><span class="cl"><span class="p">[</span><span class="na">submodule</span> <span class="p">&#34;</span><span class="s2">public&#34;</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">	<span class="nv">path</span> <span class="o">=</span> <span class="nv">public</span>
-</span></span><span class="line"><span class="cl">	<span class="nv">url</span> <span class="o">=</span> <span class="nv">https</span><span class="p">:</span><span class="c1">//github.com/msdemt/msdemt.github.io.git
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nv">branch</span> <span class="o">=</span> <span class="nv">main</span>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[credential]
+</span></span><span class="line"><span class="cl">    helper = store --file /mnt/thumbdrive/.git-credentials
+</span></span><span class="line"><span class="cl">    helper = cache --timeout 30000
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="使用子模块">使用子模块</h2>
-<p>直接克隆包含子模块的项目时，子模块目录下没有任何文件，需要在项目的根目录下执行如下命令，完成子模块的下载</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-v" data-lang="v"><span class="line"><span class="cl"><span class="nv">git</span> <span class="nv">submodule</span> <span class="nv">init</span>
-</span></span><span class="line"><span class="cl"><span class="nv">git</span> <span class="nv">submodule</span> <span class="nv">update</span>
-</span></span></code></pre></td></tr></table>
 </div>
-</div><p>或者</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-v" data-lang="v"><span class="line"><span class="cl"><span class="nv">git</span> <span class="nv">submodule</span> <span class="nv">update</span> <span class="o">--</span><span class="nv">init</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>克隆项目的同时下载子模块</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git clone &lt;url&gt; --recursive
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="更新子模块">更新子模块</h2>
-<p>子模块的维护者更新子模块后，使用子模块的项目必须手动更新子模块才可以使用最新的子模块。</p>
-<p>在项目中，进入子模块目录下，执行 <code>git pull</code> 更新，执行 <code>git log</code> 可以查看子模块的更新内容。</p>
-<p>之后进入项目根目录，使用 <code>git add</code> 和 <code>git commit</code> 命令将子模块更新到项目中，然后使用 <code>git push</code> 命令将更新子模块的项目推送到远程仓库。</p>
-<p>如果自己要修改子模块内容，需要先在子模块根路径下执行 <code>git checkout &lt;分支名&gt;</code> ，然后才可以对该子模块进行修改和提交，否则<code>git push</code>提交时出现<code>Everything up-to-date</code>。</p>
-<p>将子模块修改提交后，如果希望将项目依赖的子模块更新到最新版本，需要在项目根路径下执行 <code>git submodule update --remote</code>，然后将项目提交到远程仓库。</p>
-<h2 id="删除子模块">删除子模块</h2>
-<p>使用 <code>git submodule deinit &lt;子模块名称&gt;</code> 和 <code>git rm &lt;子模块名称&gt;</code> 命令卸载一个子模块。</p>
-<p>如果添加 &ndash;force 参数，则子模块工作区内即使有本地的修改，也会被移除。</p>
-<p>例如，删除名为 test-submodule 子模块</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-v" data-lang="v"><span class="line"><span class="cl"><span class="nv">git</span> <span class="nv">submodule</span> <span class="nv">deinit</span> <span class="nv">test</span><span class="o">-</span><span class="nv">submodule</span>
-</span></span><span class="line"><span class="cl"><span class="nv">git</span> <span class="nv">rm</span> <span class="nv">test</span><span class="o">-</span><span class="nv">submodule</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>如果完全删除子模块，还需要删除项目根路径下的 <code>.gitmodules</code> 文件和 <code>.git/modules</code> 目录下的子模块文件</p>
-<h2 id="问题">问题</h2>
-<ol>
-<li>子模块更新分支</li>
-</ol>
-<p>添加子模块</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git submodule add https://github.com/msdemt/msdemt.github.io.git public
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>子模块更新后，在父模块中更新子模块到最新版本</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git submodule update --remote
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>更新失败，错误如下</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">fatal: Needed a single revision
-</span></span><span class="line"><span class="cl">无法在子模组路径 <span class="s1">&#39;public&#39;</span> 中找到当前版本 origin/maste
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>发现父模块依赖的子模块分支为master，正确应该是main分支（子模块项目初始分支是master，后来我新增了main作为默认分支，删掉了master分支）</p>
-<p>参考：https://blog.csdn.net/weboof/article/details/108517187</p>
-<p>更新子模块的分支</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git config -f .gitmodules submodule.public.branch main
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>再执行更新子模块</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git submodule update --remote
-</span></span></code></pre></td></tr></table>
-</div>
-</div><blockquote>
-<p>参考：<br>
-<a class="link" href="https://blog.csdn.net/guotianqing/article/details/82391665"  target="_blank" rel="noopener"
-    >https://blog.csdn.net/guotianqing/article/details/82391665</a>
-<a class="link" href="https://blog.csdn.net/Lee_queenie/article/details/127386151"  target="_blank" rel="noopener"
-    >https://blog.csdn.net/Lee_queenie/article/details/127386151</a></p>
-</blockquote>
-
 </section>
 
 
@@ -542,6 +428,8 @@ path为子模块存储的目录路径</p>
     <section class="article-tags">
         
             <a href="/tags/git/">git</a>
+        
+            <a href="/tags/linux/">linux</a>
         
     </section>
 
@@ -574,19 +462,6 @@ path为子模块存储的目录路径</p>
         <div class="flex article-list--tile">
             
                 
-<article class="">
-    <a href="/p/git-credential/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">git凭证存储</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
 <article class="has-image">
     <a href="/p/git-rollback/">
         
@@ -612,6 +487,30 @@ path为子模块存储的目录路径</p>
             
                 
 <article class="has-image">
+    <a href="/p/git-submodule/">
+        
+        
+            <div class="article-image">
+                <img src="/p/git-submodule/_hufb4407888dbfcda01762496277a1213f_11862_928897ddf95d75e64051d740839c147a.webp" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post git子模块操作"
+                        data-key="git-submodule" 
+                        data-hash="md5-VMTzLrAW2EJKJaeiG&#43;gL0g==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">git子模块操作</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
     <a href="/p/git-proxy/">
         
         
@@ -629,6 +528,19 @@ path为子模块存储的目录路径</p>
 
         <div class="article-details">
             <h2 class="article-title">git设置代理</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/wsl-ubuntu-git-fail/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">wsl ubuntu git clone 失败</h2>
         </div>
     </a>
 </article>

@@ -7,28 +7,28 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <lastBuildDate>Thu, 10 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://msdemt.github.io/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>docker</title>
+        <link>https://msdemt.github.io/categories/docker/</link>
+        <pubDate>Thu, 10 Aug 2023 00:00:00 +0000</pubDate>
+        
+        <guid>https://msdemt.github.io/categories/docker/</guid>
+        <description>&lt;img src="https://msdemt.github.io/categories/docker/Docker-Logo-2017-present.jpg" alt="Featured image of post docker" /&gt;</description>
+        </item>
+        <item>
+        <title>git</title>
+        <link>https://msdemt.github.io/categories/git/</link>
+        <pubDate>Thu, 10 Aug 2023 00:00:00 +0000</pubDate>
+        
+        <guid>https://msdemt.github.io/categories/git/</guid>
+        <description>&lt;img src="https://msdemt.github.io/categories/git/1_Wjxx83j-qyiNvFBy1yOA1w.webp" alt="Featured image of post git" /&gt;</description>
+        </item>
+        <item>
         <title>linux</title>
         <link>https://msdemt.github.io/categories/linux/</link>
         <pubDate>Thu, 10 Aug 2023 00:00:00 +0000</pubDate>
         
         <guid>https://msdemt.github.io/categories/linux/</guid>
         <description>&lt;img src="https://msdemt.github.io/categories/linux/Linux-Symbole-2048x1158.png" alt="Featured image of post linux" /&gt;</description>
-        </item>
-        <item>
-        <title>git</title>
-        <link>https://msdemt.github.io/categories/git/</link>
-        <pubDate>Fri, 07 Jul 2023 00:00:00 +0000</pubDate>
-        
-        <guid>https://msdemt.github.io/categories/git/</guid>
-        <description>&lt;img src="https://msdemt.github.io/categories/git/1_Wjxx83j-qyiNvFBy1yOA1w.webp" alt="Featured image of post git" /&gt;</description>
-        </item>
-        <item>
-        <title>github</title>
-        <link>https://msdemt.github.io/categories/github/</link>
-        <pubDate>Fri, 07 Jul 2023 00:00:00 +0000</pubDate>
-        
-        <guid>https://msdemt.github.io/categories/github/</guid>
-        <description>&lt;img src="https://msdemt.github.io/categories/github/GitHub-Emblem.png" alt="Featured image of post github" /&gt;</description>
         </item>
         <item>
         <title>leetcode</title>
