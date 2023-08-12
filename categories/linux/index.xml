@@ -6,7 +6,109 @@
         <description>Recent content in linux on 何凯的博客</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <lastBuildDate>Thu, 10 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://msdemt.github.io/categories/linux/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 11 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://msdemt.github.io/categories/linux/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>H2 迁移到 MySQL 问题</title>
+        <link>https://msdemt.github.io/p/h2-to-mysql/</link>
+        <pubDate>Fri, 11 Aug 2023 00:00:00 +0000</pubDate>
+        
+        <guid>https://msdemt.github.io/p/h2-to-mysql/</guid>
+        <description>&lt;h2 id=&#34;介绍&#34;&gt;介绍&lt;/h2&gt;
+&lt;p&gt;项目中，需要将数据库由 H2 迁移到 mariadb-5.5.60，迁移过程中遇到的问题汇总如下&lt;/p&gt;
+&lt;h2 id=&#34;表名大小写敏感问题&#34;&gt;表名大小写敏感问题&lt;/h2&gt;
+&lt;p&gt;在 linux 系统中，mysql/mariadb 对表名的大小写是敏感的，因为在 SQL 语句中，使用大写的表名，在 H2 中正常，但是迁移到 mariadb 后，提示找不到表。&lt;/p&gt;
+&lt;p&gt;解决：将 SQL 语句中的表名改为小写&lt;/p&gt;
+&lt;h2 id=&#34;date_format-函数问题&#34;&gt;DATE_FORMAT() 函数问题&lt;/h2&gt;
+&lt;p&gt;在 H2 的 SQL 语句中，使用了 &lt;code&gt;FORMATDATETIME(create_time, &#39;yyyy-MM-dd HH:&#39;)&lt;/code&gt; 对日期进行格式化处理，转为 &lt;code&gt;mariadb&lt;/code&gt; &lt;code&gt;后，mariadb&lt;/code&gt; 不支持 &lt;code&gt;FORMATDATETIME()&lt;/code&gt; 函数，所以使用了 &lt;code&gt;DATE_FORMAT()&lt;/code&gt; 函数代替，但是，执行 sql 后发现查不到期望的数据。&lt;/p&gt;
+&lt;p&gt;测试：
+在 H2 控制台执行&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;select&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;FORMATDATETIME&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;2023-08-09 11:06:57&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;yyyy-MM-dd HH:&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;可以得到 &lt;code&gt;2023-08-09 11:&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;在 mariadb 控制台执行&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;select&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;DATE_FORMAT&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;2023-08-09 11:06:57&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;yyyy-MM-dd HH:&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;得到 &lt;code&gt;yyyy-MM-dd HH:&lt;/code&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;参考：&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://www.w3school.com.cn/sql/func_date_format.asp&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://www.w3school.com.cn/sql/func_date_format.asp&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;code&gt;DATE_FORMAT()&lt;/code&gt; 函数的格式化参数和 &lt;code&gt;FORMATDATETIME()&lt;/code&gt; 函数不同，将 SQL 修改为 &lt;code&gt;DATE_FORMAT(create_time, &#39;%Y-%m-%d %H:&#39;)&lt;/code&gt; 后，可以查到正确的数据。&lt;/p&gt;
+&lt;p&gt;在 mariadb 控制台执行&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;select&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;DATE_FORMAT&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;2023-08-09 11:06:57&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;%Y-%m-%d %H:&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;得到正确的结果：&lt;code&gt;2023-08-09 11:&lt;/code&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>MySQL 大小写敏感配置</title>
+        <link>https://msdemt.github.io/p/mysql-case-sensitive/</link>
+        <pubDate>Fri, 11 Aug 2023 00:00:00 +0000</pubDate>
+        
+        <guid>https://msdemt.github.io/p/mysql-case-sensitive/</guid>
+        <description>&lt;h2 id=&#34;介绍&#34;&gt;介绍&lt;/h2&gt;
+&lt;p&gt;在 &lt;code&gt;MySQL&lt;/code&gt; 中，数据库对应数据目录中的目录，数据库中的每个表至少对应数据库目录中的一个文件（也可能是多个，取决于存储引擎）。因此，所使用&lt;code&gt;操作系统的大小写敏感性决定了数据库名和表名的大小写敏感性&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;在大多数 &lt;code&gt;Unix&lt;/code&gt; 中数据库名和表名对大小写敏感，而在 &lt;code&gt;Windows&lt;/code&gt; 中对大小写不敏感。一个显著的例外情况是 &lt;code&gt;Mac OS X&lt;/code&gt; ，它基于 &lt;code&gt;Unix&lt;/code&gt; 但使用默认文件系统类型（&lt;code&gt;HFS+&lt;/code&gt;），对大小写不敏感。然而，&lt;code&gt;Mac OS X&lt;/code&gt; 也支持 &lt;code&gt;UFS&lt;/code&gt; 卷，该卷对大小写敏感，就像 &lt;code&gt;Unix&lt;/code&gt; 一样。&lt;/p&gt;
+&lt;h2 id=&#34;lower_case_file_system-参数只读&#34;&gt;lower_case_file_system 参数（只读）&lt;/h2&gt;
+&lt;p&gt;表示当前系统文件是否大小写敏感，&lt;code&gt;只读参数，无法修改&lt;/code&gt;。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;ON: 大小写不敏感&lt;/li&gt;
+&lt;li&gt;OFF: 大小写敏感&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;lower_case_table_names-参数&#34;&gt;lower_case_table_names 参数&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;Unix&lt;/code&gt; 下 &lt;code&gt;lower_case_table_names&lt;/code&gt; 默认值为 &lt;code&gt;0&lt;/code&gt; ；&lt;code&gt;Windows&lt;/code&gt; 下默认值是 &lt;code&gt;1&lt;/code&gt; ；&lt;code&gt;Mac OS X&lt;/code&gt; 下默认值是 &lt;code&gt;2&lt;/code&gt; 。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;0&lt;/code&gt;: 使用 &lt;code&gt;CREATE TABLE&lt;/code&gt; 或 &lt;code&gt;CREATE DATABASE&lt;/code&gt; 语句指定的大小写字母在硬盘上保存表名和数据库名。名称比较对&lt;code&gt;大小写敏感&lt;/code&gt;。在大小写不敏感的操作系统如 &lt;code&gt;Windows&lt;/code&gt; 或 &lt;code&gt;Mac OS x&lt;/code&gt; 上我们不能将该参数设为 &lt;code&gt;0&lt;/code&gt; ，如果在大小写不敏感的文件系统上将 &lt;code&gt;--lowercase-table-names&lt;/code&gt; 强制设为 &lt;code&gt;0&lt;/code&gt; ，并且使用不同的大小写访问 &lt;code&gt;MyISAM&lt;/code&gt; 表名，可能会导致索引破坏。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;1&lt;/code&gt;: 表名在硬盘上以小写保存，名称比较对&lt;code&gt;大小写不敏感&lt;/code&gt;。 &lt;code&gt;MySQL&lt;/code&gt; 将所有表名转换为小写在存储和查找表上。该行为也适合数据库名和表的别名。该值为 &lt;code&gt;Windows&lt;/code&gt; 的默认值。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;2&lt;/code&gt;: 表名和数据库名在硬盘上使用 &lt;code&gt;CREATE TABLE&lt;/code&gt; 或 &lt;code&gt;CREATE DATABASE&lt;/code&gt; 语句指定的大小写字母进行保存，但 &lt;code&gt;MySQL&lt;/code&gt; 将它们转换为小写在查找表上。名称比较对大小写不敏感，即按照大小写来保存，按照小写来比较。注释：只在对大小写不敏感的文件系统上适用! &lt;code&gt;innodb&lt;/code&gt; 表名用小写保存。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;由大小写敏感转换为不敏感方法&#34;&gt;由大小写敏感转换为不敏感方法&lt;/h2&gt;
+&lt;p&gt;如果原来所建立库及表都是对大小写敏感的，想要转换为对大小写不敏感，主要需要进行如下3步：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;将数据库数据通过 &lt;code&gt;mysqldump&lt;/code&gt; 导出。&lt;/li&gt;
+&lt;li&gt;在 &lt;code&gt;my.cnf&lt;/code&gt; （ &lt;code&gt;CentOS&lt;/code&gt; 下配置文件是 &lt;code&gt;/etc/my.cnf&lt;/code&gt; ）中更改最后添加 &lt;code&gt;lower_case_tables_name = 1&lt;/code&gt;，然后重启 &lt;code&gt;mysql&lt;/code&gt; 数据库&lt;/li&gt;
+&lt;li&gt;将导出的数据导入 &lt;code&gt;mysql&lt;/code&gt; 数据库。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;注：&lt;code&gt;MySQL 8.0&lt;/code&gt; 开始，禁止在重新启动 &lt;code&gt;MySQL&lt;/code&gt; 服务时将 &lt;code&gt;lower_case_table_names&lt;/code&gt; 设置 成不同于初始化 &lt;code&gt;MySQL&lt;/code&gt; 服务时设置的 &lt;code&gt;lower_case_table_names&lt;/code&gt; 值。该值只能在初始化 &lt;code&gt;MySQL&lt;/code&gt; 之前设置。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;命名规则&#34;&gt;命名规则&lt;/h2&gt;
+&lt;p&gt;为了避免大小写引发的问题，一种推荐的命名规则是：在定义数据库、表、列的时候全部采用小写字母加下划线的方式，不使用任何大写字母。&lt;/p&gt;
+&lt;p&gt;在任何系统中可以使用 &lt;code&gt;lower_case_table_names=1&lt;/code&gt; 。使用该选项的不利之处是当使用 &lt;code&gt;SHOW TABLES&lt;/code&gt; 或 &lt;code&gt;SHOW DATABASES&lt;/code&gt; 时，看不出名字原来是用大写还是小写。&lt;/p&gt;
+&lt;p&gt;请注意在 &lt;code&gt;Unix&lt;/code&gt; 中如果以前 &lt;code&gt;lower_case_table_names = 0&lt;/code&gt;，在将 &lt;code&gt;lower_case_table_names&lt;/code&gt; 设置为 &lt;code&gt;1&lt;/code&gt; 时，重启 &lt;code&gt;mysqld&lt;/code&gt; 之前，必须先将旧的数据库名和表名转换为小写。&lt;/p&gt;
+&lt;h2 id=&#34;字段名大小写不敏感&#34;&gt;字段名大小写不敏感&lt;/h2&gt;
+&lt;p&gt;数据库字段名，大小写不敏感&lt;/p&gt;
+&lt;h2 id=&#34;字段值大小写敏感设置字符集和排序规则&#34;&gt;字段值大小写敏感设置，字符集和排序规则&lt;/h2&gt;
+&lt;p&gt;字段值的大小写由 mysql 的校对规则来控制。提到校对规则，就不得不说字符集。字符集是一套符号和编码，校对规则是在字符集内用于比较字符的一套规则。&lt;/p&gt;
+&lt;p&gt;一般而言，校对规则以其相关的字符集名开始，通常包括一个语言名，并且以 &lt;code&gt;_ci&lt;/code&gt;（大小写不敏感）、&lt;code&gt;_cs&lt;/code&gt;（大小写敏感）或 &lt;code&gt;_bin&lt;/code&gt;（二元）结束 。比如 &lt;code&gt;utf8&lt;/code&gt; 字符集，&lt;code&gt;utf8_general_ci&lt;/code&gt; 表示不区分大小写，这个是 &lt;code&gt;utf8&lt;/code&gt; 字符集默认的校对规则； &lt;code&gt;utf8_general_cs&lt;/code&gt; 表示区分大小写，&lt;code&gt;utf8_bin&lt;/code&gt; 表示二进制比较，同样也区分大小写 。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;参考：&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/lishuoboy/article/details/84562007&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://blog.csdn.net/lishuoboy/article/details/84562007&lt;/a&gt;&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/147720463&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://zhuanlan.zhihu.com/p/147720463&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
         <title>docker 部署 mariadb-5.5.60</title>
         <link>https://msdemt.github.io/p/docker-mariadb-5.5.60/</link>
         <pubDate>Thu, 10 Aug 2023 00:00:00 +0000</pubDate>
@@ -1297,7 +1399,7 @@
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ fcitx --version
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;fcitx --version
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
@@ -1308,7 +1410,7 @@
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ sudo apt install -y fcitx-bin
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo apt install -y fcitx-bin
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;ol start=&#34;3&#34;&gt;
@@ -1319,7 +1421,7 @@
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ sudo apt install -y fcitx-table
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo apt install -y fcitx-table
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;ol start=&#34;4&#34;&gt;
@@ -1330,11 +1432,12 @@
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ sudo apt install -y fcitx-googlepinyin
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo apt install -y fcitx-googlepinyin
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;ol start=&#34;5&#34;&gt;
-&lt;li&gt;配置fcitx
+&lt;li&gt;
+&lt;p&gt;配置fcitx
 ubuntu设置&amp;mdash;区域和语言&amp;mdash;管理已安装语言&amp;mdash;键盘输入法系统中选择fcitx
 &lt;img src=&#34;https://msdemt.github.io/images/linux/ubuntu/fcitx-1.png&#34;
 	
@@ -1345,8 +1448,11 @@ ubuntu设置&amp;mdash;区域和语言&amp;mdash;管理已安装语言&amp;mdash
 		alt=&#34;配置fcitx&#34;
 	
 	
-&gt;&lt;/li&gt;
-&lt;li&gt;重启ubuntu系统&lt;/li&gt;
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;重启ubuntu系统&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;安装记录&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -1414,7 +1520,7 @@ ubuntu设置&amp;mdash;区域和语言&amp;mdash;管理已安装语言&amp;mdash
 &lt;a class=&#34;link&#34; href=&#34;https://leimao.github.io/blog/Ubuntu-Gaming-Chinese-Input/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;https://leimao.github.io/blog/Ubuntu-Gaming-Chinese-Input/&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;&lt;img src=&#34;https://msdemt.github.io/images/linux/fcitx-2.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://msdemt.github.io/images/linux/ubuntu/fcitx-2.png&#34;
 	
 	
 	
@@ -1424,7 +1530,7 @@ ubuntu设置&amp;mdash;区域和语言&amp;mdash;管理已安装语言&amp;mdash
 	
 	
 &gt;&lt;/p&gt;
-&lt;ol&gt;
+&lt;ol start=&#34;2&#34;&gt;
 &lt;li&gt;中英文切换问题&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;fcitx使用中，无法shift切换中英文&lt;/p&gt;
@@ -1437,7 +1543,7 @@ ubuntu设置&amp;mdash;区域和语言&amp;mdash;管理已安装语言&amp;mdash
 &lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/yucicheung/article/details/79331529&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;https://blog.csdn.net/yucicheung/article/details/79331529&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;&lt;img src=&#34;https://msdemt.github.io/images/linux/fcitx-3.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://msdemt.github.io/images/linux/ubuntu/fcitx-3.png&#34;
 	
 	
 	
@@ -1447,7 +1553,7 @@ ubuntu设置&amp;mdash;区域和语言&amp;mdash;管理已安装语言&amp;mdash
 	
 	
 &gt;
-&lt;img src=&#34;https://msdemt.github.io/images/linux/fcitx-4.png&#34;
+&lt;img src=&#34;https://msdemt.github.io/images/linux/ubuntu/fcitx-4.png&#34;
 	
 	
 	
@@ -1457,12 +1563,12 @@ ubuntu设置&amp;mdash;区域和语言&amp;mdash;管理已安装语言&amp;mdash
 	
 	
 &gt;&lt;/p&gt;
-&lt;ol&gt;
+&lt;ol start=&#34;3&#34;&gt;
 &lt;li&gt;idea快捷键冲突问题&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;使用idea时，无法使用快捷键 Ctrl+Shift+F，原因该键被fcitx的简繁转换功能占用&lt;/p&gt;
 &lt;p&gt;解决： 点击右上角fcitx小键盘图标&amp;mdash;配置&amp;mdash;附加组件，取消简繁转换&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://msdemt.github.io/images/linux/fcitx-5.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://msdemt.github.io/images/linux/ubuntu/fcitx-5.png&#34;
 	
 	
 	
@@ -1743,67 +1849,103 @@ Windows 安装 OpenSSH 参考：&lt;br&gt;
 &lt;/div&gt;</description>
         </item>
         <item>
-        <title>ubuntu配置vscode字体</title>
+        <title>ubuntu 配置 vscode 字体</title>
         <link>https://msdemt.github.io/p/ubuntu-vscode-font/</link>
         <pubDate>Fri, 07 Jul 2023 00:00:00 +0000</pubDate>
         
         <guid>https://msdemt.github.io/p/ubuntu-vscode-font/</guid>
-        <description>&lt;img src="https://msdemt.github.io/p/ubuntu-vscode-font/ubuntu_logo.png" alt="Featured image of post ubuntu配置vscode字体" /&gt;&lt;h2 id=&#34;添加字体&#34;&gt;添加字体&lt;/h2&gt;
-&lt;p&gt;&lt;code&gt;ubuntu&lt;/code&gt;上使用&lt;code&gt;vscode&lt;/code&gt;编写代码时，字体不好看。&lt;/p&gt;
-&lt;p&gt;在&lt;code&gt;windows&lt;/code&gt;上，&lt;code&gt;vscode&lt;/code&gt;的默认字体为 &lt;code&gt;Consolas&lt;/code&gt;，将该字体安装到&lt;code&gt;ubuntu&lt;/code&gt;中，让&lt;code&gt;vscode&lt;/code&gt;使用该字体。&lt;/p&gt;
-&lt;p&gt;进入&lt;code&gt;windows&lt;/code&gt;中的&lt;code&gt;C:\Windows\Fonts&lt;/code&gt;，将&lt;code&gt;Consolas&lt;/code&gt;中的&lt;code&gt;ttf&lt;/code&gt;字体文件拷贝到&lt;code&gt;ubuntu&lt;/code&gt;系统中。&lt;/p&gt;
-&lt;p&gt;在&lt;code&gt;ubuntu&lt;/code&gt;系统中，新建&lt;code&gt;consolas&lt;/code&gt;文件夹存放字体&lt;/p&gt;
+        <description>&lt;img src="https://msdemt.github.io/p/ubuntu-vscode-font/ubuntu_logo.png" alt="Featured image of post ubuntu 配置 vscode 字体" /&gt;&lt;h2 id=&#34;介绍&#34;&gt;介绍&lt;/h2&gt;
+&lt;p&gt;在 &lt;code&gt;ubuntu&lt;/code&gt; 上使用 &lt;code&gt;vscode&lt;/code&gt; 时，默认的字体（ &lt;code&gt;Droid Sans Mono&lt;/code&gt;）很不好看。 &lt;code&gt;Windows&lt;/code&gt; 上的 &lt;code&gt;vscode&lt;/code&gt; 默认字体是微软的 &lt;code&gt;Consolas&lt;/code&gt; ，比 &lt;code&gt;Droid Sans Mono&lt;/code&gt; 好看很多，而且 &lt;code&gt;JetBrains&lt;/code&gt; 出了免费字体 &lt;code&gt;JetBrains Mono&lt;/code&gt;，也十分好看。&lt;/p&gt;
+&lt;p&gt;本文将 &lt;code&gt;JetBrains Mono&lt;/code&gt; 安装到 u`buntu 中，并且配置 vscode 使用该字体。&lt;/p&gt;
+&lt;h2 id=&#34;安装字体&#34;&gt;安装字体&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;JetBrains Mono&lt;/code&gt; 字体下载地址： &lt;a class=&#34;link&#34; href=&#34;https://www.jetbrains.com/lp/mono/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://www.jetbrains.com/lp/mono/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;下载后，解压&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo mkdir /usr/share/fonts/opentype/consolas
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;unzip JetBrainsMono-2.304.zip
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;将&lt;code&gt;consolas&lt;/code&gt;字体文件移动到该文件夹中&lt;/p&gt;
-&lt;p&gt;然后执行如下命令，刷新字体缓存&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;新建系统字体目录&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo mkdir -p /usr/share/fonts/jetbrains/mono
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;字体目录的权限需要为 &lt;code&gt;755&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo chmod &lt;span class=&#34;m&#34;&gt;755&lt;/span&gt; /usr/share/fonts/jetbrains
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;将字体拷贝到目录&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo cp ~/Downloads/JetBrainsMono-2.304/fonts/ttf/* /usr/share/fonts/jetbrains/mono
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;字体文件的权限需要为 &lt;code&gt;644&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo chmod &lt;span class=&#34;m&#34;&gt;644&lt;/span&gt; /usr/share/fonts/jetbrains/mono/*
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;更新系统字体缓存&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo fc-cache -fv
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;vscode添加字体&#34;&gt;vscode添加字体&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;设置&lt;/code&gt; - &lt;code&gt;文本编辑器&lt;/code&gt; - &lt;code&gt;字体&lt;/code&gt; - &lt;code&gt;Font Family&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;将&lt;code&gt;Jetbrains Mono&lt;/code&gt;字体添加到行首，如下&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;#39;Jetbrains Mono&amp;#39;, &amp;#39;Droid Sans Mono&amp;#39;, &amp;#39;monospace&amp;#39;, monospace
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;或直接在 &lt;code&gt;settings.json&lt;/code&gt; 中添加&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;editor.fontFamily&amp;#34;&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;&amp;#39;Jetbrains Mono&amp;#39;, &amp;#39;Droid Sans Mono&amp;#39;, &amp;#39;monospace&amp;#39;, monospace&amp;#34;&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;重启 &lt;code&gt;vscode&lt;/code&gt; ，就可以使用 &lt;code&gt;Jetbrains Mono&lt;/code&gt; 字体了。&lt;/p&gt;
+&lt;p&gt;对应 &lt;code&gt;settings.json&lt;/code&gt; 中会设置如下&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo dpkg-reconfigure fontconfig
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo fc-cache -vf
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;配置vscode&#34;&gt;配置vscode&lt;/h2&gt;
-&lt;p&gt;设置-文本编辑器-字体-Font Family&lt;/p&gt;
-&lt;p&gt;将&lt;code&gt;Consolas&lt;/code&gt;字体添加到行首，如下&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;#39;Consolas&amp;#39;,&amp;#39;Droid Sans Mono&amp;#39;, &amp;#39;monospace&amp;#39;, monospace
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;或直接在settings.json中添加&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;editor.fontFamily&amp;#34;&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;&amp;#39;Consolas&amp;#39;,&amp;#39;Droid Sans Mono&amp;#39;, &amp;#39;monospace&amp;#39;, monospace&amp;#34;&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;,&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;重启vscode&lt;/p&gt;
-&lt;p&gt;Consolas字体&lt;/p&gt;
-&lt;p&gt;对应settings.json中会设置如下&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;#34;editor.fontSize&amp;#34;: 18,
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;#34;editor.fontFamily&amp;#34;: &amp;#34;&amp;#39;Consolas&amp;#39;,&amp;#39;Droid Sans Mono&amp;#39;, &amp;#39;monospace&amp;#39;, monospace&amp;#34;,
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;editor.fontLigatures&amp;#34;&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;// 是否启用字体连字
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;editor.fontSize&amp;#34;&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;18&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;// 设置字体大小
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;editor.fontFamily&amp;#34;&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;&amp;#39;Jetbrains Mono&amp;#39;,&amp;#39;Droid Sans Mono&amp;#39;, &amp;#39;monospace&amp;#39;, monospace&amp;#34;&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;,&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;vscode调整桌面字体大小&lt;/p&gt;
@@ -1812,10 +1954,17 @@ Windows 安装 OpenSSH 参考：&lt;br&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;#34;window.zoomLevel&amp;#34;: 1,
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;window.zoomLevel&amp;#34;&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;,&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description>
+&lt;/div&gt;&lt;h2 id=&#34;字体位置&#34;&gt;字体位置&lt;/h2&gt;
+&lt;p&gt;ubuntu 字体位置&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;用户字体文件：&lt;code&gt;~/.local/share/fonts&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;系统字体文件：&lt;code&gt;/usr/share/fonts&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;字体配置文件：&lt;code&gt;/etc/fonts&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
         </item>
         <item>
         <title>ubuntu配置root密码</title>

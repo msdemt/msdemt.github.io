@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://msdemt.github.io/p/ubuntu-fcitx/'>
 
-<link rel="stylesheet" href="/scss/style.min.83fdf04f357d6c514ee15e600463b045549e8b40c428f14454adecaa742b352f.css"><meta property='og:title' content='ubuntu18.04安装fcitx输入法框架'>
+<link rel="stylesheet" href="/scss/style.min.ff300df33b80e2ac49809c825614392ed1c7b27591d65d3c4043602cd162e25f.css"><meta property='og:title' content='ubuntu18.04安装fcitx输入法框架'>
 <meta property='og:description' content='ubuntu18.04安装fcitx输入法框架'>
 <meta property='og:url' content='https://msdemt.github.io/p/ubuntu-fcitx/'>
 <meta property='og:site_name' content='何凯的博客'>
@@ -383,7 +383,7 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ fcitx --version
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">fcitx --version
 </span></span></code></pre></td></tr></table>
 </div>
 </div><ol start="2">
@@ -394,7 +394,7 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ sudo apt install -y fcitx-bin
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt install -y fcitx-bin
 </span></span></code></pre></td></tr></table>
 </div>
 </div><ol start="3">
@@ -405,7 +405,7 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ sudo apt install -y fcitx-table
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt install -y fcitx-table
 </span></span></code></pre></td></tr></table>
 </div>
 </div><ol start="4">
@@ -416,11 +416,12 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ sudo apt install -y fcitx-googlepinyin
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt install -y fcitx-googlepinyin
 </span></span></code></pre></td></tr></table>
 </div>
 </div><ol start="5">
-<li>配置fcitx
+<li>
+<p>配置fcitx
 ubuntu设置&mdash;区域和语言&mdash;管理已安装语言&mdash;键盘输入法系统中选择fcitx
 <img src="/images/linux/ubuntu/fcitx-1.png"
 	
@@ -431,8 +432,11 @@ ubuntu设置&mdash;区域和语言&mdash;管理已安装语言&mdash;键盘输�
 		alt="配置fcitx"
 	
 	
-></li>
-<li>重启ubuntu系统</li>
+></p>
+</li>
+<li>
+<p>重启ubuntu系统</p>
+</li>
 </ol>
 <p>安装记录</p>
 <div class="highlight"><div class="chroma">
@@ -500,7 +504,7 @@ ubuntu设置&mdash;区域和语言&mdash;管理已安装语言&mdash;键盘输�
 <a class="link" href="https://leimao.github.io/blog/Ubuntu-Gaming-Chinese-Input/"  target="_blank" rel="noopener"
     >https://leimao.github.io/blog/Ubuntu-Gaming-Chinese-Input/</a></p>
 </blockquote>
-<p><img src="/images/linux/fcitx-2.png"
+<p><img src="/images/linux/ubuntu/fcitx-2.png"
 	
 	
 	
@@ -510,7 +514,7 @@ ubuntu设置&mdash;区域和语言&mdash;管理已安装语言&mdash;键盘输�
 	
 	
 ></p>
-<ol>
+<ol start="2">
 <li>中英文切换问题</li>
 </ol>
 <p>fcitx使用中，无法shift切换中英文</p>
@@ -523,7 +527,7 @@ ubuntu设置&mdash;区域和语言&mdash;管理已安装语言&mdash;键盘输�
 <a class="link" href="https://blog.csdn.net/yucicheung/article/details/79331529"  target="_blank" rel="noopener"
     >https://blog.csdn.net/yucicheung/article/details/79331529</a></p>
 </blockquote>
-<p><img src="/images/linux/fcitx-3.png"
+<p><img src="/images/linux/ubuntu/fcitx-3.png"
 	
 	
 	
@@ -533,7 +537,7 @@ ubuntu设置&mdash;区域和语言&mdash;管理已安装语言&mdash;键盘输�
 	
 	
 >
-<img src="/images/linux/fcitx-4.png"
+<img src="/images/linux/ubuntu/fcitx-4.png"
 	
 	
 	
@@ -543,12 +547,12 @@ ubuntu设置&mdash;区域和语言&mdash;管理已安装语言&mdash;键盘输�
 	
 	
 ></p>
-<ol>
+<ol start="3">
 <li>idea快捷键冲突问题</li>
 </ol>
 <p>使用idea时，无法使用快捷键 Ctrl+Shift+F，原因该键被fcitx的简繁转换功能占用</p>
 <p>解决： 点击右上角fcitx小键盘图标&mdash;配置&mdash;附加组件，取消简繁转换</p>
-<p><img src="/images/linux/fcitx-5.png"
+<p><img src="/images/linux/ubuntu/fcitx-5.png"
 	
 	
 	
@@ -660,7 +664,7 @@ ubuntu设置&mdash;区域和语言&mdash;管理已安装语言&mdash;键盘输�
                         width="250" 
                         height="150" 
                         loading="lazy"
-                        alt="Featured image of post ubuntu配置vscode字体"
+                        alt="Featured image of post ubuntu 配置 vscode 字体"
                         data-key="ubuntu-vscode-font" 
                         data-hash="md5-&#43;b9DfbsXvAqvhgF1Clb4nw==">
                 
@@ -668,7 +672,7 @@ ubuntu设置&mdash;区域和语言&mdash;管理已安装语言&mdash;键盘输�
         
 
         <div class="article-details">
-            <h2 class="article-title">ubuntu配置vscode字体</h2>
+            <h2 class="article-title">ubuntu 配置 vscode 字体</h2>
         </div>
     </a>
 </article>

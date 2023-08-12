@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='ubuntu配置vscode字体'>
-<title>ubuntu配置vscode字体</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='ubuntu 18.04 配置 vscode 字体为 JetBrains Mono'>
+<title>ubuntu 配置 vscode 字体</title>
 
 <link rel='canonical' href='https://msdemt.github.io/p/ubuntu-vscode-font/'>
 
-<link rel="stylesheet" href="/scss/style.min.83fdf04f357d6c514ee15e600463b045549e8b40c428f14454adecaa742b352f.css"><meta property='og:title' content='ubuntu配置vscode字体'>
-<meta property='og:description' content='ubuntu配置vscode字体'>
+<link rel="stylesheet" href="/scss/style.min.ff300df33b80e2ac49809c825614392ed1c7b27591d65d3c4043602cd162e25f.css"><meta property='og:title' content='ubuntu 配置 vscode 字体'>
+<meta property='og:description' content='ubuntu 18.04 配置 vscode 字体为 JetBrains Mono'>
 <meta property='og:url' content='https://msdemt.github.io/p/ubuntu-vscode-font/'>
 <meta property='og:site_name' content='何凯的博客'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='linux' /><meta property='article:tag' content='ubuntu' /><meta property='article:published_time' content='2023-07-07T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2023-07-07T00:00:00&#43;00:00'/><meta property='og:image' content='https://msdemt.github.io/p/ubuntu-vscode-font/ubuntu_logo.png' />
-<meta name="twitter:title" content="ubuntu配置vscode字体">
-<meta name="twitter:description" content="ubuntu配置vscode字体"><meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ubuntu 配置 vscode 字体">
+<meta name="twitter:description" content="ubuntu 18.04 配置 vscode 字体为 JetBrains Mono"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://msdemt.github.io/p/ubuntu-vscode-font/ubuntu_logo.png' />
     </head>
     <body class="
@@ -266,8 +266,10 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#添加字体">添加字体</a></li>
-    <li><a href="#配置vscode">配置vscode</a></li>
+    <li><a href="#介绍">介绍</a></li>
+    <li><a href="#安装字体">安装字体</a></li>
+    <li><a href="#vscode添加字体">vscode添加字体</a></li>
+    <li><a href="#字体位置">字体位置</a></li>
   </ol>
 </nav>
         </div>
@@ -288,7 +290,7 @@
                         width="800" 
                         height="180" 
                         loading="lazy"
-                        alt="Featured image of post ubuntu配置vscode字体" />
+                        alt="Featured image of post ubuntu 配置 vscode 字体" />
                 
             </a>
         </div>
@@ -307,12 +309,12 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/ubuntu-vscode-font/">ubuntu配置vscode字体</a>
+            <a href="/p/ubuntu-vscode-font/">ubuntu 配置 vscode 字体</a>
         </h2>
     
         
         <h3 class="article-subtitle">
-            ubuntu配置vscode字体
+            ubuntu 18.04 配置 vscode 字体为 JetBrains Mono
         </h3>
         
     </div>
@@ -363,62 +365,98 @@
     <section class="article-content">
     
     
-    <h2 id="添加字体">添加字体</h2>
-<p><code>ubuntu</code>上使用<code>vscode</code>编写代码时，字体不好看。</p>
-<p>在<code>windows</code>上，<code>vscode</code>的默认字体为 <code>Consolas</code>，将该字体安装到<code>ubuntu</code>中，让<code>vscode</code>使用该字体。</p>
-<p>进入<code>windows</code>中的<code>C:\Windows\Fonts</code>，将<code>Consolas</code>中的<code>ttf</code>字体文件拷贝到<code>ubuntu</code>系统中。</p>
-<p>在<code>ubuntu</code>系统中，新建<code>consolas</code>文件夹存放字体</p>
+    <h2 id="介绍">介绍</h2>
+<p>在 <code>ubuntu</code> 上使用 <code>vscode</code> 时，默认的字体（ <code>Droid Sans Mono</code>）很不好看。 <code>Windows</code> 上的 <code>vscode</code> 默认字体是微软的 <code>Consolas</code> ，比 <code>Droid Sans Mono</code> 好看很多，而且 <code>JetBrains</code> 出了免费字体 <code>JetBrains Mono</code>，也十分好看。</p>
+<p>本文将 <code>JetBrains Mono</code> 安装到 u`buntu 中，并且配置 vscode 使用该字体。</p>
+<h2 id="安装字体">安装字体</h2>
+<p><code>JetBrains Mono</code> 字体下载地址： <a class="link" href="https://www.jetbrains.com/lp/mono/"  target="_blank" rel="noopener"
+    >https://www.jetbrains.com/lp/mono/</a></p>
+<p>下载后，解压</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo mkdir /usr/share/fonts/opentype/consolas
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">unzip JetBrainsMono-2.304.zip
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>将<code>consolas</code>字体文件移动到该文件夹中</p>
-<p>然后执行如下命令，刷新字体缓存</p>
+</div><p>新建系统字体目录</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo mkdir -p /usr/share/fonts/jetbrains/mono
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>字体目录的权限需要为 <code>755</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo chmod <span class="m">755</span> /usr/share/fonts/jetbrains
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>将字体拷贝到目录</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo cp ~/Downloads/JetBrainsMono-2.304/fonts/ttf/* /usr/share/fonts/jetbrains/mono
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>字体文件的权限需要为 <code>644</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo chmod <span class="m">644</span> /usr/share/fonts/jetbrains/mono/*
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>更新系统字体缓存</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo fc-cache -fv
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="vscode添加字体">vscode添加字体</h2>
+<p><code>设置</code> - <code>文本编辑器</code> - <code>字体</code> - <code>Font Family</code></p>
+<p>将<code>Jetbrains Mono</code>字体添加到行首，如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&#39;Jetbrains Mono&#39;, &#39;Droid Sans Mono&#39;, &#39;monospace&#39;, monospace
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>或直接在 <code>settings.json</code> 中添加</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="s2">&#34;editor.fontFamily&#34;</span><span class="err">:</span> <span class="s2">&#34;&#39;Jetbrains Mono&#39;, &#39;Droid Sans Mono&#39;, &#39;monospace&#39;, monospace&#34;</span><span class="err">,</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>重启 <code>vscode</code> ，就可以使用 <code>Jetbrains Mono</code> 字体了。</p>
+<p>对应 <code>settings.json</code> 中会设置如下</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
+</span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo dpkg-reconfigure fontconfig
-</span></span><span class="line"><span class="cl">sudo fc-cache -vf
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="配置vscode">配置vscode</h2>
-<p>设置-文本编辑器-字体-Font Family</p>
-<p>将<code>Consolas</code>字体添加到行首，如下</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&#39;Consolas&#39;,&#39;Droid Sans Mono&#39;, &#39;monospace&#39;, monospace
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>或直接在settings.json中添加</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="s2">&#34;editor.fontFamily&#34;</span><span class="err">:</span> <span class="s2">&#34;&#39;Consolas&#39;,&#39;Droid Sans Mono&#39;, &#39;monospace&#39;, monospace&#34;</span><span class="err">,</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>重启vscode</p>
-<p>Consolas字体</p>
-<p>对应settings.json中会设置如下</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&#34;editor.fontSize&#34;: 18,
-</span></span><span class="line"><span class="cl">&#34;editor.fontFamily&#34;: &#34;&#39;Consolas&#39;,&#39;Droid Sans Mono&#39;, &#39;monospace&#39;, monospace&#34;,
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="s2">&#34;editor.fontLigatures&#34;</span><span class="err">:</span> <span class="kc">true</span><span class="err">,</span> <span class="c1">// 是否启用字体连字
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s2">&#34;editor.fontSize&#34;</span><span class="err">:</span> <span class="mi">18</span><span class="err">,</span> <span class="c1">// 设置字体大小
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s2">&#34;editor.fontFamily&#34;</span><span class="err">:</span> <span class="s2">&#34;&#39;Jetbrains Mono&#39;,&#39;Droid Sans Mono&#39;, &#39;monospace&#39;, monospace&#34;</span><span class="err">,</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>vscode调整桌面字体大小</p>
@@ -427,10 +465,17 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&#34;window.zoomLevel&#34;: 1,
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="s2">&#34;window.zoomLevel&#34;</span><span class="err">:</span> <span class="mi">1</span><span class="err">,</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div>
+</div><h2 id="字体位置">字体位置</h2>
+<p>ubuntu 字体位置</p>
+<ul>
+<li>用户字体文件：<code>~/.local/share/fonts</code></li>
+<li>系统字体文件：<code>/usr/share/fonts</code></li>
+<li>字体配置文件：<code>/etc/fonts</code></li>
+</ul>
+
 </section>
 
 

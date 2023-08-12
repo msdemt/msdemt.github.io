@@ -378,7 +378,7 @@
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ fcitx --version
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;fcitx --version
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
@@ -389,7 +389,7 @@
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ sudo apt install -y fcitx-bin
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo apt install -y fcitx-bin
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;ol start=&#34;3&#34;&gt;
@@ -400,7 +400,7 @@
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ sudo apt install -y fcitx-table
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo apt install -y fcitx-table
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;ol start=&#34;4&#34;&gt;
@@ -411,11 +411,12 @@
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ sudo apt install -y fcitx-googlepinyin
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo apt install -y fcitx-googlepinyin
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;ol start=&#34;5&#34;&gt;
-&lt;li&gt;配置fcitx
+&lt;li&gt;
+&lt;p&gt;配置fcitx
 ubuntu设置&amp;mdash;区域和语言&amp;mdash;管理已安装语言&amp;mdash;键盘输入法系统中选择fcitx
 &lt;img src=&#34;https://msdemt.github.io/images/linux/ubuntu/fcitx-1.png&#34;
 	
@@ -426,8 +427,11 @@ ubuntu设置&amp;mdash;区域和语言&amp;mdash;管理已安装语言&amp;mdash
 		alt=&#34;配置fcitx&#34;
 	
 	
-&gt;&lt;/li&gt;
-&lt;li&gt;重启ubuntu系统&lt;/li&gt;
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;重启ubuntu系统&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;安装记录&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -495,7 +499,7 @@ ubuntu设置&amp;mdash;区域和语言&amp;mdash;管理已安装语言&amp;mdash
 &lt;a class=&#34;link&#34; href=&#34;https://leimao.github.io/blog/Ubuntu-Gaming-Chinese-Input/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;https://leimao.github.io/blog/Ubuntu-Gaming-Chinese-Input/&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;&lt;img src=&#34;https://msdemt.github.io/images/linux/fcitx-2.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://msdemt.github.io/images/linux/ubuntu/fcitx-2.png&#34;
 	
 	
 	
@@ -505,7 +509,7 @@ ubuntu设置&amp;mdash;区域和语言&amp;mdash;管理已安装语言&amp;mdash
 	
 	
 &gt;&lt;/p&gt;
-&lt;ol&gt;
+&lt;ol start=&#34;2&#34;&gt;
 &lt;li&gt;中英文切换问题&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;fcitx使用中，无法shift切换中英文&lt;/p&gt;
@@ -518,7 +522,7 @@ ubuntu设置&amp;mdash;区域和语言&amp;mdash;管理已安装语言&amp;mdash
 &lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/yucicheung/article/details/79331529&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;https://blog.csdn.net/yucicheung/article/details/79331529&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;&lt;img src=&#34;https://msdemt.github.io/images/linux/fcitx-3.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://msdemt.github.io/images/linux/ubuntu/fcitx-3.png&#34;
 	
 	
 	
@@ -528,7 +532,7 @@ ubuntu设置&amp;mdash;区域和语言&amp;mdash;管理已安装语言&amp;mdash
 	
 	
 &gt;
-&lt;img src=&#34;https://msdemt.github.io/images/linux/fcitx-4.png&#34;
+&lt;img src=&#34;https://msdemt.github.io/images/linux/ubuntu/fcitx-4.png&#34;
 	
 	
 	
@@ -538,12 +542,12 @@ ubuntu设置&amp;mdash;区域和语言&amp;mdash;管理已安装语言&amp;mdash
 	
 	
 &gt;&lt;/p&gt;
-&lt;ol&gt;
+&lt;ol start=&#34;3&#34;&gt;
 &lt;li&gt;idea快捷键冲突问题&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;使用idea时，无法使用快捷键 Ctrl+Shift+F，原因该键被fcitx的简繁转换功能占用&lt;/p&gt;
 &lt;p&gt;解决： 点击右上角fcitx小键盘图标&amp;mdash;配置&amp;mdash;附加组件，取消简繁转换&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://msdemt.github.io/images/linux/fcitx-5.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://msdemt.github.io/images/linux/ubuntu/fcitx-5.png&#34;
 	
 	
 	
@@ -567,67 +571,103 @@ ubuntu设置&amp;mdash;区域和语言&amp;mdash;管理已安装语言&amp;mdash
 </description>
         </item>
         <item>
-        <title>ubuntu配置vscode字体</title>
+        <title>ubuntu 配置 vscode 字体</title>
         <link>https://msdemt.github.io/p/ubuntu-vscode-font/</link>
         <pubDate>Fri, 07 Jul 2023 00:00:00 +0000</pubDate>
         
         <guid>https://msdemt.github.io/p/ubuntu-vscode-font/</guid>
-        <description>&lt;img src="https://msdemt.github.io/p/ubuntu-vscode-font/ubuntu_logo.png" alt="Featured image of post ubuntu配置vscode字体" /&gt;&lt;h2 id=&#34;添加字体&#34;&gt;添加字体&lt;/h2&gt;
-&lt;p&gt;&lt;code&gt;ubuntu&lt;/code&gt;上使用&lt;code&gt;vscode&lt;/code&gt;编写代码时，字体不好看。&lt;/p&gt;
-&lt;p&gt;在&lt;code&gt;windows&lt;/code&gt;上，&lt;code&gt;vscode&lt;/code&gt;的默认字体为 &lt;code&gt;Consolas&lt;/code&gt;，将该字体安装到&lt;code&gt;ubuntu&lt;/code&gt;中，让&lt;code&gt;vscode&lt;/code&gt;使用该字体。&lt;/p&gt;
-&lt;p&gt;进入&lt;code&gt;windows&lt;/code&gt;中的&lt;code&gt;C:\Windows\Fonts&lt;/code&gt;，将&lt;code&gt;Consolas&lt;/code&gt;中的&lt;code&gt;ttf&lt;/code&gt;字体文件拷贝到&lt;code&gt;ubuntu&lt;/code&gt;系统中。&lt;/p&gt;
-&lt;p&gt;在&lt;code&gt;ubuntu&lt;/code&gt;系统中，新建&lt;code&gt;consolas&lt;/code&gt;文件夹存放字体&lt;/p&gt;
+        <description>&lt;img src="https://msdemt.github.io/p/ubuntu-vscode-font/ubuntu_logo.png" alt="Featured image of post ubuntu 配置 vscode 字体" /&gt;&lt;h2 id=&#34;介绍&#34;&gt;介绍&lt;/h2&gt;
+&lt;p&gt;在 &lt;code&gt;ubuntu&lt;/code&gt; 上使用 &lt;code&gt;vscode&lt;/code&gt; 时，默认的字体（ &lt;code&gt;Droid Sans Mono&lt;/code&gt;）很不好看。 &lt;code&gt;Windows&lt;/code&gt; 上的 &lt;code&gt;vscode&lt;/code&gt; 默认字体是微软的 &lt;code&gt;Consolas&lt;/code&gt; ，比 &lt;code&gt;Droid Sans Mono&lt;/code&gt; 好看很多，而且 &lt;code&gt;JetBrains&lt;/code&gt; 出了免费字体 &lt;code&gt;JetBrains Mono&lt;/code&gt;，也十分好看。&lt;/p&gt;
+&lt;p&gt;本文将 &lt;code&gt;JetBrains Mono&lt;/code&gt; 安装到 u`buntu 中，并且配置 vscode 使用该字体。&lt;/p&gt;
+&lt;h2 id=&#34;安装字体&#34;&gt;安装字体&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;JetBrains Mono&lt;/code&gt; 字体下载地址： &lt;a class=&#34;link&#34; href=&#34;https://www.jetbrains.com/lp/mono/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://www.jetbrains.com/lp/mono/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;下载后，解压&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo mkdir /usr/share/fonts/opentype/consolas
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;unzip JetBrainsMono-2.304.zip
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;将&lt;code&gt;consolas&lt;/code&gt;字体文件移动到该文件夹中&lt;/p&gt;
-&lt;p&gt;然后执行如下命令，刷新字体缓存&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;新建系统字体目录&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo mkdir -p /usr/share/fonts/jetbrains/mono
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;字体目录的权限需要为 &lt;code&gt;755&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo chmod &lt;span class=&#34;m&#34;&gt;755&lt;/span&gt; /usr/share/fonts/jetbrains
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;将字体拷贝到目录&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo cp ~/Downloads/JetBrainsMono-2.304/fonts/ttf/* /usr/share/fonts/jetbrains/mono
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;字体文件的权限需要为 &lt;code&gt;644&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo chmod &lt;span class=&#34;m&#34;&gt;644&lt;/span&gt; /usr/share/fonts/jetbrains/mono/*
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;更新系统字体缓存&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo fc-cache -fv
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;vscode添加字体&#34;&gt;vscode添加字体&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;设置&lt;/code&gt; - &lt;code&gt;文本编辑器&lt;/code&gt; - &lt;code&gt;字体&lt;/code&gt; - &lt;code&gt;Font Family&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;将&lt;code&gt;Jetbrains Mono&lt;/code&gt;字体添加到行首，如下&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;#39;Jetbrains Mono&amp;#39;, &amp;#39;Droid Sans Mono&amp;#39;, &amp;#39;monospace&amp;#39;, monospace
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;或直接在 &lt;code&gt;settings.json&lt;/code&gt; 中添加&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;editor.fontFamily&amp;#34;&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;&amp;#39;Jetbrains Mono&amp;#39;, &amp;#39;Droid Sans Mono&amp;#39;, &amp;#39;monospace&amp;#39;, monospace&amp;#34;&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;重启 &lt;code&gt;vscode&lt;/code&gt; ，就可以使用 &lt;code&gt;Jetbrains Mono&lt;/code&gt; 字体了。&lt;/p&gt;
+&lt;p&gt;对应 &lt;code&gt;settings.json&lt;/code&gt; 中会设置如下&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo dpkg-reconfigure fontconfig
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo fc-cache -vf
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;配置vscode&#34;&gt;配置vscode&lt;/h2&gt;
-&lt;p&gt;设置-文本编辑器-字体-Font Family&lt;/p&gt;
-&lt;p&gt;将&lt;code&gt;Consolas&lt;/code&gt;字体添加到行首，如下&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;#39;Consolas&amp;#39;,&amp;#39;Droid Sans Mono&amp;#39;, &amp;#39;monospace&amp;#39;, monospace
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;或直接在settings.json中添加&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;editor.fontFamily&amp;#34;&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;&amp;#39;Consolas&amp;#39;,&amp;#39;Droid Sans Mono&amp;#39;, &amp;#39;monospace&amp;#39;, monospace&amp;#34;&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;,&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;重启vscode&lt;/p&gt;
-&lt;p&gt;Consolas字体&lt;/p&gt;
-&lt;p&gt;对应settings.json中会设置如下&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;#34;editor.fontSize&amp;#34;: 18,
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;#34;editor.fontFamily&amp;#34;: &amp;#34;&amp;#39;Consolas&amp;#39;,&amp;#39;Droid Sans Mono&amp;#39;, &amp;#39;monospace&amp;#39;, monospace&amp;#34;,
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;editor.fontLigatures&amp;#34;&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;// 是否启用字体连字
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;editor.fontSize&amp;#34;&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;18&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;// 设置字体大小
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;editor.fontFamily&amp;#34;&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;&amp;#39;Jetbrains Mono&amp;#39;,&amp;#39;Droid Sans Mono&amp;#39;, &amp;#39;monospace&amp;#39;, monospace&amp;#34;&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;,&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;vscode调整桌面字体大小&lt;/p&gt;
@@ -636,10 +676,17 @@ ubuntu设置&amp;mdash;区域和语言&amp;mdash;管理已安装语言&amp;mdash
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;#34;window.zoomLevel&amp;#34;: 1,
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;window.zoomLevel&amp;#34;&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;,&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description>
+&lt;/div&gt;&lt;h2 id=&#34;字体位置&#34;&gt;字体位置&lt;/h2&gt;
+&lt;p&gt;ubuntu 字体位置&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;用户字体文件：&lt;code&gt;~/.local/share/fonts&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;系统字体文件：&lt;code&gt;/usr/share/fonts&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;字体配置文件：&lt;code&gt;/etc/fonts&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
         </item>
         <item>
         <title>ubuntu配置root密码</title>
