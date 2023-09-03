@@ -6,7 +6,15 @@
         <description>Recent content in Categories on 何凯的博客</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <lastBuildDate>Sun, 27 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://msdemt.github.io/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 03 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://msdemt.github.io/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>git</title>
+        <link>https://msdemt.github.io/categories/git/</link>
+        <pubDate>Sun, 03 Sep 2023 00:00:00 +0000</pubDate>
+        
+        <guid>https://msdemt.github.io/categories/git/</guid>
+        <description>&lt;img src="https://msdemt.github.io/categories/git/1_Wjxx83j-qyiNvFBy1yOA1w.webp" alt="Featured image of post git" /&gt;</description>
+        </item>
+        <item>
         <title>linux</title>
         <link>https://msdemt.github.io/categories/linux/</link>
         <pubDate>Sun, 27 Aug 2023 00:00:00 +0000</pubDate>
@@ -29,14 +37,6 @@
         
         <guid>https://msdemt.github.io/categories/docker/</guid>
         <description>&lt;img src="https://msdemt.github.io/categories/docker/Docker-Logo-2017-present.jpg" alt="Featured image of post docker" /&gt;</description>
-        </item>
-        <item>
-        <title>git</title>
-        <link>https://msdemt.github.io/categories/git/</link>
-        <pubDate>Thu, 10 Aug 2023 00:00:00 +0000</pubDate>
-        
-        <guid>https://msdemt.github.io/categories/git/</guid>
-        <description>&lt;img src="https://msdemt.github.io/categories/git/1_Wjxx83j-qyiNvFBy1yOA1w.webp" alt="Featured image of post git" /&gt;</description>
         </item>
         <item>
         <title>leetcode</title>
