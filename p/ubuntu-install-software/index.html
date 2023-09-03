@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='install idea、clash on ubuntu desktop'>
+<title>ubuntu安装idea等软件</title>
+
+<link rel='canonical' href='https://msdemt.github.io/p/ubuntu-install-software/'>
+
+<link rel="stylesheet" href="/scss/style.min.f2f21d9d961219a01621263328d8997e1ae3b4f0371d455628df1fdc27d57bd6.css"><meta property='og:title' content='ubuntu安装idea等软件'>
+<meta property='og:description' content='install idea、clash on ubuntu desktop'>
+<meta property='og:url' content='https://msdemt.github.io/p/ubuntu-install-software/'>
+<meta property='og:site_name' content='何凯的博客'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='linux' /><meta property='article:tag' content='ubuntu' /><meta property='article:published_time' content='2023-08-17T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2023-08-17T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="ubuntu安装idea等软件">
+<meta name="twitter:description" content="install idea、clash on ubuntu desktop">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu8bf57b87f6c84d6a9bc2eb369290e574_128598_300x0_resize_box_3.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">何凯的博客</a></h1>
+            <h2 class="site-description">The road is long and difficult, forge ahead.</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://github.com/msdemt'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E9%93%BE%E6%8E%A5/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+                <li id="i18n-switch">  
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                    <select name="language" onchange="window.location.href = this.selectedOptions[0].value">
+                        
+                            <option value="https://msdemt.github.io/" selected>中文</option>
+                        
+                            <option value="https://msdemt.github.io/en/" >English</option>
+                        
+                    </select>
+                </li>
+            
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>暗色模式</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#介绍">介绍</a></li>
+    <li><a href="#配置root用户密码">配置root用户密码</a></li>
+    <li><a href="#配置普通用户sudo免密">配置普通用户sudo免密</a></li>
+    <li><a href="#配置自动登录">配置自动登录</a></li>
+    <li><a href="#挂载磁盘">挂载磁盘</a></li>
+    <li><a href="#修改家目录为英文">修改家目录为英文</a></li>
+    <li><a href="#安装docker">安装docker</a>
+      <ol>
+        <li><a href="#修改docker存储路径">修改docker存储路径</a></li>
+      </ol>
+    </li>
+    <li><a href="#安装rar压缩工具">安装rar压缩工具</a></li>
+    <li><a href="#安装java">安装java</a></li>
+    <li><a href="#安装idea">安装idea</a></li>
+    <li><a href="#安装clash-for-windows">安装clash for windows</a></li>
+    <li><a href="#安装-fcitx">安装 fcitx</a></li>
+    <li><a href="#使用ubuntu软件安装时认证失败">使用Ubuntu软件安装时认证失败</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/linux/" style="background-color: #ff8033; color: #fff;">
+                linux
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/ubuntu-install-software/">ubuntu安装idea等软件</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            install idea、clash on ubuntu desktop
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2023-08-17</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 4 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="介绍">介绍</h2>
+<p><code>ubuntu 18.04</code> 重装后，记录下必需软件的安装过程</p>
+<h2 id="配置root用户密码">配置root用户密码</h2>
+<p><code>ubuntu</code> 安装后，默认 <code>root</code> 用户没有密码，无法执行 <code>su - root</code> 切换到 <code>root</code> 用户，配置 <code>root</code> 用户密码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo passwd
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>root</code> 密码配置成功后，就可以执行 <code>su - root</code> 切换到 <code>root</code> 用户了</p>
+<h2 id="配置普通用户sudo免密">配置普通用户sudo免密</h2>
+<p>方法一：
+在 /etc/sudoers.d/ 文件夹下新建文件，如 custom ，文件中添加如下内容</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">username ALL=(ALL) NOPASSWD:ALL
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>方法二：
+sudo 相关的配置位于 /etc/sudoers 文件内，这个文件不建议直接编辑，而是使用以下命令</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sudo visudo
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>该命令会打开默认的编辑器编辑 /etc/sudoers 文件，并在保存时自动检查文件格式并设置到正确的文件权限。</p>
+<p>进入编辑状态后，在文件的<code>最后面</code> 添加以下内容</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">username   ALL=(ALL)       NOPASSWD:ALL
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>username 改成自己的用户名</p>
+<h2 id="配置自动登录">配置自动登录</h2>
+<p>打开 ubuntu desktop 后，自动登录到桌面，避免每次输入密码</p>
+<p><code>ubuntu</code> -&gt; <code>设置</code> -&gt; <code>详细信息</code> -&gt; <code>用户</code> -&gt; 开启 <code>自动登录</code></p>
+<h2 id="挂载磁盘">挂载磁盘</h2>
+<p>执行 fdisk -l 查看可用的磁盘</p>
+<p>/dev/vdb 是额外可用的磁盘，将该磁盘挂载到 /opt 目录下</p>
+<ol>
+<li>卸载 /dev/vdb 目前的挂载位置
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo umount /dev/vdb
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>编辑 /etc/fstab，添加或修改 /dev/vdb的挂载，该文件也可以让磁盘开机自动挂载
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo vi /etc/fstab
+</span></span><span class="line"><span class="cl"><span class="c1"># 新增或修改磁盘挂载</span>
+</span></span><span class="line"><span class="cl">/dev/vdb    /opt    ext4    defaults,nofail <span class="m">0</span>   <span class="m">2</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>创建 /opt 目录
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo touch /opt
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>将 /etc/fstab 中定义的所有磁盘系统挂上
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo mount -a
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+<h2 id="修改家目录为英文">修改家目录为英文</h2>
+<p>默认家目录下的文件夹名称为中文，现将中文名称改为英文名称</p>
+<p>方法一：</p>
+<p>终端执行</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">LANG</span><span class="o">=</span>en_US
+</span></span><span class="line"><span class="cl">xdg-user-dirs-gtk-update
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>执行后，会弹出更换文件夹名称提示，选择 Update Names，将文件夹名称改为英文</p>
+<p><img src="/images/linux/ubuntu/folder-name-1.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="更换文件夹名称-1"
+	
+	
+></p>
+<p>再执行</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">LANG</span><span class="o">=</span>zh_CN.UTF-8
+</span></span><span class="line"><span class="cl">xdg-user-dirs-gtk-update
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>再次弹出更换文件夹名称提示，选择<code>保留旧的名称</code>，并选上<code>不要再次询问我</code>（下次开机的时候，就不会再次询问了）</p>
+<p><img src="/images/linux/ubuntu/folder-name-2.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="更换文件夹名称-2"
+	
+	
+></p>
+<p>重启。</p>
+<p>方法二：</p>
+<p>修改配置文件  <code>~/.config/user-dirs.dirs</code> ，将对应的路径改为英文名</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nv">XDG_DESKTOP_DIR</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$HOME</span><span class="s2">/Desktop&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">XDG_DOWNLOAD_DIR</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$HOME</span><span class="s2">/Download&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">XDG_TEMPLATES_DIR</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$HOME</span><span class="s2">/Template&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">XDG_PUBLICSHARE_DIR</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$HOME</span><span class="s2">/Public&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">XDG_DOCUMENTS_DIR</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$HOME</span><span class="s2">/Document&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">XDG_MUSIC_DIR</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$HOME</span><span class="s2">/Music&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">XDG_PICTURES_DIR</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$HOME</span><span class="s2">/Picture&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">XDG_VIDEOS_DIR</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$HOME</span><span class="s2">/Video&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>重启。</p>
+<h2 id="安装docker">安装docker</h2>
+<blockquote>
+<p>参考：<br>
+<a class="link" href="https://docs.docker.com/engine/install/ubuntu/"  target="_blank" rel="noopener"
+    >https://docs.docker.com/engine/install/ubuntu/</a><br>
+<a class="link" href="https://docs.docker.com/compose/install/linux/#install-the-plugin-manually"  target="_blank" rel="noopener"
+    >https://docs.docker.com/compose/install/linux/#install-the-plugin-manually</a></p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt-get remove docker docker-engine docker.io containerd runc
+</span></span><span class="line"><span class="cl">sudo apt-get update
+</span></span><span class="line"><span class="cl">sudo apt-get install <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    ca-certificates <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    curl <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    gnupg
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sudo mkdir -m <span class="m">0755</span> -p /etc/apt/keyrings
+</span></span><span class="line"><span class="cl">curl -fsSL https://download.docker.com/linux/ubuntu/gpg <span class="p">|</span> sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  <span class="s2">&#34;deb [arch=&#34;</span><span class="k">$(</span>dpkg --print-architecture<span class="k">)</span><span class="s2">&#34; signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+</span></span></span><span class="line"><span class="cl"><span class="s2">  &#34;</span><span class="k">$(</span>. /etc/os-release <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s2">&#34;</span><span class="nv">$VERSION_CODENAME</span><span class="s2">&#34;</span><span class="k">)</span><span class="s2">&#34; stable&#34;</span> <span class="p">|</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  sudo tee /etc/apt/sources.list.d/docker.list &gt; /dev/null
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sudo apt-get update
+</span></span><span class="line"><span class="cl">sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="修改docker存储路径">修改docker存储路径</h3>
+<blockquote>
+<p>参考：<br>
+<a class="link" href="https://blog.csdn.net/m0_58684193/article/details/127554527"  target="_blank" rel="noopener"
+    >https://blog.csdn.net/m0_58684193/article/details/127554527</a></p>
+</blockquote>
+<p><code>docker</code>数据默认存放在 <code>/var/lib/docker</code> 下，修改<code>docker</code>数据存储路径，将其放到容量大的磁盘中</p>
+<p>新建docker数据存储目录</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo mkdir -p /opt/data/docker
+</span></span><span class="line"><span class="cl">sudo vi /etc/docker/daemon.json
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>新建docker配置文件，添加存储路径配置</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo vi /etc/docker/daemon.json
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>内容如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;data-root&#34;</span><span class="p">:</span> <span class="s2">&#34;/opt/data/docker&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>重启docker</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo systemctl stop docker
+</span></span><span class="line"><span class="cl">sudo systemctl start docker
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>删除旧的docker数据目录</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo rm -rf /var/lib/docker
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="安装rar压缩工具">安装rar压缩工具</h2>
+<ol>
+<li>
+<p>压缩功能<br>
+安装</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt-get -y install rar
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>卸载</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt-get -y remove rar
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>解压功能<br>
+安装</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt-get install unrar
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>卸载</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt-get remove unrar
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>压缩解压缩.rar<br>
+解压：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">rar x FileName.rar
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>压缩：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">rar a FileName.rar DirName
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+<h2 id="安装java">安装java</h2>
+<ol>
+<li>
+<p>下载 jdk1.8.0_202<br>
+<a class="link" href="/resources/jdk-8u202-linux-x64.tar.gz" >jdk-8u202下载</a></p>
+</li>
+<li>
+<p>解压 tar 到指定目录</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo tar -zxf jdk-8u202-linux-x64.tar.gz -C /usr/local
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>创建软链接，方便以后更换 jdk 版本</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo ln -s /usr/local/jdk1.8.0_202 /usr/local/jdk
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>添加环境变量配置
+新建 jdk 环境变量文件 /etc/profile.d/jdk.sh</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo touch /etc/profile.d/jdk.sh
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>添加如下内容</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="nb">export</span> <span class="nv">JAVA_HOME</span><span class="o">=</span>/usr/local/jdk
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">CLASSPATH</span><span class="o">=</span>.:<span class="nv">$JAVA_HOME</span>/lib/dt.jar:<span class="nv">$JAVA_HOME</span>/lib/tools.jar
+</span></span><span class="line"><span class="cl"><span class="k">case</span> <span class="s2">&#34;:</span><span class="nv">$PATH</span><span class="s2">:&#34;</span> in
+</span></span><span class="line"><span class="cl">    *<span class="s2">&#34;:</span><span class="nv">$JAVA_HOME</span><span class="s2">/bin:&#34;</span>*<span class="o">)</span> :<span class="p">;;</span> <span class="c1"># already there</span>
+</span></span><span class="line"><span class="cl">    *<span class="o">)</span> <span class="nv">PATH</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$JAVA_HOME</span><span class="s2">/bin:</span><span class="nv">$PATH</span><span class="s2">&#34;</span><span class="p">;;</span> <span class="c1"># or PATH=&#34;$PATH:$new_entry&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="k">esac</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>注意：/etc/profile.d/jdk.sh 文件权限应该为 644</p>
+</li>
+<li>
+<p>更新当前 shell 环境变量</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">source</span> /etc/profile
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+<h2 id="安装idea">安装idea</h2>
+<ol>
+<li>
+<p>下载idea<br>
+下载链接：https://www.jetbrains.com/zh-cn/idea/download/</p>
+</li>
+<li>
+<p>解压</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo tar -xzf ideaIU-2023.1.tar.gz -C /opt/develop/
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> /opt/develop/
+</span></span><span class="line"><span class="cl">mv idea-IU-231.8109.175/ idea-IU
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>创建快捷方式</p>
+<p>方式一：idea首页，左下角齿轮 -&gt; create desktop entry</p>
+<p>方式二：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ cat /usr/share/applications/jetbrains-idea.desktop 
+</span></span><span class="line"><span class="cl"><span class="o">[</span>Desktop Entry<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="nv">Version</span><span class="o">=</span>1.0
+</span></span><span class="line"><span class="cl"><span class="nv">Type</span><span class="o">=</span>Application
+</span></span><span class="line"><span class="cl"><span class="nv">Name</span><span class="o">=</span>IntelliJ IDEA Ultimate Edition
+</span></span><span class="line"><span class="cl"><span class="nv">Icon</span><span class="o">=</span>/opt/develop/idea-IU/bin/idea.svg
+</span></span><span class="line"><span class="cl"><span class="nv">Exec</span><span class="o">=</span><span class="s2">&#34;/opt/develop/idea-IU/bin/idea.sh&#34;</span> %f
+</span></span><span class="line"><span class="cl"><span class="nv">Comment</span><span class="o">=</span>Capable and Ergonomic IDE <span class="k">for</span> JVM
+</span></span><span class="line"><span class="cl"><span class="nv">Categories</span><span class="o">=</span>Development<span class="p">;</span>IDE<span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">Terminal</span><span class="o">=</span><span class="nb">false</span>
+</span></span><span class="line"><span class="cl"><span class="nv">StartupWMClass</span><span class="o">=</span>jetbrains-idea
+</span></span><span class="line"><span class="cl"><span class="nv">StartupNotify</span><span class="o">=</span><span class="nb">true</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>添加可执行权限</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo chmod +x /usr/share/applications/jetbrains-idea.desktop 
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>idea64.vmoptions
+idea64.vmoptions 内容</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cat /home/username/.config/JetBrains/IntelliJIdea2023.1/idea64.vmoptions 
+</span></span><span class="line"><span class="cl"><span class="c1"># custom IntelliJ IDEA VM options (expand/override &#39;bin/idea.vmoptions&#39;)</span>
+</span></span><span class="line"><span class="cl">-javaagent:/opt/develop/jetbra/ja-netfilter.jar
+</span></span><span class="line"><span class="cl">--add-opens<span class="o">=</span>java.base/jdk.internal.org.objectweb.asm<span class="o">=</span>ALL-UNNAMED
+</span></span><span class="line"><span class="cl">--add-opens<span class="o">=</span>java.base/jdk.internal.org.objectweb.asm.tree<span class="o">=</span>ALL-UNNAMED
+</span></span><span class="line"><span class="cl">-Xmx4096m
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+<p><code>idea</code> 快捷键 <code>ctrl + shift + f</code> 无法使用问题</p>
+<p>原因： ubuntu 自带的输入法占用了 <code>ctrl + shift + f</code> 快捷键</p>
+<p>解决：修改 ubntu 输入法中<code>切换繁体/简体中文模式</code>快捷键</p>
+<h2 id="安装clash-for-windows">安装clash for windows</h2>
+<p><a class="link" href="https://github.com/Fndroid/clash_for_windows_pkg/tags"  target="_blank" rel="noopener"
+    >clash for windows 下载</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mkdir /opt/app
+</span></span><span class="line"><span class="cl">tar -zxf Clash.for.Windows-0.20.9-x64-linux.tar.gz -C /opt/app
+</span></span><span class="line"><span class="cl">ln -s /opt/app/Clash<span class="se">\ </span><span class="k">for</span><span class="se">\ </span>Windows-0.20.9-x64-linux /opt/app/clash
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> /opt/app/clash
+</span></span><span class="line"><span class="cl">wget http://cdn.jsdelivr.net/gh/Dreamacro/clash@master/docs/logo.png
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> ..
+</span></span><span class="line"><span class="cl">vi clash.desktop 
+</span></span><span class="line"><span class="cl"><span class="c1"># 内容如下</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>Desktop Entry<span class="o">]</span>
+</span></span><span class="line"><span class="cl"> <span class="nv">Name</span><span class="o">=</span>clash
+</span></span><span class="line"><span class="cl"> <span class="nv">Comment</span><span class="o">=</span>Clash
+</span></span><span class="line"><span class="cl"> <span class="nv">Exec</span><span class="o">=</span>/home/hekai/.app/clash/cfw
+</span></span><span class="line"><span class="cl"> <span class="nv">Icon</span><span class="o">=</span>/home/hekai/.app/clash/logo.png
+</span></span><span class="line"><span class="cl"> <span class="nv">Type</span><span class="o">=</span>Application
+</span></span><span class="line"><span class="cl"> <span class="nv">Categories</span><span class="o">=</span>Development<span class="p">;</span>
+</span></span><span class="line"><span class="cl"> <span class="nv">StartupNotify</span><span class="o">=</span><span class="nb">true</span>
+</span></span><span class="line"><span class="cl"> <span class="nv">NoDisplay</span><span class="o">=</span><span class="nb">false</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sudo cp clash.desktop /usr/share/applications/
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>注意：<code>.desktop</code> 文件内容权限为 <code>644</code> ，属主为 <code>root</code></p>
+<h2 id="安装-fcitx">安装 fcitx</h2>
+<p>见 <a class="link" href="/p/ubuntu-fcitx/index.html" >ubuntu安装fcitx输入法框架</a></p>
+<h2 id="使用ubuntu软件安装时认证失败">使用Ubuntu软件安装时认证失败</h2>
+<p>使用 ubuntu 软件中心 安装 deb 包时，遇到了认证失败的问题。</p>
+<p>比如弹出安装不可信任的软件，需要输入用户密码，但是密码输入后，提示<code>抱歉，认证失败。请重试。</code></p>
+<p>查看 /var/log/auth.log 日志</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">Aug <span class="m">18</span> 23:39:02 00bafcjc-dUrwEMo9N5 polkitd<span class="o">(</span><span class="nv">authority</span><span class="o">=</span><span class="nb">local</span><span class="o">)</span>: Operator of unix-session:1 FAILED to authenticate to gain authorization <span class="k">for</span> action org.freedesktop.packagekit.package-install-untrusted <span class="k">for</span> system-bus-name::1.84 <span class="o">[</span>gnome-software --local-filename<span class="o">=</span>/home/hekai/Downloads/microsoft-edge-stable_115.0.1901.203-1_amd64.deb<span class="o">]</span> <span class="o">(</span>owned by unix-user:hekai<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Aug <span class="m">18</span> 23:39:02 00bafcjc-dUrwEMo9N5 PackageKit: uid <span class="m">1000</span> failed to obtain auth
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>解决：修改  /usr/share/polkit-1/actions/org.freedesktop.packagekit.policy 中
+action 为 org.freedesktop.packagekit.package-install-untrusted ，将其中 auth_admin 的改为 yes ，如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;defaults&gt;
+</span></span><span class="line"><span class="cl">  &lt;allow_any&gt;yes&lt;/allow_any&gt;
+</span></span><span class="line"><span class="cl">  &lt;allow_inactive&gt;yes&lt;/allow_inactive&gt;
+</span></span><span class="line"><span class="cl">  &lt;allow_active&gt;yes&lt;/allow_active&gt;
+</span></span><span class="line"><span class="cl">&lt;/defaults&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>参考：<br>
+<a class="link" href="https://zhuanlan.zhihu.com/p/250658106"  target="_blank" rel="noopener"
+    >https://zhuanlan.zhihu.com/p/250658106</a><br>
+<a class="link" href="https://blog.csdn.net/Andy86666/article/details/106328819"  target="_blank" rel="noopener"
+    >https://blog.csdn.net/Andy86666/article/details/106328819</a>
+<a class="link" href="https://blog.csdn.net/qq_25518029/article/details/119906550"  target="_blank" rel="noopener"
+    >https://blog.csdn.net/qq_25518029/article/details/119906550</a><br>
+<a class="link" href="https://blog.csdn.net/zhaominyong/article/details/118361940"  target="_blank" rel="noopener"
+    >https://blog.csdn.net/zhaominyong/article/details/118361940</a><br>
+<a class="link" href="https://askubuntu.com/questions/18222/how-to-prevent-system-applications-like-the-software-center-from-asking-for-pa"  target="_blank" rel="noopener"
+    >https://askubuntu.com/questions/18222/how-to-prevent-system-applications-like-the-software-center-from-asking-for-pa</a></p>
+</blockquote>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/linux/">linux</a>
+        
+            <a href="/tags/ubuntu/">ubuntu</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/ubuntu-minikube/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">ubuntu安装minikube</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/ubuntu-change-username/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">ubuntu18.04修改用户名</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/wsl-ubuntu-git-fail/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">wsl ubuntu git clone 失败</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/wsl-ubuntu-docker/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">wsl ubuntu 安装 docker</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/wsl-install/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">wsl 安装</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2023 何凯的博客
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.18.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

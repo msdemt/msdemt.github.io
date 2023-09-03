@@ -6,13 +6,21 @@
         <description>Recent content in Categories on 何凯的博客</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <lastBuildDate>Fri, 11 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://msdemt.github.io/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 27 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://msdemt.github.io/categories/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>linux</title>
         <link>https://msdemt.github.io/categories/linux/</link>
-        <pubDate>Fri, 11 Aug 2023 00:00:00 +0000</pubDate>
+        <pubDate>Sun, 27 Aug 2023 00:00:00 +0000</pubDate>
         
         <guid>https://msdemt.github.io/categories/linux/</guid>
         <description>&lt;img src="https://msdemt.github.io/categories/linux/Linux-Symbole-2048x1158.png" alt="Featured image of post linux" /&gt;</description>
+        </item>
+        <item>
+        <title>java</title>
+        <link>https://msdemt.github.io/categories/java/</link>
+        <pubDate>Thu, 24 Aug 2023 00:00:00 +0000</pubDate>
+        
+        <guid>https://msdemt.github.io/categories/java/</guid>
+        <description>&lt;img src="https://msdemt.github.io/categories/java/Java_%28programming_language%29-Logo.png" alt="Featured image of post java" /&gt;</description>
         </item>
         <item>
         <title>docker</title>
@@ -37,14 +45,6 @@
         
         <guid>https://msdemt.github.io/categories/leetcode/</guid>
         <description>&lt;img src="https://msdemt.github.io/categories/leetcode/1603980178-c305fb1df5f5fb7.png" alt="Featured image of post leetcode" /&gt;</description>
-        </item>
-        <item>
-        <title>java</title>
-        <link>https://msdemt.github.io/categories/java/</link>
-        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-        
-        <guid>https://msdemt.github.io/categories/java/</guid>
-        <description>&lt;img src="https://msdemt.github.io/categories/java/Java_%28programming_language%29-Logo.png" alt="Featured image of post java" /&gt;</description>
         </item>
         
     </channel>

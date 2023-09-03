@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://msdemt.github.io/p/sudo-su-root/'>
 
-<link rel="stylesheet" href="/scss/style.min.ff300df33b80e2ac49809c825614392ed1c7b27591d65d3c4043602cd162e25f.css"><meta property='og:title' content='sudo su - root 介绍'>
+<link rel="stylesheet" href="/scss/style.min.f2f21d9d961219a01621263328d8997e1ae3b4f0371d455628df1fdc27d57bd6.css"><meta property='og:title' content='sudo su - root 介绍'>
 <meta property='og:description' content='sudo命令和su命令介绍'>
 <meta property='og:url' content='https://msdemt.github.io/p/sudo-su-root/'>
 <meta property='og:site_name' content='何凯的博客'>
@@ -345,7 +345,7 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 3 分钟
+                    阅读时长: 4 分钟
                 </time>
             </div>
         
@@ -380,7 +380,33 @@
 <p><code>sudo</code>配置无密码后，用户就可以使用 <code>sudo su - root</code> 直接免密切换到<code>root</code> 用户了</p>
 <h3 id="无密码-sudo-配置">无密码 sudo 配置</h3>
 <h4 id="centos7-配置用户无密码-sudo">centos7 配置用户无密码 sudo</h4>
-<p>修改<code>/etc/sudoers</code>文件，从而让普通用户<code>hekai</code>支持无密码<code>sudo</code></p>
+<p>修改<code>/etc/sudoers</code>文件，从而让普通用户<code>username</code>支持无密码<code>sudo</code></p>
+<p>方式一：</p>
+<p>sudo 相关的配置位于 /etc/sudoers 文件内，这个文件不建议直接编辑，而是使用以下命令</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sudo visudo
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>该命令会打开默认的编辑器编辑 /etc/sudoers 文件，并在保存时自动检查文件格式并设置到正确的文件权限。</p>
+<p>进入编辑状态后，在文件的<code>最后面</code> 添加以下内容</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">username   ALL=(ALL)       NOPASSWD:ALL
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>username 改成自己的用户名</p>
+<p>NOPASSWD 表示不需要输入密码<br>
+ALL 表示所有命令<br>
+也就是，用户在执行所有的 sudo 命令时军不需要输入密码，如果要设置指定命令无需输入密码，只需要把后面的 ALL 替换为具体命令</p>
+<p>方式二：</p>
+<p>手动修改 /etc/sudoers 方式如下</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -397,14 +423,14 @@
 </span></span><span class="line"><span class="cl">$ vim /etc/sudoers
 </span></span><span class="line"><span class="cl">$ diff /etc/sudoers /etc/sudoers.bak
 </span></span><span class="line"><span class="cl">108c108
-</span></span><span class="line"><span class="cl">&lt; hekai   <span class="nv">ALL</span><span class="o">=(</span>ALL<span class="o">)</span>       NOPASSWD:ALL
+</span></span><span class="line"><span class="cl">&lt; username   <span class="nv">ALL</span><span class="o">=(</span>ALL<span class="o">)</span>       NOPASSWD:ALL
 </span></span><span class="line"><span class="cl">---
 </span></span><span class="line"><span class="cl">&gt; 
 </span></span><span class="line"><span class="cl">$ chmod u-w /etc/sudoers
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>注意：<code>hekai   ALL=(ALL)       NOPASSWD:ALL</code> 需要添加到 <code># %wheel    ALL=(ALL)    NOPASSWD: ALL</code> 下面，否则<code>sudo</code>还是会需要密码的。</p>
-<p>然后，<code>hekai</code>用户就可以无需密码执行<code>sudo</code>命令了。</p>
+</div><p>注意：<code>username   ALL=(ALL)       NOPASSWD:ALL</code> 需要添加到 <code># %wheel    ALL=(ALL)    NOPASSWD: ALL</code> 下面（即文件最后面），否则<code>sudo</code>还是会需要密码的。</p>
+<p>然后，<code>username</code>用户就可以无需密码执行<code>sudo</code>命令了。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -454,7 +480,7 @@
 </span></span><span class="line"><span class="cl">[root@centos7-desktop ~]# vim /etc/sudoers
 </span></span><span class="line"><span class="cl">[root@centos7-desktop ~]# diff /etc/sudoers /etc/sudoers.bak
 </span></span><span class="line"><span class="cl">108c108
-</span></span><span class="line"><span class="cl">&lt; hekai   ALL=(ALL)       NOPASSWD:ALL
+</span></span><span class="line"><span class="cl">&lt; username   ALL=(ALL)       NOPASSWD:ALL
 </span></span><span class="line"><span class="cl">---
 </span></span><span class="line"><span class="cl">&gt; 
 </span></span><span class="line"><span class="cl">[root@centos7-desktop ~]# chmod u-w /etc/sudoers
@@ -482,7 +508,7 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">## Same thing without a password
 </span></span><span class="line"><span class="cl"># %wheel    ALL=(ALL)    NOPASSWD: ALL
-</span></span><span class="line"><span class="cl">hekai   ALL=(ALL)       NOPASSWD:ALL
+</span></span><span class="line"><span class="cl">username   ALL=(ALL)       NOPASSWD:ALL
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="配置用户有密码-sudo">配置用户有密码 sudo</h4>
@@ -492,7 +518,7 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ usermod -a -G hekai wheel
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ usermod -a -G username wheel
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>也可以使用</p>
@@ -501,17 +527,17 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ gpasswd -a hekai wheel
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ gpasswd -a username wheel
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>此时，<code>hekai</code>用户执行 <code>sudo</code> ，还需要输入密码。加入<code>wheel</code>用户组，只是允许普通用户能够 <code>sudo -s</code> 切换到 <code>root</code></p>
-<p>使用如下命令，将用户 <code>hekai</code> 从 <code>wheel</code> 组删除</p>
+</div><p>此时，<code>username</code>用户执行 <code>sudo</code> ，还需要输入密码。加入<code>wheel</code>用户组，只是允许普通用户能够 <code>sudo -s</code> 切换到 <code>root</code></p>
+<p>使用如下命令，将用户 <code>username</code> 从 <code>wheel</code> 组删除</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ gpasswd -d hekai wheel
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ gpasswd -d username wheel
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>执行 <code>usermod</code> 或 <code>gpasswd</code> 命令，不会改变 <code>/etc/sudoers</code> 文件内容</p>
@@ -536,21 +562,21 @@
 </span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 将hekai添加到wheel组</span>
-</span></span><span class="line"><span class="cl"><span class="o">[</span>root@centos7-desktop etc<span class="o">]</span><span class="c1"># usermod -a -G hekai wheel</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># 也可以使用 gpasswd -a hekai wheel</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># 使用hekai用户执行sudo，还是需要输入密码</span>
-</span></span><span class="line"><span class="cl"><span class="o">[</span>hekai@centos7-desktop ~<span class="o">]</span>$ sudo vi /etc/hosts
-</span></span><span class="line"><span class="cl"><span class="o">[</span>sudo<span class="o">]</span> hekai 的密码：
-</span></span><span class="line"><span class="cl"><span class="o">[</span>hekai@centos7-desktop ~<span class="o">]</span>$
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 将username添加到wheel组</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@centos7-desktop etc<span class="o">]</span><span class="c1"># usermod -a -G username wheel</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 也可以使用 gpasswd -a username wheel</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 使用username用户执行sudo，还是需要输入密码</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>username@centos7-desktop ~<span class="o">]</span>$ sudo vi /etc/hosts
+</span></span><span class="line"><span class="cl"><span class="o">[</span>sudo<span class="o">]</span> username 的密码：
+</span></span><span class="line"><span class="cl"><span class="o">[</span>username@centos7-desktop ~<span class="o">]</span>$
 </span></span><span class="line"><span class="cl"><span class="o">[</span>root@centos7-desktop etc<span class="o">]</span><span class="c1"># diff /etc/sudoers /etc/sudoers.bak</span>
-</span></span><span class="line"><span class="cl"><span class="o">[</span>root@centos7-desktop etc<span class="o">]</span><span class="c1"># id hekai</span>
-</span></span><span class="line"><span class="cl"><span class="nv">uid</span><span class="o">=</span>1000<span class="o">(</span>hekai<span class="o">)</span> <span class="nv">gid</span><span class="o">=</span>1000<span class="o">(</span>hekai<span class="o">)</span> <span class="nv">组</span><span class="o">=</span>1000<span class="o">(</span>hekai<span class="o">)</span>,10<span class="o">(</span>wheel<span class="o">)</span>
-</span></span><span class="line"><span class="cl">将hekai从wheel用户组删除
-</span></span><span class="line"><span class="cl"><span class="o">[</span>root@centos7-desktop etc<span class="o">]</span><span class="c1"># gpasswd -d hekai wheel</span>
-</span></span><span class="line"><span class="cl">正在将用户“hekai”从“wheel”组中删除
-</span></span><span class="line"><span class="cl"><span class="o">[</span>root@centos7-desktop etc<span class="o">]</span><span class="c1"># id hekai</span>
-</span></span><span class="line"><span class="cl"><span class="nv">uid</span><span class="o">=</span>1000<span class="o">(</span>hekai<span class="o">)</span> <span class="nv">gid</span><span class="o">=</span>1000<span class="o">(</span>hekai<span class="o">)</span> <span class="nv">组</span><span class="o">=</span>1000<span class="o">(</span>hekai<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@centos7-desktop etc<span class="o">]</span><span class="c1"># id username</span>
+</span></span><span class="line"><span class="cl"><span class="nv">uid</span><span class="o">=</span>1000<span class="o">(</span>username<span class="o">)</span> <span class="nv">gid</span><span class="o">=</span>1000<span class="o">(</span>username<span class="o">)</span> <span class="nv">组</span><span class="o">=</span>1000<span class="o">(</span>username<span class="o">)</span>,10<span class="o">(</span>wheel<span class="o">)</span>
+</span></span><span class="line"><span class="cl">将username从wheel用户组删除
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@centos7-desktop etc<span class="o">]</span><span class="c1"># gpasswd -d username wheel</span>
+</span></span><span class="line"><span class="cl">正在将用户“username”从“wheel”组中删除
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@centos7-desktop etc<span class="o">]</span><span class="c1"># id username</span>
+</span></span><span class="line"><span class="cl"><span class="nv">uid</span><span class="o">=</span>1000<span class="o">(</span>username<span class="o">)</span> <span class="nv">gid</span><span class="o">=</span>1000<span class="o">(</span>username<span class="o">)</span> <span class="nv">组</span><span class="o">=</span>1000<span class="o">(</span>username<span class="o">)</span>
 </span></span><span class="line"><span class="cl"><span class="o">[</span>root@centos7-desktop etc<span class="o">]</span><span class="c1">#</span>
 </span></span></code></pre></td></tr></table>
 </div>
@@ -609,12 +635,12 @@
             
                 
 <article class="">
-    <a href="/p/h2-to-mysql/">
+    <a href="/p/ubuntu-install-vagrant/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">H2 迁移到 MySQL 问题</h2>
+            <h2 class="article-title">ubuntu18.04安装vagrant记录</h2>
         </div>
     </a>
 </article>
@@ -622,12 +648,12 @@
             
                 
 <article class="">
-    <a href="/p/mysql-case-sensitive/">
+    <a href="/p/ubuntu-minikube/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">MySQL 大小写敏感配置</h2>
+            <h2 class="article-title">ubuntu安装minikube</h2>
         </div>
     </a>
 </article>
@@ -635,12 +661,12 @@
             
                 
 <article class="">
-    <a href="/p/docker-mariadb-5.5.60/">
+    <a href="/p/without-cpu-virtualization/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">docker 部署 mariadb-5.5.60</h2>
+            <h2 class="article-title">不支持cpu虚拟化环境运行虚拟机的探索</h2>
         </div>
     </a>
 </article>
@@ -648,12 +674,12 @@
             
                 
 <article class="">
-    <a href="/p/wsl-ubuntu-git-fail/">
+    <a href="/p/nginx-websocket/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">wsl ubuntu git clone 失败</h2>
+            <h2 class="article-title">nginx配置websocket</h2>
         </div>
     </a>
 </article>
@@ -661,12 +687,12 @@
             
                 
 <article class="">
-    <a href="/p/wsl-ubuntu-docker/">
+    <a href="/p/bash-case/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">wsl ubuntu 安装 docker</h2>
+            <h2 class="article-title">Bash case 语句</h2>
         </div>
     </a>
 </article>
@@ -692,7 +718,7 @@
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.17.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.18.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 </footer>
 
