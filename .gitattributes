@@ -1,4 +1,0 @@
-resources/jdk8u202.tar.gz00 filter=lfs diff=lfs merge=lfs -text
-resources/jdk8u202.tar.gz01 filter=lfs diff=lfs merge=lfs -text
-resources/jdk8u202.tar.gz02 filter=lfs diff=lfs merge=lfs -text
-resources/jdk8u202.tar.gz03 filter=lfs diff=lfs merge=lfs -text
