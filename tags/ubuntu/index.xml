@@ -6,7 +6,144 @@
         <description>Recent content in ubuntu on 何凯的博客</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <lastBuildDate>Sun, 27 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://msdemt.github.io/tags/ubuntu/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 08 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://msdemt.github.io/tags/ubuntu/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>ubuntu添加图标文件夹</title>
+        <link>https://msdemt.github.io/p/ubuntu-app-folder/</link>
+        <pubDate>Fri, 08 Sep 2023 00:00:00 +0000</pubDate>
+        
+        <guid>https://msdemt.github.io/p/ubuntu-app-folder/</guid>
+        <description>&lt;p&gt;ubuntu 的 GNOME 桌面可以将多个 Application 图标合并到一个图标文件夹中。&lt;/p&gt;
+&lt;h2 id=&#34;系统图标&#34;&gt;系统图标&lt;/h2&gt;
+&lt;p&gt;ubuntu 的图标位于以下位置&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;对所有用户有效: /usr/share/applications 以及 /usr/local/share/applications&lt;/li&gt;
+&lt;li&gt;仅当前用户有效: ~/.local/share/applications&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;如果图标文件放到相应位置，但是还无法显示，请检查图标文件的文件权限是否为644&lt;/p&gt;
+&lt;p&gt;图标文件以 .desktop 为后缀&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;hekai@00bafcjc-dUrwEMo9N5:/usr/share/applications$ ll
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;total &lt;span class=&#34;m&#34;&gt;908&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;drwxr-xr-x   &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt; root  root  &lt;span class=&#34;m&#34;&gt;12288&lt;/span&gt; 9月   &lt;span class=&#34;m&#34;&gt;3&lt;/span&gt; 10:53 ./
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;drwxr-xr-x &lt;span class=&#34;m&#34;&gt;287&lt;/span&gt; root  root  &lt;span class=&#34;m&#34;&gt;12288&lt;/span&gt; 9月   &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt; 10:15 ../
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;-rw-r--r--   &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; root  root    &lt;span class=&#34;m&#34;&gt;291&lt;/span&gt; 4月  &lt;span class=&#34;m&#34;&gt;13&lt;/span&gt; 01:53 apport-gtk.desktop
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;-rw-r--r--   &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; root  root    &lt;span class=&#34;m&#34;&gt;125&lt;/span&gt; 5月  &lt;span class=&#34;m&#34;&gt;20&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2016&lt;/span&gt; apturl.desktop
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;-rw-r--r--   &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; root  root    &lt;span class=&#34;m&#34;&gt;484&lt;/span&gt; 4月  &lt;span class=&#34;m&#34;&gt;12&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt; bluetooth-sendto.desktop
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;-rw-r--r--   &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; root  root    &lt;span class=&#34;m&#34;&gt;510&lt;/span&gt; 3月  &lt;span class=&#34;m&#34;&gt;21&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2018&lt;/span&gt; cheese.desktop
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;-rw-r--r--   &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; root  root    &lt;span class=&#34;m&#34;&gt;214&lt;/span&gt; 8月  &lt;span class=&#34;m&#34;&gt;21&lt;/span&gt; 13:42 clash-for-windows.desktop
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;-rwxrwxr-x   &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; root  root    &lt;span class=&#34;m&#34;&gt;469&lt;/span&gt; 8月  &lt;span class=&#34;m&#34;&gt;10&lt;/span&gt; 06:17 code.desktop*
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;当前文件夹&#34;&gt;当前文件夹&lt;/h2&gt;
+&lt;p&gt;ubuntu 18.04 的 GNOME 桌面自带两个预定义文件夹 “Utilities” 和 “Sundry”, ubuntu 20.04 不带任何图标文件夹&lt;/p&gt;
+&lt;p&gt;查看当前 App 文件夹:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;gsettings get org.gnome.desktop.app-folders folder-children
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;结果&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;[&amp;#39;Utilities&amp;#39;, &amp;#39;Sundry&amp;#39;, &amp;#39;YaST&amp;#39;]
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;创建文件夹&#34;&gt;创建文件夹&lt;/h2&gt;
+&lt;p&gt;命令格式: &lt;code&gt;gsettings set org.gnome.desktop.app-folders folder-children &amp;quot;[&#39;folder&#39;, ...]&amp;quot;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;示例&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;gsettings &lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; org.gnome.desktop.app-folders folder-children &lt;span class=&#34;s2&#34;&gt;&amp;#34;[&amp;#39;Utilities&amp;#39;, &amp;#39;Sundry&amp;#39;, &amp;#39;YaST&amp;#39;, &amp;#39;JetBrains&amp;#39;]&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;除了新创建的 JetBrains， 之前已存在的文件夹也要加上, 否则视为删除&lt;/p&gt;
+&lt;p&gt;设置展示的名称为 “JetBrains”, 格式: &lt;code&gt;gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/folder/ name &amp;quot;name&amp;quot;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;示例：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;gsettings &lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/JetBrains/ name &lt;span class=&#34;s2&#34;&gt;&amp;#34;JetBrains&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;因为文件夹内没有任何应用, 暂时该文件夹还不可见&lt;/p&gt;
+&lt;h2 id=&#34;添加图标&#34;&gt;添加图标&lt;/h2&gt;
+&lt;p&gt;命令格式: &lt;code&gt;gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/folder/ apps &amp;quot;[&#39;app.desktop&#39;, ...]&amp;quot;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;在 JetBrains 文件夹下放置 4 个应用图标，示例&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;gsettings &lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/JetBrains/ apps &lt;span class=&#34;s2&#34;&gt;&amp;#34;[&amp;#39;jetbrains-clion.desktop&amp;#39;, &amp;#39;jetbrains-goland.desktop&amp;#39;, &amp;#39;jetbrains-idea.desktop&amp;#39;, &amp;#39;jetbrains-pycharm.desktop&amp;#39;]&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;参考：&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/jiang_huixin/article/details/107092622&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://blog.csdn.net/jiang_huixin/article/details/107092622&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
+        <title>wps在ubuntu上缺少字体</title>
+        <link>https://msdemt.github.io/p/ubuntu-wps-fonts/</link>
+        <pubDate>Fri, 08 Sep 2023 00:00:00 +0000</pubDate>
+        
+        <guid>https://msdemt.github.io/p/ubuntu-wps-fonts/</guid>
+        <description>&lt;p&gt;ubuntu 18.04 安装 wps 2019，安装后打开 wps，提示如下错误&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://msdemt.github.io/images/linux/ubuntu/wps-fonts.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;wps-fonts&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;解决：&lt;br&gt;
+将相关字体拷贝到 /usr/share/fonts/wps-office 目录&lt;/p&gt;
+&lt;p&gt;注意：字体文件权限应该为644&lt;/p&gt;
+&lt;p&gt;拷贝后，更新字体缓存&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo fc-cache -fv
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;其中 WINGDNG2.TTF、WINGDNG3.TTF、symobol.ttf、wingding.ttf 可以从windows系统中的 &lt;code&gt;C:\Windows\Fonts&lt;/code&gt; 获取&lt;/p&gt;
+&lt;p&gt;MTEXTRA.TTF 需要从网络下载&lt;/p&gt;
+&lt;p&gt;字体附件：&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://msdemt.github.io/resources/ubuntu-wps-lack-fonts.zip&#34; &gt;ubuntu wps 缺失字体下载&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>ubuntu安装minikube</title>
         <link>https://msdemt.github.io/p/ubuntu-minikube/</link>
         <pubDate>Sun, 27 Aug 2023 00:00:00 +0000</pubDate>
@@ -1573,8 +1710,8 @@ ubuntu设置&amp;mdash;区域和语言&amp;mdash;管理已安装语言&amp;mdash
 &lt;/div&gt;
 &lt;/div&gt;&lt;h2 id=&#34;问题&#34;&gt;问题&lt;/h2&gt;
 &lt;ol&gt;
-&lt;li&gt;输入法图标问题&lt;/li&gt;
-&lt;/ol&gt;
+&lt;li&gt;
+&lt;p&gt;输入法图标问题&lt;/p&gt;
 &lt;p&gt;重启后，可以在ubuntu界面右上角看到fcitx的小键盘图标，如果之前配置使用过IBus输入法，此时右上角会有两个输入法图标。&lt;/p&gt;
 &lt;p&gt;解决：ubuntu设置&amp;mdash;区域和语言&amp;mdash;输入源 中删除汉语，只保留英语(美国)，这样默认的输入法图标就消失了。&lt;/p&gt;
 &lt;blockquote&gt;
@@ -1592,9 +1729,9 @@ ubuntu设置&amp;mdash;区域和语言&amp;mdash;管理已安装语言&amp;mdash
 	
 	
 &gt;&lt;/p&gt;
-&lt;ol start=&#34;2&#34;&gt;
-&lt;li&gt;中英文切换问题&lt;/li&gt;
-&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;中英文切换问题&lt;/p&gt;
 &lt;p&gt;fcitx使用中，无法shift切换中英文&lt;/p&gt;
 &lt;p&gt;原因：点击右上角fcitx小键盘图标&amp;mdash;配置&amp;mdash;输入法 中只配置了 Google拼音 输入法。&lt;/p&gt;
 &lt;p&gt;Ubuntu下所谓的中英文切换就是一个输入法系统的中文输入法切换到其中的英文输入法，所以一定要保证输入法系统中既有中文输入法也要有英文输入法。
@@ -1625,9 +1762,9 @@ ubuntu设置&amp;mdash;区域和语言&amp;mdash;管理已安装语言&amp;mdash
 	
 	
 &gt;&lt;/p&gt;
-&lt;ol start=&#34;3&#34;&gt;
-&lt;li&gt;idea快捷键冲突问题&lt;/li&gt;
-&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;idea快捷键冲突问题&lt;/p&gt;
 &lt;p&gt;使用idea时，无法使用快捷键 Ctrl+Shift+F，原因该键被fcitx的简繁转换功能占用&lt;/p&gt;
 &lt;p&gt;解决： 点击右上角fcitx小键盘图标&amp;mdash;配置&amp;mdash;附加组件，取消简繁转换&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://msdemt.github.io/images/linux/ubuntu/fcitx-5.png&#34;
@@ -1640,6 +1777,37 @@ ubuntu设置&amp;mdash;区域和语言&amp;mdash;管理已安装语言&amp;mdash
 	
 	
 &gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;谷歌拼音输入法无法输出中文中括号（【】）&lt;/p&gt;
+&lt;p&gt;使用谷歌拼音输入法输出中文中括号时，输出的是&lt;code&gt;·「·」&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;解决办法：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;查看 fcitx 的版本: &lt;code&gt;fcitx --version&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;fctix 使用的是 4 版本
+&lt;ul&gt;
+&lt;li&gt;编辑 &lt;code&gt;/usr/share/fcitx/data/punc.mb.zh_CN&lt;/code&gt;，将第18行修改为 &lt;code&gt;[ 【&lt;/code&gt;，将第19行修改为 &lt;code&gt;] 】&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;fcitx 使用的是 5 版本
+&lt;ul&gt;
+&lt;li&gt;编辑 &lt;code&gt;/usr/share/fcitx5/punctuation/punc.mb.zh_CN&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;重启 fcitx&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;误点击 ctrl+. 导致切换到全角输入法&lt;/p&gt;
+&lt;p&gt;使用谷歌拼音时，不小心点击了 &lt;code&gt;ctrl+.&lt;/code&gt;，切换到了全角字母，导致输出的空格、中划线等不符合预期。&lt;/p&gt;
+&lt;p&gt;解决：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;在谷歌拼音-全局配置-显示高级选项-Hotkey-Switch Full Width Punc Mode-将快捷键置为空&lt;/li&gt;
+&lt;li&gt;附加组件-高级-取消选中全角字符&lt;/li&gt;
+&lt;li&gt;重启 fcitx&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
 &lt;blockquote&gt;
 &lt;p&gt;参考：&lt;br&gt;
 &lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/508797663&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
@@ -1649,7 +1817,11 @@ ubuntu设置&amp;mdash;区域和语言&amp;mdash;管理已安装语言&amp;mdash
 &lt;a class=&#34;link&#34; href=&#34;https://leimao.github.io/blog/Ubuntu-Gaming-Chinese-Input/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;https://leimao.github.io/blog/Ubuntu-Gaming-Chinese-Input/&lt;/a&gt;&lt;br&gt;
 &lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/chen462488588/article/details/109290855&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;https://blog.csdn.net/chen462488588/article/details/109290855&lt;/a&gt;&lt;/p&gt;
+    &gt;https://blog.csdn.net/chen462488588/article/details/109290855&lt;/a&gt;&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/u010168781/article/details/80033701&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://blog.csdn.net/u010168781/article/details/80033701&lt;/a&gt;&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/163805070&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://zhuanlan.zhihu.com/p/163805070&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 </description>
         </item>

@@ -6,18 +6,42 @@
         <description>Recent content in Tags on 何凯的博客</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <lastBuildDate>Sun, 27 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://msdemt.github.io/tags/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>k8s</title>
-        <link>https://msdemt.github.io/tags/k8s/</link>
-        <pubDate>Sun, 27 Aug 2023 00:00:00 +0000</pubDate>
+        <lastBuildDate>Fri, 08 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://msdemt.github.io/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>c</title>
+        <link>https://msdemt.github.io/tags/c/</link>
+        <pubDate>Fri, 08 Sep 2023 00:00:00 +0000</pubDate>
         
-        <guid>https://msdemt.github.io/tags/k8s/</guid>
+        <guid>https://msdemt.github.io/tags/c/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>docker</title>
+        <link>https://msdemt.github.io/tags/docker/</link>
+        <pubDate>Fri, 08 Sep 2023 00:00:00 +0000</pubDate>
+        
+        <guid>https://msdemt.github.io/tags/docker/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>git</title>
+        <link>https://msdemt.github.io/tags/git/</link>
+        <pubDate>Fri, 08 Sep 2023 00:00:00 +0000</pubDate>
+        
+        <guid>https://msdemt.github.io/tags/git/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>ldap</title>
+        <link>https://msdemt.github.io/tags/ldap/</link>
+        <pubDate>Fri, 08 Sep 2023 00:00:00 +0000</pubDate>
+        
+        <guid>https://msdemt.github.io/tags/ldap/</guid>
         <description></description>
         </item>
         <item>
         <title>linux</title>
         <link>https://msdemt.github.io/tags/linux/</link>
-        <pubDate>Sun, 27 Aug 2023 00:00:00 +0000</pubDate>
+        <pubDate>Fri, 08 Sep 2023 00:00:00 +0000</pubDate>
         
         <guid>https://msdemt.github.io/tags/linux/</guid>
         <description></description>
@@ -25,7 +49,7 @@
         <item>
         <title>ubuntu</title>
         <link>https://msdemt.github.io/tags/ubuntu/</link>
-        <pubDate>Sun, 27 Aug 2023 00:00:00 +0000</pubDate>
+        <pubDate>Fri, 08 Sep 2023 00:00:00 +0000</pubDate>
         
         <guid>https://msdemt.github.io/tags/ubuntu/</guid>
         <description></description>
@@ -33,9 +57,25 @@
         <item>
         <title>java</title>
         <link>https://msdemt.github.io/tags/java/</link>
-        <pubDate>Thu, 24 Aug 2023 00:00:00 +0000</pubDate>
+        <pubDate>Thu, 07 Sep 2023 00:00:00 +0000</pubDate>
         
         <guid>https://msdemt.github.io/tags/java/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>slurm</title>
+        <link>https://msdemt.github.io/tags/slurm/</link>
+        <pubDate>Thu, 07 Sep 2023 00:00:00 +0000</pubDate>
+        
+        <guid>https://msdemt.github.io/tags/slurm/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>k8s</title>
+        <link>https://msdemt.github.io/tags/k8s/</link>
+        <pubDate>Sun, 27 Aug 2023 00:00:00 +0000</pubDate>
+        
+        <guid>https://msdemt.github.io/tags/k8s/</guid>
         <description></description>
         </item>
         <item>
@@ -52,22 +92,6 @@
         <pubDate>Fri, 11 Aug 2023 00:00:00 +0000</pubDate>
         
         <guid>https://msdemt.github.io/tags/mysql/</guid>
-        <description></description>
-        </item>
-        <item>
-        <title>docker</title>
-        <link>https://msdemt.github.io/tags/docker/</link>
-        <pubDate>Thu, 10 Aug 2023 00:00:00 +0000</pubDate>
-        
-        <guid>https://msdemt.github.io/tags/docker/</guid>
-        <description></description>
-        </item>
-        <item>
-        <title>git</title>
-        <link>https://msdemt.github.io/tags/git/</link>
-        <pubDate>Thu, 10 Aug 2023 00:00:00 +0000</pubDate>
-        
-        <guid>https://msdemt.github.io/tags/git/</guid>
         <description></description>
         </item>
         <item>

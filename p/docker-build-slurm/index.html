@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='使用docker构造slurm镜像问题汇总'>
+<title>使用docker构造slurm镜像问题汇总</title>
+
+<link rel='canonical' href='https://msdemt.github.io/p/docker-build-slurm/'>
+
+<link rel="stylesheet" href="/scss/style.min.f2f21d9d961219a01621263328d8997e1ae3b4f0371d455628df1fdc27d57bd6.css"><meta property='og:title' content='使用docker构造slurm镜像问题汇总'>
+<meta property='og:description' content='使用docker构造slurm镜像问题汇总'>
+<meta property='og:url' content='https://msdemt.github.io/p/docker-build-slurm/'>
+<meta property='og:site_name' content='何凯的博客'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='linux' /><meta property='article:tag' content='docker' /><meta property='article:tag' content='slurm' /><meta property='article:published_time' content='2023-09-07T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2023-09-07T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="使用docker构造slurm镜像问题汇总">
+<meta name="twitter:description" content="使用docker构造slurm镜像问题汇总">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu8bf57b87f6c84d6a9bc2eb369290e574_128598_300x0_resize_box_3.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">何凯的博客</a></h1>
+            <h2 class="site-description">The road is long and difficult, forge ahead.</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://github.com/msdemt'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E9%93%BE%E6%8E%A5/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+                <li id="i18n-switch">  
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                    <select name="language" onchange="window.location.href = this.selectedOptions[0].value">
+                        
+                            <option value="https://msdemt.github.io/" selected>中文</option>
+                        
+                            <option value="https://msdemt.github.io/en/" >English</option>
+                        
+                    </select>
+                </li>
+            
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>暗色模式</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/linux/" style="background-color: #ff8033; color: #fff;">
+                linux
+            </a>
+        
+            <a href="/categories/docker/" style="background-color: #2a9d8f; color: #fff;">
+                docker
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/docker-build-slurm/">使用docker构造slurm镜像问题汇总</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            使用docker构造slurm镜像问题汇总
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2023-09-07</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 6 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <ol>
+<li>
+<p>ius仓库不支持arm64架构</p>
+<p>使用github workflow流水线构建镜像时，若支持arm64架构，则构建镜像失败，github action workflow 如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">name: Docker Image CI
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">on:
+</span></span><span class="line"><span class="cl">push:
+</span></span><span class="line"><span class="cl">    branches: [ &#34;main&#34; ]
+</span></span><span class="line"><span class="cl">pull_request:
+</span></span><span class="line"><span class="cl">    branches: [ &#34;main&#34; ]
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">jobs:
+</span></span><span class="line"><span class="cl">build:
+</span></span><span class="line"><span class="cl">    runs-on: ubuntu-latest
+</span></span><span class="line"><span class="cl">    steps:
+</span></span><span class="line"><span class="cl">    - name: Checkout
+</span></span><span class="line"><span class="cl">    uses: actions/checkout@v3
+</span></span><span class="line"><span class="cl">    - name: Login to Docker Hub
+</span></span><span class="line"><span class="cl">    uses: docker/login-action@v2
+</span></span><span class="line"><span class="cl">    with:
+</span></span><span class="line"><span class="cl">        username: ${{ secrets.DOCKERHUB_USERNAME }}
+</span></span><span class="line"><span class="cl">        password: ${{ secrets.DOCKERHUB_TOKEN }}
+</span></span><span class="line"><span class="cl">    - name: Set up QEMU
+</span></span><span class="line"><span class="cl">    uses: docker/setup-qemu-action@v2
+</span></span><span class="line"><span class="cl">    - name: Set up Docker Buildx
+</span></span><span class="line"><span class="cl">    uses: docker/setup-buildx-action@v2
+</span></span><span class="line"><span class="cl">    - name: Build and push
+</span></span><span class="line"><span class="cl">    uses: docker/build-push-action@v4
+</span></span><span class="line"><span class="cl">    with:
+</span></span><span class="line"><span class="cl">        context: .
+</span></span><span class="line"><span class="cl">        file: ./Dockerfile
+</span></span><span class="line"><span class="cl">        platforms: |
+</span></span><span class="line"><span class="cl">            linux/amd64
+</span></span><span class="line"><span class="cl">            linux/arm64
+</span></span><span class="line"><span class="cl">        push: true
+</span></span><span class="line"><span class="cl">        tags: ${{ secrets.DOCKERHUB_USERNAME }}/centos7.9-slurm22:latest
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>platforms里包含    linux/arm64 时，构建镜像失败</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">&gt; <span class="o">[</span>linux/arm64 2/7<span class="o">]</span> RUN <span class="nb">set</span> -ex     <span class="o">&amp;&amp;</span> yum makecache fast     <span class="o">&amp;&amp;</span> yum -y update     <span class="o">&amp;&amp;</span> yum -y install https://repo.ius.io/ius-release-el7.rpm     <span class="o">&amp;&amp;</span> yum -y install         munge         munge-devel         mariadb-server         mariadb-devel         mysql-devel         gcc         gcc-c++         python3         readline-devel         perl-ExtUtils-MakeMaker         pam-devel         http-parser-devel         json-c-devel         libyaml-devel         libjwt-devel         wget         git         vim         bzip2         make automake libtool         supervisor         psmisc         openldap openldap-servers openldap-clients nss-pam-ldapd authconfig         kde-l10n-Chinese glibc-common         bash-completion         openssh-server     <span class="o">&amp;&amp;</span> yum clean all     <span class="o">&amp;&amp;</span> rm -rf /var/cache/yum:
+</span></span><span class="line"><span class="cl">13528588.7      5. Configure the failing repository to be skipped, <span class="k">if</span> it is unavailable.
+</span></span><span class="line"><span class="cl">13529588.7         Note that yum will try to contact the repo. when it runs most commands,
+</span></span><span class="line"><span class="cl">13530588.7         so will have to try and fail each <span class="nb">time</span> <span class="o">(</span>and thus. yum will be be much
+</span></span><span class="line"><span class="cl">13531588.7         slower<span class="o">)</span>. If it is a very temporary problem though, this is often a nice
+</span></span><span class="line"><span class="cl">13532588.7         compromise:
+</span></span><span class="line"><span class="cl">13533588.7 
+</span></span><span class="line"><span class="cl">13534588.7             yum-config-manager --save --setopt<span class="o">=</span>ius.skip_if_unavailable<span class="o">=</span><span class="nb">true</span>
+</span></span><span class="line"><span class="cl">13535588.7 
+</span></span><span class="line"><span class="cl">13536588.7 failure: repodata/repomd.xml from ius: <span class="o">[</span>Errno 256<span class="o">]</span> No more mirrors to try.13537
+</span></span><span class="line"><span class="cl">588.7 https://repo.ius.io/7/aarch64/repodata/repomd.xml: <span class="o">[</span>Errno 14<span class="o">]</span> HTTPS Error <span class="m">404</span> - Not Found
+</span></span><span class="line"><span class="cl">------
+</span></span><span class="line"><span class="cl">13539Dockerfile:6
+</span></span><span class="line"><span class="cl">13540--------------------
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>原因：ius仓库（https://repo.ius.io/ius-release-el7.rpm）不支持arm64架构，
+解决：将workflow中的第31行 linux/arm64 删除</p>
+</li>
+<li>
+<p>ERROR: failed to solve: circular dependency detected on stage: build</p>
+<p>原因： Dockerfile脚本问题，使用多阶段构建时，第二个FROM前面的语句末尾存在 \</p>
+</li>
+<li>
+<p>Dockerfile 构建时出现 command not found</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ cat Dockerfile
+</span></span><span class="line"><span class="cl">FROM hekai/centos7.9-jdk8u202
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">RUN set -ex \
+</span></span><span class="line"><span class="cl">    &amp;&amp; yum makecache fast \
+</span></span><span class="line"><span class="cl">    &amp;&amp; yum -y update \
+</span></span><span class="line"><span class="cl">    &amp;&amp; yum -y install \
+</span></span><span class="line"><span class="cl">        mariadb-server \
+</span></span><span class="line"><span class="cl">        mariadb-devel \
+</span></span><span class="line"><span class="cl">        mysql-devel \
+</span></span><span class="line"><span class="cl">    &amp;&amp; yum clean all \
+</span></span><span class="line"><span class="cl">    &amp;&amp; rm -rf /var/cache/yum \
+</span></span><span class="line"><span class="cl">    # config mariadb
+</span></span><span class="line"><span class="cl">    &amp;&amp; sed -i &#39;/\[mysqld\]/a\innodb_buffer_pool_size=1024M\ninnodb_log_file_size=64M\ninnodb_lock_wait_timeout=900&#39; /etc/my.cnf \
+</span></span><span class="line"><span class="cl">    &amp;&amp; /usr/bin/mysql_install_db --user=mysql &amp;&gt;/dev/null \
+</span></span><span class="line"><span class="cl">    &amp;&amp; /usr/bin/mysqld_safe --user=mysql &amp; &amp;&gt;/dev/null \
+</span></span><span class="line"><span class="cl">    &amp;&amp; sleep 3s \
+</span></span><span class="line"><span class="cl">    &amp;&amp; mysql -e &#34;CREATE USER &#39;slurm&#39;@&#39;localhost&#39; identified by &#39;password&#39;&#34; \
+</span></span><span class="line"><span class="cl">    &amp;&amp; mysql -e &#34;GRANT ALL ON slurm_acct_db.* to &#39;slurm&#39;@&#39;localhost&#39; identified by &#39;password&#39; with GRANT option&#34; \
+</span></span><span class="line"><span class="cl">    &amp;&amp; mysql -e &#34;CREATE DATABASE slurm_acct_db&#34;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">CMD [&#34;/bin/bash&#34;]
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>构建镜像时出现错误</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ docker build -t mariadb:v1 -f Dockerfile.b  .
+</span></span><span class="line"><span class="cl"><span class="o">[</span>+<span class="o">]</span> Building 4.0s <span class="o">(</span>5/5<span class="o">)</span> <span class="nv">FINISHED</span>                                                                                                         
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">[</span>internal<span class="o">]</span> load build definition from Dockerfile.b                                                                              0.1s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">=</span>&gt; transferring dockerfile: 832B                                                                                                0.0s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">[</span>internal<span class="o">]</span> load .dockerignore                                                                                                   0.1s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">=</span>&gt; transferring context: 109B                                                                                                   0.0s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">[</span>internal<span class="o">]</span> load metadata <span class="k">for</span> docker.io/hekai/centos7.9-jdk8u202:latest                                                          0.0s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">[</span>1/2<span class="o">]</span> FROM docker.io/hekai/centos7.9-jdk8u202                                                                                   0.1s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; ERROR <span class="o">[</span>2/2<span class="o">]</span> RUN <span class="nb">set</span> -ex     <span class="o">&amp;&amp;</span> yum makecache fast     <span class="o">&amp;&amp;</span> yum -y update     <span class="o">&amp;&amp;</span> yum -y install         mariadb-server         ma  3.7s
+</span></span><span class="line"><span class="cl">------                                                                                                                                   
+</span></span><span class="line"><span class="cl">&gt; <span class="o">[</span>2/2<span class="o">]</span> RUN <span class="nb">set</span> -ex     <span class="o">&amp;&amp;</span> yum makecache fast     <span class="o">&amp;&amp;</span> yum -y update     <span class="o">&amp;&amp;</span> yum -y install         mariadb-server         mariadb-devel         mysql-devel     <span class="o">&amp;&amp;</span> yum clean all     <span class="o">&amp;&amp;</span> rm -rf /var/cache/yum     <span class="o">&amp;&amp;</span> sed -i <span class="s1">&#39;/\[mysqld\]/a\innodb_buffer_pool_size=1024M\ninnodb_log_file_size=64M\ninnodb_lock_wait_timeout=900&#39;</span> /etc/my.cnf     <span class="o">&amp;&amp;</span> /usr/bin/mysql_install_db --user<span class="o">=</span>mysql <span class="p">&amp;</span>&gt;/dev/null     <span class="o">&amp;&amp;</span> /usr/bin/mysqld_safe --user<span class="o">=</span>mysql <span class="p">&amp;</span> <span class="p">&amp;</span>&gt;/dev/null     <span class="o">&amp;&amp;</span> sleep 3s     <span class="o">&amp;&amp;</span> mysql -e <span class="s2">&#34;CREATE USER &#39;slurm&#39;@&#39;localhost&#39; identified by &#39;password&#39;&#34;</span>     <span class="o">&amp;&amp;</span> mysql -e <span class="s2">&#34;GRANT ALL ON slurm_acct_db.* to &#39;slurm&#39;@&#39;localhost&#39; identified by &#39;password&#39; with GRANT option&#34;</span>     <span class="o">&amp;&amp;</span> mysql -e <span class="s2">&#34;CREATE DATABASE slurm_acct_db&#34;</span>:
+</span></span><span class="line"><span class="cl"><span class="c1">#0 0.519 + yum makecache fast</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#0 1.193 Loaded plugins: fastestmirror, ovl</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#0 1.567 Determining fastest mirrors</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#0 2.744  * base: mirrors.huaweicloud.com</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#0 2.745  * extras: mirrors.huaweicloud.com</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#0 2.745  * updates: mirrors.huaweicloud.com</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#0 3.524 /bin/sh: mysql: command not found</span>
+</span></span><span class="line"><span class="cl">------
+</span></span><span class="line"><span class="cl">Dockerfile.b:4
+</span></span><span class="line"><span class="cl">--------------------
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>原因：可能是docker对RUN指令进行优化，解析到 mysql 指令时还未安装mysql</p>
+<p>解决：将mysql的安装和配置放在不同的RUN语句</p>
+<p>修改后如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ cat Dockerfile
+</span></span><span class="line"><span class="cl">FROM hekai/centos7.9-jdk8u202
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">RUN <span class="nb">set</span> -ex <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="o">&amp;&amp;</span> yum makecache fast <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="o">&amp;&amp;</span> yum -y update <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="o">&amp;&amp;</span> yum -y install <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>        mariadb-server <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>        mariadb-devel <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>        mysql-devel <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="o">&amp;&amp;</span> yum clean all <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="o">&amp;&amp;</span> rm -rf /var/cache/yum <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>
+</span></span><span class="line"><span class="cl">RUN sest -ex <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="c1"># config mariadb</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&amp;&amp;</span> sed -i <span class="s1">&#39;/\[mysqld\]/a\innodb_buffer_pool_size=1024M\ninnodb_log_file_size=64M\ninnodb_lock_wait_timeout=900&#39;</span> /etc/my.cnf <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="o">&amp;&amp;</span> /usr/bin/mysql_install_db --user<span class="o">=</span>mysql <span class="p">&amp;</span>&gt;/dev/null <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="o">&amp;&amp;</span> /usr/bin/mysqld_safe --user<span class="o">=</span>mysql <span class="p">&amp;</span> <span class="p">&amp;</span>&gt;/dev/null <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="o">&amp;&amp;</span> sleep 3s <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="o">&amp;&amp;</span> mysql -e <span class="s2">&#34;CREATE USER &#39;slurm&#39;@&#39;localhost&#39; identified by &#39;password&#39;&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="o">&amp;&amp;</span> mysql -e <span class="s2">&#34;GRANT ALL ON slurm_acct_db.* to &#39;slurm&#39;@&#39;localhost&#39; identified by &#39;password&#39; with GRANT option&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="o">&amp;&amp;</span> mysql -e <span class="s2">&#34;CREATE DATABASE slurm_acct_db&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">CMD <span class="o">[</span><span class="s2">&#34;/bin/bash&#34;</span><span class="o">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>构建镜像时出现错误，连不上mariadb</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ERROR <span class="m">2002</span> <span class="o">(</span>HY000<span class="o">)</span>: Can<span class="s1">&#39;t connect to local MySQL server through socket &#39;</span>/var/lib/mysql/mysql.sock<span class="err">&#39;</span> <span class="o">(</span>2<span class="o">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>对应Dockerfile中的RUN指令</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">RUN <span class="nb">set</span> -ex <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    ... ...
+</span></span><span class="line"><span class="cl">    <span class="c1"># config mariadb</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&amp;&amp;</span> sed -i <span class="s1">&#39;/\[mysqld\]/a\innodb_buffer_pool_size=1024M\ninnodb_log_file_size=64M\ninnodb_lock_wait_timeout=900&#39;</span> /etc/my.cnf <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="o">&amp;&amp;</span> /usr/bin/mysql_install_db --user<span class="o">=</span>mysql <span class="p">&amp;</span>&gt;/dev/null <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="o">&amp;&amp;</span> /usr/bin/mysqld_safe --user<span class="o">=</span>mysql <span class="p">&amp;</span> <span class="p">&amp;</span>&gt;/dev/null <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="o">&amp;&amp;</span> sleep 3s <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="o">&amp;&amp;</span> mysql -e <span class="s2">&#34;CREATE USER &#39;slurm&#39;@&#39;localhost&#39; identified by &#39;password&#39;&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="o">&amp;&amp;</span> mysql -e <span class="s2">&#34;GRANT ALL ON slurm_acct_db.* to &#39;slurm&#39;@&#39;localhost&#39; identified by &#39;password&#39; with GRANT option&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="o">&amp;&amp;</span> mysql -e <span class="s2">&#34;CREATE DATABASE slurm_acct_db&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    ... ...
+</span></span><span class="line"><span class="cl">    <span class="c1"># clean</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&amp;&amp;</span> rm -rf /var/log/* /var/cache/* /tmp/*
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>sleep 设置了100s 也无法解决</p>
+<p>解决： 将mariadb单独抽出来，放在一个RUN中</p>
+<p>原因： 未知</p>
+<p>修改后如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">RUN set -ex \
+</span></span><span class="line"><span class="cl">    ... ...
+</span></span><span class="line"><span class="cl">    # clean
+</span></span><span class="line"><span class="cl">    &amp;&amp; rm -rf /var/log/* /var/cache/* /tmp/*
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">RUN set -ex \
+</span></span><span class="line"><span class="cl">    # config mariadb
+</span></span><span class="line"><span class="cl">    &amp;&amp; sed -i &#39;/\[mysqld\]/a\innodb_buffer_pool_size=1024M\ninnodb_log_file_size=64M\ninnodb_lock_wait_timeout=900&#39; /etc/my.cnf \
+</span></span><span class="line"><span class="cl">    &amp;&amp; /usr/bin/mysql_install_db --user=mysql &amp;&gt;/dev/null \
+</span></span><span class="line"><span class="cl">    &amp;&amp; /usr/bin/mysqld_safe --user=mysql &amp; &amp;&gt;/dev/null \
+</span></span><span class="line"><span class="cl">    &amp;&amp; sleep 3s \
+</span></span><span class="line"><span class="cl">    &amp;&amp; mysql -e &#34;CREATE USER &#39;slurm&#39;@&#39;localhost&#39; identified by &#39;password&#39;&#34; \
+</span></span><span class="line"><span class="cl">    &amp;&amp; mysql -e &#34;GRANT ALL ON slurm_acct_db.* to &#39;slurm&#39;@&#39;localhost&#39; identified by &#39;password&#39; with GRANT option&#34; \
+</span></span><span class="line"><span class="cl">    &amp;&amp; mysql -e &#34;CREATE DATABASE slurm_acct_db&#34;
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>构建镜像出现错误，mysql启动失败</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">&gt; <span class="o">[</span>stage-1 5/7<span class="o">]</span> RUN <span class="nb">set</span> -ex     <span class="o">&amp;&amp;</span> sed -i <span class="s1">&#39;/\[mysqld\]/a\innodb_buffer_pool_size=1024M\ninnodb_log_file_size=64M\ninnodb_lock_wait_timeout=900&#39;</span> /etc/my.cnf     <span class="o">&amp;&amp;</span> /usr/bin/mysql_install_db --user<span class="o">=</span>mysql <span class="p">&amp;</span>&gt;/dev/null     <span class="o">&amp;&amp;</span> /usr/bin/mysqld_safe --user<span class="o">=</span>mysql <span class="p">&amp;</span> <span class="p">&amp;</span>&gt;/dev/null     <span class="o">&amp;&amp;</span> sleep 3s     <span class="o">&amp;&amp;</span> mysql -e <span class="s2">&#34;CREATE USER &#39;slurm&#39;@&#39;localhost&#39; identified by &#39;password&#39;&#34;</span>     <span class="o">&amp;&amp;</span> mysql -e <span class="s2">&#34;GRANT ALL ON slurm_acct_db.* to &#39;slurm&#39;@&#39;localhost&#39; identified by &#39;password&#39; with GRANT option&#34;</span>     <span class="o">&amp;&amp;</span> mysql -e <span class="s2">&#34;CREATE DATABASE slurm_acct_db&#34;</span>:
+</span></span><span class="line"><span class="cl">257730.064 + sed -i <span class="s1">&#39;/\[mysqld\]/a\innodb_buffer_pool_size=1024M\ninnodb_log_file_size=64M\ninnodb_lock_wait_timeout=900&#39;</span> /etc/my.cnf
+</span></span><span class="line"><span class="cl">257740.068 + /usr/bin/mysql_install_db --user<span class="o">=</span>mysql
+</span></span><span class="line"><span class="cl">257750.251 + /usr/bin/mysqld_safe --user<span class="o">=</span>mysql
+</span></span><span class="line"><span class="cl">257760.355 <span class="m">230905</span> 03:18:57 mysqld_safe Logging to <span class="s1">&#39;/var/log/mariadb/mariadb.log&#39;</span>.
+</span></span><span class="line"><span class="cl">257770.386 <span class="m">230905</span> 03:18:57 mysqld_safe Starting mysqld daemon with databases from /var/lib/mysql
+</span></span><span class="line"><span class="cl">257780.390 /usr/bin/mysqld_safe_helper: Can<span class="s1">&#39;t create/write to file &#39;</span>/var/log/mariadb/mariadb.log<span class="s1">&#39; (Errcode: 2)
+</span></span></span><span class="line"><span class="cl"><span class="s1">257793.072 ERROR 2002 (HY000): Can&#39;</span>t connect to <span class="nb">local</span> MySQL server through socket <span class="s1">&#39;/var/lib/mysql/mysql.sock&#39;</span> <span class="o">(</span>2<span class="o">)</span>
+</span></span><span class="line"><span class="cl">25780------
+</span></span><span class="line"><span class="cl">25781Dockerfile.2:141
+</span></span><span class="line"><span class="cl">25782--------------------
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>原因是删掉了/var/log/mariadb目录，清理日志文件时，保留 mariadb 目录</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">find /var/log/* <span class="p">|</span> grep -v -e mariadb <span class="p">|</span> xargs rm -rf
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>配置slurm</p>
+<p>slurm配置命令如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">./configure --prefix<span class="o">=</span>/opt/slurm --sysconfdir<span class="o">=</span>/opt/slurm/etc --enable-slurmrestd 
+</span></span><span class="line"><span class="cl">--with-mysql_config<span class="o">=</span>/usr/bin --libdir<span class="o">=</span>/usr/lib64
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>make install 安装时会将slurm的动态库文件放在 /usr/lib64/slurm下</p>
+<p>如果配置时不指定&ndash;libdir，则会将动态库安装到prefix指定的目录下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">./configure --prefix<span class="o">=</span>/opt/slurm --sysconfdir<span class="o">=</span>/opt/slurm/etc --enable-slurmrestd 
+</span></span><span class="line"><span class="cl">--with-mysql_config<span class="o">=</span>/usr/bin
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>此时会将动态库安装到 /opt/slurm/lib64下</p>
+<p>为了正常使用动态库，需要将/opt/slurm/lib64的动态库链接到/usr/lib64下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ln -s /opt/slurm/lib64 /usr/lib64/slurm
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>支持killall命令</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">/usr/local/bin/docker-entrypoint.sh: line 77: killall: <span class="nb">command</span> not found
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>解决：安装 psmisc</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">yum install -y psmisc
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>centos7精简版（minimal）运行killall命令提示 command not found</p>
+<p>是由于没有安装psmisc所致，psmisc软件包包含三个帮助管理/proc目录的程序。</p>
+<p>fuser, killall,pstree和pstree.x11(到pstree的链接)</p>
+<ul>
+<li>fuser 显示使用指定文件或者文件系统的进程的PID。</li>
+<li>killall 杀死某个名字的进程，它向运行指定命令的所有进程发出信号。</li>
+<li>pstree 树型显示当前运行的进程。</li>
+<li>pstree.x11 与pstree功能相同，只是在退出前需要确认。</li>
+</ul>
+</li>
+<li>
+<p>安装git
+IDEA进入docker容器进行远程开发
+提示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Unsupported Git Version 1.8.3.1
+</span></span><span class="line"><span class="cl">At least 2.17.0 is required
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>需要对yum源中的git进行升级</p>
+<p>在 centos7.9 的 docker 镜像中，是没有 git 的，所以有两种方式</p>
+<ol>
+<li>编译安装新版本 git</li>
+<li>安装 yum 源中的 git &gt; 2.17.0 的版本
+<ul>
+<li><a class="link" href="https://ius.io/"  target="_blank" rel="noopener"
+    >IUS yum源</a>中提供了 git 2.36.6 版本
+<ul>
+<li>注：<a class="link" href="https://ius.io/setup"  target="_blank" rel="noopener"
+    >安装 IUS yum 源</a>时会自动安装 epel 源</li>
+<li>安装 IUS 源： <code>yum -y install https://repo.ius.io/ius-release-el7.rpm</code></li>
+<li>查看 git ：<code>yum search git|grep -E &quot;^git&quot;</code></li>
+<li>查看 git 版本： <code>yum info git236</code></li>
+<li>安装 git 236 版本：<code>yum -y install git236</code></li>
+</ul>
+</li>
+<li><a class="link" href="https://packages.endpointdev.com/"  target="_blank" rel="noopener"
+    >endpoint yum源</a>中提供了最新版本的 git
+<ul>
+<li>安装 endpoint 源：<code>yum install https://packages.endpointdev.com/rhel/7/os/x86_64/endpoint-repo.x86_64.rpm</code></li>
+<li>安装 git: <code>yum -y install git</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>
+<p>编译安装python3
+<a class="link" href="https://www.jianshu.com/p/2cad40bc9e1b"  target="_blank" rel="noopener"
+    >https://www.jianshu.com/p/2cad40bc9e1b</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">curl -O https://www.python.org/ftp/python/3.7.14/Python-3.7.14.tar.xz
+</span></span><span class="line"><span class="cl">tar -xf Python-3.7.14.tar.xz
+</span></span><span class="line"><span class="cl">cd Python-3.7.14
+</span></span><span class="line"><span class="cl">yum -y install make
+</span></span><span class="line"><span class="cl">yum-builddep -y python
+</span></span><span class="line"><span class="cl">./configure --prefix=/opt/tools/python-3.7.14
+</span></span><span class="line"><span class="cl">make &amp;&amp; make install
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>docker compose 挂root目录，导致环境变量无效</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ cat docker-compose.yml 
+</span></span><span class="line"><span class="cl">version: &#39;3&#39;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">services:
+</span></span><span class="line"><span class="cl">slurm-master:
+</span></span><span class="line"><span class="cl">    image: hekai/centos7.9-slurm22
+</span></span><span class="line"><span class="cl">    hostname: linux0
+</span></span><span class="line"><span class="cl">    privileged: true
+</span></span><span class="line"><span class="cl">    stdin_open: true
+</span></span><span class="line"><span class="cl">    restart: always
+</span></span><span class="line"><span class="cl">    tty: true
+</span></span><span class="line"><span class="cl">    ports:
+</span></span><span class="line"><span class="cl">    - 389:389
+</span></span><span class="line"><span class="cl">    - 6820:6820
+</span></span><span class="line"><span class="cl">    environment:
+</span></span><span class="line"><span class="cl">    role: &#34;master&#34;
+</span></span><span class="line"><span class="cl">    TZ: Asia/Shanghai
+</span></span><span class="line"><span class="cl">    volumes:
+</span></span><span class="line"><span class="cl">    - .root:/root
+</span></span><span class="line"><span class="cl">    - .data/log:/var/log/slurm
+</span></span><span class="line"><span class="cl">    - etc_munge:/etc/munge
+</span></span><span class="line"><span class="cl">    - etc_slurm:/etc/slurm
+</span></span><span class="line"><span class="cl">    - spool_slurm:/var/spool/slurm
+</span></span><span class="line"><span class="cl">    - mysql:/var/lib/mysql
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">slurm-compute-1:
+</span></span><span class="line"><span class="cl">    image: hekai/centos7.9-slurm22
+</span></span><span class="line"><span class="cl">    hostname: linux1
+</span></span><span class="line"><span class="cl">    privileged: true
+</span></span><span class="line"><span class="cl">    stdin_open: true
+</span></span><span class="line"><span class="cl">    restart: always
+</span></span><span class="line"><span class="cl">    tty: true
+</span></span><span class="line"><span class="cl">    environment:
+</span></span><span class="line"><span class="cl">    role: &#34;compute&#34;
+</span></span><span class="line"><span class="cl">    TZ: Asia/Shanghai
+</span></span><span class="line"><span class="cl">    volumes:
+</span></span><span class="line"><span class="cl">    - .data/log:/var/log/slurm
+</span></span><span class="line"><span class="cl">    - etc_munge:/etc/munge
+</span></span><span class="line"><span class="cl">    - etc_slurm:/etc/slurm
+</span></span><span class="line"><span class="cl">    depends_on:
+</span></span><span class="line"><span class="cl">    - &#34;slurm-master&#34;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">volumes:
+</span></span><span class="line"><span class="cl">etc_munge:
+</span></span><span class="line"><span class="cl">etc_slurm:
+</span></span><span class="line"><span class="cl">spool_slurm:
+</span></span><span class="line"><span class="cl">mysql:
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如上，slurm-master 节点挂在了容器内的 <code>/root</code> 到本地，进入容器后，发现构建镜像时设置的环境变量没有了，在容器中执行下 <code>source /etc/profile</code>，然后可以将在 <code>/etc/profile.d/jdk.sh</code> 中定义的变量加载出来了</p>
+<ol>
+<li>在<code>Dockerfile</code>中添加 <code>source /etc/profile</code> 命令，无法解决</li>
+<li>在<code>entrypoint.sh</code>中添加 <code>source /etc/profile</code> 命令，无法解决</li>
+<li>不直接挂载容器中 <code>/root</code>，将<code>/root</code>下需要的文件单独挂载出来，可以解决该问题</li>
+</ol>
+</li>
+<li>
+<p>希望先查ldap中的用户，若ldap中不存在，再查linux系统用户</p>
+<p>实现这种方案，需要修改 /etc/nsswitch.conf 中 passwprd、shadow、group 属性对应值的顺序</p>
+<p>怎么优雅地修改这些属性值呢？<br>
+搜索了下，linux好像没有提供命令修改这些值的顺序，只能通过修改文本的方式
+使用sed命令修改nsswitch.conf 中的用户搜索顺序</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sed -i <span class="s1">&#39;s/passwd:     files ldap/passwd:     ldap files/g&#39;</span> ./nsswitch.conf 
+</span></span><span class="line"><span class="cl">sed -i <span class="s1">&#39;s/shadow:     files ldap/shadow:     ldap files/g&#39;</span> ./nsswitch.conf 
+</span></span><span class="line"><span class="cl">sed -i <span class="s1">&#39;s/group:      files ldap/group:      ldap files/g&#39;</span> ./nsswitch.conf
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>参考：<br>
+<a class="link" href="https://serverfault.com/questions/972401/try-ldap-authentication-before-local-authentication"  target="_blank" rel="noopener"
+    >https://serverfault.com/questions/972401/try-ldap-authentication-before-local-authentication</a> <br>
+<a class="link" href="https://documents.uow.edu.au/~blane/netapp/ontap/nag/networking/concept/c_oc_netw_maintaining_host_name_search.html#c_oc_netw_maintaining_host_name_search"  target="_blank" rel="noopener"
+    >https://documents.uow.edu.au/~blane/netapp/ontap/nag/networking/concept/c_oc_netw_maintaining_host_name_search.html#c_oc_netw_maintaining_host_name_search</a><br>
+<a class="link" href="https://superuser.com/questions/1417190/"  target="_blank" rel="noopener"
+    >https://superuser.com/questions/1417190/</a>  why-do-i-need-to-change-the-order-of-hosts-in-nsswitch-conf<br>
+<a class="link" href="https://man7.org/linux/man-pages/man5/nsswitch.conf.5.html"  target="_blank" rel="noopener"
+    >https://man7.org/linux/man-pages/man5/nsswitch.conf.5.html</a><br>
+<a class="link" href="https://unix.stackexchange.com/questions/140378/editing-nsswitch-conf-file-safely"  target="_blank" rel="noopener"
+    >https://unix.stackexchange.com/questions/140378/editing-nsswitch-conf-file-safely</a></p>
+</blockquote>
+</li>
+</ol>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/linux/">linux</a>
+        
+            <a href="/tags/docker/">docker</a>
+        
+            <a href="/tags/slurm/">slurm</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/docker-install-sshd/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">docker安装sshd</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/docker-compose-add-ip/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">docker compose 指定容器 ip</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/docker-skills/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">docker 技巧</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/docker-mariadb-5.5.60/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">docker 部署 mariadb-5.5.60</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/wsl-ubuntu-docker/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">wsl ubuntu 安装 docker</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2023 何凯的博客
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.19.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

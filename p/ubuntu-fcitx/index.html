@@ -495,8 +495,8 @@ ubuntu设置&mdash;区域和语言&mdash;管理已安装语言&mdash;键盘输�
 </div>
 </div><h2 id="问题">问题</h2>
 <ol>
-<li>输入法图标问题</li>
-</ol>
+<li>
+<p>输入法图标问题</p>
 <p>重启后，可以在ubuntu界面右上角看到fcitx的小键盘图标，如果之前配置使用过IBus输入法，此时右上角会有两个输入法图标。</p>
 <p>解决：ubuntu设置&mdash;区域和语言&mdash;输入源 中删除汉语，只保留英语(美国)，这样默认的输入法图标就消失了。</p>
 <blockquote>
@@ -514,9 +514,9 @@ ubuntu设置&mdash;区域和语言&mdash;管理已安装语言&mdash;键盘输�
 	
 	
 ></p>
-<ol start="2">
-<li>中英文切换问题</li>
-</ol>
+</li>
+<li>
+<p>中英文切换问题</p>
 <p>fcitx使用中，无法shift切换中英文</p>
 <p>原因：点击右上角fcitx小键盘图标&mdash;配置&mdash;输入法 中只配置了 Google拼音 输入法。</p>
 <p>Ubuntu下所谓的中英文切换就是一个输入法系统的中文输入法切换到其中的英文输入法，所以一定要保证输入法系统中既有中文输入法也要有英文输入法。
@@ -547,9 +547,9 @@ ubuntu设置&mdash;区域和语言&mdash;管理已安装语言&mdash;键盘输�
 	
 	
 ></p>
-<ol start="3">
-<li>idea快捷键冲突问题</li>
-</ol>
+</li>
+<li>
+<p>idea快捷键冲突问题</p>
 <p>使用idea时，无法使用快捷键 Ctrl+Shift+F，原因该键被fcitx的简繁转换功能占用</p>
 <p>解决： 点击右上角fcitx小键盘图标&mdash;配置&mdash;附加组件，取消简繁转换</p>
 <p><img src="/images/linux/ubuntu/fcitx-5.png"
@@ -562,6 +562,37 @@ ubuntu设置&mdash;区域和语言&mdash;管理已安装语言&mdash;键盘输�
 	
 	
 ></p>
+</li>
+<li>
+<p>谷歌拼音输入法无法输出中文中括号（【】）</p>
+<p>使用谷歌拼音输入法输出中文中括号时，输出的是<code>·「·」</code></p>
+<p>解决办法：</p>
+<ol>
+<li>查看 fcitx 的版本: <code>fcitx --version</code></li>
+<li>fctix 使用的是 4 版本
+<ul>
+<li>编辑 <code>/usr/share/fcitx/data/punc.mb.zh_CN</code>，将第18行修改为 <code>[ 【</code>，将第19行修改为 <code>] 】</code></li>
+</ul>
+</li>
+<li>fcitx 使用的是 5 版本
+<ul>
+<li>编辑 <code>/usr/share/fcitx5/punctuation/punc.mb.zh_CN</code></li>
+</ul>
+</li>
+<li>重启 fcitx</li>
+</ol>
+</li>
+<li>
+<p>误点击 ctrl+. 导致切换到全角输入法</p>
+<p>使用谷歌拼音时，不小心点击了 <code>ctrl+.</code>，切换到了全角字母，导致输出的空格、中划线等不符合预期。</p>
+<p>解决：</p>
+<ol>
+<li>在谷歌拼音-全局配置-显示高级选项-Hotkey-Switch Full Width Punc Mode-将快捷键置为空</li>
+<li>附加组件-高级-取消选中全角字符</li>
+<li>重启 fcitx</li>
+</ol>
+</li>
+</ol>
 <blockquote>
 <p>参考：<br>
 <a class="link" href="https://zhuanlan.zhihu.com/p/508797663"  target="_blank" rel="noopener"
@@ -571,7 +602,11 @@ ubuntu设置&mdash;区域和语言&mdash;管理已安装语言&mdash;键盘输�
 <a class="link" href="https://leimao.github.io/blog/Ubuntu-Gaming-Chinese-Input/"  target="_blank" rel="noopener"
     >https://leimao.github.io/blog/Ubuntu-Gaming-Chinese-Input/</a><br>
 <a class="link" href="https://blog.csdn.net/chen462488588/article/details/109290855"  target="_blank" rel="noopener"
-    >https://blog.csdn.net/chen462488588/article/details/109290855</a></p>
+    >https://blog.csdn.net/chen462488588/article/details/109290855</a><br>
+<a class="link" href="https://blog.csdn.net/u010168781/article/details/80033701"  target="_blank" rel="noopener"
+    >https://blog.csdn.net/u010168781/article/details/80033701</a><br>
+<a class="link" href="https://zhuanlan.zhihu.com/p/163805070"  target="_blank" rel="noopener"
+    >https://zhuanlan.zhihu.com/p/163805070</a></p>
 </blockquote>
 
 </section>
@@ -617,6 +652,32 @@ ubuntu设置&mdash;区域和语言&mdash;管理已安装语言&mdash;键盘输�
             
                 
 <article class="">
+    <a href="/p/ubuntu-app-folder/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">ubuntu添加图标文件夹</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/ubuntu-wps-fonts/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">wps在ubuntu上缺少字体</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
     <a href="/p/ubuntu-minikube/">
         
         
@@ -649,32 +710,6 @@ ubuntu设置&mdash;区域和语言&mdash;管理已安装语言&mdash;键盘输�
 
         <div class="article-details">
             <h2 class="article-title">ubuntu18.04修改用户名</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="">
-    <a href="/p/wsl-ubuntu-git-fail/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">wsl ubuntu git clone 失败</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="">
-    <a href="/p/wsl-ubuntu-docker/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">wsl ubuntu 安装 docker</h2>
         </div>
     </a>
 </article>

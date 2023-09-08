@@ -1,0 +1,1352 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='docker compose 指定容器 ip'>
+<title>docker compose 指定容器 ip</title>
+
+<link rel='canonical' href='https://msdemt.github.io/p/docker-compose-add-ip/'>
+
+<link rel="stylesheet" href="/scss/style.min.f2f21d9d961219a01621263328d8997e1ae3b4f0371d455628df1fdc27d57bd6.css"><meta property='og:title' content='docker compose 指定容器 ip'>
+<meta property='og:description' content='docker compose 指定容器 ip'>
+<meta property='og:url' content='https://msdemt.github.io/p/docker-compose-add-ip/'>
+<meta property='og:site_name' content='何凯的博客'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='linux' /><meta property='article:tag' content='docker' /><meta property='article:published_time' content='2023-09-07T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2023-09-07T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="docker compose 指定容器 ip">
+<meta name="twitter:description" content="docker compose 指定容器 ip">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu8bf57b87f6c84d6a9bc2eb369290e574_128598_300x0_resize_box_3.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">何凯的博客</a></h1>
+            <h2 class="site-description">The road is long and difficult, forge ahead.</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://github.com/msdemt'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E9%93%BE%E6%8E%A5/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+                <li id="i18n-switch">  
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                    <select name="language" onchange="window.location.href = this.selectedOptions[0].value">
+                        
+                            <option value="https://msdemt.github.io/" selected>中文</option>
+                        
+                            <option value="https://msdemt.github.io/en/" >English</option>
+                        
+                    </select>
+                </li>
+            
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>暗色模式</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#利用-docker-ipam-分配固定-ip">利用 docker ipam 分配固定 IP</a></li>
+    <li><a href="#先建外部网络再给容器分配ip">先建外部网络，再给容器分配IP</a></li>
+    <li><a href="#问题">问题</a></li>
+    <li><a href="#操作记录">操作记录</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/linux/" style="background-color: #ff8033; color: #fff;">
+                linux
+            </a>
+        
+            <a href="/categories/docker/" style="background-color: #2a9d8f; color: #fff;">
+                docker
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/docker-compose-add-ip/">docker compose 指定容器 ip</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            docker compose 指定容器 ip
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2023-09-07</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 5 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <blockquote>
+<p>参考：<br>
+<a class="link" href="https://www.zctou.com/2158.html"  target="_blank" rel="noopener"
+    >https://www.zctou.com/2158.html</a><br>
+<a class="link" href="https://www.cnblogs.com/xuanmanstein/p/10576476.html"  target="_blank" rel="noopener"
+    >https://www.cnblogs.com/xuanmanstein/p/10576476.html</a></p>
+</blockquote>
+<p>在 docker-compose.yml 文件中为容器分配固定IP，一般有两种方法：</p>
+<ul>
+<li>利用 docker ipam 功能在同一 yml 文件中分配固定IP</li>
+<li>先在外部创建一个网络（external），然后在想要用这网络的容器指定IP</li>
+</ul>
+<h2 id="利用-docker-ipam-分配固定-ip">利用 docker ipam 分配固定 IP</h2>
+<p>docker ipam 就是 IP Address Management Driver ，docker 官方文档地址如下：</p>
+<p><a class="link" href="https://docs.docker.com/engine/reference/commandline/network_create/"  target="_blank" rel="noopener"
+    >https://docs.docker.com/engine/reference/commandline/network_create/</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="line"><span class="cl"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3.1&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">db</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">mariadb:5.5.60</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l">always</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">MYSQL_ROOT_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l">root</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">MYSQL_ROOT_HOST</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;%&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">TZ</span><span class="p">:</span><span class="w"> </span><span class="l">Asia/Shanghai</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="m">3306</span><span class="p">:</span><span class="m">3306</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">.data:/var/lib/mysql</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">.conf:/etc/mysql/conf.d</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">mynet1</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">ipv4_address</span><span class="p">:</span><span class="w"> </span><span class="m">172.15.0.2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">adminer</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">adminer</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l">always</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">TZ</span><span class="p">:</span><span class="w"> </span><span class="l">Asia/Shanghai</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="m">18080</span><span class="p">:</span><span class="m">8080</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">mynet1</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">ipv4_address</span><span class="p">:</span><span class="w"> </span><span class="m">172.15.0.3</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">mynet1</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ipam</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">config</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">subnet</span><span class="p">:</span><span class="w"> </span><span class="m">172.15.0.0</span><span class="l">/16</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>可以看到用 ipam 指定一个内部网络，容器用 ipv4_address 获取固定IP。</p>
+<p>所有的容器都需要配置固定IP，否则容器IP位于不同网段，导致同一个yml中的容器网络不通。</p>
+<p>但这些 IP 只能用于这个内部网络容器间相互访问，要打通与其他网络间的访问，至少要有一个容器要同时在两个网络内。</p>
+<p>说得更白一点就是：这样分配的IP，是以这个yml为单位的小局域网，只能是这个yml中创建的容器间能互相访问。其他yml创建的容器访问不到这网络里面的容器。</p>
+<p>若要不同docker-compose.yml创建的网络互通，在yml中添加一个external为true的网络</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">version: &#39;3.1&#39;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">services:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  db:
+</span></span><span class="line"><span class="cl">    image: mariadb:5.5.60
+</span></span><span class="line"><span class="cl">    restart: always
+</span></span><span class="line"><span class="cl">    environment:
+</span></span><span class="line"><span class="cl">      MYSQL_ROOT_PASSWORD: root
+</span></span><span class="line"><span class="cl">      MYSQL_ROOT_HOST: &#34;%&#34;
+</span></span><span class="line"><span class="cl">      TZ: Asia/Shanghai
+</span></span><span class="line"><span class="cl">    ports:
+</span></span><span class="line"><span class="cl">      - 3306:3306
+</span></span><span class="line"><span class="cl">    volumes:
+</span></span><span class="line"><span class="cl">      - .data:/var/lib/mysql
+</span></span><span class="line"><span class="cl">      - .conf:/etc/mysql/conf.d
+</span></span><span class="line"><span class="cl">    networks:
+</span></span><span class="line"><span class="cl">      mynet1:
+</span></span><span class="line"><span class="cl">        ipv4_address: 172.15.0.2
+</span></span><span class="line"><span class="cl">      mynet2:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  adminer:
+</span></span><span class="line"><span class="cl">    image: adminer
+</span></span><span class="line"><span class="cl">    restart: always
+</span></span><span class="line"><span class="cl">    environment:
+</span></span><span class="line"><span class="cl">      TZ: Asia/Shanghai
+</span></span><span class="line"><span class="cl">    ports:
+</span></span><span class="line"><span class="cl">      - 18080:8080
+</span></span><span class="line"><span class="cl">    networks:
+</span></span><span class="line"><span class="cl">      mynet1:
+</span></span><span class="line"><span class="cl">        ipv4_address: 172.15.0.3
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">networks:
+</span></span><span class="line"><span class="cl">  mynet1:
+</span></span><span class="line"><span class="cl">    ipam:
+</span></span><span class="line"><span class="cl">      config:
+</span></span><span class="line"><span class="cl">      - subnet: 172.15.0.0/16
+</span></span><span class="line"><span class="cl">  mynet2:
+</span></span><span class="line"><span class="cl">    external: true
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="先建外部网络再给容器分配ip">先建外部网络，再给容器分配IP</h2>
+<p>先定义一个外部网络，再分别在每个 docker-compose 中用 ipv4_address 固定IP。</p>
+<p>创建外部网络</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1">#创建proxy网络</span>
+</span></span><span class="line"><span class="cl">docker network create --driver bridge --subnet<span class="o">=</span>172.18.0.0/24 mynet2
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>为容器指定 ip</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="line"><span class="cl"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3.1&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">db</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">mariadb:5.5.60</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l">always</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">MYSQL_ROOT_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l">root</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">MYSQL_ROOT_HOST</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;%&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">TZ</span><span class="p">:</span><span class="w"> </span><span class="l">Asia/Shanghai</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="m">3306</span><span class="p">:</span><span class="m">3306</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">.data:/var/lib/mysql</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">.conf:/etc/mysql/conf.d</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">mynet2</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">ipv4_address</span><span class="p">:</span><span class="w"> </span><span class="m">172.20.0.2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">adminer</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">adminer</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l">always</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">TZ</span><span class="p">:</span><span class="w"> </span><span class="l">Asia/Shanghai</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="m">18080</span><span class="p">:</span><span class="m">8080</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">mynet2</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">ipv4_address</span><span class="p">:</span><span class="w"> </span><span class="m">172.20.0.3</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">mynet2</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">external</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="问题">问题</h2>
+<p>docker-compose up 首先会创建network 注意之前如果已经运行过多个不同工程的docker-compose 可能已经自动创建了很多network</p>
+<p>这样如果IP网段已经分配过了，就会失败:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ERROR: Pool overlaps with other one on this address space
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>类似地，此外如果已经创建了network mynet1的网段 为 172.28.0.0，但是想改成172.19.0.1，也会失败</p>
+<p>这样都需要清理一下无效的network</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">docker network prune
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>清除各种不用的docker相关东西 参考  <a class="link" href="https://blog.csdn.net/wennuanddianbo/article/details/78453325"  target="_blank" rel="noopener"
+    >https://blog.csdn.net/wennuanddianbo/article/details/78453325</a></p>
+<h2 id="操作记录">操作记录</h2>
+<p>network 定义在 docker-compose.yml 文件内</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">hekai@00bafcjc-dUrwEMo9N5:/opt/workspace/msdemt/docker-collection/docker-compose/mariadb$ cat docker-compose.yml 
+</span></span><span class="line"><span class="cl">version: <span class="s1">&#39;3.1&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">services:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  db:
+</span></span><span class="line"><span class="cl">    image: mariadb:5.5.60
+</span></span><span class="line"><span class="cl">    restart: always
+</span></span><span class="line"><span class="cl">    environment:
+</span></span><span class="line"><span class="cl">      MYSQL_ROOT_PASSWORD: root
+</span></span><span class="line"><span class="cl">      MYSQL_ROOT_HOST: <span class="s2">&#34;%&#34;</span>
+</span></span><span class="line"><span class="cl">      TZ: Asia/Shanghai
+</span></span><span class="line"><span class="cl">    ports:
+</span></span><span class="line"><span class="cl">      - 3306:3306
+</span></span><span class="line"><span class="cl">    volumes:
+</span></span><span class="line"><span class="cl">      - .data:/var/lib/mysql
+</span></span><span class="line"><span class="cl">      - .conf:/etc/mysql/conf.d
+</span></span><span class="line"><span class="cl">    networks:
+</span></span><span class="line"><span class="cl">      mynet1:
+</span></span><span class="line"><span class="cl">        ipv4_address: 172.15.0.2
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  adminer:
+</span></span><span class="line"><span class="cl">    image: adminer
+</span></span><span class="line"><span class="cl">    restart: always
+</span></span><span class="line"><span class="cl">    environment:
+</span></span><span class="line"><span class="cl">      TZ: Asia/Shanghai
+</span></span><span class="line"><span class="cl">    ports:
+</span></span><span class="line"><span class="cl">      - 18080:8080
+</span></span><span class="line"><span class="cl">    networks:
+</span></span><span class="line"><span class="cl">      mynet1:
+</span></span><span class="line"><span class="cl">        ipv4_address: 172.15.0.3
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">networks:
+</span></span><span class="line"><span class="cl">  mynet1:
+</span></span><span class="line"><span class="cl">    ipam:
+</span></span><span class="line"><span class="cl">      config:
+</span></span><span class="line"><span class="cl">      - subnet: 172.15.0.0/16
+</span></span><span class="line"><span class="cl">hekai@00bafcjc-dUrwEMo9N5:/opt/workspace/msdemt/docker-collection/docker-compose/mariadb$ docker network ls
+</span></span><span class="line"><span class="cl">NETWORK ID     NAME                                   DRIVER    SCOPE
+</span></span><span class="line"><span class="cl">7350be8b3ad2   bridge                                 bridge    <span class="nb">local</span>
+</span></span><span class="line"><span class="cl">0d7795b17742   docker-centos7-slurm-cluster_default   bridge    <span class="nb">local</span>
+</span></span><span class="line"><span class="cl">666586e51a5b   host                                   host      <span class="nb">local</span>
+</span></span><span class="line"><span class="cl">97ca9cb8d2ea   none                                   null      <span class="nb">local</span>
+</span></span><span class="line"><span class="cl">hekai@00bafcjc-dUrwEMo9N5:/opt/workspace/msdemt/docker-collection/docker-compose/mariadb$ docker compose up -d
+</span></span><span class="line"><span class="cl"><span class="o">[</span>+<span class="o">]</span> Building 0.0s <span class="o">(</span>0/0<span class="o">)</span>                                                                                              
+</span></span><span class="line"><span class="cl"><span class="o">[</span>+<span class="o">]</span> Running 3/3
+</span></span><span class="line"><span class="cl"> ✔ Network mariadb_mynet1       Created                                                                         0.1s 
+</span></span><span class="line"><span class="cl"> ✔ Container mariadb-adminer-1  Started                                                                         1.7s 
+</span></span><span class="line"><span class="cl"> ✔ Container mariadb-db-1       Started                                                                         0.8s 
+</span></span><span class="line"><span class="cl">hekai@00bafcjc-dUrwEMo9N5:/opt/workspace/msdemt/docker-collection/docker-compose/mariadb$ docker network ls
+</span></span><span class="line"><span class="cl">NETWORK ID     NAME                                   DRIVER    SCOPE
+</span></span><span class="line"><span class="cl">7350be8b3ad2   bridge                                 bridge    <span class="nb">local</span>
+</span></span><span class="line"><span class="cl">0d7795b17742   docker-centos7-slurm-cluster_default   bridge    <span class="nb">local</span>
+</span></span><span class="line"><span class="cl">666586e51a5b   host                                   host      <span class="nb">local</span>
+</span></span><span class="line"><span class="cl">40ffa94e1ab4   mariadb_mynet1                         bridge    <span class="nb">local</span>
+</span></span><span class="line"><span class="cl">97ca9cb8d2ea   none                                   null      <span class="nb">local</span>
+</span></span><span class="line"><span class="cl">hekai@00bafcjc-dUrwEMo9N5:/opt/workspace/msdemt/docker-collection/docker-compose/mariadb$ docker ps
+</span></span><span class="line"><span class="cl">CONTAINER ID   IMAGE                     COMMAND                   CREATED              STATUS              PORTS                                                                                                               NAMES
+</span></span><span class="line"><span class="cl">49caff9a1d15   mariadb:5.5.60            <span class="s2">&#34;docker-entrypoint.s…&#34;</span>   About a minute ago   Up About a minute   0.0.0.0:3306-&gt;3306/tcp, :::3306-&gt;3306/tcp                                                                           mariadb-db-1
+</span></span><span class="line"><span class="cl">127e6317a80a   adminer                   <span class="s2">&#34;entrypoint.sh php -…&#34;</span>   About a minute ago   Up About a minute   0.0.0.0:18080-&gt;8080/tcp, :::18080-&gt;8080/tcp                                                                         mariadb-adminer-1
+</span></span><span class="line"><span class="cl">64a701a17667   hekai/centos7.9-slurm22   <span class="s2">&#34;/tini -- /usr/local…&#34;</span>   <span class="m">9</span> hours ago     Up <span class="m">9</span> hours     22/tcp, 3306/tcp, 6817-6820/tcp                                                                                     docker-centos7-slurm-cluster-slurm-compute-1-1
+</span></span><span class="line"><span class="cl">e9762ead7456   hekai/centos7.9-slurm22   <span class="s2">&#34;/tini -- /usr/local…&#34;</span>   <span class="m">9</span> hours ago     Up <span class="m">9</span> hours     22/tcp, 3306/tcp, 6817-6820/tcp                                                                                     docker-centos7-slurm-cluster-slurm-compute-2-1
+</span></span><span class="line"><span class="cl">1fc423ffcf00   hekai/centos7.9-slurm22   <span class="s2">&#34;/tini -- /usr/local…&#34;</span>   <span class="m">9</span> hours ago     Up <span class="m">9</span> hours     22/tcp, 3306/tcp, 0.0.0.0:389-&gt;389/tcp, :::389-&gt;389/tcp, 6817-6819/tcp, 0.0.0.0:6820-&gt;6820/tcp, :::6820-&gt;6820/tcp   docker-centos7-slurm-cluster-slurm-master-1
+</span></span><span class="line"><span class="cl">hekai@00bafcjc-dUrwEMo9N5:/opt/workspace/msdemt/docker-collection/docker-compose/mariadb$ docker inspect 49caff9a1d15 <span class="p">|</span> grep IPAddress
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;SecondaryIPAddresses&#34;</span>: null,
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;IPAddress&#34;</span>: <span class="s2">&#34;&#34;</span>,
+</span></span><span class="line"><span class="cl">                    <span class="s2">&#34;IPAddress&#34;</span>: <span class="s2">&#34;172.15.0.2&#34;</span>,
+</span></span><span class="line"><span class="cl">hekai@00bafcjc-dUrwEMo9N5:/opt/workspace/msdemt/docker-collection/docker-compose/mariadb$ docker inspect 127e6317a80a <span class="p">|</span> grep IPAddress
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;SecondaryIPAddresses&#34;</span>: null,
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;IPAddress&#34;</span>: <span class="s2">&#34;&#34;</span>,
+</span></span><span class="line"><span class="cl">                    <span class="s2">&#34;IPAddress&#34;</span>: <span class="s2">&#34;172.15.0.3&#34;</span>,
+</span></span><span class="line"><span class="cl">hekai@00bafcjc-dUrwEMo9N5:/opt/workspace/msdemt/docker-collection/docker-compose/mariadb$ docker compose down
+</span></span><span class="line"><span class="cl"><span class="o">[</span>+<span class="o">]</span> Running 3/3
+</span></span><span class="line"><span class="cl"> ✔ Container mariadb-adminer-1  Removed                                                                         0.4s 
+</span></span><span class="line"><span class="cl"> ✔ Container mariadb-db-1       Removed                                                                         5.3s 
+</span></span><span class="line"><span class="cl"> ✔ Network mariadb_mynet1       Removed                                                                         0.2s 
+</span></span><span class="line"><span class="cl">hekai@00bafcjc-dUrwEMo9N5:/opt/workspace/msdemt/docker-collection/docker-compose/mariadb$ docker network ls
+</span></span><span class="line"><span class="cl">NETWORK ID     NAME                                   DRIVER    SCOPE
+</span></span><span class="line"><span class="cl">7350be8b3ad2   bridge                                 bridge    <span class="nb">local</span>
+</span></span><span class="line"><span class="cl">0d7795b17742   docker-centos7-slurm-cluster_default   bridge    <span class="nb">local</span>
+</span></span><span class="line"><span class="cl">666586e51a5b   host                                   host      <span class="nb">local</span>
+</span></span><span class="line"><span class="cl">97ca9cb8d2ea   none                                   null      <span class="nb">local</span>
+</span></span><span class="line"><span class="cl">hekai@00bafcjc-dUrwEMo9N5:/opt/workspace/msdemt/docker-collection/docker-compose/mariadb$ docker ps
+</span></span><span class="line"><span class="cl">CONTAINER ID   IMAGE                     COMMAND                   CREATED         STATUS         PORTS                                                                                                               NAMES
+</span></span><span class="line"><span class="cl">66a097a109ef   mariadb:5.5.60            <span class="s2">&#34;docker-entrypoint.s…&#34;</span>   <span class="m">8</span> seconds ago   Up <span class="m">5</span> seconds   0.0.0.0:3306-&gt;3306/tcp, :::3306-&gt;3306/tcp                                                                           mariadb-db-1
+</span></span><span class="line"><span class="cl">b9188a6e2cf6   adminer                   <span class="s2">&#34;entrypoint.sh php -…&#34;</span>   <span class="m">8</span> seconds ago   Up <span class="m">6</span> seconds   0.0.0.0:18080-&gt;8080/tcp, :::18080-&gt;8080/tcp                                                                         mariadb-adminer-1
+</span></span><span class="line"><span class="cl">64a701a17667   hekai/centos7.9-slurm22   <span class="s2">&#34;/tini -- /usr/local…&#34;</span>   <span class="m">9</span> hours ago     Up <span class="m">9</span> hours     22/tcp, 3306/tcp, 6817-6820/tcp                                                                                     docker-centos7-slurm-cluster-slurm-compute-1-1
+</span></span><span class="line"><span class="cl">e9762ead7456   hekai/centos7.9-slurm22   <span class="s2">&#34;/tini -- /usr/local…&#34;</span>   <span class="m">9</span> hours ago     Up <span class="m">9</span> hours     22/tcp, 3306/tcp, 6817-6820/tcp                                                                                     docker-centos7-slurm-cluster-slurm-compute-2-1
+</span></span><span class="line"><span class="cl">1fc423ffcf00   hekai/centos7.9-slurm22   <span class="s2">&#34;/tini -- /usr/local…&#34;</span>   <span class="m">9</span> hours ago     Up <span class="m">9</span> hours     22/tcp, 3306/tcp, 0.0.0.0:389-&gt;389/tcp, :::389-&gt;389/tcp, 6817-6819/tcp, 0.0.0.0:6820-&gt;6820/tcp, :::6820-&gt;6820/tcp   docker-centos7-slurm-cluster-slurm-master-1
+</span></span><span class="line"><span class="cl">hekai@00bafcjc-dUrwEMo9N5:/opt/workspace/msdemt/docker-collection/docker-compose/mariadb$ docker inspect 1fc423ffcf00 <span class="p">|</span> grep IPAddress
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;SecondaryIPAddresses&#34;</span>: null,
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;IPAddress&#34;</span>: <span class="s2">&#34;&#34;</span>,
+</span></span><span class="line"><span class="cl">                    <span class="s2">&#34;IPAddress&#34;</span>: <span class="s2">&#34;172.19.0.2&#34;</span>,
+</span></span><span class="line"><span class="cl">hekai@00bafcjc-dUrwEMo9N5:/opt/workspace/msdemt/docker-collection/docker-compose/mariadb$ docker <span class="nb">exec</span> -ti 66a097a109ef bash
+</span></span><span class="line"><span class="cl">root@66a097a109ef:/# ping 172.19.0.2
+</span></span><span class="line"><span class="cl">PING 172.19.0.2 <span class="o">(</span>172.19.0.2<span class="o">)</span> 56<span class="o">(</span>84<span class="o">)</span> bytes of data.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">^C
+</span></span><span class="line"><span class="cl">--- 172.19.0.2 ping statistics ---
+</span></span><span class="line"><span class="cl"><span class="m">7</span> packets transmitted, <span class="m">0</span> received, 100% packet loss, <span class="nb">time</span> 6129ms
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">root@66a097a109ef:/# ping www.baidu.com
+</span></span><span class="line"><span class="cl">PING www.a.shifen.com <span class="o">(</span>220.181.38.149<span class="o">)</span> 56<span class="o">(</span>84<span class="o">)</span> bytes of data.
+</span></span><span class="line"><span class="cl"><span class="m">64</span> bytes from 220.181.38.149: <span class="nv">icmp_seq</span><span class="o">=</span><span class="m">1</span> <span class="nv">ttl</span><span class="o">=</span><span class="m">48</span> <span class="nv">time</span><span class="o">=</span>10.6 ms
+</span></span><span class="line"><span class="cl"><span class="m">64</span> bytes from 220.181.38.149: <span class="nv">icmp_seq</span><span class="o">=</span><span class="m">2</span> <span class="nv">ttl</span><span class="o">=</span><span class="m">48</span> <span class="nv">time</span><span class="o">=</span>10.6 ms
+</span></span><span class="line"><span class="cl">^C
+</span></span><span class="line"><span class="cl">--- www.a.shifen.com ping statistics ---
+</span></span><span class="line"><span class="cl"><span class="m">2</span> packets transmitted, <span class="m">2</span> received, 0% packet loss, <span class="nb">time</span> 1001ms
+</span></span><span class="line"><span class="cl">rtt min/avg/max/mdev <span class="o">=</span> 10.639/10.646/10.654/0.103 ms
+</span></span><span class="line"><span class="cl">root@66a097a109ef:/# <span class="nb">exit</span>
+</span></span><span class="line"><span class="cl"><span class="nb">exit</span>
+</span></span><span class="line"><span class="cl">hekai@00bafcjc-dUrwEMo9N5:/opt/workspace/msdemt/docker-collection/docker-compose/mariadb$
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>network 定义在 docker-compose.yml 文件外</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">hekai@00bafcjc-dUrwEMo9N5:/opt/workspace/msdemt/docker-collection/docker-compose/mariadb$ docker network ls
+</span></span><span class="line"><span class="cl">NETWORK ID     NAME                                   DRIVER    SCOPE
+</span></span><span class="line"><span class="cl">7350be8b3ad2   bridge                                 bridge    <span class="nb">local</span>
+</span></span><span class="line"><span class="cl">0d7795b17742   docker-centos7-slurm-cluster_default   bridge    <span class="nb">local</span>
+</span></span><span class="line"><span class="cl">666586e51a5b   host                                   host      <span class="nb">local</span>
+</span></span><span class="line"><span class="cl">97ca9cb8d2ea   none                                   null      <span class="nb">local</span>
+</span></span><span class="line"><span class="cl">hekai@00bafcjc-dUrwEMo9N5:/opt/workspace/msdemt/docker-collection/docker-compose/mariadb$ docker network create --driver bridge --subnet<span class="o">=</span>172.20.0.0/24 mynet2
+</span></span><span class="line"><span class="cl">2bc1739b9484c6f7b640f84b711c5618cc80d2f98fcb794c037abcf299bf7be1
+</span></span><span class="line"><span class="cl">hekai@00bafcjc-dUrwEMo9N5:/opt/workspace/msdemt/docker-collection/docker-compose/mariadb$ cat docker-compose.yml 
+</span></span><span class="line"><span class="cl">version: <span class="s1">&#39;3.1&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">services:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  db:
+</span></span><span class="line"><span class="cl">    image: mariadb:5.5.60
+</span></span><span class="line"><span class="cl">    restart: always
+</span></span><span class="line"><span class="cl">    environment:
+</span></span><span class="line"><span class="cl">      MYSQL_ROOT_PASSWORD: root
+</span></span><span class="line"><span class="cl">      MYSQL_ROOT_HOST: <span class="s2">&#34;%&#34;</span>
+</span></span><span class="line"><span class="cl">      TZ: Asia/Shanghai
+</span></span><span class="line"><span class="cl">    ports:
+</span></span><span class="line"><span class="cl">      - 3306:3306
+</span></span><span class="line"><span class="cl">    volumes:
+</span></span><span class="line"><span class="cl">      - .data:/var/lib/mysql
+</span></span><span class="line"><span class="cl">      - .conf:/etc/mysql/conf.d
+</span></span><span class="line"><span class="cl">    networks:
+</span></span><span class="line"><span class="cl">      mynet2:
+</span></span><span class="line"><span class="cl">        ipv4_address: 172.20.0.2
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  adminer:
+</span></span><span class="line"><span class="cl">    image: adminer
+</span></span><span class="line"><span class="cl">    restart: always
+</span></span><span class="line"><span class="cl">    environment:
+</span></span><span class="line"><span class="cl">      TZ: Asia/Shanghai
+</span></span><span class="line"><span class="cl">    ports:
+</span></span><span class="line"><span class="cl">      - 18080:8080
+</span></span><span class="line"><span class="cl">    networks:
+</span></span><span class="line"><span class="cl">      mynet2:
+</span></span><span class="line"><span class="cl">        ipv4_address: 172.20.0.3
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">networks:
+</span></span><span class="line"><span class="cl">  mynet2:
+</span></span><span class="line"><span class="cl">    external: <span class="nb">true</span>
+</span></span><span class="line"><span class="cl">hekai@00bafcjc-dUrwEMo9N5:/opt/workspace/msdemt/docker-collection/docker-compose/mariadb$ docker compose up -d
+</span></span><span class="line"><span class="cl"><span class="o">[</span>+<span class="o">]</span> Building 0.0s <span class="o">(</span>0/0<span class="o">)</span>                                                                                              
+</span></span><span class="line"><span class="cl"><span class="o">[</span>+<span class="o">]</span> Running 2/2
+</span></span><span class="line"><span class="cl"> ✔ Container mariadb-adminer-1  Started                                                                         0.8s 
+</span></span><span class="line"><span class="cl"> ✔ Container mariadb-db-1       Started                                                                         1.8s 
+</span></span><span class="line"><span class="cl">hekai@00bafcjc-dUrwEMo9N5:/opt/workspace/msdemt/docker-collection/docker-compose/mariadb$ docker network ls
+</span></span><span class="line"><span class="cl">NETWORK ID     NAME                                   DRIVER    SCOPE
+</span></span><span class="line"><span class="cl">7350be8b3ad2   bridge                                 bridge    <span class="nb">local</span>
+</span></span><span class="line"><span class="cl">0d7795b17742   docker-centos7-slurm-cluster_default   bridge    <span class="nb">local</span>
+</span></span><span class="line"><span class="cl">666586e51a5b   host                                   host      <span class="nb">local</span>
+</span></span><span class="line"><span class="cl">2bc1739b9484   mynet2                                 bridge    <span class="nb">local</span>
+</span></span><span class="line"><span class="cl">97ca9cb8d2ea   none                                   null      <span class="nb">local</span>
+</span></span><span class="line"><span class="cl">hekai@00bafcjc-dUrwEMo9N5:/opt/workspace/msdemt/docker-collection/docker-compose/mariadb$ docker ps -a
+</span></span><span class="line"><span class="cl">CONTAINER ID   IMAGE                     COMMAND                   CREATED         STATUS         PORTS                                                                                                               NAMES
+</span></span><span class="line"><span class="cl">04c55ef43d94   mariadb:5.5.60            <span class="s2">&#34;docker-entrypoint.s…&#34;</span>   <span class="m">9</span> seconds ago   Up <span class="m">7</span> seconds   0.0.0.0:3306-&gt;3306/tcp, :::3306-&gt;3306/tcp                                                                           mariadb-db-1
+</span></span><span class="line"><span class="cl">36af8aae907c   adminer                   <span class="s2">&#34;entrypoint.sh php -…&#34;</span>   <span class="m">9</span> seconds ago   Up <span class="m">8</span> seconds   0.0.0.0:18080-&gt;8080/tcp, :::18080-&gt;8080/tcp                                                                         mariadb-adminer-1
+</span></span><span class="line"><span class="cl">64a701a17667   hekai/centos7.9-slurm22   <span class="s2">&#34;/tini -- /usr/local…&#34;</span>   <span class="m">9</span> hours ago     Up <span class="m">9</span> hours     22/tcp, 3306/tcp, 6817-6820/tcp                                                                                     docker-centos7-slurm-cluster-slurm-compute-1-1
+</span></span><span class="line"><span class="cl">e9762ead7456   hekai/centos7.9-slurm22   <span class="s2">&#34;/tini -- /usr/local…&#34;</span>   <span class="m">9</span> hours ago     Up <span class="m">9</span> hours     22/tcp, 3306/tcp, 6817-6820/tcp                                                                                     docker-centos7-slurm-cluster-slurm-compute-2-1
+</span></span><span class="line"><span class="cl">1fc423ffcf00   hekai/centos7.9-slurm22   <span class="s2">&#34;/tini -- /usr/local…&#34;</span>   <span class="m">9</span> hours ago     Up <span class="m">9</span> hours     22/tcp, 3306/tcp, 0.0.0.0:389-&gt;389/tcp, :::389-&gt;389/tcp, 6817-6819/tcp, 0.0.0.0:6820-&gt;6820/tcp, :::6820-&gt;6820/tcp   docker-centos7-slurm-cluster-slurm-master-1
+</span></span><span class="line"><span class="cl">hekai@00bafcjc-dUrwEMo9N5:/opt/workspace/msdemt/docker-collection/docker-compose/mariadb$ docker inspect 04c55ef43d94 <span class="p">|</span> grep IPAddress
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;SecondaryIPAddresses&#34;</span>: null,
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;IPAddress&#34;</span>: <span class="s2">&#34;&#34;</span>,
+</span></span><span class="line"><span class="cl">                    <span class="s2">&#34;IPAddress&#34;</span>: <span class="s2">&#34;172.20.0.2&#34;</span>,
+</span></span><span class="line"><span class="cl">hekai@00bafcjc-dUrwEMo9N5:/opt/workspace/msdemt/docker-collection/docker-compose/mariadb$ docker inspect 36af8aae907c <span class="p">|</span> grep IPAddress
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;SecondaryIPAddresses&#34;</span>: null,
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;IPAddress&#34;</span>: <span class="s2">&#34;&#34;</span>,
+</span></span><span class="line"><span class="cl">                    <span class="s2">&#34;IPAddress&#34;</span>: <span class="s2">&#34;172.20.0.3&#34;</span>,
+</span></span><span class="line"><span class="cl">hekai@00bafcjc-dUrwEMo9N5:/opt/workspace/msdemt/docker-collection/docker-compose/mariadb$ docker inspect 1fc423ffcf00 <span class="p">|</span> grep IPAddress
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;SecondaryIPAddresses&#34;</span>: null,
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;IPAddress&#34;</span>: <span class="s2">&#34;&#34;</span>,
+</span></span><span class="line"><span class="cl">                    <span class="s2">&#34;IPAddress&#34;</span>: <span class="s2">&#34;172.19.0.2&#34;</span>,
+</span></span><span class="line"><span class="cl">hekai@00bafcjc-dUrwEMo9N5:/opt/workspace/msdemt/docker-collection/docker-compose/mariadb$ docker <span class="nb">exec</span> -ti 04c55ef43d94 bsah
+</span></span><span class="line"><span class="cl">OCI runtime <span class="nb">exec</span> failed: <span class="nb">exec</span> failed: unable to start container process: exec: <span class="s2">&#34;bsah&#34;</span>: executable file not found in <span class="nv">$PATH</span>: unknown
+</span></span><span class="line"><span class="cl">hekai@00bafcjc-dUrwEMo9N5:/opt/workspace/msdemt/docker-collection/docker-compose/mariadb$ docker <span class="nb">exec</span> -ti 04c55ef43d94 bash
+</span></span><span class="line"><span class="cl">root@04c55ef43d94:/# ping 172.20.0.3
+</span></span><span class="line"><span class="cl">PING 172.20.0.3 <span class="o">(</span>172.20.0.3<span class="o">)</span> 56<span class="o">(</span>84<span class="o">)</span> bytes of data.
+</span></span><span class="line"><span class="cl"><span class="m">64</span> bytes from 172.20.0.3: <span class="nv">icmp_seq</span><span class="o">=</span><span class="m">1</span> <span class="nv">ttl</span><span class="o">=</span><span class="m">64</span> <span class="nv">time</span><span class="o">=</span>0.232 ms
+</span></span><span class="line"><span class="cl"><span class="m">64</span> bytes from 172.20.0.3: <span class="nv">icmp_seq</span><span class="o">=</span><span class="m">2</span> <span class="nv">ttl</span><span class="o">=</span><span class="m">64</span> <span class="nv">time</span><span class="o">=</span>0.115 ms
+</span></span><span class="line"><span class="cl">^C
+</span></span><span class="line"><span class="cl">--- 172.20.0.3 ping statistics ---
+</span></span><span class="line"><span class="cl"><span class="m">2</span> packets transmitted, <span class="m">2</span> received, 0% packet loss, <span class="nb">time</span> 1027ms
+</span></span><span class="line"><span class="cl">rtt min/avg/max/mdev <span class="o">=</span> 0.115/0.173/0.232/0.059 ms
+</span></span><span class="line"><span class="cl">root@04c55ef43d94:/# ping 172.19.0.2
+</span></span><span class="line"><span class="cl">PING 172.19.0.2 <span class="o">(</span>172.19.0.2<span class="o">)</span> 56<span class="o">(</span>84<span class="o">)</span> bytes of data.
+</span></span><span class="line"><span class="cl">^C
+</span></span><span class="line"><span class="cl">--- 172.19.0.2 ping statistics ---
+</span></span><span class="line"><span class="cl"><span class="m">2</span> packets transmitted, <span class="m">0</span> received, 100% packet loss, <span class="nb">time</span> 1029ms
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">root@04c55ef43d94:/# ping www.baidu.com
+</span></span><span class="line"><span class="cl">PING www.a.shifen.com <span class="o">(</span>220.181.38.149<span class="o">)</span> 56<span class="o">(</span>84<span class="o">)</span> bytes of data.
+</span></span><span class="line"><span class="cl"><span class="m">64</span> bytes from 220.181.38.149: <span class="nv">icmp_seq</span><span class="o">=</span><span class="m">1</span> <span class="nv">ttl</span><span class="o">=</span><span class="m">48</span> <span class="nv">time</span><span class="o">=</span>18.5 ms
+</span></span><span class="line"><span class="cl">^C
+</span></span><span class="line"><span class="cl">--- www.a.shifen.com ping statistics ---
+</span></span><span class="line"><span class="cl"><span class="m">1</span> packets transmitted, <span class="m">1</span> received, 0% packet loss, <span class="nb">time</span> 0ms
+</span></span><span class="line"><span class="cl">rtt min/avg/max/mdev <span class="o">=</span> 18.512/18.512/18.512/0.000 ms
+</span></span><span class="line"><span class="cl">root@04c55ef43d94:/# <span class="nb">exit</span>
+</span></span><span class="line"><span class="cl"><span class="nb">exit</span>
+</span></span><span class="line"><span class="cl">hekai@00bafcjc-dUrwEMo9N5:/opt/workspace/msdemt/docker-collection/docker-compose/mariadb$ docker compose down
+</span></span><span class="line"><span class="cl"><span class="o">[</span>+<span class="o">]</span> Running 2/2
+</span></span><span class="line"><span class="cl"> ✔ Container mariadb-db-1       Removed                                                                         2.2s 
+</span></span><span class="line"><span class="cl"> ✔ Container mariadb-adminer-1  Removed                                                                         0.4s 
+</span></span><span class="line"><span class="cl">hekai@00bafcjc-dUrwEMo9N5:/opt/workspace/msdemt/docker-collection/docker-compose/mariadb$ docker network ls
+</span></span><span class="line"><span class="cl">NETWORK ID     NAME                                   DRIVER    SCOPE
+</span></span><span class="line"><span class="cl">7350be8b3ad2   bridge                                 bridge    <span class="nb">local</span>
+</span></span><span class="line"><span class="cl">0d7795b17742   docker-centos7-slurm-cluster_default   bridge    <span class="nb">local</span>
+</span></span><span class="line"><span class="cl">666586e51a5b   host                                   host      <span class="nb">local</span>
+</span></span><span class="line"><span class="cl">2bc1739b9484   mynet2                                 bridge    <span class="nb">local</span>
+</span></span><span class="line"><span class="cl">97ca9cb8d2ea   none                                   null      <span class="nb">local</span>
+</span></span><span class="line"><span class="cl">hekai@00bafcjc-dUrwEMo9N5:/opt/workspace/msdemt/docker-collection/docker-compose/mariadb$ docker network rm mynet2
+</span></span><span class="line"><span class="cl">mynet2
+</span></span><span class="line"><span class="cl">hekai@00bafcjc-dUrwEMo9N5:/opt/workspace/msdemt/docker-collection/docker-compose/mariadb$ 
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/linux/">linux</a>
+        
+            <a href="/tags/docker/">docker</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/docker-install-sshd/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">docker安装sshd</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/docker-skills/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">docker 技巧</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/docker-build-slurm/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">使用docker构造slurm镜像问题汇总</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/docker-mariadb-5.5.60/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">docker 部署 mariadb-5.5.60</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/wsl-ubuntu-docker/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">wsl ubuntu 安装 docker</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2023 何凯的博客
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.19.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

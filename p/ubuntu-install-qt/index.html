@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='ubuntu18.04安装qt5.15.10'>
+<title>ubuntu安装qt</title>
+
+<link rel='canonical' href='https://msdemt.github.io/p/ubuntu-install-qt/'>
+
+<link rel="stylesheet" href="/scss/style.min.f2f21d9d961219a01621263328d8997e1ae3b4f0371d455628df1fdc27d57bd6.css"><meta property='og:title' content='ubuntu安装qt'>
+<meta property='og:description' content='ubuntu18.04安装qt5.15.10'>
+<meta property='og:url' content='https://msdemt.github.io/p/ubuntu-install-qt/'>
+<meta property='og:site_name' content='何凯的博客'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='linux' /><meta property='article:tag' content='c' /><meta property='article:published_time' content='2023-09-08T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2023-09-08T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="ubuntu安装qt">
+<meta name="twitter:description" content="ubuntu18.04安装qt5.15.10">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu8bf57b87f6c84d6a9bc2eb369290e574_128598_300x0_resize_box_3.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">何凯的博客</a></h1>
+            <h2 class="site-description">The road is long and difficult, forge ahead.</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://github.com/msdemt'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E9%93%BE%E6%8E%A5/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+                <li id="i18n-switch">  
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                    <select name="language" onchange="window.location.href = this.selectedOptions[0].value">
+                        
+                            <option value="https://msdemt.github.io/" selected>中文</option>
+                        
+                            <option value="https://msdemt.github.io/en/" >English</option>
+                        
+                    </select>
+                </li>
+            
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>暗色模式</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#安装qt">安装qt</a></li>
+    <li><a href="#安装-qt-creator">安装 qt-creator</a></li>
+    <li><a href="#问题">问题</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/linux/" style="background-color: #ff8033; color: #fff;">
+                linux
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/ubuntu-install-qt/">ubuntu安装qt</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            ubuntu18.04安装qt5.15.10
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2023-09-08</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 4 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="安装qt">安装qt</h2>
+<blockquote>
+<p>参考：<br>
+<a class="link" href="https://www.tal.org/tutorials/building-qt-515-lts-raspberry-pi-raspberry-pi-os"  target="_blank" rel="noopener"
+    >https://www.tal.org/tutorials/building-qt-515-lts-raspberry-pi-raspberry-pi-os</a></p>
+</blockquote>
+<ol>
+<li>
+<p>下载 qt 源码包</p>
+<p>下载地址：https://download.qt.io/archive/qt/5.15/5.15.10/single/qt-everywhere-opensource-src-5.15.10.tar.xz</p>
+</li>
+<li>
+<p>安装qt编译依赖库</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt-get install -y build-essential libfontconfig1-dev libfreetype6-dev libx11-dev libxext-dev libxfixes-dev libxi-dev libxrender-dev libxcb1-dev libxcb-glx0-dev libxcb-keysyms1-dev libxcb-image0-dev libxcb-shm0-dev libcups2-dev zlib1g-dev
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>解压源码包并进入目录</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">tar -xf qt-everywhere-src-5.15.10.tar.xz 
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> qt-everywhere-src-5.15.10/
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>配置编译选项</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">./configure -opensource -confirm-license -nomake examples -nomake tests -prefix /opt/app/qt-5.15.10
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>-opensource: 表示使用开源许可证</li>
+<li>-confirm-license: 表示自动确认许可证</li>
+<li>-nomake examples -nomake tests: 表示不编译示例和测试程序</li>
+<li>-prefix: 指定安装位置，默认安装到 /usr/local/Qt-5.15.10 下</li>
+</ul>
+</li>
+<li>
+<p>编译源码</p>
+<p>因为源码编译耗时特别长，所以最好加上 -j 参数，并行编译，加快编译速度</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">make -j8
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>安装qt</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo make install
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>配置环境变量</p>
+<p>需要将Qt添加到PATH中，以便在终端中使用Qt命令行工具。可以编辑.bashrc文件，在末尾添加以下内容：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">export QTDIR=/opt/app/qt-5.15.10
+</span></span><span class="line"><span class="cl">export PATH=QTDIR/bin:PATH
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>保存并退出文件后，执行以下命令使其生效：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">source</span> ~/.bashrc
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>也可以添加全局环境变量配置，新增 /etc/profile.d/qt.sh，内容如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="nb">export</span> <span class="nv">QTDIR</span><span class="o">=</span>/opt/app/qt-5.15.10
+</span></span><span class="line"><span class="cl"><span class="k">case</span> <span class="s2">&#34;:</span><span class="nv">$PATH</span><span class="s2">:&#34;</span> in
+</span></span><span class="line"><span class="cl">    *<span class="s2">&#34;:</span><span class="nv">$QTDIR</span><span class="s2">/bin:&#34;</span>*<span class="o">)</span> :<span class="p">;;</span> <span class="c1"># already there</span>
+</span></span><span class="line"><span class="cl">    *<span class="o">)</span> <span class="nv">PATH</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$QTDIR</span><span class="s2">/bin:</span><span class="nv">$PATH</span><span class="s2">&#34;</span><span class="p">;;</span> <span class="c1"># or PATH=&#34;$PATH:$new_entry&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="k">esac</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+<h2 id="安装-qt-creator">安装 qt-creator</h2>
+<p>下载最新版的 qt-creator</p>
+<p>下载地址：https://download.qt.io/official_releases/qtcreator/11.0/11.0.2/</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">chmod +x qt-creator-opensource-linux-x86_64-11.0.2.run
+</span></span><span class="line"><span class="cl">./qt-creator-opensource-linux-x86_64-11.0.2.run
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="问题">问题</h2>
+<ol>
+<li>
+<p>配置编译选项时出错：<code>ERROR: The OpenGL functionality tests failed!</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">./configure -opensource -confirm-license -nomake examples -nomake tests
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>错误如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ERROR: The OpenGL functionality tests failed!
+</span></span><span class="line"><span class="cl">You might need to modify the include and library search paths by editing QMAKE_INCDIR_OPENGL[_ES2],
+</span></span><span class="line"><span class="cl">QMAKE_LIBDIR_OPENGL[_ES2] and QMAKE_LIBS_OPENGL[_ES2] in the mkspec for your platform.
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>添加 -no-opengl，可以正常通过配置</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">./configure -opensource -confirm-license -nomake examples -nomake tests -no-opengl
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>猜测：系统没有安装opengl</p>
+<p>安装 opengl</p>
+<blockquote>
+<p>参考：<br>
+<a class="link" href="https://crainyday.gitee.io/Ubuntu_004.html"  target="_blank" rel="noopener"
+    >https://crainyday.gitee.io/Ubuntu_004.html</a><br>
+<a class="link" href="https://en.wikibooks.org/wiki/OpenGL_Programming/Installation/Linux"  target="_blank" rel="noopener"
+    >https://en.wikibooks.org/wiki/OpenGL_Programming/Installation/Linux</a></p>
+</blockquote>
+<p>问题：安装 libgl1-mesa-dev 失败，提示无法安装libx11-xcb-dev</p>
+<p>手动安装 libx11-xcb-dev</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">hekai@00bafcjc-dUrwEMo9N5:~/Downloads$ sudo apt install libx11-xcb-dev
+</span></span><span class="line"><span class="cl">正在读取软件包列表... 完成
+</span></span><span class="line"><span class="cl">正在分析软件包的依赖关系树
+</span></span><span class="line"><span class="cl">正在读取状态信息... 完成
+</span></span><span class="line"><span class="cl">有一些软件包无法被安装。如果您用的是 unstable 发行版，这也许是
+</span></span><span class="line"><span class="cl">因为系统无法达到您要求的状态造成的。该版本中可能会有一些您需要的软件
+</span></span><span class="line"><span class="cl">包尚未被创建或是它们已被从新到<span class="o">(</span>Incoming<span class="o">)</span>目录移出。
+</span></span><span class="line"><span class="cl">下列信息可能会对解决问题有所帮助：
+</span></span><span class="line"><span class="cl">下列软件包有未满足的依赖关系：
+</span></span><span class="line"><span class="cl">libx11-xcb-dev : 依赖: libx11-xcb1 <span class="o">(=</span> 2:1.6.4-3ubuntu0.4<span class="o">)</span> 但是 2:1.6.4-3ubuntu0.5 正要被安装
+</span></span><span class="line"><span class="cl">E: 无法修正错误，因为您要求某些软件包保持现状，就是它们破坏了软件包间的依赖关系。
+</span></span><span class="line"><span class="cl">hekai@00bafcjc-dUrwEMo9N5:~/Downloads$ sudo apt list --installed <span class="p">|</span> grep libx11-xcb1
+</span></span><span class="line"><span class="cl">WARNING: apt does not have a stable CLI interface. Use with caution in scripts.
+</span></span><span class="line"><span class="cl">libx11-xcb1/now 2:1.6.4-3ubuntu0.5 amd64 <span class="o">[</span>已安装，本地<span class="o">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>由上可知，本系统已经安装了 libx11-xcb1 2:1.6.4-3ubuntu0.5，但是从仓库中安装 libx11-xcb-dev 时，仓库中的 libx11-xcb-dev 依赖 libx11-xcb1 2:1.6.4-3ubuntu0.4</p>
+<p>查看仓库中 libx11-xcb-dev 的版本，可以看到仓库中的 libx11-xcb-dev 版本是 2:1.6.4-3ubuntu0.4 amd64</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">hekai@00bafcjc-dUrwEMo9N5:~/Downloads$ sudo apt search libx11-xcb-dev
+</span></span><span class="line"><span class="cl">正在排序... 完成
+</span></span><span class="line"><span class="cl">全文搜索... 完成
+</span></span><span class="line"><span class="cl">libx11-xcb-dev/bionic-updates,bionic-security 2:1.6.4-3ubuntu0.4 amd64
+</span></span><span class="line"><span class="cl">Xlib/XCB interface library <span class="o">(</span>development headers<span class="o">)</span>
+</span></span><span class="line"><span class="cl">hekai@00bafcjc-dUrwEMo9N5:~/Downloads$
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>有两个方法</p>
+<ol>
+<li>卸载本机中的 libx11-xcb1 2:1.6.4-3ubuntu0.5 ，安装低版本的 libx11-xcb1 2:1.6.4-3ubuntu0.4，然后继续安装仓库中的 libx11-xcb-dev</li>
+<li>找找有没有 2:1.6.4-3ubuntu0.5 版本的 libx11-xcb-dev</li>
+</ol>
+<p>第一个方法风险有点大，因为看到很多软件都依赖了 libx11-xcb1</p>
+<p>幸好找到了 2:1.6.4-3ubuntu0.5 版本的 libx11-xcb-dev，所以使用第二个方法。</p>
+<p>libx11-xcb-dev 2:1.6.4-3ubuntu0.5 下载地址：<br>
+<a class="link" href="https://launchpad.net/ubuntu/bionic/amd64/libx11-xcb-dev/2:1.6.4-3ubuntu0.5"  target="_blank" rel="noopener"
+    >https://launchpad.net/ubuntu/bionic/amd64/libx11-xcb-dev/2:1.6.4-3ubuntu0.5</a></p>
+<p><a class="link" href="/resources/libx11-xcb-dev_1.6.4-3ubuntu0.5_amd64.deb" >libx11-xcb-dev 2:1.6.4-3ubuntu0.5 本地下载</a></p>
+<p>安装 libx11-xcb-dev 2:1.6.4-3ubuntu0.5</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">hekai@00bafcjc-dUrwEMo9N5:~/Downloads$ sudo dpkg -i libx11-xcb-dev_1.6.4-3ubuntu0.5_amd64.deb
+</span></span><span class="line"><span class="cl">正在选中未选择的软件包 libx11-xcb-dev:amd64。
+</span></span><span class="line"><span class="cl"><span class="o">(</span>正在读取数据库 ... 系统当前共安装有 <span class="m">285619</span> 个文件和目录。<span class="o">)</span>
+</span></span><span class="line"><span class="cl">正准备解包 libx11-xcb-dev_1.6.4-3ubuntu0.5_amd64.deb  ...
+</span></span><span class="line"><span class="cl">正在解包 libx11-xcb-dev:amd64 <span class="o">(</span>2:1.6.4-3ubuntu0.5<span class="o">)</span> ...
+</span></span><span class="line"><span class="cl">正在设置 libx11-xcb-dev:amd64 <span class="o">(</span>2:1.6.4-3ubuntu0.5<span class="o">)</span> ...
+</span></span><span class="line"><span class="cl">正在处理用于 man-db <span class="o">(</span>2.8.3-2ubuntu0.1<span class="o">)</span> 的触发器 ...
+</span></span><span class="line"><span class="cl">hekai@00bafcjc-dUrwEMo9N5:~/Downloads$
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后可以安装 opengl 了</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sudo apt-get install build-essential libgl1-mesa-dev
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>configure配置时由于存在缓存导致失败</p>
+<p>缓存可能会导致执行 ./configure 时失败</p>
+<p>解决办法：删除 configure.cache ，然后再执行 ./configure</p>
+</li>
+<li>
+<p>启动 qtcreator ，没有响应</p>
+<p>查看日志 journalctl -f</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">qtcreator: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.28&#39; not found
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>安装 glibc_2.28</p>
+<blockquote>
+<p>参考：<br>
+<a class="link" href="http://www.xbhp.cn/news/54783.html"  target="_blank" rel="noopener"
+    >http://www.xbhp.cn/news/54783.html</a></p>
+</blockquote>
+<p>查看当前系统支持的 glibc : <code>strings /lib/x86_64-linux-gnu/libc.so.6 | grep GLIBC_</code></p>
+<p>在 /etc/apt/source.list 文件新增源</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">deb http://security.debian.org/debian-security buster/updates main 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>刷新软件包的缓存</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sudo apt update
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>apt-get update之后若出现下面提示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">由于没有公钥，无法验证下列签名： NO_PUBKEY 112695A0E562B32A NO_PUBKEY 54404762BBB6E853
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>执行如下命令</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 112695A0E562B32A 54404762BBB6E853
+</span></span><span class="line"><span class="cl">``
+</span></span><span class="line"><span class="cl">其中后面的112695A0E562B32A 54404762BBB6E853就是上面提到的NO_PUBKEY 112695A0E562B32A NO_PUBKEY 54404762BBB6E853中的公钥，替换成对应的即可。然后重新apt-get update。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">查看软件包可更新列表
+</span></span><span class="line"><span class="cl">```bash
+</span></span><span class="line"><span class="cl">sudo apt list --upgradable 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>安装libc6</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt install libc6-dev  /sudo apt install libc6
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>查看服务器当前glibc版本：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">strings /lib/x86_64-linux-gnu/libc.so.6 <span class="p">|</span> grep GLIBC_
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/linux/">linux</a>
+        
+            <a href="/tags/c/">c</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/docker-install-sshd/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">docker安装sshd</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/ldap-add-readonly-user/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">ldap添加只读用户</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/ldap-forbidden-anonymous/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">ldap禁止匿名用户访问</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/ubuntu-app-folder/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">ubuntu添加图标文件夹</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/ubuntu-wps-fonts/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">wps在ubuntu上缺少字体</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2023 何凯的博客
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.19.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

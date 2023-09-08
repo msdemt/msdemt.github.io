@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='使用git-lfs上传100mb大文件到github'>
-<title>使用git-lfs上传大文件到github</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='使用 git-lfs 上传大于100MB文件到 github'>
+<title>github 上传大文件</title>
 
 <link rel='canonical' href='https://msdemt.github.io/p/github-large-files/'>
 
-<link rel="stylesheet" href="/scss/style.min.f2f21d9d961219a01621263328d8997e1ae3b4f0371d455628df1fdc27d57bd6.css"><meta property='og:title' content='使用git-lfs上传大文件到github'>
-<meta property='og:description' content='使用git-lfs上传100mb大文件到github'>
+<link rel="stylesheet" href="/scss/style.min.f2f21d9d961219a01621263328d8997e1ae3b4f0371d455628df1fdc27d57bd6.css"><meta property='og:title' content='github 上传大文件'>
+<meta property='og:description' content='使用 git-lfs 上传大于100MB文件到 github'>
 <meta property='og:url' content='https://msdemt.github.io/p/github-large-files/'>
 <meta property='og:site_name' content='何凯的博客'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2023-09-03T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2023-09-03T00:00:00&#43;00:00'/>
-<meta name="twitter:title" content="使用git-lfs上传大文件到github">
-<meta name="twitter:description" content="使用git-lfs上传100mb大文件到github">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2023-09-07T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2023-09-07T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="github 上传大文件">
+<meta name="twitter:description" content="使用 git-lfs 上传大于100MB文件到 github">
     </head>
     <body class="
     article-page
@@ -266,9 +266,12 @@
             <nav id="TableOfContents">
   <ol>
     <li><a href="#介绍">介绍</a></li>
-    <li><a href="#安装-git-lfs">安装 git lfs</a></li>
-    <li><a href="#上传">上传</a></li>
-    <li><a href="#问题">问题</a></li>
+    <li><a href="#github">github</a>
+      <ol>
+        <li><a href="#git-lfs-上传文件介绍">git lfs 上传文件介绍</a></li>
+        <li><a href="#问题">问题</a></li>
+      </ol>
+    </li>
   </ol>
 </nav>
         </div>
@@ -296,12 +299,12 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/github-large-files/">使用git-lfs上传大文件到github</a>
+            <a href="/p/github-large-files/">github 上传大文件</a>
         </h2>
     
         
         <h3 class="article-subtitle">
-            使用git-lfs上传100mb大文件到github
+            使用 git-lfs 上传大于100MB文件到 github
         </h3>
         
     </div>
@@ -322,7 +325,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2023-09-03</time>
+                <time class="article-time--published">2023-09-07</time>
             </div>
         
 
@@ -337,7 +340,7 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 1 分钟
+                    阅读时长: 3 分钟
                 </time>
             </div>
         
@@ -353,86 +356,136 @@
     
     
     <h2 id="介绍">介绍</h2>
-<p>在ubuntu 18.04 上，上传大于100mb文件到github</p>
-<h2 id="安装-git-lfs">安装 git lfs</h2>
-<p>添加软件仓库</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh <span class="p">|</span> sudo bash
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>安装 lfs</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt-get install git-lfs
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="上传">上传</h2>
-<p>进入代码仓库，执行</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git lfs track &lt;file&gt;
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>file 是需要上传的大文件<br>
-执行完后会发现目录下生成了 <code>.gitattributes</code> 文件， 文件内记录了我们要上传文件的信息。只有先把 <code>.gitattributes</code> 传上去，才可以上传大文件。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git add .gitattributes
-</span></span><span class="line"><span class="cl">git commit -m <span class="s2">&#34;add large file .gitattributes&#34;</span>
-</span></span><span class="line"><span class="cl">git push origin main
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>开始上传大文件</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git add &lt;file&gt;
-</span></span><span class="line"><span class="cl">git commit -m <span class="s2">&#34;add large file&#34;</span>
-</span></span><span class="line"><span class="cl">git push origin main
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>需要注意的是，通过git-lfs上传文件是有空间限制的，单个文件最大100mb，最大支持1GB，免费用户如果上传的文件超过了1G，账号就会被冻结，所以在上传前一定要检查一下自己还剩多少空间，可以在 Settings - Billing and plans - Plans and usage 查看。</p>
-<h2 id="问题">问题</h2>
-<ol>
-<li>上传大文件时失败</li>
-</ol>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">batch response: Git LFS is disabled for this repository.
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>就说明你的账号被冻结了，需要在GitHub后台提交解封申请。</p>
-<p><a class="link" href="https://support.github.com/contact"  target="_blank" rel="noopener"
-    >https://support.github.com/contact</a></p>
-<p>工作日一般几个小时就会帮你把账号解封，解封后才可以继续上传大文件</p>
+<p>希望将 jdk-8u202-linux-x64.tar.gz (186M) 上传到 github ，从而生成 jdk-8u202-linux-x64.tar.gz 的直链，用于构建包含 jdk 的 docker 镜像</p>
+<h2 id="github">github</h2>
 <blockquote>
 <p>参考：<br>
 <a class="link" href="https://docs.github.com/zh/repositories/working-with-files/managing-large-files/about-large-files-on-github"  target="_blank" rel="noopener"
-    >https://docs.github.com/zh/repositories/working-with-files/managing-large-files/about-large-files-on-github</a><br>
-<a class="link" href="https://github.com/git-lfs/git-lfs/blob/main/INSTALLING.md"  target="_blank" rel="noopener"
-    >https://github.com/git-lfs/git-lfs/blob/main/INSTALLING.md</a><br>
+    >https://docs.github.com/zh/repositories/working-with-files/managing-large-files/about-large-files-on-github</a></p>
+</blockquote>
+<p>github 文件大小限制</p>
+<ul>
+<li>GitHub 限制存储库中允许的文件大小。 如果尝试添加或更新大于 50 MiB 的文件，您将从 Git 收到警告。 更改仍将成功推送到仓库，但您可以考虑删除提交，以尽量减少对性能的影响。</li>
+<li>如果通过浏览器将文件添加到存储库，该文件不得大于 25 MiB</li>
+<li>GitHub 阻止大小超过 100 MiB 的文件。要跟踪超出此限制的文件，必须使用 <a class="link" href="https://docs.github.com/zh/repositories/working-with-files/managing-large-files/about-git-large-file-storage"  target="_blank" rel="noopener"
+    >Git Large File Storage (Git LFS)</a>
+<ul>
+<li>Git LFS 处理大文件的方式是存储对仓库中文件的引用，而不实际文件本身。 为满足 Git 的架构要求，Git LFS 创建了“指针文件”，充当对实际文件（存储在其他位置）的引用。 GitHub 在仓库中管理此指针文件。 克隆仓库时，GitHub 使用指针文件作为映射来查找大文件。&ndash;&gt; 无法生成文件直链</li>
+<li>Git LFS 的不同最大大小限制取决于 GitHub 计划，免费版文件大小上线为2</li>
+</ul>
+</li>
+<li>如果需要在存储库中分发大文件，则可以在 GitHub.com 上创建版本，而不是跟踪文件。参阅 <a class="link" href="https://docs.github.com/zh/repositories/working-with-files/managing-large-files/about-large-files-on-github#distributing-large-binaries"  target="_blank" rel="noopener"
+    >分发大型二进制文件</a>
+<ul>
+<li>如果需要在存储库内分发大型文件，可以在 GitHub.com 上创建发行版。 发行版允许您打包软件、发行说明和指向二进制文件的链接，以供其他人使用。 有关详细信息，请访问“<a class="link" href="https://docs.github.com/zh/repositories/releasing-projects-on-github/about-releases"  target="_blank" rel="noopener"
+    >关于发行版</a>”</li>
+<li>不限制二进制发行版文件的总大小，也不限制用于传递它们的带宽。 但每个文件必须小于 2 GiB。</li>
+</ul>
+</li>
+</ul>
+<p>所以，无法直接将体积为 186MB 的 jdk-8u202-linux-x64.tar.gz 上传到仓库，可行的方式如下</p>
+<ul>
+<li>使用 git lfs，问题：无法生成直链（点击链接即可下载）</li>
+<li>使用 <a class="link" href="https://docs.github.com/zh/repositories/releasing-projects-on-github/managing-releases-in-a-repository"  target="_blank" rel="noopener"
+    >发行版</a></li>
+<li>将 jdk 拆分为最大100MB的子包，上传到 github 获取直链，然后在 Dockerfile 中下载所有子包后，将子包合并为完整包
+<ul>
+<li>拆分子包命令：<code>tar -czf - jdk-8u202-linux-x64.tar.gz | split -b 100m -d - jdk8u202.tar.gz</code></li>
+<li>合并子包：<code>cat jdk8u202.tar.gz* | tar -zxf -</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="git-lfs-上传文件介绍">git lfs 上传文件介绍</h3>
+<p>github 使用 <a class="link" href="https://github.com/git-lfs/git-lfs"  target="_blank" rel="noopener"
+    >git lfs</a> 上传大于 100MB 文件</p>
+<ol>
+<li><a class="link" href="https://github.com/git-lfs/git-lfs/blob/main/INSTALLING.md"  target="_blank" rel="noopener"
+    >ubuntu 安装 git lfs</a>
+<ul>
+<li>安装 git lfs 软件仓库： <code>curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash</code></li>
+<li>安装 git lfs: <code>sudo apt-get install -y git-lfs</code></li>
+</ul>
+</li>
+<li>进入 git 项目目录： <code>cd large_file_test</code></li>
+<li>追踪待上传的大文件： <code>git lfs track files/jdk-8u202-linux-x64.tar.gz</code>
+<ul>
+<li>执行 <code>git lfs track</code> 命令后，会生成 <code>.gitattribute</code> 文件，文件内记录了待上传文件的信息，将 <code>.gitattribute</code> 文件上传后，才可以上传大文件</li>
+</ul>
+</li>
+<li>将 <code>.gitattribute</code> 文件上传
+<ul>
+<li><code>git add .gitattribute</code></li>
+<li><code>git commit -m &quot;add .gitattribute&quot;</code></li>
+<li><code>git push origin main</code></li>
+</ul>
+</li>
+<li>上传大文件
+<ul>
+<li><code>git add files/jdk-8u202-linux-x64.tar.gz</code></li>
+<li><code>git commit -m &quot;add jdk-8u202-linux-x64.tar.gz&quot;</code></li>
+<li><code>git push origin main</code></li>
+</ul>
+</li>
+</ol>
+<p>需要注意的是，通过git-lfs上传文件是有空间限制的，免费用户如果上传的文件超过了1G，账号就会被冻结，所以大家在上传前一定要检查一下自己还剩多少空间（Settings - Billing and plans - Plans and usage - Git LFS Data）。</p>
+<h3 id="问题">问题</h3>
+<ol>
+<li>
+<p>batch response: Git LFS is disabled for this repository.</p>
+<p>如果在上传过程中出现如下报错：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">batch response: Git LFS is disabled for this repository.
+</span></span><span class="line"><span class="cl">Uploading LFS objects:   0% (0/1), 0 B | 0 B/s, done
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>就说明你的账号被冻结了，需要在GitHub后台提交解封申请。<br>
+<a class="link" href="https://support.github.com/contact"  target="_blank" rel="noopener"
+    >https://support.github.com/contact</a></p>
+</li>
+<li>
+<p>gitee 使用 git lfs上传失败</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ git push origin mainwarning: Authentication error: Authentication required: LFS only supported repository in paid or trial enterprise.
+</span></span><span class="line"><span class="cl">batch response: LFS only supported repository in paid or trial enterprise.      
+</span></span><span class="line"><span class="cl">Uploading LFS objects:   0% <span class="o">(</span>0/1<span class="o">)</span>, <span class="m">0</span> B <span class="p">|</span> <span class="m">0</span> B/s, <span class="k">done</span>.
+</span></span><span class="line"><span class="cl">error: failed to push some refs to <span class="s1">&#39;https://gitee.com/msdemt/large-files.git&#39;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>解决：<br>
+删除 <code>.git/hooks/pre-push</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">rm .git/hooks/pre-push
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后执行上传</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git push origin main 
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+<blockquote>
+<p>参考：<br>
 <a class="link" href="https://cloud.tencent.com/developer/article/1677003"  target="_blank" rel="noopener"
     >https://cloud.tencent.com/developer/article/1677003</a></p>
 </blockquote>
