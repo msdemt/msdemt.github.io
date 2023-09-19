@@ -3,7 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://msdemt.github.io/</loc>
-    <lastmod>2023-09-08T00:00:00+00:00</lastmod>
+    <lastmod>2023-09-18T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -15,11 +15,8 @@
                 href="https://msdemt.github.io/"
                 />
   </url><url>
-    <loc>https://msdemt.github.io/tags/c/</loc>
-    <lastmod>2023-09-08T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://msdemt.github.io/categories/</loc>
-    <lastmod>2023-09-08T00:00:00+00:00</lastmod>
+    <lastmod>2023-09-18T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -30,6 +27,43 @@
                 hreflang="zh-cn"
                 href="https://msdemt.github.io/categories/"
                 />
+  </url><url>
+    <loc>https://msdemt.github.io/p/macos-fusion-ubuntu-18.04/</loc>
+    <lastmod>2023-09-18T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://msdemt.github.io/tags/linux/</loc>
+    <lastmod>2023-09-18T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://msdemt.github.io/categories/linux/</loc>
+    <lastmod>2023-09-18T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://msdemt.github.io/tags/macos/</loc>
+    <lastmod>2023-09-18T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://msdemt.github.io/post/</loc>
+    <lastmod>2023-09-18T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://msdemt.github.io/tags/</loc>
+    <lastmod>2023-09-18T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://msdemt.github.io/en/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://msdemt.github.io/tags/"
+                />
+  </url><url>
+    <loc>https://msdemt.github.io/tags/ubuntu/</loc>
+    <lastmod>2023-09-18T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://msdemt.github.io/p/ubuntu-wine/</loc>
+    <lastmod>2023-09-18T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://msdemt.github.io/tags/c/</loc>
+    <lastmod>2023-09-08T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://msdemt.github.io/tags/docker/</loc>
     <lastmod>2023-09-08T00:00:00+00:00</lastmod>
@@ -53,31 +87,6 @@
     <lastmod>2023-09-08T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://msdemt.github.io/p/ldap-add-readonly-user/</loc>
-    <lastmod>2023-09-08T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://msdemt.github.io/tags/linux/</loc>
-    <lastmod>2023-09-08T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://msdemt.github.io/categories/linux/</loc>
-    <lastmod>2023-09-08T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://msdemt.github.io/post/</loc>
-    <lastmod>2023-09-08T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://msdemt.github.io/tags/</loc>
-    <lastmod>2023-09-08T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://msdemt.github.io/en/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://msdemt.github.io/tags/"
-                />
-  </url><url>
-    <loc>https://msdemt.github.io/tags/ubuntu/</loc>
     <lastmod>2023-09-08T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://msdemt.github.io/categories/ubuntu/</loc>

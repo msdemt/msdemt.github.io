@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='ubuntu 18.04 安装 wine 使用企业微信'>
+<title>ubuntu 安装 wine</title>
+
+<link rel='canonical' href='https://msdemt.github.io/p/ubuntu-wine/'>
+
+<link rel="stylesheet" href="/scss/style.min.abbd69b2908fdfcd5179898beaafd374514a86538d81639ddd2c58c06ae54e40.css"><meta property='og:title' content='ubuntu 安装 wine'>
+<meta property='og:description' content='ubuntu 18.04 安装 wine 使用企业微信'>
+<meta property='og:url' content='https://msdemt.github.io/p/ubuntu-wine/'>
+<meta property='og:site_name' content='何凯的博客'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='linux' /><meta property='article:tag' content='ubuntu' /><meta property='article:published_time' content='2023-09-18T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2023-09-18T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="ubuntu 安装 wine">
+<meta name="twitter:description" content="ubuntu 18.04 安装 wine 使用企业微信">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu8bf57b87f6c84d6a9bc2eb369290e574_128598_300x0_resize_box_3.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">何凯的博客</a></h1>
+            <h2 class="site-description">The road is long and difficult, forge ahead.</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://github.com/msdemt'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E9%93%BE%E6%8E%A5/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+                <li id="i18n-switch">  
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                    <select name="language" onchange="window.location.href = this.selectedOptions[0].value">
+                        
+                            <option value="https://msdemt.github.io/" selected>中文</option>
+                        
+                            <option value="https://msdemt.github.io/en/" >English</option>
+                        
+                    </select>
+                </li>
+            
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>暗色模式</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#介绍">介绍</a></li>
+    <li><a href="#ubuntu-1804-安装-wine">ubuntu 18.04 安装 wine</a></li>
+    <li><a href="#安装企业微信">安装企业微信</a></li>
+    <li><a href="#安装-topicons">安装 topicons</a></li>
+    <li><a href="#问题">问题：</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/linux/" style="background-color: #ff8033; color: #fff;">
+                linux
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/ubuntu-wine/">ubuntu 安装 wine</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            ubuntu 18.04 安装 wine 使用企业微信
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2023-09-18</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 5 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="介绍">介绍</h2>
+<p>因为目前企业微信没有 linux 版本，希望在 ubuntu 18.04 上使用企业微信，所以探索使用 wine 来在 ubuntu 上运行企业微信。</p>
+<h2 id="ubuntu-1804-安装-wine">ubuntu 18.04 安装 wine</h2>
+<p>启用 32 位架构</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo dpkg --add-architecture i386
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>配置 wine 仓库</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo wget -nc -O /usr/share/keyrings/winehq-archive.key https://dl.winehq.org/wine-builds/winehq.key
+</span></span><span class="line"><span class="cl">sudo sh -c <span class="s2">&#34;echo &#39;deb [arch=amd64,i386 signed-by=/usr/share/keyrings/winehq-archive.key] https://mirrors.tuna.tsinghua.edu.cn/wine-builds/ubuntu/ bionic main&#39; &gt; /etc/apt/sources.list.d/winehq.list&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>修改 /usr/share/keyrings/winehq-archive.key 权限</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo chmod <span class="m">644</span> /usr/share/keyrings/winehq-archive.key
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>更新镜像源</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt update
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>安装 wine 最新稳定版</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt -y install --install-recommends winehq-stable
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>查看 wine 版本</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wine --version
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>使用32位模式启动 winecfg</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nv">WINEARCH</span><span class="o">=</span>win32 <span class="nv">WINEPREFIX</span><span class="o">=</span>~/.wine winecfg
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>因为 wine 缺少语言包，所以中文显示会乱码，解决：将 windows 系统 <code>C:\Windows\Fonts</code> 中的语言文件拷贝到 <code>~/.wine/drive_c/windows/Fonts/</code> 目录</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo unzip Fonts.zip
+</span></span><span class="line"><span class="cl">sudo cp ./Fonts/* ~/.wine/drive_c/windows/Fonts/
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>winecfg 启动是提示安装 wine-mono 和 wine-gecko，如果在线安装失败，可以使用离线安装</p>
+<p>下载 wine-mono 和 wine-gecko</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wget http://mirrors.ustc.edu.cn/wine/wine/wine-mono/7.4.0/wine-mono-7.4.0-x86.msi
+</span></span><span class="line"><span class="cl">wget http://mirrors.ustc.edu.cn/wine/wine/wine-gecko/2.47.4/wine-gecko-2.47.4-x86.msi
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>安装 wine-mono 和 wine-gecko</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wine start wine-mono-7.4.0-x86.msi
+</span></span><span class="line"><span class="cl">wine start wine-gecko-2.47.4-x86.msi
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>安装 winetricks</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wget https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks
+</span></span><span class="line"><span class="cl">sudo chmod +x winetricks 
+</span></span><span class="line"><span class="cl">sudo mv winetricks /usr/local/bin
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>使用32位模式启动 winetricks</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nv">WINEARCH</span><span class="o">=</span>win32 <span class="nv">WINEPREFIX</span><span class="o">=</span>~/.wine winetricks
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>使用 winetricks 安装组件时，如果安装失败，经常是因为下载的文件不完整（<code>SHA256 mismatch!</code>），所以需要我们单独下载文件，拷贝到相应的位置</p>
+<p>使用 winetricks 安装 windows 组件</p>
+<ul>
+<li>安装 riched20
+<ul>
+<li>
+<p>安装 riched20 时，需要提前安装 cabextract</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt-get -y install cabextract
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>使用 winetrick 下载 W2KSP4_EN.EXE 文件不完整</p>
+<ul>
+<li>手动下载，地址：<code>http://x3270.bgp.nu/download/specials/W2KSP4_EN.EXE</code></li>
+<li>将 W2KSP4_EN.EXE 拷贝到 <code>~/.cache/winetricks/win2ksp4/</code> 目录</li>
+</ul>
+</li>
+<li>
+<p>使用 winetrick 下载 InstMsiW.exe 文件不完整</p>
+<ul>
+<li>手动下载，地址：<code>https://web.archive.org/web/20160710055851if_/http://download.microsoft.com/download/WindowsInstaller/Install/2.0/NT45/EN-US/InstMsiW.exe</code></li>
+<li>将 <code>InstMsiW.exe</code> 拷贝到 <code>~/.cache/winetricks/msls31</code> 目录</li>
+</ul>
+</li>
+<li>
+<p>安装 riched20</p>
+</li>
+</ul>
+</li>
+<li>安装 riched30
+<ul>
+<li>使用 winetrick 下载 InstMsiA.exe 文件不完整
+<ul>
+<li>手动下载，地址：<code>https://web.archive.org/web/20060720160141/https://download.microsoft.com/download/WindowsInstaller/Install/2.0/W9XMe/EN-US/InstMsiA.exe</code></li>
+<li>将 <code>InstMsiA.exe</code> 拷贝到 <code>~/.cache/winetricks/riched30</code></li>
+</ul>
+</li>
+<li>安装 riched30</li>
+</ul>
+</li>
+<li>安装 richtx32
+<ul>
+<li>提前安装 7zip
+<ul>
+<li>ubuntu 安装 7zip: <code>sudo apt-get install p7zip-full</code></li>
+</ul>
+</li>
+<li>安装 richtx32</li>
+</ul>
+</li>
+<li>安装 windowscodecs
+<ul>
+<li>若使用 winetrick 下载 wic_x86_enu.exe 文件不完整
+<ul>
+<li>手动下载，地址：<code>https://web.archive.org/web/20200810071051if_/https://download.microsoft.com/download/f/f/1/ff178bb1-da91-48ed-89e5-478a99387d4f/wic_x86_enu.exe</code></li>
+<li>将 <code>wic_x86_enu.exe</code> 拷贝到 <code>~/.cache/winetricks/windowscodecs</code></li>
+</ul>
+</li>
+<li>安装 windowscodecs</li>
+</ul>
+</li>
+</ul>
+<h2 id="安装企业微信">安装企业微信</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">WINEARCH=win32 WINEPREFIX=~/.wine wine WeCom_3.1.6.3605.exe
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>经过测试</p>
+<ul>
+<li><a class="link" href="https://dldir1.qq.com/wework/work_weixin/WeCom_3.1.6.3605.exe"  target="_blank" rel="noopener"
+    >企业微信-3.1.6</a> 可以正常使用，这个版本也是 <a class="link" href="https://blog.csdn.net/wmcy123/article/details/125596823"  target="_blank" rel="noopener"
+    >ukylin-wxwork_1.0_amd64.deb</a> 中对应的版本</li>
+<li><a class="link" href="https://dldir1.qq.com/wework/work_weixin/WeCom_3.1.10.3010.exe"  target="_blank" rel="noopener"
+    >企业微信-3.1.10</a> 可以正常使用，但是无法使用 WXDriver.exe</li>
+<li><a class="link" href="" >企业微信-3.1.12</a>、<a class="link" href="" >企业微信-3.1.15</a>、 <a class="link" href="https://dldir1.qq.com/wework/work_weixin/WeCom_3.1.16.3008.exe"  target="_blank" rel="noopener"
+    >企业微信-3.1.16</a>，提示wemail不可用，应该是内置的邮箱无法使用。无法正常使用</li>
+<li>企业微信-3.1.18.6007 虽然可以登录，但是经常崩溃</li>
+</ul>
+<p>企业微信安装成功后，在收藏夹中存在两个企业微信图标，位置：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">~/.local/share/applications/wine/Programs/企业微信/企业微信.desktop
+</span></span><span class="line"><span class="cl">~/.local/share/applications/wine/企业微信.desktop
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>删掉一个即可</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">rm -rf ~/.local/share/applications/wine/企业微信.desktop
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="安装-topicons">安装 topicons</h2>
+<p>使用 wine 安装企业微信后，企业微信图标会以悬浮窗的形式显示，可以安装Gnome Shell插件
+TopIcons Plus 解决问题，将 wine 中软件的图标整合到 ubuntu gnome 托盘。</p>
+<p><code>安装方式一（推荐）：</code><br>
+安装 gnome shell 扩展</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt install gnome-shell-extension-top-icons-plus
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>安装方式二：</code></p>
+<p>编译安装</p>
+<ul>
+<li>根据 ubuntu 使用的 GONME 版本，下载对应的 topicons</li>
+<li>ubuntu 18.04.6 使用的 GNOME 版本为 3.28.2</li>
+<li>topicons 下载地址：https://extensions.gnome.org/extension/1031/topicons/</li>
+<li>Download 3.28 22</li>
+<li>安装 make 编译工具
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sudo apt-get -y install make
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>编译安装
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo make install
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<p><code>安装后重启gnome</code>
+alt+f2 输入 r 重启 gnome</p>
+<p>问题：无法显示企业微信图标</p>
+<h2 id="问题">问题：</h2>
+<ol>
+<li>
+<p>sudo echo 权限不够</p>
+<p>希望将文本写入到某个文件中（若这个文件不存在，自动创建该文件）</p>
+<p>使用 <code>sudo echo &quot;&quot; &gt; file</code> 时提示权限不够</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ sudo <span class="nb">echo</span> <span class="s2">&#34;deb [arch=amd64,i386 signed-by=/usr/share/keyrings/winehq-archive.key] https://mirrors.tuna.tsinghua.edu.cn/wine-builds/ubuntu/ bionic main&#34;</span> &gt; /etc/apt/sources.list.d/winehq.list
+</span></span><span class="line"><span class="cl">bash: /etc/apt/sources.list.d/winehq.list: 权限不够
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>解决：</p>
+<ol>
+<li>使用 <code>sh -c &quot;sudo echo '' &gt; file&quot;</code>，如
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ sudo sh -c <span class="s2">&#34;echo &#39;deb [arch=amd64,i386 signed-by=/usr/share/keyrings/winehq-archive.key] https://mirrors.tuna.tsinghua.edu.cn/wine-builds/ubuntu/ bionic main&#39; &gt; /etc/apt/sources.list.d/winehq.list&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>使用 <code>echo &quot;&quot; | sudo tee file</code>，如：
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ <span class="nb">echo</span> <span class="s2">&#34;deb [arch=amd64,i386 signed-by=/usr/share/keyrings/winehq-archive.key] https://mirrors.tuna.tsinghua.edu.cn/wine-builds/ubuntu/ bionic main&#34;</span> <span class="p">|</span> sudo tee /etc/apt/sources.list.d/winehq.list
+</span></span></code></pre></td></tr></table>
+</div>
+</div>使用 <code>echo &quot;&quot; | sudo tee -a file</code>，进行追加文本，等同于 <code>&gt;&gt;</code></li>
+</ol>
+</li>
+<li>
+<p>使用 wine 安装微信时提示 <code>ntlm_check_version ntlm_auth was not found</code></p>
+<p>wine 安装微信</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nv">WINEARCH</span><span class="o">=</span>win32 wine ./WeChatSetup.exe
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>错误信息：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">03f0:err:winediag:ntlm_check_version ntlm_auth was not found. Make sure that ntlm_auth &gt;<span class="o">=</span> 3.0.25 is in your path. Usually, you can find it in the winbind package of your distribution.
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>解决：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt-get install -y winbind
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p><code>Cannot find cabextract.  Please install it (e.g. 'sudo apt-get install cabextract' or 'sudo yum install cabextract').</code></p>
+<p>解决： 安装 cabextract</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">apt-get install cabextract
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p><code>Note: command cabextract -q --directory=/home/hekai/.wine/dosdevices/c:/windows/temp /home/hekai/.cache/winetricks/msls31/InstMsiW.exe returned status 1. Aborting.</code></p>
+<p>原因：<br>
+winetricks 自动下载的 InstMsiW.exe 文件不完整</p>
+<p>解决：<br>
+手动下载 <a class="link" href="https://web.archive.org/web/20160710055851if_/http://download.microsoft.com/download/WindowsInstaller/Install/2.0/NT45/EN-US/InstMsiW.exe"  target="_blank" rel="noopener"
+    >InstMsiW.exe</a>，然后拷贝到 <code>~/.cache/winetricks/msls31</code></p>
+</li>
+<li>
+<p><code>Note: command cabextract -q --directory=/home/ctyun/.wine/dosdevices/c:/windows/temp /home/ctyun/.cache/winetricks/riched30/InstMsiA.exe returned status 1. Aborting.</code></p>
+<p>原因：<br>
+winetricks 自动下载的 InstMsiA.exe 文件不完整</p>
+<p>解决：<br>
+手动下载 <a class="link" href="https://web.archive.org/web/20060720160141if_/http://download.microsoft.com:80/download/WindowsInstaller/Install/2.0/W9XMe/EN-US/instmsiA.exe"  target="_blank" rel="noopener"
+    >InstMsiA.exe</a>，然后拷贝到 <code>~/.cache/winetricks/riched30</code></p>
+</li>
+<li>
+<p>使用 wine 安装微信失败</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ <span class="nv">WINEARCH</span><span class="o">=</span>win32 wine ./WeChatSetup.exe
+</span></span><span class="line"><span class="cl">0118:fixme:seh:WerRegisterMemoryBlock <span class="o">(</span>530AA498 6144<span class="o">)</span> stub
+</span></span><span class="line"><span class="cl">0118:fixme:seh:WerRegisterMemoryBlock <span class="o">(</span>530A4000 4<span class="o">)</span> stub
+</span></span><span class="line"><span class="cl">0118:err:ole:apartment_getclassobject DllGetClassObject returned error 0x80040154 <span class="k">for</span> dll L<span class="s2">&#34;C:\\windows\\system32\\windowscodecs.dll&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>解决： 使用 winetricks 安装 windowscodecs</p>
+</li>
+<li>
+<p>更新apt源报错</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ sudo apt update
+</span></span><span class="line"><span class="cl">获取:1 http://security.debian.org/debian-security buster/updates InRelease <span class="o">[</span>34.8 kB<span class="o">]</span>
+</span></span><span class="line"><span class="cl">获取:2 https://mirrors.tuna.tsinghua.edu.cn/wine-builds/ubuntu bionic InRelease <span class="o">[</span>6,263 B<span class="o">]</span>
+</span></span><span class="line"><span class="cl">错误:2 https://mirrors.tuna.tsinghua.edu.cn/wine-builds/ubuntu bionic InRelease
+</span></span><span class="line"><span class="cl">  由于没有公钥，无法验证下列签名： NO_PUBKEY 76F1A20FF987672F
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>参考： <a class="link" href="https://blog.csdn.net/weixin_44172434/article/details/89160720"  target="_blank" rel="noopener"
+    >https://blog.csdn.net/weixin_44172434/article/details/89160720</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 76F1A20FF987672F
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>执行后，还是报错</p>
+<p>发现 /usr/share/keyrings/winehq-archive.key 文件权限是 660，同目录下其他文件权限是644，将 winehq-archive.key 文件权限修改为 644 后就可以执行 sudo apt update 了。</p>
+</li>
+</ol>
+<blockquote>
+<p>参考：<br>
+<a class="link" href="https://wiki.winehq.org/Ubuntu"  target="_blank" rel="noopener"
+    >https://wiki.winehq.org/Ubuntu</a><br>
+<a class="link" href="https://mirrors-i.tuna.tsinghua.edu.cn/help/wine-builds/"  target="_blank" rel="noopener"
+    >https://mirrors-i.tuna.tsinghua.edu.cn/help/wine-builds/</a><br>
+<a class="link" href="https://cloud.tencent.com/developer/article/1626683"  target="_blank" rel="noopener"
+    >https://cloud.tencent.com/developer/article/1626683</a><br>
+<a class="link" href="https://mirrors-i.tuna.tsinghua.edu.cn/help/wine-builds/"  target="_blank" rel="noopener"
+    >https://mirrors-i.tuna.tsinghua.edu.cn/help/wine-builds/</a><br>
+<a class="link" href="https://blog.csdn.net/amnesiagreen/article/details/116791833"  target="_blank" rel="noopener"
+    >https://blog.csdn.net/amnesiagreen/article/details/116791833</a><br>
+<a class="link" href="https://blog.csdn.net/cxrshiz7890/article/details/106185468"  target="_blank" rel="noopener"
+    >https://blog.csdn.net/cxrshiz7890/article/details/106185468</a><br>
+<a class="link" href="https://blog.csdn.net/qq_45945548/article/details/124123820"  target="_blank" rel="noopener"
+    >https://blog.csdn.net/qq_45945548/article/details/124123820</a><br>
+<a class="link" href="https://blog.csdn.net/cxrshiz7890/article/details/106042837"  target="_blank" rel="noopener"
+    >https://blog.csdn.net/cxrshiz7890/article/details/106042837</a><br>
+<a class="link" href="https://blog.csdn.net/Hsin96/article/details/119147144"  target="_blank" rel="noopener"
+    >https://blog.csdn.net/Hsin96/article/details/119147144</a></p>
+</blockquote>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/linux/">linux</a>
+        
+            <a href="/tags/ubuntu/">ubuntu</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/ubuntu-app-folder/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">ubuntu添加图标文件夹</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/ubuntu-wps-fonts/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">wps在ubuntu上缺少字体</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/ubuntu-minikube/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">ubuntu安装minikube</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/ubuntu-install-software/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">ubuntu安装idea等软件</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/ubuntu-change-username/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">ubuntu18.04修改用户名</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2023 何凯的博客
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.20.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
